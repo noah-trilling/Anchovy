@@ -138,20 +138,19 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CooksController.cs" />
+    <Compile Include="DAL\AnchovyContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Chargeable.cs" />
     <Compile Include="Models\Cook.cs" />
     <Compile Include="Models\Crust.cs" />
     <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Line.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\MenuListing.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderStatus.cs" />
-    <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Pizza.cs" />
     <Compile Include="Models\Sauce.cs" />
     <Compile Include="Models\Shift.cs" />
@@ -175,7 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

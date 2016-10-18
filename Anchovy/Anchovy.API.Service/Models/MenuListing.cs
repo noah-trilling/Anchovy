@@ -1,7 +1,11 @@
 ﻿namespace Anchovy.API.Service.Models
 {
-    public class MenuListing : Chargeable
+    public class MenuListing
     {
-        public Pizza Pizza { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int SizeId { get; set; }
+        public Size Size { get; set; }
+        public decimal Cost { get; set; }
     }
 }
