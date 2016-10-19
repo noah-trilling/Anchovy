@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.API.Service", "Anch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.API.Service.Tests", "Anchovy.API.Service.Tests\Anchovy.API.Service.Tests.csproj", "{8D2689DC-3715-4AE0-992B-87CD5D575594}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.API.Client", "Anchovy.API.Client\Anchovy.API.Client.csproj", "{9A289605-399F-4544-879C-D4310B9BF44E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8D2689DC-3715-4AE0-992B-87CD5D575594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D2689DC-3715-4AE0-992B-87CD5D575594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D2689DC-3715-4AE0-992B-87CD5D575594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A289605-399F-4544-879C-D4310B9BF44E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A289605-399F-4544-879C-D4310B9BF44E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A289605-399F-4544-879C-D4310B9BF44E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A289605-399F-4544-879C-D4310B9BF44E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
