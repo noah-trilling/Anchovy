@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.Cook.Login", "Ancho
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Anchovy.Cook.GUI", "Anchovy.Cook.GUI", "{8B569EAA-894E-4E5C-B2F3-7EE2A5FB9F53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.Cook.Main", "Anchovy.Cook.Main\Anchovy.Cook.Main.csproj", "{C0A37E00-4304-40CA-BC0D-9FFA7FB2CC38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.Cook.Main", "Anchovy.Cook.GUI\Anchovy.Cook.Main\Anchovy.Cook.Main.csproj", "{C0A37E00-4304-40CA-BC0D-9FFA7FB2CC38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
