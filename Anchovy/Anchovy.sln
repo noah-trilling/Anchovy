@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.API.Service.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.API.Client", "Anchovy.API.Client\Anchovy.API.Client.csproj", "{9A289605-399F-4544-879C-D4310B9BF44E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.Cook.Login", "Anchovy.Cook.GUI\Anchovy.Cook.Login.csproj", "{6034F7F8-F11A-499D-9EB0-56DC2BE23DA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Anchovy.Cook.GUI", "Anchovy.Cook.GUI", "{8B569EAA-894E-4E5C-B2F3-7EE2A5FB9F53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.Cook.Main", "Anchovy.Cook.Main\Anchovy.Cook.Main.csproj", "{C0A37E00-4304-40CA-BC0D-9FFA7FB2CC38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +33,20 @@ Global
 		{9A289605-399F-4544-879C-D4310B9BF44E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A289605-399F-4544-879C-D4310B9BF44E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A289605-399F-4544-879C-D4310B9BF44E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6034F7F8-F11A-499D-9EB0-56DC2BE23DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6034F7F8-F11A-499D-9EB0-56DC2BE23DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6034F7F8-F11A-499D-9EB0-56DC2BE23DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6034F7F8-F11A-499D-9EB0-56DC2BE23DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A37E00-4304-40CA-BC0D-9FFA7FB2CC38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A37E00-4304-40CA-BC0D-9FFA7FB2CC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A37E00-4304-40CA-BC0D-9FFA7FB2CC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A37E00-4304-40CA-BC0D-9FFA7FB2CC38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6034F7F8-F11A-499D-9EB0-56DC2BE23DA6} = {8B569EAA-894E-4E5C-B2F3-7EE2A5FB9F53}
+		{C0A37E00-4304-40CA-BC0D-9FFA7FB2CC38} = {8B569EAA-894E-4E5C-B2F3-7EE2A5FB9F53}
 	EndGlobalSection
 EndGlobal
