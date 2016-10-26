@@ -48,6 +48,9 @@ namespace Anchovy.API.Client.Tests
             var gotCooks = getCooksResponse.Result.Body;
             var postedCook = gotCooks.Where(_ => _.FirstName == "Montgomery");
             Assert.IsNotNull(postedCook);
+
+
+
         }
     }
 }
