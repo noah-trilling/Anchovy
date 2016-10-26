@@ -46,7 +46,7 @@ namespace Anchovy.API.Client.Tests
             var thing = postResponse.Body;
             var getCooksResponse = _cooks.GetCooksWithOperationResponseAsync(CancellationToken.None);
             var gotCooks = getCooksResponse.Result.Body;
-            var postedCook = gotCooks.Where(_ => _.FirstName == "Montgomery");
+            var postedCook = gotCooks.Where(_ => _.FirstName == "Homer").FirstOrDefault();
             Assert.IsNotNull(postedCook);
         }
     }
