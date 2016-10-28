@@ -126,8 +126,8 @@ namespace Anchovy.API.Client.Tests
             var postResp5 = await _crusts.PostCrustWithOperationResponseAsync(crust5);
             var postResp6 = await _crusts.PostCrustWithOperationResponseAsync(crust6);
 
-            var getResp = _crusts.GetCrustsWithOperationResponseAsync(CancellationToken.None);
-            var gotCrust = getResp.Result.Body;
+            var getResp = await _crusts.GetCrustsWithOperationResponseAsync(CancellationToken.None);
+            var gotCrust = getResp.Body;
 
             var postedCrust1 = gotCrust.Where(_ => _.Name == "regular");
             var postedCrust2 = gotCrust.Where(_ => _.Name == "cheesy");

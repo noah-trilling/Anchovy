@@ -19,9 +19,10 @@ namespace Anchovy.API.Client.Tests
             _sauces = Service.Sauces;
         }
         [TestMethod]
-        public void GetSauces()
+        public async Task GetSauces()
         {
-            var sauces = _sauces.GetSaucesWithOperationResponseAsync().Result.Body;
+            var getResp = await _sauces.GetSaucesWithOperationResponseAsync();
+            var sauces = getResp.Body;
            
             for(int i = 0; i < sauces.Count; ++i)
             {
