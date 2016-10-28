@@ -108,8 +108,8 @@ namespace Anchovy.API.Client.Tests
             Assert.IsNotNull(postedCook1);
             Assert.IsNotNull(postedCook2);
 
-            StringAssert.Equals("slim", postedCook1.First().MiddleName);
-            StringAssert.Equals("jon", postedCook2.First().MiddleName);
+            Assert.AreEqual("slim", postedCook1.First().MiddleName);
+            Assert.AreEqual("jon", postedCook2.First().MiddleName);
         }
 
         [TestMethod]

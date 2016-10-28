@@ -21,7 +21,6 @@ namespace Anchovy.API.Client.Tests
             _crusts = Service.Crusts;
         }
 
-
         [TestMethod]
         public async Task GetCrust1()
         {         
@@ -49,7 +48,7 @@ namespace Anchovy.API.Client.Tests
             var gotCrust = getResp.Result.Body;
             var crust = gotCrust.Where(_ => _.Name == "thick");
             Assert.IsNotNull(crust);
-            StringAssert.Equals("thick",crust.First().Name);    
+            Assert.AreEqual("thick",crust.First().Name);    
 
         }
 
@@ -76,8 +75,8 @@ namespace Anchovy.API.Client.Tests
             var postedCrust2 = gotCrust.Where(_ => _.Name == "extra-cheesy");
             Assert.IsNotNull(crust1);
             Assert.IsNotNull(crust2);
-            StringAssert.Equals("extra-spicy", postedCrust1.First().Name);
-            StringAssert.Equals("extra-cheesy", postedCrust2.First().Name);
+            Assert.AreEqual("extra-spicy", postedCrust1.First().Name);
+            Assert.AreEqual("extra-cheesy", postedCrust2.First().Name);
 
         }
 
@@ -142,12 +141,12 @@ namespace Anchovy.API.Client.Tests
             Assert.IsNotNull(crust4);
             Assert.IsNotNull(crust5);
             Assert.IsNotNull(crust6);
-            StringAssert.Equals("regular", postedCrust1.First().Name);
-            StringAssert.Equals("cheesy", postedCrust2.First().Name);
-            StringAssert.Equals("garlic", postedCrust3.First().Name);
-            StringAssert.Equals("spicy", postedCrust4.First().Name);
-            StringAssert.Equals("extra-thin", postedCrust5.First().Name);
-            StringAssert.Equals("extra-thick", postedCrust6.First().Name);
+            Assert.AreEqual("regular", postedCrust1.First().Name);
+            Assert.AreEqual("cheesy", postedCrust2.First().Name);
+            Assert.AreEqual("garlic", postedCrust3.First().Name);
+            Assert.AreEqual("spicy", postedCrust4.First().Name);
+            Assert.AreEqual("extra-thin", postedCrust5.First().Name);
+            Assert.AreEqual("extra-thick", postedCrust6.First().Name);
         }
 
         [TestMethod]
@@ -163,10 +162,89 @@ namespace Anchovy.API.Client.Tests
             }
         }
 
-        [TestCleanup]
-        public void tearDown()
+        [TestMethod]
+        public async Task PutCrust1()
         {
+            Crust crust1 = new Crust
+            {
+                Cost = 21,
+                Name = "test"
+            };
+                                   
+            var postResp = await _crusts.PostCrustWithOperationResponseAsync(crust1);
+            var getResp1 = await _crusts.GetCrustsWithOperationResponseAsync();
+            var postedCrust = getResp1.Body.Where(_ => _.Name == "test").First();
 
+
+            Crust crust2 = new Crust
+            {
+                Cost = 5,
+                Id = postedCrust.Id,
+                Name = "new crust"
+            };
+
+            var putResp = await _crusts.PutCrustWithOperationResponseAsync((int)postedCrust.Id,crust2);
+            var getResp2 = await _crusts.GetCrustWithOperationResponseAsync((int)postedCrust.Id);
+            var putCrust = getResp2.Body;
+
+            Assert.IsNotNull(postedCrust);
+            Assert.IsNotNull(putCrust);
+            Assert.AreEqual("test", postedCrust.Name);
+            Assert.AreEqual("new crust", putCrust.Name);
+        }
+
+        [TestMethod]
+        public async Task PutCrust2()
+        {
+            Crust crust1 = new Crust
+            {
+                Cost = 21,
+                Name = "test1"
+            };
+
+           Crust crust2 = new Crust
+            {
+                Cost = 23,
+                Name = "test2"
+            };
+
+            var postResp1 = await _crusts.PostCrustWithOperationResponseAsync(crust1);
+            var getResp1 = await _crusts.GetCrustsWithOperationResponseAsync();
+            var postedCrust1 = getResp1.Body.Where(_ => _.Name == "test1").First();
+            var postResp2 = await _crusts.PostCrustWithOperationResponseAsync(crust2);
+            var getResp2 = await _crusts.GetCrustsWithOperationResponseAsync();
+            var postedCrust2 = getResp2.Body.Where(_ => _.Name == "test2").First();
+
+
+            Crust crust3 = new Crust
+            {
+                Cost = 5,
+                Id = postedCrust1.Id,
+                Name = "new1"
+            };
+
+            Crust crust4 = new Crust
+            {
+                Cost = 3,
+                Id = postedCrust2.Id,
+                Name = "new2"
+            };
+
+            var putResp1 = await _crusts.PutCrustWithOperationResponseAsync((int)postedCrust1.Id, crust3);
+            var getResp3 = await _crusts.GetCrustWithOperationResponseAsync((int)postedCrust1.Id);
+            var putCrust1 = getResp3.Body;
+            var putResp2 = await _crusts.PutCrustWithOperationResponseAsync((int)postedCrust2.Id, crust4);
+            var getResp4 = await _crusts.GetCrustWithOperationResponseAsync((int)postedCrust2.Id);
+            var putCrust2 = getResp4.Body;
+
+            Assert.IsNotNull(postedCrust1);
+            Assert.IsNotNull(postedCrust2);
+            Assert.IsNotNull(putCrust1);
+            Assert.IsNotNull(putCrust2);
+            Assert.AreEqual("test1", postedCrust1.Name);
+            Assert.AreEqual("test2", postedCrust2.Name);
+            Assert.AreEqual("new1", putCrust1.Name);
+            Assert.AreEqual("new2", putCrust2.Name);
         }
     }
 }
