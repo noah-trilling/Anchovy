@@ -19,18 +19,6 @@ namespace Anchovy.API.Client.Tests
         {
             _cooks = Service.Cooks;
             _managers = Service.Managers;
-        }
-
-        [TestMethod]
-        public async Task GetCooks()
-        {
-            var getResp = await _cooks.GetCooksWithOperationResponseAsync();
-            var cooks = getResp.Body;
-
-            for(int i = 0; i < cooks.Count; ++i)
-            {
-                Console.WriteLine(cooks[i].FirstName + " " + cooks[i].MiddleName + " " + cooks[i].LastName);
-            }
 
             var burns = new Manager
             {
@@ -43,7 +31,19 @@ namespace Anchovy.API.Client.Tests
                 MiddleName = "Bobo"
             };
 
-            var postResponse1 = await _managers.PostManagerWithOperationResponseAsync(burns, CancellationToken.None);
+            var postResponse1 = _managers.PostManagerWithOperationResponseAsync(burns, CancellationToken.None);
+        }
+
+        [TestMethod]
+        public async Task GetCooks()
+        {
+            var getResp = await _cooks.GetCooksWithOperationResponseAsync();
+            var cooks = getResp.Body;
+
+            for(int i = 0; i < cooks.Count; ++i)
+            {
+                Console.WriteLine(cooks[i].FirstName + " " + cooks[i].MiddleName + " " + cooks[i].LastName);
+            }
         }
 
         [TestMethod]
