@@ -252,7 +252,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "mills",
                 Password = "Password1234",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = 68
             };
             var postResp = await _cooks.PostCookWithOperationResponseAsync(cook1);
             var getResp1 = await _cooks.GetCooksWithOperationResponseAsync();
@@ -269,7 +269,7 @@ namespace Anchovy.API.Client.Tests
                 Id = postedCook.Id,
                 Password = "K#)jlp,nd3",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = 68
             };
 
             var putResp = await _cooks.PutCookWithOperationResponseAsync((int)cook2.Id, cook2);

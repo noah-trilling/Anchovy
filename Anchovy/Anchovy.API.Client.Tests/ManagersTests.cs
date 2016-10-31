@@ -102,7 +102,7 @@ namespace Anchovy.API.Client.Tests
             {
                 Address = "555 lake rd",
                 City = "lakeview",
-                Email = "jonnycl@email.com",
+                Email = "jakycl@email.com",
                 Salary = 50000.00,
                 FirstName = "Jake",
                 LastName = "Lin",
