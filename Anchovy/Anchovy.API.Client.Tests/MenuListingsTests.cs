@@ -52,7 +52,7 @@ namespace Anchovy.API.Client.Tests
             {
                 Cost = 6,
                 Name = "Wings",
-                Size = (Size)size
+                Size = size
             };
 
             var postResponse = await _menuListings.PostMenuListingWithOperationResponseAsync(menuListing1, CancellationToken.None);

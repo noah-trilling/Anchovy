@@ -12,11 +12,13 @@ namespace Anchovy.API.Client.Tests
     public class CooksTests : AnchovyApiClientTests
     {
         private ICooks _cooks;
+        private IManagers _managers;
 
         [TestInitialize]
         public void CooksTestInit()
         {
             _cooks = Service.Cooks;
+            _managers = Service.Managers;
         }
 
         [TestMethod]
@@ -44,6 +46,12 @@ namespace Anchovy.API.Client.Tests
                 LastName = "Burns",
                 MiddleName = "Bobo"
             };
+
+            var postResponse1 = await _managers.PostManagerWithOperationResponseAsync(burns, CancellationToken.None);
+            var gotResponse1 = await _managers.GetManagersWithOperationResponseAsync();
+            var gotManagers = gotResponse1.Body;
+            var gotManager = gotManagers.Where(_ => _.FirstName == "Montgomery").FirstOrDefault();
+
             var homer = new Cook
             {
                 Address = "123 Fake Street",
@@ -53,7 +61,7 @@ namespace Anchovy.API.Client.Tests
                 LastName = "Simpson",
                 MiddleName = "Jay",
                 HourlyWage = 60000,
-                Manager = burns
+                Manager = gotManager
             };
             var postResponse =  await _cooks.PostCookWithOperationResponseAsync(homer, CancellationToken.None);
             var thing = postResponse.Body;
@@ -67,6 +75,11 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task PostCook2()
         {
+
+            var gotResponse1 = await _managers.GetManagersWithOperationResponseAsync();
+            var gotManagers = gotResponse1.Body;
+            var gotManager = gotManagers.Where(_ => _.FirstName == "Montgomery").FirstOrDefault();
+
             var cook1 = new Cook
             {
                 FirstName = "speedy",
@@ -80,7 +93,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "speedster",
                 Password = "speedy1234",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
 
             var cook2 = new Cook
@@ -96,7 +109,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "plankjj",
                 Password = "kd-3kd$#2",
                 PieceworkRate = 4.25,
-                ManagerId = 3
+                ManagerId = gotManager.Id
             };
 
             var postResp1 = await _cooks.PostCookWithOperationResponseAsync(cook1);
@@ -116,6 +129,11 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task PostCook3()
         {
+
+            var gotResponse1 = await _managers.GetManagersWithOperationResponseAsync();
+            var gotManagers = gotResponse1.Body;
+            var gotManager = gotManagers.Where(_ => _.FirstName == "Montgomery").FirstOrDefault();
+
             var cook1 = new Cook
             {
                 FirstName = "speedy",
@@ -129,7 +147,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "speedster",
                 Password = "speedy1234",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
 
             var cook2 = new Cook
@@ -145,7 +163,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "plankjj",
                 Password = "kd-3kd$#2",
                 PieceworkRate = 4.25,
-                ManagerId = 3
+                ManagerId = gotManager.Id
             };
 
             var cook3 = new Cook
@@ -160,7 +178,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "timloom",
                 Password = "cromtim",
                 PieceworkRate = 2,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
 
             var cook4 = new Cook
@@ -174,7 +192,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "arthb",
                 Password = "password1",
                 PieceworkRate = 2.5,
-                ManagerId = 3
+                ManagerId = gotManager.Id
             };
 
             var cook5 = new Cook
@@ -189,7 +207,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "fritsy",
                 Password = "lsneond",
                 PieceworkRate = 3.25,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
 
             var cook6 = new Cook
@@ -203,7 +221,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "kswiss",
                 Password = "swissk32",
                 PieceworkRate = 3.75,
-                ManagerId = 3
+                ManagerId = gotManager.Id
             };
 
 
@@ -242,6 +260,11 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task PutCook1()
         {
+
+            var gotResponse1 = await _managers.GetManagersWithOperationResponseAsync();
+            var gotManagers = gotResponse1.Body;
+            var gotManager = gotManagers.Where(_ => _.FirstName == "Montgomery").FirstOrDefault();
+
             var cook1 = new Cook
             {
                 FirstName = "silv",
@@ -252,7 +275,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "mills",
                 Password = "Password1234",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
             var postResp = await _cooks.PostCookWithOperationResponseAsync(cook1);
             var getResp1 = await _cooks.GetCooksWithOperationResponseAsync();
@@ -269,7 +292,7 @@ namespace Anchovy.API.Client.Tests
                 Id = postedCook.Id,
                 Password = "K#)jlp,nd3",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
 
             var putResp = await _cooks.PutCookWithOperationResponseAsync((int)cook2.Id, cook2);
@@ -285,6 +308,11 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task PutCook2()
         {
+
+            var gotResponse1 = await _managers.GetManagersWithOperationResponseAsync();
+            var gotManagers = gotResponse1.Body;
+            var gotManager = gotManagers.Where(_ => _.FirstName == "Montgomery").FirstOrDefault();
+
             var cook1 = new Cook
             {
                 FirstName = "trish",
@@ -295,7 +323,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "jamesj",
                 Password = "K#)jlp,nd3",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
 
             var cook2 = new Cook
@@ -308,7 +336,7 @@ namespace Anchovy.API.Client.Tests
                 Username = "jamesj",
                 Password = "K#)jlp,nd3",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
 
             var postResp1 = await _cooks.PostCookWithOperationResponseAsync(cook1);
@@ -330,7 +358,7 @@ namespace Anchovy.API.Client.Tests
                 Id = postedCook1.Id,
                 Password = "K#)jlp,nd3",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
 
             var cook4 = new Cook
@@ -344,7 +372,7 @@ namespace Anchovy.API.Client.Tests
                 Id = postedCook2.Id,
                 Password = "K#)jlp,nd3",
                 PieceworkRate = 3.5,
-                ManagerId = 5
+                ManagerId = gotManager.Id
             };
 
             var putResp1 = await _cooks.PutCookWithOperationResponseAsync((int)cook3.Id, cook3);
@@ -367,6 +395,16 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task ClearCookTable()
         {
+            var managers = _managers.GetManagersWithOperationResponseAsync().Result.Body;
+
+            while (managers.Count > 0)
+            {
+                var delResp = await _managers.DeleteManagerWithOperationResponseAsync((int)managers.First().Id);
+                var deletedManager = delResp.Body;
+                Assert.IsNotNull(deletedManager);
+                managers = _managers.GetManagersWithOperationResponseAsync().Result.Body;
+            }
+
             var cooks = _cooks.GetCooksWithOperationResponseAsync().Result.Body;
 
             while (cooks.Count > 0)
