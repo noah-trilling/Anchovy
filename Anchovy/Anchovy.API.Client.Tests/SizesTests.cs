@@ -21,7 +21,7 @@ namespace Anchovy.API.Client.Tests
         }
 
         [TestMethod]
-        public async Task GetSizes()
+        public async Task SizesGet()
         {
             var getResp = await _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None);
             var sizes = getResp.Body;
@@ -32,7 +32,7 @@ namespace Anchovy.API.Client.Tests
         }
 
         [TestMethod]
-        public async Task PostOneSize()
+        public async Task SizePost()
         {
             var size1 = new Size
             {
@@ -42,18 +42,17 @@ namespace Anchovy.API.Client.Tests
             };
             
             var postResponse = await _sizes.PostSizeWithOperationResponseAsync(size1, CancellationToken.None);
-            var obj = postResponse.Body;
             var getResponse = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None);
             var gotSize = getResponse.Result.Body;
             var size = gotSize.Where(_ => _.Name == "small");
 
             Assert.IsNotNull(size);
             Assert.AreEqual(size1.Name, size.First().Name);
-            Assert.AreEqual(6, size.First().Cost);
+            Assert.AreEqual(size1.Cost, size.First().Cost);
         }
 
         [TestMethod]
-        public async Task PostNoId()
+        public async Task SizePostNoId()
         {
             var size1 = new Size
             {
@@ -62,7 +61,6 @@ namespace Anchovy.API.Client.Tests
             };
 
             var postResponse = await _sizes.PostSizeWithOperationResponseAsync(size1, CancellationToken.None);
-            var obj = postResponse.Body;
             var getResponse = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None);
             var gotSize = getResponse.Result.Body;
             var size = gotSize.Where(_ => _.Name == "medium");
@@ -74,7 +72,25 @@ namespace Anchovy.API.Client.Tests
         }
 
         [TestMethod]
-        public async Task PutSize()
+        public async Task SizeGetById()
+        {
+            var size1 = new Size
+            {
+                Cost = 10,
+                Name = "x-small"
+            };
+
+            var postResponse = await _sizes.PostSizeWithOperationResponseAsync(size1, CancellationToken.None);
+            var getResponse = _sizes.GetSizeWithOperationResponseAsync((int)postResponse.Body.Id);
+            var gotSize = getResponse.Result.Body;
+
+            Assert.IsNotNull(gotSize);
+            Assert.AreEqual(size1.Cost, gotSize.Cost);
+            Assert.AreEqual(size1.Name, gotSize.Name);
+        }
+
+        [TestMethod]
+        public async Task SizePut()
         {
             var size1 = new Size
             {
@@ -106,7 +122,7 @@ namespace Anchovy.API.Client.Tests
         }
 
         [TestMethod]
-        public async Task DeleteSize()
+        public async Task SizeDelete()
         {
             var size1 = new Size
             {
@@ -127,7 +143,7 @@ namespace Anchovy.API.Client.Tests
         }
 
         [TestMethod]
-        public async Task PostMultipleSizes()
+        public async Task SizePostMultiple()
         {
             var size1 = new Size
             {
@@ -205,9 +221,10 @@ namespace Anchovy.API.Client.Tests
         }
 
         [TestMethod]
-        public async Task ClearSizeTable()
+        public async Task SizeClearTable()
         {
             var gotSize = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None).Result.Body;
+            // Iterate over each size to get the id and delete that size
             while (gotSize.Count > 0)
             {
                 var delResp = await _sizes.DeleteSizeWithOperationResponseAsync((int)gotSize.First().Id);
@@ -218,6 +235,7 @@ namespace Anchovy.API.Client.Tests
 
             var getResp1 = await _sizes.GetSizesWithOperationResponseAsync();
 
+            // Confirm there are no sizes left
             Assert.AreEqual(0, getResp1.Body.Count);
         }
     }
