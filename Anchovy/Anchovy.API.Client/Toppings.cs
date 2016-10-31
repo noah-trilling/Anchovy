@@ -420,7 +420,7 @@ namespace Anchovy.API.Client
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            if (statusCode != HttpStatusCode.OK)
+            if (statusCode != HttpStatusCode.Created)
             {
                 HttpOperationException<object> ex = new HttpOperationException<object>();
                 ex.Request = httpRequest;
