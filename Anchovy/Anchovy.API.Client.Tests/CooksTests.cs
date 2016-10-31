@@ -31,11 +31,7 @@ namespace Anchovy.API.Client.Tests
             {
                 Console.WriteLine(cooks[i].FirstName + " " + cooks[i].MiddleName + " " + cooks[i].LastName);
             }
-        }
 
-        [TestMethod]
-        public async Task PostCook1()
-        {
             var burns = new Manager
             {
                 Address = "123 Fake Street",
@@ -48,6 +44,11 @@ namespace Anchovy.API.Client.Tests
             };
 
             var postResponse1 = await _managers.PostManagerWithOperationResponseAsync(burns, CancellationToken.None);
+        }
+
+        [TestMethod]
+        public async Task PostCook1()
+        {
             var gotResponse1 = await _managers.GetManagersWithOperationResponseAsync();
             var gotManagers = gotResponse1.Body;
             var gotManager = gotManagers.Where(_ => _.FirstName == "Montgomery").FirstOrDefault();
