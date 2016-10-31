@@ -11,10 +11,10 @@ namespace Anchovy.API.Service.Models
         public Customer Customer { get; set; }
         public int CookId { get; set; }
         public Cook Cook { get; set; }
-        public DateTime OrderedTimeStamp { get; set; }
-        public DateTime ClaimedTimeStamp { get; set; }
-        public DateTime CompletedTimeStamp { get; set; }
-        public DateTime CancelledTimeStamp { get; set; }
+        public DateTimeOffset OrderedTimeStamp { get; set; }
+        public DateTimeOffset ClaimedTimeStamp { get; set; }
+        public DateTimeOffset CompletedTimeStamp { get; set; }
+        public DateTimeOffset CancelledTimeStamp { get; set; }
         public OrderStatus OrderStatus { get; set; }
     }
 }

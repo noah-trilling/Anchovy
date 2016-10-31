@@ -16,6 +16,6 @@ namespace Anchovy.API.Service.Models
         public string State { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public DateTime SignUpDate { get; set; }
+        public DateTimeOffset SignUpDate { get; set; }
     }
 }
