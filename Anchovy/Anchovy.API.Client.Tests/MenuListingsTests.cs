@@ -63,7 +63,6 @@ namespace Anchovy.API.Client.Tests
             Assert.IsNotNull(menuListing);
             Assert.AreEqual(menuListing1.Name, menuListing.First().Name);
             Assert.AreEqual(menuListing1.Cost, menuListing.First().Cost);
-            Assert.AreEqual(size1, menuListing.First().Size);
         }
 
         [TestMethod]
@@ -88,13 +87,12 @@ namespace Anchovy.API.Client.Tests
             var postResponse = await _menuListings.PostMenuListingWithOperationResponseAsync(menuListing1, CancellationToken.None);
             var getResponse = _menuListings.GetMenuListingsWithOperationResponseAsync(CancellationToken.None);
             var gotMenuListing = getResponse.Result.Body;
-            var menuListing = gotMenuListing.Where(_ => _.Name == "small");
+            var menuListing = gotMenuListing.Where(_ => _.Name == "Wings");
 
             Assert.IsNotNull(menuListing);
             Assert.IsNotNull(menuListing.First().Id);
             Assert.AreEqual(menuListing1.Name, menuListing.First().Name);
             Assert.AreEqual(menuListing1.Cost, menuListing.First().Cost);
-            Assert.AreEqual(size1, menuListing.First().Size);
         }
 
         [TestMethod]
@@ -144,7 +142,7 @@ namespace Anchovy.API.Client.Tests
 
             var postResp = await _menuListings.PostMenuListingWithOperationResponseAsync(menuListing1);
             var getResp1 = await _menuListings.GetMenuListingsWithOperationResponseAsync();
-            var postedMenuListing = getResp1.Body.Where(_ => _.Name == "small").First();
+            var postedMenuListing = getResp1.Body.Where(_ => _.Name == "Breadsticks").First();
 
             var size2 = new Size
             {
@@ -158,21 +156,26 @@ namespace Anchovy.API.Client.Tests
                 Cost = 20,
                 SizeId = postedMenuListing.SizeId,
                 Id = postedMenuListing.Id,
-                Name = "new menuListing",
-                Size = size2
+                Name = "new menuListing"
             };
 
-            var putResp = await _menuListings.PutMenuListingWithOperationResponseAsync((int)postedMenuListing.Id, menuListing2);
-            var getResp2 = await _menuListings.GetMenuListingWithOperationResponseAsync((int)postedMenuListing.Id);
-            var putMenuListing = getResp2.Body;
+            if (postedMenuListing.Id != null)
+            {
+                var putResp = await _menuListings.PutMenuListingWithOperationResponseAsync(postedMenuListing.Id.Value, menuListing2);
+            }
+            if (postedMenuListing.Id != null)
+            {
+                var getResp2 = await _menuListings.GetMenuListingWithOperationResponseAsync(postedMenuListing.Id.Value);
+                var putMenuListing = getResp2.Body;
 
-            // Check for new values
-            Assert.IsNotNull(postedMenuListing);
-            Assert.IsNotNull(putMenuListing);
-            Assert.AreEqual(menuListing2.Name, putMenuListing.Name);
-            Assert.AreEqual(menuListing2.Cost, putMenuListing.Cost);
-            Assert.AreEqual(menuListing2.SizeId, putMenuListing.SizeId);
-            Assert.AreEqual(postedMenuListing.Id, putMenuListing.Id);
+                // Check for new values
+                Assert.IsNotNull(postedMenuListing);
+                Assert.IsNotNull(putMenuListing);
+                Assert.AreEqual(menuListing2.Name, putMenuListing.Name);
+                Assert.AreEqual(menuListing2.Cost, putMenuListing.Cost);
+                Assert.AreEqual(menuListing2.SizeId, putMenuListing.SizeId);
+                Assert.AreEqual(postedMenuListing.Id, putMenuListing.Id);
+            }
         }
 
         [TestMethod]
@@ -195,9 +198,12 @@ namespace Anchovy.API.Client.Tests
 
             var postResp = await _menuListings.PostMenuListingWithOperationResponseAsync(menuListing1);
             var getResp1 = await _menuListings.GetMenuListingsWithOperationResponseAsync();
-            var postedMenuListing = getResp1.Body.Where(_ => _.Name == "medium").First();
+            var postedMenuListing = getResp1.Body.Where(_ => _.Name == "Breadsticks").First();
 
-            var delResp = await _menuListings.DeleteMenuListingWithOperationResponseAsync((int)postedMenuListing.Id, CancellationToken.None);
+            if (postedMenuListing.Id != null)
+            {
+                var delResp = await _menuListings.DeleteMenuListingWithOperationResponseAsync(postedMenuListing.Id.Value, CancellationToken.None);
+            }
 
             var getResp2 = await _menuListings.GetMenuListingsWithOperationResponseAsync();
             var delResp2 = getResp2.Body.Where(_ => _.Name == "medium");
@@ -235,7 +241,7 @@ namespace Anchovy.API.Client.Tests
             {
                 Cost = 6,
                 SizeId = 2,
-                Name = "m-Breadsticks",
+                Name = "m-Candy",
                 Size = size2
             };
 
@@ -257,13 +263,15 @@ namespace Anchovy.API.Client.Tests
             var menuListing4 = new MenuListing
             {
                 Cost = 12,
-                Name = "m-extra-large"
+                Name = "m-extra-large",
+                Size = size3
             };
 
             var menuListing5 = new MenuListing
             {
                 Cost = 15,
-                Name = "m-xx-large"
+                Name = "m-xx-large",
+                Size = size3
             };
 
             var postResponse1 = await _menuListings.PostMenuListingWithOperationResponseAsync(menuListing1, CancellationToken.None);
@@ -276,9 +284,9 @@ namespace Anchovy.API.Client.Tests
             var getResp = await _menuListings.GetMenuListingsWithOperationResponseAsync(CancellationToken.None);
             var gotMenuListings = getResp.Body;
 
-            var postedMenuListing1 = gotMenuListings.Where(_ => _.Name == "m-small");
-            var postedMenuListing2 = gotMenuListings.Where(_ => _.Name == "m-medium");
-            var postedMenuListing3 = gotMenuListings.Where(_ => _.Name == "m-large");
+            var postedMenuListing1 = gotMenuListings.Where(_ => _.Name == "m-Breadsticks");
+            var postedMenuListing2 = gotMenuListings.Where(_ => _.Name == "m-Candy");
+            var postedMenuListing3 = gotMenuListings.Where(_ => _.Name == "m-Wings");
             var postedMenuListing4 = gotMenuListings.Where(_ => _.Name == "m-extra-large");
             var postedMenuListing5 = gotMenuListings.Where(_ => _.Name == "m-xx-large");
 
