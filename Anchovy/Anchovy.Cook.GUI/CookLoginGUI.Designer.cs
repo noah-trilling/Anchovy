@@ -30,10 +30,12 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.loginbutton = new System.Windows.Forms.Button();
+            this.usernameBox = new System.Windows.Forms.TextBox();
+            this.passwordBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.invalidUserLabel = new System.Windows.Forms.Label();
+            this.invalidPassLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -57,28 +59,31 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Password";
             // 
-            // button1
+            // loginbutton
             // 
-            this.button1.Location = new System.Drawing.Point(144, 192);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = true;
+            this.loginbutton.Location = new System.Drawing.Point(144, 192);
+            this.loginbutton.Name = "loginbutton";
+            this.loginbutton.Size = new System.Drawing.Size(124, 23);
+            this.loginbutton.TabIndex = 2;
+            this.loginbutton.Text = "Login";
+            this.loginbutton.UseVisualStyleBackColor = true;
+            this.loginbutton.Click += new System.EventHandler(this.loginbutton_Click);
             // 
-            // textBox1
+            // usernameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(155, 81);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 3;
+            this.usernameBox.Location = new System.Drawing.Point(155, 81);
+            this.usernameBox.Name = "usernameBox";
+            this.usernameBox.Size = new System.Drawing.Size(100, 20);
+            this.usernameBox.TabIndex = 3;
             // 
-            // textBox2
+            // passwordBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(155, 116);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.passwordBox.Location = new System.Drawing.Point(155, 116);
+            this.passwordBox.Name = "passwordBox";
+            this.passwordBox.Size = new System.Drawing.Size(100, 20);
+            this.passwordBox.TabIndex = 4;
+            this.passwordBox.UseSystemPasswordChar = true;
+            this.passwordBox.UseWaitCursor = true;
             // 
             // label3
             // 
@@ -91,20 +96,38 @@
             this.label3.Text = "Anchovy";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // CookLogin
+            // invalidUserLabel
+            // 
+            this.invalidUserLabel.AutoSize = true;
+            this.invalidUserLabel.Location = new System.Drawing.Point(261, 84);
+            this.invalidUserLabel.Name = "invalidUserLabel";
+            this.invalidUserLabel.Size = new System.Drawing.Size(0, 13);
+            this.invalidUserLabel.TabIndex = 6;
+            // 
+            // invalidPassLabel
+            // 
+            this.invalidPassLabel.AutoSize = true;
+            this.invalidPassLabel.Location = new System.Drawing.Point(261, 119);
+            this.invalidPassLabel.Name = "invalidPassLabel";
+            this.invalidPassLabel.Size = new System.Drawing.Size(0, 13);
+            this.invalidPassLabel.TabIndex = 7;
+            // 
+            // CookLoginGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(413, 268);
+            this.Controls.Add(this.invalidPassLabel);
+            this.Controls.Add(this.invalidUserLabel);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.passwordBox);
+            this.Controls.Add(this.usernameBox);
+            this.Controls.Add(this.loginbutton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.Name = "CookLogin";
+            this.Name = "CookLoginGUI";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -116,10 +139,12 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button loginbutton;
+        private System.Windows.Forms.TextBox usernameBox;
+        private System.Windows.Forms.TextBox passwordBox;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label invalidUserLabel;
+        private System.Windows.Forms.Label invalidPassLabel;
     }
 }
 

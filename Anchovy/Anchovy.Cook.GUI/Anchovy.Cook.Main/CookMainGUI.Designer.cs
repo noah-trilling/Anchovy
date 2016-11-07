@@ -1,6 +1,6 @@
 ﻿namespace Anchovy.Cook.Main
 {
-    partial class Form1
+    partial class CookMainGUI
     {
         /// <summary>
         /// Required designer variable.
@@ -138,7 +138,7 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Ingredients";
             // 
-            // Form1
+            // CookMainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -152,7 +152,7 @@
             this.Controls.Add(this.myQueue);
             this.Controls.Add(this.myQLabel);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "CookMainGUI";
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();

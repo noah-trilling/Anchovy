@@ -80,6 +80,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Anchovy.API.Client\Anchovy.API.Client.csproj">
+      <Project>{9A289605-399F-4544-879C-D4310B9BF44E}</Project>
+      <Name>Anchovy.API.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="Anchovy.Cook.Main\Anchovy.Cook.Main.csproj">
+      <Project>{C0A37E00-4304-40CA-BC0D-9FFA7FB2CC38}</Project>
+      <Name>Anchovy.Cook.Main</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
