@@ -47,8 +47,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Anchovy.API.Client\Anchovy.API.Client.csproj">
+      <Project>{9a289605-399f-4544-879c-d4310b9bf44e}</Project>
+      <Name>Anchovy.API.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Anchovy.API.Service\Anchovy.API.Service.csproj">
-      <Project>{D4808EE7-9978-4CFF-A4A2-7274013C45F1}</Project>
+      <Project>{d4808ee7-9978-4cff-a4a2-7274013c45f1}</Project>
       <Name>Anchovy.API.Service</Name>
     </ProjectReference>
   </ItemGroup>
