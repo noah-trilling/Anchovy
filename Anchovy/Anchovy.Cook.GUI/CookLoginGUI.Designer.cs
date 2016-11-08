@@ -61,6 +61,7 @@
             // 
             // loginbutton
             // 
+            this.loginbutton.ForeColor = System.Drawing.Color.DodgerBlue;
             this.loginbutton.Location = new System.Drawing.Point(144, 192);
             this.loginbutton.Name = "loginbutton";
             this.loginbutton.Size = new System.Drawing.Size(124, 23);
@@ -99,18 +100,23 @@
             // invalidUserLabel
             // 
             this.invalidUserLabel.AutoSize = true;
+            this.invalidUserLabel.ForeColor = System.Drawing.Color.Red;
             this.invalidUserLabel.Location = new System.Drawing.Point(261, 84);
             this.invalidUserLabel.Name = "invalidUserLabel";
-            this.invalidUserLabel.Size = new System.Drawing.Size(0, 13);
+            this.invalidUserLabel.Size = new System.Drawing.Size(37, 13);
             this.invalidUserLabel.TabIndex = 6;
+            this.invalidUserLabel.Text = "          ";
+            this.invalidUserLabel.Click += new System.EventHandler(this.invalidUserLabel_Click);
             // 
             // invalidPassLabel
             // 
             this.invalidPassLabel.AutoSize = true;
+            this.invalidPassLabel.ForeColor = System.Drawing.Color.Red;
             this.invalidPassLabel.Location = new System.Drawing.Point(261, 119);
             this.invalidPassLabel.Name = "invalidPassLabel";
-            this.invalidPassLabel.Size = new System.Drawing.Size(0, 13);
+            this.invalidPassLabel.Size = new System.Drawing.Size(37, 13);
             this.invalidPassLabel.TabIndex = 7;
+            this.invalidPassLabel.Text = "          ";
             // 
             // CookLoginGUI
             // 

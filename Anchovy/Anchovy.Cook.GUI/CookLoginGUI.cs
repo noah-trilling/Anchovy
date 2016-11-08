@@ -1,28 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Anchovy.API.Client;
-using Anchovy.API.Client.Models;
 using Anchovy.Cook.Main;
+using System.Threading;
 
 namespace Anchovy.Cook.GUI
 {
     public partial class CookLoginGUI : Form
     {
         private ICooks _cooks;
-        
+        private CookMainGUI _mainG;
+
+
         public CookLoginGUI()
         {
             InitializeComponent();
             _cooks = new AnchovyAPIService().Cooks;
-            invalidUserLabel.ForeColor = Color.Red;
-            invalidPassLabel.ForeColor = Color.Red;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -69,10 +64,12 @@ namespace Anchovy.Cook.GUI
                     {
                         if(pass == cook.First().Password)
                         {
-                            CookMainGUI mainG = new CookMainGUI();
-                            mainG.Text = "Login- " + cook.First().Username;
-                            this.Hide();
-                            mainG.Show();
+                            _mainG = new CookMainGUI();
+                            _mainG.Text = "Login- " + cook.First().Username;
+                            Thread th = new Thread(launchMain);
+                            th.SetApartmentState(ApartmentState.STA);
+                            th.Start();
+                            this.Close();
                         }
                         else
                         {
@@ -87,5 +84,14 @@ namespace Anchovy.Cook.GUI
             }
         }
 
+       private void launchMain()
+        {
+            Application.Run(_mainG);
+        }
+
+        private void invalidUserLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

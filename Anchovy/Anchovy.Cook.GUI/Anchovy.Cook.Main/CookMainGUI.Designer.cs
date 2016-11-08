@@ -37,6 +37,7 @@
             this.completeQLabel = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.label2 = new System.Windows.Forms.Label();
+            this.logoutButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -138,11 +139,23 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Ingredients";
             // 
+            // logoutButton
+            // 
+            this.logoutButton.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.logoutButton.Location = new System.Drawing.Point(620, 12);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(70, 23);
+            this.logoutButton.TabIndex = 11;
+            this.logoutButton.Text = "Logout";
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
+            // 
             // CookMainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 432);
+            this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.listBox2);
@@ -169,6 +182,7 @@
         private System.Windows.Forms.Label completeQLabel;
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button logoutButton;
     }
 }
 
