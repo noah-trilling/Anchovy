@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Anchovy.API.Service.Models;
+using Anchovy.API.Client.Models;
 
 namespace Anchovy.Models.Utilities
 {
     public class LineHelper
     {
-        public virtual decimal CalculateLineCost(Line line)
+        public virtual double? CalculateLineCost(Line line)
         {
             var listingHelper = new MenuListingHelper();
             var pizzaHelper = new PizzaHelper();
