@@ -31,11 +31,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.myQLabel = new System.Windows.Forms.Label();
             this.myQueue = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.globalQueue = new System.Windows.Forms.ListBox();
             this.globalQLabel = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.completedQueue = new System.Windows.Forms.ListBox();
             this.completeQLabel = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.ingredientsBox = new System.Windows.Forms.ListView();
             this.label2 = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -51,7 +51,6 @@
             this.label1.Size = new System.Drawing.Size(102, 29);
             this.label1.TabIndex = 1;
             this.label1.Text = "Anchovy";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // myQLabel
             // 
@@ -66,6 +65,7 @@
             // 
             // myQueue
             // 
+            this.myQueue.AllowDrop = true;
             this.myQueue.Items.AddRange(new object[] {
             "Large Pepperoni",
             "Small Veggie",
@@ -74,18 +74,29 @@
             this.myQueue.Name = "myQueue";
             this.myQueue.Size = new System.Drawing.Size(152, 173);
             this.myQueue.TabIndex = 3;
-            this.myQueue.SelectedIndexChanged += new System.EventHandler(this.myQueue_SelectedIndexChanged);
+            this.myQueue.MouseClick += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseClick);
+            this.myQueue.DragDrop += new System.Windows.Forms.DragEventHandler(this.myQueue_DragDrop);
+            this.myQueue.DragEnter += new System.Windows.Forms.DragEventHandler(this.myQueue_DragEnter);
+            this.myQueue.DragOver += new System.Windows.Forms.DragEventHandler(this.myQueue_DragOver);
+            this.myQueue.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseDoubleClick);
+            this.myQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseDown);
+            this.myQueue.MouseUp += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseUp);
             // 
-            // listBox1
+            // globalQueue
             // 
-            this.listBox1.Items.AddRange(new object[] {
+            this.globalQueue.AllowDrop = true;
+            this.globalQueue.Items.AddRange(new object[] {
             "Large Pepperoni",
             "Small Veggie",
             "Medium All American"});
-            this.listBox1.Location = new System.Drawing.Point(221, 78);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(152, 173);
-            this.listBox1.TabIndex = 5;
+            this.globalQueue.Location = new System.Drawing.Point(221, 78);
+            this.globalQueue.Name = "globalQueue";
+            this.globalQueue.Size = new System.Drawing.Size(152, 173);
+            this.globalQueue.TabIndex = 5;
+            this.globalQueue.DragDrop += new System.Windows.Forms.DragEventHandler(this.globalQueue_DragDrop);
+            this.globalQueue.DragEnter += new System.Windows.Forms.DragEventHandler(this.globalQueue_DragEnter);
+            this.globalQueue.DragOver += new System.Windows.Forms.DragEventHandler(this.globalQueue_DragOver);
+            this.globalQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.globalQueue_MouseDown);
             // 
             // globalQLabel
             // 
@@ -98,16 +109,21 @@
             this.globalQLabel.TabIndex = 4;
             this.globalQLabel.Text = "GloabalQueue";
             // 
-            // listBox2
+            // completedQueue
             // 
-            this.listBox2.Items.AddRange(new object[] {
+            this.completedQueue.AllowDrop = true;
+            this.completedQueue.Items.AddRange(new object[] {
             "Large Pepperoni",
             "Small Veggie",
             "Medium All American"});
-            this.listBox2.Location = new System.Drawing.Point(430, 78);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(152, 173);
-            this.listBox2.TabIndex = 7;
+            this.completedQueue.Location = new System.Drawing.Point(430, 78);
+            this.completedQueue.Name = "completedQueue";
+            this.completedQueue.Size = new System.Drawing.Size(152, 173);
+            this.completedQueue.TabIndex = 7;
+            this.completedQueue.DragDrop += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragDrop);
+            this.completedQueue.DragEnter += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragEnter);
+            this.completedQueue.DragOver += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragOver);
+            this.completedQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.completedQueue_MouseDown);
             // 
             // completeQLabel
             // 
@@ -120,14 +136,17 @@
             this.completeQLabel.TabIndex = 6;
             this.completeQLabel.Text = "CompletedQueue";
             // 
-            // listView1
+            // ingredientsBox
             // 
-            this.listView1.Location = new System.Drawing.Point(12, 310);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(229, 97);
-            this.listView1.TabIndex = 8;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
+            this.ingredientsBox.AllowDrop = true;
+            this.ingredientsBox.Location = new System.Drawing.Point(12, 310);
+            this.ingredientsBox.Name = "ingredientsBox";
+            this.ingredientsBox.Size = new System.Drawing.Size(229, 97);
+            this.ingredientsBox.TabIndex = 8;
+            this.ingredientsBox.UseCompatibleStateImageBehavior = false;
+            this.ingredientsBox.View = System.Windows.Forms.View.List;
+            this.ingredientsBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.ingredientsBox_DragDrop);
+            this.ingredientsBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.ingredientsBox_DragEnter);
             // 
             // label2
             // 
@@ -157,10 +176,10 @@
             this.ClientSize = new System.Drawing.Size(702, 432);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.listBox2);
+            this.Controls.Add(this.ingredientsBox);
+            this.Controls.Add(this.completedQueue);
             this.Controls.Add(this.completeQLabel);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.globalQueue);
             this.Controls.Add(this.globalQLabel);
             this.Controls.Add(this.myQueue);
             this.Controls.Add(this.myQLabel);
@@ -176,11 +195,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label myQLabel;
         private System.Windows.Forms.ListBox myQueue;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox globalQueue;
         private System.Windows.Forms.Label globalQLabel;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox completedQueue;
         private System.Windows.Forms.Label completeQLabel;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView ingredientsBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button logoutButton;
     }
