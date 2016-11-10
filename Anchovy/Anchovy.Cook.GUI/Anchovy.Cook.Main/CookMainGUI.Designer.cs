@@ -36,8 +36,9 @@
             this.completedQueue = new System.Windows.Forms.ListBox();
             this.completeQLabel = new System.Windows.Forms.Label();
             this.ingredientsBox = new System.Windows.Forms.ListView();
-            this.label2 = new System.Windows.Forms.Label();
+            this.ingredientsLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
+            this.clearQueue = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -74,13 +75,11 @@
             this.myQueue.Name = "myQueue";
             this.myQueue.Size = new System.Drawing.Size(152, 173);
             this.myQueue.TabIndex = 3;
-            this.myQueue.MouseClick += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseClick);
             this.myQueue.DragDrop += new System.Windows.Forms.DragEventHandler(this.myQueue_DragDrop);
             this.myQueue.DragEnter += new System.Windows.Forms.DragEventHandler(this.myQueue_DragEnter);
             this.myQueue.DragOver += new System.Windows.Forms.DragEventHandler(this.myQueue_DragOver);
             this.myQueue.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseDoubleClick);
             this.myQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseDown);
-            this.myQueue.MouseUp += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseUp);
             // 
             // globalQueue
             // 
@@ -103,7 +102,7 @@
             this.globalQLabel.AutoSize = true;
             this.globalQLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.globalQLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.globalQLabel.Location = new System.Drawing.Point(262, 55);
+            this.globalQLabel.Location = new System.Drawing.Point(238, 55);
             this.globalQLabel.Name = "globalQLabel";
             this.globalQLabel.Size = new System.Drawing.Size(112, 20);
             this.globalQLabel.TabIndex = 4;
@@ -145,18 +144,17 @@
             this.ingredientsBox.TabIndex = 8;
             this.ingredientsBox.UseCompatibleStateImageBehavior = false;
             this.ingredientsBox.View = System.Windows.Forms.View.List;
-            this.ingredientsBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.ingredientsBox_DragDrop);
-            this.ingredientsBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.ingredientsBox_DragEnter);
             // 
-            // label2
+            // ingredientsLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(24, 287);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 20);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Ingredients";
+            this.ingredientsLabel.AutoSize = true;
+            this.ingredientsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ingredientsLabel.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.ingredientsLabel.Location = new System.Drawing.Point(24, 287);
+            this.ingredientsLabel.Name = "ingredientsLabel";
+            this.ingredientsLabel.Size = new System.Drawing.Size(89, 20);
+            this.ingredientsLabel.TabIndex = 9;
+            this.ingredientsLabel.Text = "Ingredients";
             // 
             // logoutButton
             // 
@@ -169,13 +167,26 @@
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
+            // clearQueue
+            // 
+            this.clearQueue.BackColor = System.Drawing.SystemColors.Control;
+            this.clearQueue.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.clearQueue.Location = new System.Drawing.Point(470, 257);
+            this.clearQueue.Name = "clearQueue";
+            this.clearQueue.Size = new System.Drawing.Size(75, 23);
+            this.clearQueue.TabIndex = 12;
+            this.clearQueue.Text = "Clear";
+            this.clearQueue.UseVisualStyleBackColor = false;
+            this.clearQueue.Click += new System.EventHandler(this.clearQueue_Click);
+            // 
             // CookMainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 432);
+            this.Controls.Add(this.clearQueue);
             this.Controls.Add(this.logoutButton);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.ingredientsLabel);
             this.Controls.Add(this.ingredientsBox);
             this.Controls.Add(this.completedQueue);
             this.Controls.Add(this.completeQLabel);
@@ -200,8 +211,9 @@
         private System.Windows.Forms.ListBox completedQueue;
         private System.Windows.Forms.Label completeQLabel;
         private System.Windows.Forms.ListView ingredientsBox;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label ingredientsLabel;
         private System.Windows.Forms.Button logoutButton;
+        private System.Windows.Forms.Button clearQueue;
     }
 }
 
