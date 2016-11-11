@@ -208,8 +208,6 @@ namespace Anchovy.Cook.Main
             if (myQueue.SelectedIndex >= 0)
             {
                 ingredientsLabel.Text = ingredientsLabel.Text.Split()[0] + " - " + myQueue.SelectedItem;
-                myQueue.Items.Remove(myQueue.SelectedItem);
-                myQueue.ClearSelected();
             }
         }
 
