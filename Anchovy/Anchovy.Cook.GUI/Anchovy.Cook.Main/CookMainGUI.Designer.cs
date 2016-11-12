@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.anchovyLabel = new System.Windows.Forms.Label();
             this.myQLabel = new System.Windows.Forms.Label();
             this.myQueue = new System.Windows.Forms.ListBox();
             this.globalQueue = new System.Windows.Forms.ListBox();
@@ -41,17 +41,17 @@
             this.clearQueue = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // anchovyLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label1.ImageAlign = System.Drawing.ContentAlignment.TopRight;
-            this.label1.Location = new System.Drawing.Point(248, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 29);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Anchovy";
+            this.anchovyLabel.AutoSize = true;
+            this.anchovyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.anchovyLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.anchovyLabel.ImageAlign = System.Drawing.ContentAlignment.TopRight;
+            this.anchovyLabel.Location = new System.Drawing.Point(248, 9);
+            this.anchovyLabel.Name = "anchovyLabel";
+            this.anchovyLabel.Size = new System.Drawing.Size(102, 29);
+            this.anchovyLabel.TabIndex = 1;
+            this.anchovyLabel.Text = "Anchovy";
             // 
             // myQLabel
             // 
@@ -194,16 +194,17 @@
             this.Controls.Add(this.globalQLabel);
             this.Controls.Add(this.myQueue);
             this.Controls.Add(this.myQLabel);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.anchovyLabel);
             this.Name = "CookMainGUI";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CookMainGUI_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label anchovyLabel;
         private System.Windows.Forms.Label myQLabel;
         private System.Windows.Forms.ListBox myQueue;
         private System.Windows.Forms.ListBox globalQueue;

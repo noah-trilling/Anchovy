@@ -23,15 +23,9 @@ namespace Anchovy.Cook.Main
         //Logout current cook and return to login screen
         private void logoutButton_Click(object sender, EventArgs e)
         {
-            Thread th = new Thread(launchLogin);
-            th.SetApartmentState(ApartmentState.STA);
-            th.Start();
-            this.Close();
-        }
-
-        private void launchLogin()
-        {
-            //Application.Run(new CookLoginGUI);
+            Owner.Show();
+            Owner = null;
+            Close();
         }
 
         //Initialize a drag-and-drop operation
@@ -241,6 +235,15 @@ namespace Anchovy.Cook.Main
                 completedQueue.Items.Clear();
                 clearQueue.Enabled = false;
             }
+        }
+
+        private void CookMainGUI_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (Owner != null)
+            {
+                Application.Exit();
+            }
+
         }
     }
 }

@@ -66,10 +66,11 @@ namespace Anchovy.Cook.GUI
                         {
                             _mainG = new CookMainGUI();
                             _mainG.Text = "Login- " + cook.First().Username;
-                            Thread th = new Thread(launchMain);
-                            th.SetApartmentState(ApartmentState.STA);
-                            th.Start();
-                            this.Close();
+                            _mainG.Owner = this;
+                            Hide();
+                            usernameBox.Text = "";
+                            passwordBox.Text = "";
+                            _mainG.Show();
                         }
                         else
                         {
