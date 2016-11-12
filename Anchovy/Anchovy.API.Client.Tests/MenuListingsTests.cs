@@ -21,6 +21,14 @@ namespace Anchovy.API.Client.Tests
         {
             _menuListings = Service.MenuListings;
             _sizes = Service.Sizes;
+
+            var size1 = new Size
+            {
+                Cost = 6,
+                Name = "small"
+            };
+            var postSize = _sizes.PostSizeWithOperationResponseAsync(size1, CancellationToken.None);
+
         }
 
         [TestMethod]
@@ -37,13 +45,7 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task MenuListingPost()
         {
-            var size1 = new Size
-            {
-                Cost = 6,
-                Id = 2,
-                Name = "small"
-            };
-            var postSize = await _sizes.PostSizeWithOperationResponseAsync(size1, CancellationToken.None);
+           
             var getResponse = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None);
             var gotSize = getResponse.Result.Body;
             var size = gotSize.Where(_ => _.Name == "small").First();
@@ -52,6 +54,7 @@ namespace Anchovy.API.Client.Tests
             {
                 Cost = 6,
                 Name = "Wings",
+                SizeId = size.Id,
                 Size = size
             };
 
@@ -68,25 +71,21 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task MenuListingPostNoId()
         {
-            var size1 = new Size
-            {
-                Cost = 6,
-                Id = 2,
-                Name = "small"
-            };
-            var postSize = await _sizes.PostSizeWithOperationResponseAsync(size1, CancellationToken.None);
+            var getResponse = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None);
+            var gotSize = getResponse.Result.Body;
+            var size = gotSize.Where(_ => _.Name == "small").First();
 
             var menuListing1 = new MenuListing
             {
                 Cost = 6,
-                SizeId = 2,
-                Name = "Wings",
-                Size = size1
+                SizeId = size.Id,
+                Size = size,
+                Name = "Wings"
             };
 
             var postResponse = await _menuListings.PostMenuListingWithOperationResponseAsync(menuListing1, CancellationToken.None);
-            var getResponse = _menuListings.GetMenuListingsWithOperationResponseAsync(CancellationToken.None);
-            var gotMenuListing = getResponse.Result.Body;
+            var getResponse1 = _menuListings.GetMenuListingsWithOperationResponseAsync(CancellationToken.None);
+            var gotMenuListing = getResponse1.Result.Body;
             var menuListing = gotMenuListing.Where(_ => _.Name == "Wings");
 
             Assert.IsNotNull(menuListing);
@@ -98,24 +97,20 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task MenuListingGetById()
         {
-            var size1 = new Size
-            {
-                Cost = 6,
-                Id = 2,
-                Name = "x-small"
-            };
+            var getResponse = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None);
+            var gotSize = getResponse.Result.Body;
+            var size = gotSize.Where(_ => _.Name == "small").First();
 
             var menuListing1 = new MenuListing
             {
                 Cost = 6,
-                SizeId = 2,
+                SizeId = size.Id,
                 Name = "Breadsticks",
-                Size = size1
+                Size = size
             };
 
             var postResponse = await _menuListings.PostMenuListingWithOperationResponseAsync(menuListing1, CancellationToken.None);
-            var getResponse = _menuListings.GetMenuListingWithOperationResponseAsync((int)postResponse.Body.Id);
-            var gotMenuListing = getResponse.Result.Body;
+            var gotMenuListing = _menuListings.GetMenuListing((int)postResponse.Body.Id);
 
             Assert.IsNotNull(gotMenuListing);
             Assert.AreEqual(menuListing1.Cost, gotMenuListing.Cost);
@@ -125,38 +120,29 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task MenuListingPut()
         {
-            var size1 = new Size
-            {
-                Cost = 6,
-                Id = 2,
-                Name = "x-small"
-            };
+            var getResponse = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None);
+            var gotSize = getResponse.Result.Body;
+            var size = gotSize.Where(_ => _.Name == "small").First();
 
             var menuListing1 = new MenuListing
             {
                 Cost = 6,
-                SizeId = 2,
+                SizeId = size.Id,
                 Name = "Breadsticks",
-                Size = size1
+                Size = size
             };
 
             var postResp = await _menuListings.PostMenuListingWithOperationResponseAsync(menuListing1);
             var getResp1 = await _menuListings.GetMenuListingsWithOperationResponseAsync();
             var postedMenuListing = getResp1.Body.Where(_ => _.Name == "Breadsticks").First();
 
-            var size2 = new Size
-            {
-                Cost = 6,
-                Id = 2,
-                Name = "x-large"
-            };
-
             MenuListing menuListing2 = new MenuListing
             {
-                Cost = 20,
+                Cost = 40,
                 SizeId = postedMenuListing.SizeId,
                 Id = postedMenuListing.Id,
-                Name = "new menuListing"
+                Name = "new menuListing",
+                Size = size
             };
 
             if (postedMenuListing.Id != null)
@@ -181,19 +167,16 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task MenuListingDelete()
         {
-            var size1 = new Size
-            {
-                Cost = 6,
-                Id = 2,
-                Name = "x-small"
-            };
+            var getResponse = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None);
+            var gotSize = getResponse.Result.Body;
+            var size = gotSize.Where(_ => _.Name == "small").First();
 
             var menuListing1 = new MenuListing
             {
                 Cost = 6,
-                SizeId = 2,
+                SizeId = size.Id,
                 Name = "Breadsticks",
-                Size = size1
+                Size = size
             };
 
             var postResp = await _menuListings.PostMenuListingWithOperationResponseAsync(menuListing1);
@@ -206,7 +189,6 @@ namespace Anchovy.API.Client.Tests
             }
 
             var getResp2 = await _menuListings.GetMenuListingsWithOperationResponseAsync();
-            var delResp2 = getResp2.Body.Where(_ => _.Name == "medium");
 
             // Check that item was deleted
             Assert.AreEqual(getResp1.Body.Count - 1, getResp2.Body.Count);
@@ -322,20 +304,35 @@ namespace Anchovy.API.Client.Tests
         [TestMethod]
         public async Task MenuListingsClearTable()
         {
+            var gotSize = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None).Result.Body;
+            // Iterate over each size to get the id and delete that size
+            while (gotSize.Count > 0)
+            {
+                var delResp = await _sizes.DeleteSizeWithOperationResponseAsync((int)gotSize.First().Id);
+                var deletedSize = delResp.Body;
+                Assert.IsNotNull(deletedSize);
+                gotSize = _sizes.GetSizesWithOperationResponseAsync(CancellationToken.None).Result.Body;
+            }
+
+            var getResp1 = await _sizes.GetSizesWithOperationResponseAsync();
+
+            // Confirm there are no sizes left
+            Assert.AreEqual(0, getResp1.Body.Count);
+
             var gotMenuListings = _menuListings.GetMenuListingsWithOperationResponseAsync(CancellationToken.None).Result.Body;
             // Iterate over each menuListing to get the id and delete that menuListing
             while (gotMenuListings.Count > 0)
             {
-                var delResp = await _menuListings.DeleteMenuListingWithOperationResponseAsync((int)gotMenuListings.First().Id);
-                var deletedMenuListing = delResp.Body;
+                var delResp1 = await _menuListings.DeleteMenuListingWithOperationResponseAsync((int)gotMenuListings.First().Id);
+                var deletedMenuListing = delResp1.Body;
                 Assert.IsNotNull(deletedMenuListing);
                 gotMenuListings = _menuListings.GetMenuListingsWithOperationResponseAsync(CancellationToken.None).Result.Body;
             }
 
-            var getResp1 = await _menuListings.GetMenuListingsWithOperationResponseAsync();
+            var getResp2 = await _menuListings.GetMenuListingsWithOperationResponseAsync();
 
             // Confirm there are no menuListings left
-            Assert.AreEqual(0, getResp1.Body.Count);
+            Assert.AreEqual(0, getResp2.Body.Count);
         }
     }
 }
