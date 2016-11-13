@@ -19,6 +19,40 @@ namespace Anchovy.API.Client.Tests
         //public void ShiftTestInit()
         //{
         //    _shift = Service.Shifts;
+        //    _manager = Service.Managers;
+        //    _cook = Service.Cooks;
+
+        //    var burns = new Manager
+        //    {
+        //        Address = "123 Fake Street",
+        //        City = "Springfield",
+        //        Email = "burns@nuclearplant.gov",
+        //        Salary = 10000000000.00,
+        //        FirstName = "Montgomery",
+        //        LastName = "Burns",
+        //        MiddleName = "Bobo"
+        //    };
+
+        //    var postResponse1 = _manager.PostManagerWithOperationResponseAsync(burns, CancellationToken.None);
+
+        //    var gotResponseM = _manager.GetManagers();
+        //    // var gotManagers = gotResponseM.;
+        //    var gotManager = gotResponseM.Where(_ => _.FirstName == "Montgomery").FirstOrDefault();
+
+        //    var homer = new Cook
+        //    {
+        //        Address = "123 Fake Street",
+        //        City = "Springfield",
+        //        Email = "burns@nuclearplant.gov",
+        //        FirstName = "Homer",
+        //        LastName = "Simpson",
+        //        MiddleName = "Jay",
+        //        HourlyWage = 60000,
+        //        Manager = gotManager
+        //    };
+        //    var postResponseC = _cook.PostCookWithOperationResponseAsync(homer, CancellationToken.None);
+
+
         //}
 
         //[TestMethod]
@@ -34,7 +68,12 @@ namespace Anchovy.API.Client.Tests
         //        LastName = "Burns",
         //        MiddleName = "Bobo"
         //    };
-        //   // var postResponse1 = await _manager.PostManagerWithOperationResponseAsync(burns, CancellationToken.None);
+
+        //    var postResponse1 = _manager.PostManagerWithOperationResponseAsync(burns, CancellationToken.None);
+
+        //    var gotResponseM = _manager.GetManagers();
+        //    // var gotManagers = gotResponseM.;
+        //    var gotManager = gotResponseM.Where(_ => _.FirstName == "Montgomery").FirstOrDefault();
 
         //    var homer = new Cook
         //    {
@@ -45,118 +84,120 @@ namespace Anchovy.API.Client.Tests
         //        LastName = "Simpson",
         //        MiddleName = "Jay",
         //        HourlyWage = 60000,
-        //        Manager = burns
+        //        Manager = gotManager
         //    };
-        //   // var postResponse2 = await _cook.PostCookWithOperationResponseAsync(homer, CancellationToken.None);
+        //    var postResponseC = _cook.PostCookWithOperationResponseAsync(homer, CancellationToken.None);
+
+        //    //var gotResponseM = await _manager.GetManagersWithOperationResponseAsync();
+        //    //var gotManagers = gotResponseM.Body;
+        //    //var gotManager = gotManagers.Where(_ => _.FirstName == "Montgomery").FirstOrDefault();
+        //    //var homer = new Cook
+        //    //{
+        //    //    Address = "123 Fake Street",
+        //    //    City = "Springfield",
+        //    //    Email = "burns@nuclearplant.gov",
+        //    //    FirstName = "Homer",
+        //    //    LastName = "Simpson",
+        //    //    MiddleName = "Jay",
+        //    //    HourlyWage = 60000,
+        //    //    Manager = gotManager
+        //    //};
+        //    //var postResponseC = await _cook.PostCookWithOperationResponseAsync(homer, CancellationToken.None);
+
+        //    var gotResponseC = await _cook.GetCooksWithOperationResponseAsync();
+        //    var gotCooks = gotResponseC.Body;
+        //    var gotCook = gotCooks.Where(_ => _.FirstName == "Homer").FirstOrDefault();
 
         //    var shift1 = new Shift
-        //    { 
-        //            Id= 0,
-        //            //CookId = homer.Id,
-        //            Cook= homer,
-        //            StartTime = DateTime.Now,
-        //            EndTime = DateTime.Now
+        //    {
+        //        Id = 0,
+        //        CookId = gotCook.Id,
+        //        Cook = gotCook,
+        //        StartTime = DateTime.Now,
+        //        EndTime = DateTime.Now
         //    };
 
-        //    var postResponse = await _shift.PostShiftWithOperationResponseAsync(shift1, CancellationToken.None);
-        //    var thing = postResponse.Body;
+        //    var postResponseS = await _shift.PostShiftWithOperationResponseAsync(shift1, CancellationToken.None);
+        //    // var thing = postResponseS.Body;
         //    var getShiftsResponse = _shift.GetShiftsWithOperationResponseAsync(CancellationToken.None);
         //    var gotShifts = getShiftsResponse.Result.Body;
-        //    var postedShift = gotShifts.Where(_ => _.Id == shift1.Id).FirstOrDefault();
+        //    var gotShift = gotShifts.First();
+        //    var postedShift = gotShifts.Where(_ => _.Id == gotShift.Id).FirstOrDefault();
         //    Assert.IsNotNull(postedShift);
         //}
 
+
         //[TestMethod]
-        //public async Task addManager2()
+        //public async Task PutShift1()
         //{
-        //    var man1 = new Manager
+
+        //    var gotResponseC = await _cook.GetCooksWithOperationResponseAsync();
+        //    var gotCooks = gotResponseC.Body;
+        //    var gotCook = gotCooks.Where(_ => _.FirstName == "Homer").FirstOrDefault();
+
+        //    var shift1 = new Shift
         //    {
-        //        Address = "555 lake rd",
-        //        City = "lakeview",
-        //        Email = "man1@email.com",
-        //        Salary = 50000.00,
-        //        FirstName = "Bobby",
-        //        LastName = "Ray",
-        //        MiddleName = "Etch"
+        //        Id = 0,
+        //        CookId = gotCook.Id,
+        //        Cook = gotCook,
+        //        StartTime = DateTime.Now,
+        //        EndTime = DateTime.Now
         //    };
 
-        //    var man2 = new Manager
+        //    var postResponseS = await _shift.PostShiftWithOperationResponseAsync(shift1, CancellationToken.None);
+        //    var getShiftsResponse = await _shift.GetShiftsWithOperationResponseAsync(CancellationToken.None);
+        //    var gotShifts = getShiftsResponse.Body;
+        //    var gotShift = gotShifts.First();
+        //    var postedShift = gotShifts.Where(_ => _.Id == gotShift.Id).FirstOrDefault();
+
+
+
+        //    var shift2 = new Shift
         //    {
-        //        Address = "444 lake rd",
-        //        City = "lakeview",
-        //        Email = "man2@email.com",
-        //        Salary = 50000.00,
-        //        FirstName = "Jonny",
-        //        LastName = "Lynch",
-        //        MiddleName = "Cray"
+
+        //        CookId = gotCook.Id,
+        //        Cook = gotCook,
+        //        StartTime = DateTime.Now,
+        //        EndTime = DateTime.Now,
+        //        Id = postedShift.Id
         //    };
 
-        //    var postResp1 = await _managers.PostManagerWithOperationResponseAsync(man1);
-        //    var postResp2 = await _managers.PostManagerWithOperationResponseAsync(man2);
-        //    var gotManagersResp = await _managers.GetManagersWithOperationResponseAsync();
-        //    var managerList = gotManagersResp.Body;
-        //    var postedManager1 = managerList.Where(_ => _.LastName == "Ray");
-        //    var postedManager2 = managerList.Where(_ => _.FirstName == "Jonny");
+        //    var putResp = await _shift.PutShiftWithOperationResponseAsync((int)shift2.Id, shift2);
+        //    var getResp2 = await _shift.GetShiftWithOperationResponseAsync((int)shift2.Id);
+        //    var putShift = getResp2.Body;
 
-        //    Assert.IsNotNull(postedManager1);
-        //    Assert.IsNotNull(postedManager2);
-
-        //    Assert.AreEqual("Etch", postedManager1.First().MiddleName);
-        //    Assert.AreEqual("Cray", postedManager2.First().MiddleName);
+        //    Assert.IsNotNull(postedShift);
+        //    Assert.IsNotNull(putShift);
+        //    Assert.AreEqual(gotCook.Id, postedShift.CookId);
+        //    Assert.AreEqual(gotCook.Id, putShift.CookId);
         //}
 
         //[TestMethod]
-        //public async Task PutManager1()
+        //public async Task ClearShiftTable()
         //{
-        //    var jonny = new Manager
-        //    {
-        //        Address = "444 lake rd",
-        //        City = "lakeview",
-        //        Email = "jonnycl@email.com",
-        //        Salary = 50000.00,
-        //        FirstName = "Jonny",
-        //        LastName = "Lynch",
-        //        MiddleName = "Cray"
-        //    };
-
-        //    var postResp = await _managers.PostManagerWithOperationResponseAsync(jonny);
-        //    var getResp1 = await _managers.GetManagersWithOperationResponseAsync();
-        //    var postedManager = getResp1.Body.Where(_ => _.Email == "jonnycl@email.com").First();
-
-        //    var jake = new Manager
-        //    {
-        //        Address = "555 lake rd",
-        //        City = "lakeview",
-        //        Email = "jakycl@email.com",
-        //        Salary = 50000.00,
-        //        FirstName = "Jake",
-        //        LastName = "Lin",
-        //        MiddleName = "Dart",
-        //        Id = postedManager.Id
-        //    };
-
-        //    var putResp = await _managers.PutManagerWithOperationResponseAsync((int)jake.Id, jake);
-        //    var getResp2 = await _managers.GetManagerWithOperationResponseAsync((int)jake.Id);
-        //    var putManager = getResp2.Body;
-
-        //    Assert.IsNotNull(postedManager);
-        //    Assert.IsNotNull(putManager);
-        //    Assert.AreEqual("Jonny", postedManager.FirstName);
-        //    Assert.AreEqual("Jake", putManager.FirstName);
-        //}
-
-        //[TestMethod]
-        //public async Task ClearManagerTable()
-        //{
-        //    var managers = _managers.GetManagersWithOperationResponseAsync().Result.Body;
-
+        //    var managers = _manager.GetManagersWithOperationResponseAsync().Result.Body;
         //    while (managers.Count > 0)
         //    {
-        //        var delResp = await _managers.DeleteManagerWithOperationResponseAsync((int)managers.First().Id);
-        //        var deletedManager = delResp.Body;
-        //        Assert.IsNotNull(deletedManager);
-        //        managers = _managers.GetManagersWithOperationResponseAsync().Result.Body;
+        //        var delResp = await _manager.DeleteManagerWithOperationResponseAsync((int)managers.First().Id);
+        //        managers = _manager.GetManagersWithOperationResponseAsync().Result.Body;
         //    }
+
+        //    var cooks = _cook.GetCooksWithOperationResponseAsync().Result.Body;
+        //    while (cooks.Count > 0)
+        //    {
+        //        var delResp = await _cook.DeleteCookWithOperationResponseAsync((int)managers.First().Id);
+        //        cooks = _cook.GetCooksWithOperationResponseAsync().Result.Body;
+        //    }
+
+        //    var shifts = _shift.GetShiftsWithOperationResponseAsync().Result.Body;
+        //    while (shifts.Count > 0)
+        //    {
+        //        var delResp = await _shift.DeleteShiftWithOperationResponseAsync((int)managers.First().Id);
+        //        var deletedShift = delResp.Body;
+        //        Assert.IsNotNull(deletedShift);
+        //        shifts = _shift.GetShiftsWithOperationResponseAsync().Result.Body;
+        //    }
+
         //}
     }
 }
