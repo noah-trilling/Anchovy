@@ -20,7 +20,6 @@ namespace Anchovy.API.Service.DAL
         public DbSet<Topping> Toppings { get; set; }
         public AnchovyContext() : base("AnchovyContext")
         {
-            
         }
 
 

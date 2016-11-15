@@ -7,13 +7,13 @@ namespace Anchovy.API.Service.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitialCreate : IMigrationMetadata
+    public sealed partial class third : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(third));
         
         string IMigrationMetadata.Id
         {
-            get { return "201610182334397_InitialCreate"; }
+            get { return "201611150608292_third"; }
         }
         
         string IMigrationMetadata.Source

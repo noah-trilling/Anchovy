@@ -20,14 +20,14 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/MenuListings
         public IQueryable<MenuListing> GetMenuListings()
         {
-            return db.MenuListings;
+            return db.MenuListings.Include(_=>_.Size);
         }
 
         // GET: api/MenuListings/5
         [ResponseType(typeof(MenuListing))]
         public IHttpActionResult GetMenuListing(int id)
         {
-            MenuListing menuListing = db.MenuListings.Find(id);
+            MenuListing menuListing = db.MenuListings.Include(_=>_.Size).FirstOrDefault(_=>_.Id == id);
             if (menuListing == null)
             {
                 return NotFound();
@@ -51,6 +51,7 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(menuListing).State = EntityState.Modified;
+            db.Entry(menuListing.Size).State = EntityState.Unchanged;
 
             try
             {
@@ -81,6 +82,7 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.MenuListings.Add(menuListing);
+            db.Entry(menuListing.Size).State = EntityState.Unchanged;
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = menuListing.Id }, menuListing);

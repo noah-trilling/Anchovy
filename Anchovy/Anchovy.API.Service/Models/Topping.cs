@@ -1,4 +1,6 @@
-﻿namespace Anchovy.API.Service.Models
+﻿using System.Collections.Generic;
+
+namespace Anchovy.API.Service.Models
 {
     public class Topping
     {
@@ -7,5 +9,6 @@
         public decimal Cost { get; set; }
         public int Quantity { get; set; }
         public int LowLevel { get; set; }
+        public ICollection<Pizza> Pizzas { get; set; }
     }
 }

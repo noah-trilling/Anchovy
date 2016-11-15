@@ -20,14 +20,20 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Orders
         public IQueryable<Order> GetOrders()
         {
-            return db.Orders;
+            var orders = db.Orders.Include(_ => _.Cook);
+            orders = orders.Include(_ => _.Customer);
+            orders = orders.Include(_ => _.Lines);
+            return orders;
         }
 
         // GET: api/Orders/5
         [ResponseType(typeof(Order))]
         public IHttpActionResult GetOrder(int id)
         {
-            Order order = db.Orders.Find(id);
+            var orders = db.Orders.Include(_ => _.Cook);
+            orders = orders.Include(_ => _.Customer);
+            orders = orders.Include(_ => _.Lines);
+            var order = orders.FirstOrDefault(_ => _.Id == id);
             if (order == null)
             {
                 return NotFound();
@@ -51,6 +57,22 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(order).State = EntityState.Modified;
+            if (order.Cook != null)
+            {
+                db.Entry(order.Cook).State = EntityState.Unchanged;
+            }
+            if (order.Customer != null)
+            {
+                db.Entry(order.Customer).State = EntityState.Unchanged;
+            }
+            foreach (var line in order.Lines)
+            {
+                if (line != null)
+                {
+                    db.Entry(line).State = EntityState.Unchanged;
+                }
+            }
+
 
             try
             {
@@ -81,6 +103,21 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Orders.Add(order);
+            if (order.Cook != null)
+            {
+                db.Entry(order.Cook).State = EntityState.Unchanged;
+            }
+            if (order.Customer != null)
+            {
+                db.Entry(order.Customer).State = EntityState.Unchanged;
+            }
+            foreach (var line in order.Lines)
+            {
+                if (line != null)
+                {
+                    db.Entry(line).State = EntityState.Unchanged;
+                }
+            }
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);

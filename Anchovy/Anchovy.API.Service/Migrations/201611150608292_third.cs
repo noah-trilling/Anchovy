@@ -3,7 +3,7 @@ namespace Anchovy.API.Service.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class third : DbMigration
     {
         public override void Up()
         {
@@ -74,7 +74,7 @@ namespace Anchovy.API.Service.Migrations
                         State = c.String(),
                         Email = c.String(),
                         Phone = c.String(),
-                        SignUpDate = c.DateTime(nullable: false),
+                        SignUpDate = c.DateTimeOffset(nullable: false, precision: 7),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -83,14 +83,14 @@ namespace Anchovy.API.Service.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        MenuListingId = c.Int(nullable: false),
-                        PizzaId = c.Int(nullable: false),
+                        MenuListingId = c.Int(),
+                        PizzaId = c.Int(),
                         Quantity = c.Int(nullable: false),
                         Order_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.MenuListings", t => t.MenuListingId, cascadeDelete: true)
-                .ForeignKey("dbo.Pizzas", t => t.PizzaId, cascadeDelete: true)
+                .ForeignKey("dbo.MenuListings", t => t.MenuListingId)
+                .ForeignKey("dbo.Pizzas", t => t.PizzaId)
                 .ForeignKey("dbo.Orders", t => t.Order_Id)
                 .Index(t => t.MenuListingId)
                 .Index(t => t.PizzaId)
@@ -98,6 +98,19 @@ namespace Anchovy.API.Service.Migrations
             
             CreateTable(
                 "dbo.MenuListings",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        SizeId = c.Int(nullable: false),
+                        Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Sizes", t => t.SizeId, cascadeDelete: true)
+                .Index(t => t.SizeId);
+            
+            CreateTable(
+                "dbo.Sizes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -112,31 +125,21 @@ namespace Anchovy.API.Service.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
                         CrustId = c.Int(nullable: false),
                         SauceId = c.Int(nullable: false),
-                        Size_Id = c.Int(),
+                        MenuItem = c.Boolean(nullable: false),
+                        SizeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Crusts", t => t.CrustId, cascadeDelete: true)
                 .ForeignKey("dbo.Sauces", t => t.SauceId, cascadeDelete: true)
-                .ForeignKey("dbo.Sizes", t => t.Size_Id)
+                .ForeignKey("dbo.Sizes", t => t.SizeId, cascadeDelete: true)
                 .Index(t => t.CrustId)
                 .Index(t => t.SauceId)
-                .Index(t => t.Size_Id);
+                .Index(t => t.SizeId);
             
             CreateTable(
                 "dbo.Sauces",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Sizes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -166,15 +169,15 @@ namespace Anchovy.API.Service.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         CustomerId = c.Int(nullable: false),
-                        CookId = c.Int(nullable: false),
-                        OrderedTimeStamp = c.DateTime(nullable: false),
-                        ClaimedTimeStamp = c.DateTime(nullable: false),
-                        CompletedTimeStamp = c.DateTime(nullable: false),
-                        CancelledTimeStamp = c.DateTime(nullable: false),
+                        CookId = c.Int(),
+                        OrderedTimeStamp = c.DateTimeOffset(precision: 7),
+                        ClaimedTimeStamp = c.DateTimeOffset(precision: 7),
+                        CompletedTimeStamp = c.DateTimeOffset(precision: 7),
+                        CancelledTimeStamp = c.DateTimeOffset(precision: 7),
                         OrderStatus = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Cooks", t => t.CookId, cascadeDelete: true)
+                .ForeignKey("dbo.Cooks", t => t.CookId)
                 .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
                 .Index(t => t.CustomerId)
                 .Index(t => t.CookId);
@@ -185,8 +188,8 @@ namespace Anchovy.API.Service.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         CookId = c.Int(nullable: false),
-                        StartTime = c.DateTime(nullable: false),
-                        EndTime = c.DateTime(nullable: false),
+                        StartTime = c.DateTimeOffset(nullable: false, precision: 7),
+                        EndTime = c.DateTimeOffset(precision: 7),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cooks", t => t.CookId, cascadeDelete: true)
@@ -202,18 +205,20 @@ namespace Anchovy.API.Service.Migrations
             DropForeignKey("dbo.Orders", "CookId", "dbo.Cooks");
             DropForeignKey("dbo.Lines", "PizzaId", "dbo.Pizzas");
             DropForeignKey("dbo.Toppings", "Pizza_Id", "dbo.Pizzas");
-            DropForeignKey("dbo.Pizzas", "Size_Id", "dbo.Sizes");
+            DropForeignKey("dbo.Pizzas", "SizeId", "dbo.Sizes");
             DropForeignKey("dbo.Pizzas", "SauceId", "dbo.Sauces");
             DropForeignKey("dbo.Pizzas", "CrustId", "dbo.Crusts");
             DropForeignKey("dbo.Lines", "MenuListingId", "dbo.MenuListings");
+            DropForeignKey("dbo.MenuListings", "SizeId", "dbo.Sizes");
             DropForeignKey("dbo.Cooks", "ManagerId", "dbo.Managers");
             DropIndex("dbo.Shifts", new[] { "CookId" });
             DropIndex("dbo.Orders", new[] { "CookId" });
             DropIndex("dbo.Orders", new[] { "CustomerId" });
             DropIndex("dbo.Toppings", new[] { "Pizza_Id" });
-            DropIndex("dbo.Pizzas", new[] { "Size_Id" });
+            DropIndex("dbo.Pizzas", new[] { "SizeId" });
             DropIndex("dbo.Pizzas", new[] { "SauceId" });
             DropIndex("dbo.Pizzas", new[] { "CrustId" });
+            DropIndex("dbo.MenuListings", new[] { "SizeId" });
             DropIndex("dbo.Lines", new[] { "Order_Id" });
             DropIndex("dbo.Lines", new[] { "PizzaId" });
             DropIndex("dbo.Lines", new[] { "MenuListingId" });
@@ -221,9 +226,9 @@ namespace Anchovy.API.Service.Migrations
             DropTable("dbo.Shifts");
             DropTable("dbo.Orders");
             DropTable("dbo.Toppings");
-            DropTable("dbo.Sizes");
             DropTable("dbo.Sauces");
             DropTable("dbo.Pizzas");
+            DropTable("dbo.Sizes");
             DropTable("dbo.MenuListings");
             DropTable("dbo.Lines");
             DropTable("dbo.Customers");

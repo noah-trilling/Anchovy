@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Anchovy.API.Service.DAL;
 using Anchovy.API.Service.Models;
+using RefactorThis.GraphDiff;
 
 namespace Anchovy.API.Service.Controllers
 {
@@ -20,14 +21,22 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Pizzas
         public IQueryable<Pizza> GetPizzas()
         {
-            return db.Pizzas;
+            var pizzas = db.Pizzas.Include(_ => _.Size);
+            pizzas = pizzas.Include(_ => _.Crust);
+            pizzas = pizzas.Include(_ => _.Sauce);
+            pizzas = pizzas.Include(_ => _.Toppings);
+            return pizzas;
         }
 
         // GET: api/Pizzas/5
         [ResponseType(typeof(Pizza))]
         public IHttpActionResult GetPizza(int id)
         {
-            Pizza pizza = db.Pizzas.Find(id);
+            var pizzas = db.Pizzas.Include(_ => _.Size);
+            pizzas = pizzas.Include(_ => _.Crust);
+            pizzas = pizzas.Include(_ => _.Sauce);
+            pizzas = pizzas.Include(_ => _.Toppings);
+            var pizza = pizzas.FirstOrDefault(_ => _.Id == id);
             if (pizza == null)
             {
                 return NotFound();
@@ -51,6 +60,13 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(pizza).State = EntityState.Modified;
+            db.Entry(pizza.Size).State = EntityState.Unchanged;
+            db.Entry(pizza.Crust).State = EntityState.Unchanged;
+            db.Entry(pizza.Sauce).State = EntityState.Unchanged;
+            foreach (var pizzaTopping in pizza.Toppings)
+            {
+                db.Entry(pizzaTopping).State = EntityState.Unchanged;
+            }
 
             try
             {
@@ -81,6 +97,13 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Pizzas.Add(pizza);
+            db.Entry(pizza.Size).State = EntityState.Unchanged;
+            db.Entry(pizza.Crust).State = EntityState.Unchanged;
+            db.Entry(pizza.Sauce).State = EntityState.Unchanged;
+            foreach (var topping in pizza.Toppings)
+            {
+                db.Entry(topping).State = EntityState.Unchanged;
+            }
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = pizza.Id }, pizza);
