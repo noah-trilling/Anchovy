@@ -155,8 +155,10 @@
     <Compile Include="Controllers\LinesController.cs" />
     <Compile Include="Controllers\ManagersController.cs" />
     <Compile Include="Controllers\MenuListingsController.cs" />
+    <Compile Include="Controllers\OrderLinesController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PizzasController.cs" />
+    <Compile Include="Controllers\PizzaToppingsController.cs" />
     <Compile Include="Controllers\SaucesController.cs" />
     <Compile Include="Controllers\ShiftsController.cs" />
     <Compile Include="Controllers\SizesController.cs" />
@@ -165,13 +167,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201611150608292_third.cs" />
-    <Compile Include="Migrations\201611150608292_third.Designer.cs">
-      <DependentUpon>201611150608292_third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611150637508_many to many.cs" />
-    <Compile Include="Migrations\201611150637508_many to many.Designer.cs">
-      <DependentUpon>201611150637508_many to many.cs</DependentUpon>
+    <Compile Include="Migrations\201611152345259_new.cs" />
+    <Compile Include="Migrations\201611152345259_new.Designer.cs">
+      <DependentUpon>201611152345259_new.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cook.cs" />
@@ -181,8 +179,10 @@
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\MenuListing.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderLine.cs" />
     <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\Pizza.cs" />
+    <Compile Include="Models\PizzaTopping.cs" />
     <Compile Include="Models\Sauce.cs" />
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\Size.cs" />
@@ -208,11 +208,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611150608292_third.resx">
-      <DependentUpon>201611150608292_third.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611150637508_many to many.resx">
-      <DependentUpon>201611150637508_many to many.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611152345259_new.resx">
+      <DependentUpon>201611152345259_new.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

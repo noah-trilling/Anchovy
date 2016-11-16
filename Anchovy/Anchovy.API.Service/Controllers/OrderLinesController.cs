@@ -13,44 +13,44 @@ using Anchovy.API.Service.Models;
 
 namespace Anchovy.API.Service.Controllers
 {
-    public class OrdersController : ApiController
+    public class OrderLinesController : ApiController
     {
         private AnchovyContext db = new AnchovyContext();
 
-        // GET: api/Orders
-        public IQueryable<Order> GetOrders()
+        // GET: api/OrderLines
+        public IQueryable<OrderLine> GetOrderLines()
         {
-            return db.Orders;
+            return db.OrderLines;
         }
 
-        // GET: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public IHttpActionResult GetOrder(int id)
+        // GET: api/OrderLines/5
+        [ResponseType(typeof(OrderLine))]
+        public IHttpActionResult GetOrderLine(int id)
         {
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            OrderLine orderLine = db.OrderLines.Find(id);
+            if (orderLine == null)
             {
                 return NotFound();
             }
 
-            return Ok(order);
+            return Ok(orderLine);
         }
 
-        // PUT: api/Orders/5
+        // PUT: api/OrderLines/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutOrder(int id, Order order)
+        public IHttpActionResult PutOrderLine(int id, OrderLine orderLine)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != order.Id)
+            if (id != orderLine.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(order).State = EntityState.Modified;
+            db.Entry(orderLine).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace Anchovy.API.Service.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderExists(id))
+                if (!OrderLineExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace Anchovy.API.Service.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Orders
-        [ResponseType(typeof(Order))]
-        public IHttpActionResult PostOrder(Order order)
+        // POST: api/OrderLines
+        [ResponseType(typeof(OrderLine))]
+        public IHttpActionResult PostOrderLine(OrderLine orderLine)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Orders.Add(order);
+            db.OrderLines.Add(orderLine);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
+            return CreatedAtRoute("DefaultApi", new { id = orderLine.Id }, orderLine);
         }
 
-        // DELETE: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public IHttpActionResult DeleteOrder(int id)
+        // DELETE: api/OrderLines/5
+        [ResponseType(typeof(OrderLine))]
+        public IHttpActionResult DeleteOrderLine(int id)
         {
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            OrderLine orderLine = db.OrderLines.Find(id);
+            if (orderLine == null)
             {
                 return NotFound();
             }
 
-            db.Orders.Remove(order);
+            db.OrderLines.Remove(orderLine);
             db.SaveChanges();
 
-            return Ok(order);
+            return Ok(orderLine);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace Anchovy.API.Service.Controllers
             base.Dispose(disposing);
         }
 
-        private bool OrderExists(int id)
+        private bool OrderLineExists(int id)
         {
-            return db.Orders.Count(e => e.Id == id) > 0;
+            return db.OrderLines.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -20,14 +20,14 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Shifts
         public IQueryable<Shift> GetShifts()
         {
-            return db.Shifts.Include(_=>_.Cook);
+            return db.Shifts;
         }
 
         // GET: api/Shifts/5
         [ResponseType(typeof(Shift))]
         public IHttpActionResult GetShift(int id)
         {
-            Shift shift = db.Shifts.Include(_=>_.Cook).FirstOrDefault(_=>_.Id == id);
+            Shift shift = db.Shifts.Find(id);
             if (shift == null)
             {
                 return NotFound();
@@ -51,7 +51,6 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(shift).State = EntityState.Modified;
-            db.Entry(shift.Cook).State = EntityState.Unchanged;
 
             try
             {
@@ -82,7 +81,6 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Shifts.Add(shift);
-            db.Entry(shift.Cook).State = EntityState.Unchanged;
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = shift.Id }, shift);

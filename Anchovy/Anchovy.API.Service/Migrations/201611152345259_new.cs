@@ -3,7 +3,7 @@ namespace Anchovy.API.Service.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class third : DbMigration
+    public partial class _new : DbMigration
     {
         public override void Up()
         {
@@ -86,15 +86,12 @@ namespace Anchovy.API.Service.Migrations
                         MenuListingId = c.Int(),
                         PizzaId = c.Int(),
                         Quantity = c.Int(nullable: false),
-                        Order_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.MenuListings", t => t.MenuListingId)
                 .ForeignKey("dbo.Pizzas", t => t.PizzaId)
-                .ForeignKey("dbo.Orders", t => t.Order_Id)
                 .Index(t => t.MenuListingId)
-                .Index(t => t.PizzaId)
-                .Index(t => t.Order_Id);
+                .Index(t => t.PizzaId);
             
             CreateTable(
                 "dbo.MenuListings",
@@ -149,19 +146,18 @@ namespace Anchovy.API.Service.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Toppings",
+                "dbo.OrderLines",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Quantity = c.Int(nullable: false),
-                        LowLevel = c.Int(nullable: false),
-                        Pizza_Id = c.Int(),
+                        OrderId = c.Int(nullable: false),
+                        LineId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Pizzas", t => t.Pizza_Id)
-                .Index(t => t.Pizza_Id);
+                .ForeignKey("dbo.Lines", t => t.LineId, cascadeDelete: true)
+                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
+                .Index(t => t.OrderId)
+                .Index(t => t.LineId);
             
             CreateTable(
                 "dbo.Orders",
@@ -183,6 +179,32 @@ namespace Anchovy.API.Service.Migrations
                 .Index(t => t.CookId);
             
             CreateTable(
+                "dbo.PizzaToppings",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        PizzaId = c.Int(nullable: false),
+                        ToppingId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Pizzas", t => t.PizzaId, cascadeDelete: true)
+                .ForeignKey("dbo.Toppings", t => t.ToppingId, cascadeDelete: true)
+                .Index(t => t.PizzaId)
+                .Index(t => t.ToppingId);
+            
+            CreateTable(
+                "dbo.Toppings",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Quantity = c.Int(nullable: false),
+                        LowLevel = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Shifts",
                 c => new
                     {
@@ -200,11 +222,13 @@ namespace Anchovy.API.Service.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Shifts", "CookId", "dbo.Cooks");
-            DropForeignKey("dbo.Lines", "Order_Id", "dbo.Orders");
+            DropForeignKey("dbo.PizzaToppings", "ToppingId", "dbo.Toppings");
+            DropForeignKey("dbo.PizzaToppings", "PizzaId", "dbo.Pizzas");
+            DropForeignKey("dbo.OrderLines", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.Orders", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.Orders", "CookId", "dbo.Cooks");
+            DropForeignKey("dbo.OrderLines", "LineId", "dbo.Lines");
             DropForeignKey("dbo.Lines", "PizzaId", "dbo.Pizzas");
-            DropForeignKey("dbo.Toppings", "Pizza_Id", "dbo.Pizzas");
             DropForeignKey("dbo.Pizzas", "SizeId", "dbo.Sizes");
             DropForeignKey("dbo.Pizzas", "SauceId", "dbo.Sauces");
             DropForeignKey("dbo.Pizzas", "CrustId", "dbo.Crusts");
@@ -212,20 +236,24 @@ namespace Anchovy.API.Service.Migrations
             DropForeignKey("dbo.MenuListings", "SizeId", "dbo.Sizes");
             DropForeignKey("dbo.Cooks", "ManagerId", "dbo.Managers");
             DropIndex("dbo.Shifts", new[] { "CookId" });
+            DropIndex("dbo.PizzaToppings", new[] { "ToppingId" });
+            DropIndex("dbo.PizzaToppings", new[] { "PizzaId" });
             DropIndex("dbo.Orders", new[] { "CookId" });
             DropIndex("dbo.Orders", new[] { "CustomerId" });
-            DropIndex("dbo.Toppings", new[] { "Pizza_Id" });
+            DropIndex("dbo.OrderLines", new[] { "LineId" });
+            DropIndex("dbo.OrderLines", new[] { "OrderId" });
             DropIndex("dbo.Pizzas", new[] { "SizeId" });
             DropIndex("dbo.Pizzas", new[] { "SauceId" });
             DropIndex("dbo.Pizzas", new[] { "CrustId" });
             DropIndex("dbo.MenuListings", new[] { "SizeId" });
-            DropIndex("dbo.Lines", new[] { "Order_Id" });
             DropIndex("dbo.Lines", new[] { "PizzaId" });
             DropIndex("dbo.Lines", new[] { "MenuListingId" });
             DropIndex("dbo.Cooks", new[] { "ManagerId" });
             DropTable("dbo.Shifts");
-            DropTable("dbo.Orders");
             DropTable("dbo.Toppings");
+            DropTable("dbo.PizzaToppings");
+            DropTable("dbo.Orders");
+            DropTable("dbo.OrderLines");
             DropTable("dbo.Sauces");
             DropTable("dbo.Pizzas");
             DropTable("dbo.Sizes");

@@ -13,44 +13,44 @@ using Anchovy.API.Service.Models;
 
 namespace Anchovy.API.Service.Controllers
 {
-    public class OrdersController : ApiController
+    public class PizzaToppingsController : ApiController
     {
         private AnchovyContext db = new AnchovyContext();
 
-        // GET: api/Orders
-        public IQueryable<Order> GetOrders()
+        // GET: api/PizzaToppings
+        public IQueryable<PizzaTopping> GetPizzaToppings()
         {
-            return db.Orders;
+            return db.PizzaToppings;
         }
 
-        // GET: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public IHttpActionResult GetOrder(int id)
+        // GET: api/PizzaToppings/5
+        [ResponseType(typeof(PizzaTopping))]
+        public IHttpActionResult GetPizzaTopping(int id)
         {
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            PizzaTopping pizzaTopping = db.PizzaToppings.Find(id);
+            if (pizzaTopping == null)
             {
                 return NotFound();
             }
 
-            return Ok(order);
+            return Ok(pizzaTopping);
         }
 
-        // PUT: api/Orders/5
+        // PUT: api/PizzaToppings/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutOrder(int id, Order order)
+        public IHttpActionResult PutPizzaTopping(int id, PizzaTopping pizzaTopping)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != order.Id)
+            if (id != pizzaTopping.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(order).State = EntityState.Modified;
+            db.Entry(pizzaTopping).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace Anchovy.API.Service.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderExists(id))
+                if (!PizzaToppingExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace Anchovy.API.Service.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Orders
-        [ResponseType(typeof(Order))]
-        public IHttpActionResult PostOrder(Order order)
+        // POST: api/PizzaToppings
+        [ResponseType(typeof(PizzaTopping))]
+        public IHttpActionResult PostPizzaTopping(PizzaTopping pizzaTopping)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Orders.Add(order);
+            db.PizzaToppings.Add(pizzaTopping);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
+            return CreatedAtRoute("DefaultApi", new { id = pizzaTopping.Id }, pizzaTopping);
         }
 
-        // DELETE: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public IHttpActionResult DeleteOrder(int id)
+        // DELETE: api/PizzaToppings/5
+        [ResponseType(typeof(PizzaTopping))]
+        public IHttpActionResult DeletePizzaTopping(int id)
         {
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            PizzaTopping pizzaTopping = db.PizzaToppings.Find(id);
+            if (pizzaTopping == null)
             {
                 return NotFound();
             }
 
-            db.Orders.Remove(order);
+            db.PizzaToppings.Remove(pizzaTopping);
             db.SaveChanges();
 
-            return Ok(order);
+            return Ok(pizzaTopping);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace Anchovy.API.Service.Controllers
             base.Dispose(disposing);
         }
 
-        private bool OrderExists(int id)
+        private bool PizzaToppingExists(int id)
         {
-            return db.Orders.Count(e => e.Id == id) > 0;
+            return db.PizzaToppings.Count(e => e.Id == id) > 0;
         }
     }
 }
