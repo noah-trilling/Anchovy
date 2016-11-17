@@ -51,7 +51,15 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(line).State = EntityState.Modified;
-
+            if (line.MenuListing != null)
+            {
+                db.Entry(line.MenuListing).State = EntityState.Unchanged;
+            }
+            if (line.Pizza != null)
+            {
+                db.Entry(line.Pizza).State = EntityState.Unchanged;
+            }
+             
             try
             {
                 db.SaveChanges();
@@ -81,6 +89,15 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Lines.Add(line);
+            if (line.MenuListing != null)
+            {
+                db.Entry(line.MenuListing).State = EntityState.Unchanged;
+            }
+            if (line.Pizza != null)
+            {
+                db.Entry(line.Pizza).State = EntityState.Unchanged;
+            }
+
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = line.Id }, line);
@@ -97,7 +114,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Lines.Remove(line);
-            db.SaveChanges();
+            
+db.SaveChanges();
 
             return Ok(line);
         }

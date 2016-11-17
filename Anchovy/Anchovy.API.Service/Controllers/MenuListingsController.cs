@@ -51,6 +51,7 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(menuListing).State = EntityState.Modified;
+            db.Entry(menuListing.Size).State = EntityState.Unchanged;
 
             try
             {
@@ -81,6 +82,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.MenuListings.Add(menuListing);
+            db.Entry(menuListing.Size).State = EntityState.Unchanged;
+
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = menuListing.Id }, menuListing);

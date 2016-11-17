@@ -51,6 +51,7 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(shift).State = EntityState.Modified;
+            db.Entry(shift.Cook).State = EntityState.Unchanged;
 
             try
             {
@@ -81,6 +82,7 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Shifts.Add(shift);
+            db.Entry(shift.Cook).State = EntityState.Unchanged;
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = shift.Id }, shift);

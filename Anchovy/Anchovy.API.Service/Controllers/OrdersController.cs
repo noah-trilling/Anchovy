@@ -51,6 +51,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(order).State = EntityState.Modified;
+            db.Entry(order.Cook).State = EntityState.Unchanged;
+            db.Entry(order.Customer).State = EntityState.Unchanged;
 
             try
             {
@@ -81,7 +83,13 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Orders.Add(order);
+            if (order.Cook != null)
+            {
+                db.Entry(order.Cook).State = EntityState.Unchanged;
+            }
+            db.Entry(order.Customer).State = EntityState.Unchanged;
             db.SaveChanges();
+
 
             return CreatedAtRoute("DefaultApi", new { id = order.Id }, order);
         }

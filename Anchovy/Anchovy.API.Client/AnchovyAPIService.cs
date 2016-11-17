@@ -75,6 +75,13 @@ namespace Anchovy.API.Client
             get { return this._menuListings; }
         }
         
+        private IOrderLines _orderLines;
+        
+        public virtual IOrderLines OrderLines
+        {
+            get { return this._orderLines; }
+        }
+        
         private IOrders _orders;
         
         public virtual IOrders Orders
@@ -87,6 +94,13 @@ namespace Anchovy.API.Client
         public virtual IPizzas Pizzas
         {
             get { return this._pizzas; }
+        }
+        
+        private IPizzaToppings _pizzaToppings;
+        
+        public virtual IPizzaToppings PizzaToppings
+        {
+            get { return this._pizzaToppings; }
         }
         
         private ISauces _sauces;
@@ -129,8 +143,10 @@ namespace Anchovy.API.Client
             this._lines = new Lines(this);
             this._managers = new Managers(this);
             this._menuListings = new MenuListings(this);
+            this._orderLines = new OrderLines(this);
             this._orders = new Orders(this);
             this._pizzas = new Pizzas(this);
+            this._pizzaToppings = new PizzaToppings(this);
             this._sauces = new Sauces(this);
             this._shifts = new Shifts(this);
             this._sizes = new Sizes(this);
@@ -154,8 +170,10 @@ namespace Anchovy.API.Client
             this._lines = new Lines(this);
             this._managers = new Managers(this);
             this._menuListings = new MenuListings(this);
+            this._orderLines = new OrderLines(this);
             this._orders = new Orders(this);
             this._pizzas = new Pizzas(this);
+            this._pizzaToppings = new PizzaToppings(this);
             this._sauces = new Sauces(this);
             this._shifts = new Shifts(this);
             this._sizes = new Sizes(this);
@@ -182,8 +200,10 @@ namespace Anchovy.API.Client
             this._lines = new Lines(this);
             this._managers = new Managers(this);
             this._menuListings = new MenuListings(this);
+            this._orderLines = new OrderLines(this);
             this._orders = new Orders(this);
             this._pizzas = new Pizzas(this);
+            this._pizzaToppings = new PizzaToppings(this);
             this._sauces = new Sauces(this);
             this._shifts = new Shifts(this);
             this._sizes = new Sizes(this);

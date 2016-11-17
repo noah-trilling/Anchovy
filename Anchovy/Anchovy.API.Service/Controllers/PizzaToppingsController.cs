@@ -51,6 +51,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(pizzaTopping).State = EntityState.Modified;
+            db.Entry(pizzaTopping.Pizza).State = EntityState.Unchanged;
+            db.Entry(pizzaTopping.Topping).State = EntityState.Unchanged;
 
             try
             {
@@ -81,6 +83,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.PizzaToppings.Add(pizzaTopping);
+            db.Entry(pizzaTopping.Pizza).State = EntityState.Unchanged;
+            db.Entry(pizzaTopping.Topping).State = EntityState.Unchanged;
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = pizzaTopping.Id }, pizzaTopping);

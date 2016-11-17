@@ -439,7 +439,7 @@ namespace Anchovy.API.Client
             result.Response = httpResponse;
             
             // Deserialize Response
-            if (statusCode == HttpStatusCode.OK)
+            if (statusCode == HttpStatusCode.Created)
             {
                 Manager resultModel = new Manager();
                 JToken responseDoc = null;
@@ -542,7 +542,7 @@ namespace Anchovy.API.Client
             HttpStatusCode statusCode = httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-            if (statusCode != HttpStatusCode.NoContent) 
+            if (statusCode != HttpStatusCode.NoContent)
             {
                 HttpOperationException<object> ex = new HttpOperationException<object>();
                 ex.Request = httpRequest;
