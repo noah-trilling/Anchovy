@@ -30,6 +30,7 @@ namespace Anchovy.Models.Utilities
         public virtual IList<Order> GetCookOrdersByStatus(IList<Order> orders, Cook cook, OrderStatus orderStatus)
         {
             return orders.Where(_ => _.CookId.Equals(cook.Id) && _.OrderStatus.Equals(orderStatus)).ToList();
+          //  GetCookOrdersByStatus(orders, cook, )
         }
 
         public virtual IList<Order> GetCustomerOrders(IList<Order> orders, Customer customer)

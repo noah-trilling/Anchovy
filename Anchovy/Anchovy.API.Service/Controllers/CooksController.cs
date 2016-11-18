@@ -32,7 +32,7 @@ namespace Anchovy.API.Service.Controllers
             {
                 return NotFound();
             }
-
+            
             return Ok(cook);
         }
 

@@ -20,7 +20,8 @@ namespace Anchovy.API.Service.DAL
         public DbSet<Topping> Toppings { get; set; }
         public AnchovyContext() : base("AnchovyContext")
         {
-            
+            this.Configuration.ProxyCreationEnabled = true;
+            this.Configuration.LazyLoadingEnabled = true;
         }
 
 
