@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Anchovy.Customer.Main
 {
-    static class CustomerMainGUI
+    static class AnchovyCustomerMain
     {
         /// <summary>
         /// The main entry point for the application.
@@ -16,7 +16,7 @@ namespace Anchovy.Customer.Main
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CustomerMain());
+            Application.Run(new AnchovyCustomerMainGUI());
         }
     }
 }
