@@ -47,7 +47,6 @@
             this.usernameLabel.Size = new System.Drawing.Size(83, 20);
             this.usernameLabel.TabIndex = 0;
             this.usernameLabel.Text = "Username";
-            this.usernameLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // passwordLabel
             // 
@@ -95,7 +94,6 @@
             this.anchovyLabel.Size = new System.Drawing.Size(102, 29);
             this.anchovyLabel.TabIndex = 5;
             this.anchovyLabel.Text = "Anchovy";
-            this.anchovyLabel.Click += new System.EventHandler(this.label3_Click);
             // 
             // invalidUserLabel
             // 
@@ -106,7 +104,6 @@
             this.invalidUserLabel.Size = new System.Drawing.Size(37, 13);
             this.invalidUserLabel.TabIndex = 6;
             this.invalidUserLabel.Text = "          ";
-            this.invalidUserLabel.Click += new System.EventHandler(this.invalidUserLabel_Click);
             // 
             // invalidPassLabel
             // 
@@ -135,7 +132,6 @@
             this.ForeColor = System.Drawing.Color.DodgerBlue;
             this.Name = "CookLoginGUI";
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
