@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Anchovy.Customer.Main")]
+[assembly: AssemblyTitle("Customer.SignUp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Anchovy.Customer.Main")]
+[assembly: AssemblyProduct("Customer.SignUp")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("51c5c871-0101-47de-8f7c-fb33fa317074")]
+[assembly: Guid("91daaf35-717a-42ca-af8a-309846376ab1")]
 
 // Version information for an assembly consists of the following four values:
 //

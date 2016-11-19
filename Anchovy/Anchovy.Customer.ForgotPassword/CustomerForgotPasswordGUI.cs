@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Anchovy.Customer.Main
+namespace Anchovy.Customer.ForgotPassword
 {
-    public partial class CustomerMain : Form
+    public partial class CustomerForgotPasswordGUI : Form
     {
-        public CustomerMain()
+        public CustomerForgotPasswordGUI()
         {
             InitializeComponent();
         }

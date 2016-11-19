@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Anchovy.Customer.Main
+namespace Customer.SignUp
 {
-    static class CustomerMainGUI
+    static class CustomerSignUp
     {
         /// <summary>
         /// The main entry point for the application.
@@ -16,7 +16,7 @@ namespace Anchovy.Customer.Main
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new CustomerMain());
+            Application.Run(new CustomerSignUpGUI());
         }
     }
 }
