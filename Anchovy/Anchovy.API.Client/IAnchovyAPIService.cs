@@ -56,12 +56,22 @@ namespace Anchovy.API.Client
             get; 
         }
         
+        IOrderLines OrderLines
+        {
+            get; 
+        }
+        
         IOrders Orders
         {
             get; 
         }
         
         IPizzas Pizzas
+        {
+            get; 
+        }
+        
+        IPizzaToppings PizzaToppings
         {
             get; 
         }

@@ -51,6 +51,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(orderLine).State = EntityState.Modified;
+            db.Entry(orderLine.Line).State = EntityState.Unchanged;
+            db.Entry(orderLine.Order).State = EntityState.Unchanged;
 
             try
             {
@@ -81,6 +83,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.OrderLines.Add(orderLine);
+            db.Entry(orderLine.Line).State = EntityState.Unchanged;
+            db.Entry(orderLine.Order).State = EntityState.Unchanged;
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = orderLine.Id }, orderLine);

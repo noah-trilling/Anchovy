@@ -2,10 +2,8 @@
 // Changes may cause incorrect behavior and will be lost if the code is regenerated.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Anchovy.API.Client.Models;
-using Microsoft.Rest;
 using Newtonsoft.Json.Linq;
 
 namespace Anchovy.API.Client.Models
@@ -100,15 +98,15 @@ namespace Anchovy.API.Client.Models
             set { this._size = value; }
         }
         
-        private IList<Topping> _toppings;
+        private int? _sizeId;
         
         /// <summary>
         /// Optional.
         /// </summary>
-        public IList<Topping> Toppings
+        public int? SizeId
         {
-            get { return this._toppings; }
-            set { this._toppings = value; }
+            get { return this._sizeId; }
+            set { this._sizeId = value; }
         }
         
         /// <summary>
@@ -116,7 +114,6 @@ namespace Anchovy.API.Client.Models
         /// </summary>
         public Pizza()
         {
-            this.Toppings = new LazyList<Topping>();
         }
         
         /// <summary>
@@ -172,15 +169,10 @@ namespace Anchovy.API.Client.Models
                     size.DeserializeJson(sizeValue);
                     this.Size = size;
                 }
-                JToken toppingsSequence = ((JToken)inputObject["Toppings"]);
-                if (toppingsSequence != null && toppingsSequence.Type != JTokenType.Null)
+                JToken sizeIdValue = inputObject["SizeId"];
+                if (sizeIdValue != null && sizeIdValue.Type != JTokenType.Null)
                 {
-                    foreach (JToken toppingsValue in ((JArray)toppingsSequence))
-                    {
-                        Topping topping = new Topping();
-                        topping.DeserializeJson(toppingsValue);
-                        this.Toppings.Add(topping);
-                    }
+                    this.SizeId = ((int)sizeIdValue);
                 }
             }
         }
@@ -229,21 +221,9 @@ namespace Anchovy.API.Client.Models
             {
                 outputObject["Size"] = this.Size.SerializeJson(null);
             }
-            JArray toppingsSequence = null;
-            if (this.Toppings != null)
+            if (this.SizeId != null)
             {
-                if (this.Toppings is ILazyCollection<Topping> == false || ((ILazyCollection<Topping>)this.Toppings).IsInitialized)
-                {
-                    toppingsSequence = new JArray();
-                    outputObject["Toppings"] = toppingsSequence;
-                    foreach (Topping toppingsItem in this.Toppings)
-                    {
-                        if (toppingsItem != null)
-                        {
-                            toppingsSequence.Add(toppingsItem.SerializeJson(null));
-                        }
-                    }
-                }
+                outputObject["SizeId"] = this.SizeId.Value;
             }
             return outputObject;
         }

@@ -439,7 +439,7 @@ namespace Anchovy.API.Client
             result.Response = httpResponse;
             
             // Deserialize Response
-            if (statusCode == HttpStatusCode.Created)
+            if (statusCode == HttpStatusCode.Created )
             {
                 MenuListing resultModel = new MenuListing();
                 JToken responseDoc = null;

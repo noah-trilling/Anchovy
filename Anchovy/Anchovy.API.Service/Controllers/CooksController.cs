@@ -20,14 +20,16 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Cooks
         public IQueryable<Cook> GetCooks()
         {
-            return db.Cooks;
+            var cooks = db.Cooks.Include(_ => _.Manager);
+            return cooks;
         }
 
         // GET: api/Cooks/5
         [ResponseType(typeof(Cook))]
         public IHttpActionResult GetCook(int id)
         {
-            Cook cook = db.Cooks.Find(id);
+            var cooks = db.Cooks.Include(_ => _.Manager);
+            var cook = cooks.FirstOrDefault(_=> _.Id == id);
             if (cook == null)
             {
                 return NotFound();
@@ -51,6 +53,7 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(cook).State = EntityState.Modified;
+            db.Entry(cook.Manager).State = EntityState.Unchanged;
 
             try
             {
@@ -81,6 +84,7 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Cooks.Add(cook);
+            db.Entry(cook.Manager).State = EntityState.Unchanged;
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = cook.Id }, cook);

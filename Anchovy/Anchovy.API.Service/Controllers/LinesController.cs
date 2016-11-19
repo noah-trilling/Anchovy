@@ -20,14 +20,15 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Lines
         public IQueryable<Line> GetLines()
         {
-            return db.Lines;
+            var lines = db.Lines.Include("MenuListing").Include("MenuListing.Size").Include("Pizza.Size").Include("Pizza.Crust").Include("Pizza.Sauce");
+            return lines;
         }
 
         // GET: api/Lines/5
         [ResponseType(typeof(Line))]
         public IHttpActionResult GetLine(int id)
         {
-            Line line = db.Lines.Find(id);
+            Line line = db.Lines.Include("MenuListing").Include("MenuListing.Size").Include("Pizza").Include("Pizza.Size").Include("Pizza.Crust").Include("Pizza.Sauce").FirstOrDefault(_ => _.Id == id);
             if (line == null)
             {
                 return NotFound();
@@ -51,6 +52,18 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(line).State = EntityState.Modified;
+            if (line.MenuListing != null)
+            {
+                db.Entry(line.MenuListing).State = EntityState.Unchanged;
+                db.Entry(line.MenuListing.Size).State = EntityState.Unchanged;
+            }
+            if (line.Pizza != null)
+            {
+                db.Entry(line.Pizza).State = EntityState.Unchanged;
+                db.Entry(line.Pizza.Size).State = EntityState.Unchanged;
+                db.Entry(line.Pizza.Crust).State = EntityState.Unchanged;
+                db.Entry(line.Pizza.Sauce).State = EntityState.Unchanged;
+            }
 
             try
             {
@@ -81,6 +94,19 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Lines.Add(line);
+            if (line.MenuListing != null)
+            {
+                db.Entry(line.MenuListing).State = EntityState.Unchanged;
+                db.Entry(line.MenuListing.Size).State = EntityState.Unchanged;
+            }
+            if (line.Pizza != null)
+            {
+                db.Entry(line.Pizza).State = EntityState.Unchanged;
+                db.Entry(line.Pizza.Size).State = EntityState.Unchanged;
+                db.Entry(line.Pizza.Crust).State = EntityState.Unchanged;
+                db.Entry(line.Pizza.Sauce).State = EntityState.Unchanged;
+            }
+
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = line.Id }, line);
@@ -97,7 +123,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Lines.Remove(line);
-            db.SaveChanges();
+            
+db.SaveChanges();
 
             return Ok(line);
         }

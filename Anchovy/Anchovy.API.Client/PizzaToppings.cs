@@ -17,15 +17,15 @@ using Newtonsoft.Json.Linq;
 
 namespace Anchovy.API.Client
 {
-    internal partial class Toppings : IServiceOperations<AnchovyAPIService>, IToppings
+    internal partial class PizzaToppings : IServiceOperations<AnchovyAPIService>, IPizzaToppings
     {
         /// <summary>
-        /// Initializes a new instance of the Toppings class.
+        /// Initializes a new instance of the PizzaToppings class.
         /// </summary>
         /// <param name='client'>
         /// Reference to the service client.
         /// </param>
-        internal Toppings(AnchovyAPIService client)
+        internal PizzaToppings(AnchovyAPIService client)
         {
             this._client = client;
         }
@@ -46,7 +46,7 @@ namespace Anchovy.API.Client
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Topping>> DeleteToppingWithOperationResponseAsync(int id, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<PizzaTopping>> DeletePizzaToppingWithOperationResponseAsync(int id, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -56,12 +56,12 @@ namespace Anchovy.API.Client
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("id", id);
-                ServiceClientTracing.Enter(invocationId, this, "DeleteToppingAsync", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "DeletePizzaToppingAsync", tracingParameters);
             }
             
             // Construct URL
             string url = "";
-            url = url + "/api/Toppings/";
+            url = url + "/api/PizzaToppings/";
             url = url + Uri.EscapeDataString(id.ToString());
             string baseUrl = this.Client.BaseUri.AbsoluteUri;
             // Trim '/' character from the end of baseUrl and beginning of url.
@@ -116,14 +116,14 @@ namespace Anchovy.API.Client
             }
             
             // Create Result
-            HttpOperationResponse<Topping> result = new HttpOperationResponse<Topping>();
+            HttpOperationResponse<PizzaTopping> result = new HttpOperationResponse<PizzaTopping>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK)
             {
-                Topping resultModel = new Topping();
+                PizzaTopping resultModel = new PizzaTopping();
                 JToken responseDoc = null;
                 if (string.IsNullOrEmpty(responseContent) == false)
                 {
@@ -149,7 +149,7 @@ namespace Anchovy.API.Client
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Topping>> GetToppingWithOperationResponseAsync(int id, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<PizzaTopping>> GetPizzaToppingWithOperationResponseAsync(int id, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -159,12 +159,12 @@ namespace Anchovy.API.Client
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("id", id);
-                ServiceClientTracing.Enter(invocationId, this, "GetToppingAsync", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "GetPizzaToppingAsync", tracingParameters);
             }
             
             // Construct URL
             string url = "";
-            url = url + "/api/Toppings/";
+            url = url + "/api/PizzaToppings/";
             url = url + Uri.EscapeDataString(id.ToString());
             string baseUrl = this.Client.BaseUri.AbsoluteUri;
             // Trim '/' character from the end of baseUrl and beginning of url.
@@ -219,14 +219,14 @@ namespace Anchovy.API.Client
             }
             
             // Create Result
-            HttpOperationResponse<Topping> result = new HttpOperationResponse<Topping>();
+            HttpOperationResponse<PizzaTopping> result = new HttpOperationResponse<PizzaTopping>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK)
             {
-                Topping resultModel = new Topping();
+                PizzaTopping resultModel = new PizzaTopping();
                 JToken responseDoc = null;
                 if (string.IsNullOrEmpty(responseContent) == false)
                 {
@@ -249,7 +249,7 @@ namespace Anchovy.API.Client
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<IList<Topping>>> GetToppingsWithOperationResponseAsync(CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<IList<PizzaTopping>>> GetPizzaToppingsWithOperationResponseAsync(CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Tracing
             bool shouldTrace = ServiceClientTracing.IsEnabled;
@@ -258,12 +258,12 @@ namespace Anchovy.API.Client
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                ServiceClientTracing.Enter(invocationId, this, "GetToppingsAsync", tracingParameters);
+                ServiceClientTracing.Enter(invocationId, this, "GetPizzaToppingsAsync", tracingParameters);
             }
             
             // Construct URL
             string url = "";
-            url = url + "/api/Toppings";
+            url = url + "/api/PizzaToppings";
             string baseUrl = this.Client.BaseUri.AbsoluteUri;
             // Trim '/' character from the end of baseUrl and beginning of url.
             if (baseUrl[baseUrl.Length - 1] == '/')
@@ -317,14 +317,14 @@ namespace Anchovy.API.Client
             }
             
             // Create Result
-            HttpOperationResponse<IList<Topping>> result = new HttpOperationResponse<IList<Topping>>();
+            HttpOperationResponse<IList<PizzaTopping>> result = new HttpOperationResponse<IList<PizzaTopping>>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK)
             {
-                IList<Topping> resultModel = new List<Topping>();
+                IList<PizzaTopping> resultModel = new List<PizzaTopping>();
                 JToken responseDoc = null;
                 if (string.IsNullOrEmpty(responseContent) == false)
                 {
@@ -332,7 +332,7 @@ namespace Anchovy.API.Client
                 }
                 if (responseDoc != null)
                 {
-                    resultModel = ToppingCollection.DeserializeJson(responseDoc);
+                    resultModel = PizzaToppingCollection.DeserializeJson(responseDoc);
                 }
                 result.Body = resultModel;
             }
@@ -344,18 +344,18 @@ namespace Anchovy.API.Client
             return result;
         }
         
-        /// <param name='topping'>
+        /// <param name='pizzaTopping'>
         /// Required.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<Topping>> PostToppingWithOperationResponseAsync(Topping topping, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<PizzaTopping>> PostPizzaToppingWithOperationResponseAsync(PizzaTopping pizzaTopping, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
-            if (topping == null)
+            if (pizzaTopping == null)
             {
-                throw new ArgumentNullException("topping");
+                throw new ArgumentNullException("pizzaTopping");
             }
             
             // Tracing
@@ -365,13 +365,13 @@ namespace Anchovy.API.Client
             {
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("topping", topping);
-                ServiceClientTracing.Enter(invocationId, this, "PostToppingAsync", tracingParameters);
+                tracingParameters.Add("pizzaTopping", pizzaTopping);
+                ServiceClientTracing.Enter(invocationId, this, "PostPizzaToppingAsync", tracingParameters);
             }
             
             // Construct URL
             string url = "";
-            url = url + "/api/Toppings";
+            url = url + "/api/PizzaToppings";
             string baseUrl = this.Client.BaseUri.AbsoluteUri;
             // Trim '/' character from the end of baseUrl and beginning of url.
             if (baseUrl[baseUrl.Length - 1] == '/')
@@ -401,7 +401,7 @@ namespace Anchovy.API.Client
             
             // Serialize Request
             string requestContent = null;
-            JToken requestDoc = topping.SerializeJson(null);
+            JToken requestDoc = pizzaTopping.SerializeJson(null);
             requestContent = requestDoc.ToString(Newtonsoft.Json.Formatting.Indented);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
@@ -434,14 +434,14 @@ namespace Anchovy.API.Client
             }
             
             // Create Result
-            HttpOperationResponse<Topping> result = new HttpOperationResponse<Topping>();
+            HttpOperationResponse<PizzaTopping> result = new HttpOperationResponse<PizzaTopping>();
             result.Request = httpRequest;
             result.Response = httpResponse;
             
             // Deserialize Response
             if (statusCode == HttpStatusCode.Created)
             {
-                Topping resultModel = new Topping();
+                PizzaTopping resultModel = new PizzaTopping();
                 JToken responseDoc = null;
                 if (string.IsNullOrEmpty(responseContent) == false)
                 {
@@ -464,18 +464,18 @@ namespace Anchovy.API.Client
         /// <param name='id'>
         /// Required.
         /// </param>
-        /// <param name='topping'>
+        /// <param name='pizzaTopping'>
         /// Required.
         /// </param>
         /// <param name='cancellationToken'>
         /// Cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<object>> PutToppingWithOperationResponseAsync(int id, Topping topping, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        public async Task<HttpOperationResponse<object>> PutPizzaToppingWithOperationResponseAsync(int id, PizzaTopping pizzaTopping, CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             // Validate
-            if (topping == null)
+            if (pizzaTopping == null)
             {
-                throw new ArgumentNullException("topping");
+                throw new ArgumentNullException("pizzaTopping");
             }
             
             // Tracing
@@ -486,13 +486,13 @@ namespace Anchovy.API.Client
                 invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("id", id);
-                tracingParameters.Add("topping", topping);
-                ServiceClientTracing.Enter(invocationId, this, "PutToppingAsync", tracingParameters);
+                tracingParameters.Add("pizzaTopping", pizzaTopping);
+                ServiceClientTracing.Enter(invocationId, this, "PutPizzaToppingAsync", tracingParameters);
             }
             
             // Construct URL
             string url = "";
-            url = url + "/api/Toppings/";
+            url = url + "/api/PizzaToppings/";
             url = url + Uri.EscapeDataString(id.ToString());
             string baseUrl = this.Client.BaseUri.AbsoluteUri;
             // Trim '/' character from the end of baseUrl and beginning of url.
@@ -523,7 +523,7 @@ namespace Anchovy.API.Client
             
             // Serialize Request
             string requestContent = null;
-            JToken requestDoc = topping.SerializeJson(null);
+            JToken requestDoc = pizzaTopping.SerializeJson(null);
             requestContent = requestDoc.ToString(Newtonsoft.Json.Formatting.Indented);
             httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
             httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");

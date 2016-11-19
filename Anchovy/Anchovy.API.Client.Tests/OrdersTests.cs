@@ -23,10 +23,6 @@ namespace Anchovy.API.Client.Tests
         private void DeleteTest()
         {
             if (Order.Id == null) return;
-            foreach (var line in Order.Lines)
-            {
-                if (line.Id != null) _lines.DeleteLine(line.Id.Value);
-            }
             var deletedOrder = _orders.DeleteOrder(Order.Id.Value);
             TestOrder(Order, deletedOrder);
         }
