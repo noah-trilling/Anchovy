@@ -20,14 +20,14 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Orders
         public IQueryable<Order> GetOrders()
         {
-            return db.Orders;
+            return db.Orders.Include("Cook").Include("Customer").Include("Customer.Manager");
         }
 
         // GET: api/Orders/5
         [ResponseType(typeof(Order))]
         public IHttpActionResult GetOrder(int id)
         {
-            Order order = db.Orders.Find(id);
+            Order order = db.Orders.Include("Cook").Include("Customer").Include("Customer.Manager").FirstOrDefault(_ => _.Id == id);
             if (order == null)
             {
                 return NotFound();
@@ -51,7 +51,11 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(order).State = EntityState.Modified;
-            db.Entry(order.Cook).State = EntityState.Unchanged;
+            if (order.Cook != null)
+            {
+                db.Entry(order.Cook).State = EntityState.Unchanged;
+                db.Entry(order.Cook.Manager).State = EntityState.Unchanged;
+            }
             db.Entry(order.Customer).State = EntityState.Unchanged;
 
             try
@@ -86,6 +90,7 @@ namespace Anchovy.API.Service.Controllers
             if (order.Cook != null)
             {
                 db.Entry(order.Cook).State = EntityState.Unchanged;
+                db.Entry(order.Cook.Manager).State = EntityState.Unchanged;
             }
             db.Entry(order.Customer).State = EntityState.Unchanged;
             db.SaveChanges();

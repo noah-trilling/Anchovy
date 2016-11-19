@@ -20,14 +20,14 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Pizzas
         public IQueryable<Pizza> GetPizzas()
         {
-            return db.Pizzas;
+            return db.Pizzas.Include("Size").Include("Sauce").Include("Crust");
         }
 
         // GET: api/Pizzas/5
         [ResponseType(typeof(Pizza))]
         public IHttpActionResult GetPizza(int id)
         {
-            Pizza pizza = db.Pizzas.Find(id);
+            Pizza pizza = db.Pizzas.Include("Size").Include("Crust").Include("Sauce").FirstOrDefault(_ => _.Id == id);
             if (pizza == null)
             {
                 return NotFound();

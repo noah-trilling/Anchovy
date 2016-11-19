@@ -20,14 +20,14 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/OrderLines
         public IQueryable<OrderLine> GetOrderLines()
         {
-            return db.OrderLines;
+            return db.OrderLines.Include("Line");
         }
 
         // GET: api/OrderLines/5
         [ResponseType(typeof(OrderLine))]
         public IHttpActionResult GetOrderLine(int id)
         {
-            OrderLine orderLine = db.OrderLines.Find(id);
+            OrderLine orderLine = db.OrderLines.Include("Line").FirstOrDefault(_ => _.Id == id);
             if (orderLine == null)
             {
                 return NotFound();
