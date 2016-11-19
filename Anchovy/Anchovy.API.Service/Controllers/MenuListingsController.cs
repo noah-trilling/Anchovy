@@ -20,14 +20,16 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/MenuListings
         public IQueryable<MenuListing> GetMenuListings()
         {
-            return db.MenuListings;
+            var menuListings = db.MenuListings.Include(_ => _.Size);
+            return menuListings;
         }
 
         // GET: api/MenuListings/5
         [ResponseType(typeof(MenuListing))]
         public IHttpActionResult GetMenuListing(int id)
         {
-            MenuListing menuListing = db.MenuListings.Find(id);
+            var menuListings = db.MenuListings.Include(_ => _.Size);
+            var menuListing = menuListings.FirstOrDefault(_ => _.Id == id);
             if (menuListing == null)
             {
                 return NotFound();

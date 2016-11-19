@@ -20,14 +20,16 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Shifts
         public IQueryable<Shift> GetShifts()
         {
-            return db.Shifts;
+            var shifts = db.Shifts.Include(_ => _.Cook);
+            return shifts;
         }
 
         // GET: api/Shifts/5
         [ResponseType(typeof(Shift))]
         public IHttpActionResult GetShift(int id)
         {
-            Shift shift = db.Shifts.Find(id);
+            var shifts = db.Shifts.Include(_ => _.Cook);
+            var shift = shifts.FirstOrDefault(_ => _.Id == id);
             if (shift == null)
             {
                 return NotFound();
