@@ -20,7 +20,7 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Orders
         public IQueryable<Order> GetOrders()
         {
-            return db.Orders.Include("Cook").Include("Customer").Include("Customer.Manager");
+            return db.Orders.Include("Cook").Include("Customer").Include("Cook.Manager");
         }
 
         // GET: api/Orders/5
