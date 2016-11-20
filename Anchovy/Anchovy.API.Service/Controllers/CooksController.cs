@@ -53,7 +53,7 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(cook).State = EntityState.Modified;
-            db.Entry(cook.Manager).State = EntityState.Unchanged;
+            if(cook.Manager != null) db.Entry(cook.Manager).State = EntityState.Unchanged;
 
             try
             {

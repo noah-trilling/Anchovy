@@ -51,9 +51,9 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(pizza).State = EntityState.Modified;
-            db.Entry(pizza.Size).State = EntityState.Unchanged;
-            db.Entry(pizza.Crust).State = EntityState.Unchanged;
-            db.Entry(pizza.Sauce).State = EntityState.Unchanged;
+            if (pizza.Size != null) db.Entry(pizza.Size).State = EntityState.Unchanged;
+            if (pizza.Crust != null) db.Entry(pizza.Crust).State = EntityState.Unchanged;
+            if (pizza.Sauce != null) db.Entry(pizza.Sauce).State = EntityState.Unchanged;
             
             try
             {
@@ -84,9 +84,9 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Pizzas.Add(pizza);
-            db.Entry(pizza.Size).State = EntityState.Unchanged;
-            db.Entry(pizza.Crust).State = EntityState.Unchanged;
-            db.Entry(pizza.Sauce).State = EntityState.Unchanged;
+            if (pizza.Size != null) db.Entry(pizza.Size).State = EntityState.Unchanged;
+            if (pizza.Crust != null) db.Entry(pizza.Crust).State = EntityState.Unchanged;
+            if (pizza.Sauce != null) db.Entry(pizza.Sauce).State = EntityState.Unchanged;
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = pizza.Id }, pizza);

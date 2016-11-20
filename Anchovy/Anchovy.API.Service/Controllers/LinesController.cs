@@ -55,14 +55,14 @@ namespace Anchovy.API.Service.Controllers
             if (line.MenuListing != null)
             {
                 db.Entry(line.MenuListing).State = EntityState.Unchanged;
-                db.Entry(line.MenuListing.Size).State = EntityState.Unchanged;
+                if (line.MenuListing.Size != null) db.Entry(line.MenuListing.Size).State = EntityState.Unchanged;
             }
             if (line.Pizza != null)
             {
                 db.Entry(line.Pizza).State = EntityState.Unchanged;
-                db.Entry(line.Pizza.Size).State = EntityState.Unchanged;
-                db.Entry(line.Pizza.Crust).State = EntityState.Unchanged;
-                db.Entry(line.Pizza.Sauce).State = EntityState.Unchanged;
+                if (line.Pizza.Size != null) db.Entry(line.Pizza.Size).State = EntityState.Unchanged;
+                if(line.Pizza.Crust != null) db.Entry(line.Pizza.Crust).State = EntityState.Unchanged;
+                if(line.Pizza.Sauce != null) db.Entry(line.Pizza.Sauce).State = EntityState.Unchanged;
             }
 
             try
@@ -97,14 +97,14 @@ namespace Anchovy.API.Service.Controllers
             if (line.MenuListing != null)
             {
                 db.Entry(line.MenuListing).State = EntityState.Unchanged;
-                db.Entry(line.MenuListing.Size).State = EntityState.Unchanged;
+                if (line.MenuListing.Size != null) db.Entry(line.MenuListing.Size).State = EntityState.Unchanged;
             }
             if (line.Pizza != null)
             {
                 db.Entry(line.Pizza).State = EntityState.Unchanged;
-                db.Entry(line.Pizza.Size).State = EntityState.Unchanged;
-                db.Entry(line.Pizza.Crust).State = EntityState.Unchanged;
-                db.Entry(line.Pizza.Sauce).State = EntityState.Unchanged;
+                if (line.Pizza.Size != null) db.Entry(line.Pizza.Size).State = EntityState.Unchanged;
+                if (line.Pizza.Crust != null) db.Entry(line.Pizza.Crust).State = EntityState.Unchanged;
+                if (line.Pizza.Sauce != null) db.Entry(line.Pizza.Sauce).State = EntityState.Unchanged;
             }
 
             db.SaveChanges();
