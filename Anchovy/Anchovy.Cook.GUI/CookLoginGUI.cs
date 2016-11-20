@@ -20,21 +20,6 @@ namespace Anchovy.Cook.GUI
             _cooks = new AnchovyAPIService().Cooks;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void loginbutton_Click(object sender, EventArgs e)
         {
             var user = usernameBox.Text;
@@ -88,11 +73,6 @@ namespace Anchovy.Cook.GUI
        private void launchMain()
         {
             Application.Run(_mainG);
-        }
-
-        private void invalidUserLabel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

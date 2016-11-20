@@ -28,9 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.anchovyLabel = new System.Windows.Forms.Label();
             this.myQLabel = new System.Windows.Forms.Label();
             this.myQueue = new System.Windows.Forms.ListBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalQueue = new System.Windows.Forms.ListBox();
             this.globalQLabel = new System.Windows.Forms.Label();
             this.completedQueue = new System.Windows.Forms.ListBox();
@@ -39,6 +42,7 @@
             this.ingredientsLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.clearQueue = new System.Windows.Forms.Button();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // anchovyLabel
@@ -67,13 +71,12 @@
             // myQueue
             // 
             this.myQueue.AllowDrop = true;
-            this.myQueue.Items.AddRange(new object[] {
-            "Large Pepperoni",
-            "Small Veggie",
-            "Medium All American"});
+            this.myQueue.ContextMenuStrip = this.contextMenuStrip1;
+            this.myQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.myQueue.ItemHeight = 18;
             this.myQueue.Location = new System.Drawing.Point(12, 78);
             this.myQueue.Name = "myQueue";
-            this.myQueue.Size = new System.Drawing.Size(152, 173);
+            this.myQueue.Size = new System.Drawing.Size(152, 166);
             this.myQueue.TabIndex = 3;
             this.myQueue.DragDrop += new System.Windows.Forms.DragEventHandler(this.myQueue_DragDrop);
             this.myQueue.DragEnter += new System.Windows.Forms.DragEventHandler(this.myQueue_DragEnter);
@@ -81,16 +84,30 @@
             this.myQueue.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseDoubleClick);
             this.myQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.myQueue_MouseDown);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cancelToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(111, 26);
+            this.contextMenuStrip1.Text = "can";
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            this.contextMenuStrip1.Click += new System.EventHandler(this.contextMenuStrip1_Click);
+            // 
+            // cancelToolStripMenuItem
+            // 
+            this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.cancelToolStripMenuItem.Text = "Cancel";
+            // 
             // globalQueue
             // 
             this.globalQueue.AllowDrop = true;
-            this.globalQueue.Items.AddRange(new object[] {
-            "Large Pepperoni",
-            "Small Veggie",
-            "Medium All American"});
+            this.globalQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.globalQueue.ItemHeight = 18;
             this.globalQueue.Location = new System.Drawing.Point(221, 78);
             this.globalQueue.Name = "globalQueue";
-            this.globalQueue.Size = new System.Drawing.Size(152, 173);
+            this.globalQueue.Size = new System.Drawing.Size(152, 166);
             this.globalQueue.TabIndex = 5;
             this.globalQueue.DragDrop += new System.Windows.Forms.DragEventHandler(this.globalQueue_DragDrop);
             this.globalQueue.DragEnter += new System.Windows.Forms.DragEventHandler(this.globalQueue_DragEnter);
@@ -111,14 +128,14 @@
             // completedQueue
             // 
             this.completedQueue.AllowDrop = true;
-            this.completedQueue.Items.AddRange(new object[] {
-            "Large Pepperoni",
-            "Small Veggie",
-            "Medium All American"});
+            this.completedQueue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.completedQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.completedQueue.ItemHeight = 18;
             this.completedQueue.Location = new System.Drawing.Point(430, 78);
             this.completedQueue.Name = "completedQueue";
-            this.completedQueue.Size = new System.Drawing.Size(152, 173);
+            this.completedQueue.Size = new System.Drawing.Size(187, 166);
             this.completedQueue.TabIndex = 7;
+            this.completedQueue.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.completedQueue_DrawItem);
             this.completedQueue.DragDrop += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragDrop);
             this.completedQueue.DragEnter += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragEnter);
             this.completedQueue.DragOver += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragOver);
@@ -138,9 +155,10 @@
             // ingredientsBox
             // 
             this.ingredientsBox.AllowDrop = true;
+            this.ingredientsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ingredientsBox.Location = new System.Drawing.Point(12, 310);
             this.ingredientsBox.Name = "ingredientsBox";
-            this.ingredientsBox.Size = new System.Drawing.Size(229, 97);
+            this.ingredientsBox.Size = new System.Drawing.Size(229, 239);
             this.ingredientsBox.TabIndex = 8;
             this.ingredientsBox.UseCompatibleStateImageBehavior = false;
             this.ingredientsBox.View = System.Windows.Forms.View.List;
@@ -183,7 +201,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 432);
+            this.ClientSize = new System.Drawing.Size(774, 586);
             this.Controls.Add(this.clearQueue);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.ingredientsLabel);
@@ -198,6 +216,7 @@
             this.Name = "CookMainGUI";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CookMainGUI_FormClosed);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,6 +234,8 @@
         private System.Windows.Forms.Label ingredientsLabel;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Button clearQueue;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
     }
 }
 
