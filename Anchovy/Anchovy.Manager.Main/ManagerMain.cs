@@ -39,5 +39,34 @@ namespace Anchovy.Manager.Main
         {
 
         }
+
+        private void lblCheese_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            txtCheese.ReadOnly = false;
+            txtPepperoni.ReadOnly = false;
+            txtBacon.ReadOnly = false;
+            txtAnchovies.ReadOnly = false;
+            txtPinepples.ReadOnly = false;
+            txtGreenPeppers.ReadOnly = false;
+            txtBlackOlives.ReadOnly = false;
+            txtRedOnions.ReadOnly = false;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            txtCheese.ReadOnly = true;
+            txtPepperoni.ReadOnly = true;
+            txtBacon.ReadOnly = true;
+            txtAnchovies.ReadOnly = true;
+            txtPinepples.ReadOnly = true;
+            txtGreenPeppers.ReadOnly = true;
+            txtBlackOlives.ReadOnly = true;
+            txtRedOnions.ReadOnly = true;
+        }
     }
 }
