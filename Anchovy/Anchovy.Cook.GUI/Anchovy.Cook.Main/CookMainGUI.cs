@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Anchovy.API.Client;
 using System.Drawing;
+using Anchovy.API.Service.Models;
 
 namespace Anchovy.Cook.Main
 {
@@ -142,7 +143,12 @@ namespace Anchovy.Cook.Main
 			{
 				if (e.Effect == DragDropEffects.Move)
 				{
-					completedQueue.Items.Add(e.Data.GetData(DataFormats.Text));
+                    var item = (string)e.Data.GetData(DataFormats.Text);
+                    completedQueue.Items.Add(item);
+                    var split = item.Split();
+                    var id = Int32.Parse(split[split.Length - 1]);
+                   
+
 					if (globalQueue.SelectedIndex >= 0)
 					{
 						globalQueue.Items.Remove(globalQueue.SelectedItem);
@@ -154,8 +160,13 @@ namespace Anchovy.Cook.Main
 						myQueue.ClearSelected();
 					}
 					clearQueue.Enabled = true;
-				}
-			}
+                   // Console.WriteLine("id: " + id);
+                     var order = _orders.GetOrder(id);
+                    order.OrderStatus = (int)OrderStatus.Completed;
+                    order.CompletedTimeStamp = DateTimeOffset.UtcNow;
+                    _orders.PutOrder((int)order.Id, order);
+                }
+            }
 		}
 
 		//Add the selected order to globalQueue
@@ -232,6 +243,7 @@ namespace Anchovy.Cook.Main
 		{
 			if (myQueue.SelectedIndex >= 0)
 			{
+                ingredientsBox.Clear();
 				ingredientsLabel.Text = ingredientsLabel.Text.Split()[0] + " - " + myQueue.SelectedItem;
 				var order = myQueue.SelectedItem.ToString().Split();
 				var orderId = Int32.Parse(order[order.Length - 1]);
