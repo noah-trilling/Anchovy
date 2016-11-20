@@ -1,4 +1,6 @@
-﻿namespace Anchovy.API.Service.Models
+﻿using System.Collections.Generic;
+
+namespace Anchovy.API.Service.Models
 {
     public class Topping
     {

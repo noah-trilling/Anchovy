@@ -3,7 +3,7 @@ namespace Anchovy.API.Service.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class _new : DbMigration
     {
         public override void Up()
         {
@@ -74,7 +74,7 @@ namespace Anchovy.API.Service.Migrations
                         State = c.String(),
                         Email = c.String(),
                         Phone = c.String(),
-                        SignUpDate = c.DateTime(nullable: false),
+                        SignUpDate = c.DateTimeOffset(nullable: false, precision: 7),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -83,21 +83,31 @@ namespace Anchovy.API.Service.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        MenuListingId = c.Int(nullable: false),
-                        PizzaId = c.Int(nullable: false),
+                        MenuListingId = c.Int(),
+                        PizzaId = c.Int(),
                         Quantity = c.Int(nullable: false),
-                        Order_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.MenuListings", t => t.MenuListingId, cascadeDelete: true)
-                .ForeignKey("dbo.Pizzas", t => t.PizzaId, cascadeDelete: true)
-                .ForeignKey("dbo.Orders", t => t.Order_Id)
+                .ForeignKey("dbo.MenuListings", t => t.MenuListingId)
+                .ForeignKey("dbo.Pizzas", t => t.PizzaId)
                 .Index(t => t.MenuListingId)
-                .Index(t => t.PizzaId)
-                .Index(t => t.Order_Id);
+                .Index(t => t.PizzaId);
             
             CreateTable(
                 "dbo.MenuListings",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        SizeId = c.Int(nullable: false),
+                        Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Sizes", t => t.SizeId, cascadeDelete: true)
+                .Index(t => t.SizeId);
+            
+            CreateTable(
+                "dbo.Sizes",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -112,18 +122,18 @@ namespace Anchovy.API.Service.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
                         CrustId = c.Int(nullable: false),
                         SauceId = c.Int(nullable: false),
-                        Size_Id = c.Int(),
+                        MenuItem = c.Boolean(nullable: false),
+                        SizeId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Crusts", t => t.CrustId, cascadeDelete: true)
                 .ForeignKey("dbo.Sauces", t => t.SauceId, cascadeDelete: true)
-                .ForeignKey("dbo.Sizes", t => t.Size_Id)
+                .ForeignKey("dbo.Sizes", t => t.SizeId, cascadeDelete: true)
                 .Index(t => t.CrustId)
                 .Index(t => t.SauceId)
-                .Index(t => t.Size_Id);
+                .Index(t => t.SizeId);
             
             CreateTable(
                 "dbo.Sauces",
@@ -136,14 +146,51 @@ namespace Anchovy.API.Service.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Sizes",
+                "dbo.OrderLines",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        OrderId = c.Int(nullable: false),
+                        LineId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Lines", t => t.LineId, cascadeDelete: true)
+                .ForeignKey("dbo.Orders", t => t.OrderId, cascadeDelete: true)
+                .Index(t => t.OrderId)
+                .Index(t => t.LineId);
+            
+            CreateTable(
+                "dbo.Orders",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CustomerId = c.Int(nullable: false),
+                        CookId = c.Int(),
+                        OrderedTimeStamp = c.DateTimeOffset(precision: 7),
+                        ClaimedTimeStamp = c.DateTimeOffset(precision: 7),
+                        CompletedTimeStamp = c.DateTimeOffset(precision: 7),
+                        CancelledTimeStamp = c.DateTimeOffset(precision: 7),
+                        OrderStatus = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Cooks", t => t.CookId)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.CustomerId)
+                .Index(t => t.CookId);
+            
+            CreateTable(
+                "dbo.PizzaToppings",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        PizzaId = c.Int(nullable: false),
+                        ToppingId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Pizzas", t => t.PizzaId, cascadeDelete: true)
+                .ForeignKey("dbo.Toppings", t => t.ToppingId, cascadeDelete: true)
+                .Index(t => t.PizzaId)
+                .Index(t => t.ToppingId);
             
             CreateTable(
                 "dbo.Toppings",
@@ -154,30 +201,8 @@ namespace Anchovy.API.Service.Migrations
                         Cost = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Quantity = c.Int(nullable: false),
                         LowLevel = c.Int(nullable: false),
-                        Pizza_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Pizzas", t => t.Pizza_Id)
-                .Index(t => t.Pizza_Id);
-            
-            CreateTable(
-                "dbo.Orders",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        CustomerId = c.Int(nullable: false),
-                        CookId = c.Int(nullable: false),
-                        OrderedTimeStamp = c.DateTime(nullable: false),
-                        ClaimedTimeStamp = c.DateTime(nullable: false),
-                        CompletedTimeStamp = c.DateTime(nullable: false),
-                        CancelledTimeStamp = c.DateTime(nullable: false),
-                        OrderStatus = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Cooks", t => t.CookId, cascadeDelete: true)
-                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
-                .Index(t => t.CustomerId)
-                .Index(t => t.CookId);
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Shifts",
@@ -185,8 +210,8 @@ namespace Anchovy.API.Service.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         CookId = c.Int(nullable: false),
-                        StartTime = c.DateTime(nullable: false),
-                        EndTime = c.DateTime(nullable: false),
+                        StartTime = c.DateTimeOffset(nullable: false, precision: 7),
+                        EndTime = c.DateTimeOffset(precision: 7),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cooks", t => t.CookId, cascadeDelete: true)
@@ -197,33 +222,41 @@ namespace Anchovy.API.Service.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Shifts", "CookId", "dbo.Cooks");
-            DropForeignKey("dbo.Lines", "Order_Id", "dbo.Orders");
+            DropForeignKey("dbo.PizzaToppings", "ToppingId", "dbo.Toppings");
+            DropForeignKey("dbo.PizzaToppings", "PizzaId", "dbo.Pizzas");
+            DropForeignKey("dbo.OrderLines", "OrderId", "dbo.Orders");
             DropForeignKey("dbo.Orders", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.Orders", "CookId", "dbo.Cooks");
+            DropForeignKey("dbo.OrderLines", "LineId", "dbo.Lines");
             DropForeignKey("dbo.Lines", "PizzaId", "dbo.Pizzas");
-            DropForeignKey("dbo.Toppings", "Pizza_Id", "dbo.Pizzas");
-            DropForeignKey("dbo.Pizzas", "Size_Id", "dbo.Sizes");
+            DropForeignKey("dbo.Pizzas", "SizeId", "dbo.Sizes");
             DropForeignKey("dbo.Pizzas", "SauceId", "dbo.Sauces");
             DropForeignKey("dbo.Pizzas", "CrustId", "dbo.Crusts");
             DropForeignKey("dbo.Lines", "MenuListingId", "dbo.MenuListings");
+            DropForeignKey("dbo.MenuListings", "SizeId", "dbo.Sizes");
             DropForeignKey("dbo.Cooks", "ManagerId", "dbo.Managers");
             DropIndex("dbo.Shifts", new[] { "CookId" });
+            DropIndex("dbo.PizzaToppings", new[] { "ToppingId" });
+            DropIndex("dbo.PizzaToppings", new[] { "PizzaId" });
             DropIndex("dbo.Orders", new[] { "CookId" });
             DropIndex("dbo.Orders", new[] { "CustomerId" });
-            DropIndex("dbo.Toppings", new[] { "Pizza_Id" });
-            DropIndex("dbo.Pizzas", new[] { "Size_Id" });
+            DropIndex("dbo.OrderLines", new[] { "LineId" });
+            DropIndex("dbo.OrderLines", new[] { "OrderId" });
+            DropIndex("dbo.Pizzas", new[] { "SizeId" });
             DropIndex("dbo.Pizzas", new[] { "SauceId" });
             DropIndex("dbo.Pizzas", new[] { "CrustId" });
-            DropIndex("dbo.Lines", new[] { "Order_Id" });
+            DropIndex("dbo.MenuListings", new[] { "SizeId" });
             DropIndex("dbo.Lines", new[] { "PizzaId" });
             DropIndex("dbo.Lines", new[] { "MenuListingId" });
             DropIndex("dbo.Cooks", new[] { "ManagerId" });
             DropTable("dbo.Shifts");
-            DropTable("dbo.Orders");
             DropTable("dbo.Toppings");
-            DropTable("dbo.Sizes");
+            DropTable("dbo.PizzaToppings");
+            DropTable("dbo.Orders");
+            DropTable("dbo.OrderLines");
             DropTable("dbo.Sauces");
             DropTable("dbo.Pizzas");
+            DropTable("dbo.Sizes");
             DropTable("dbo.MenuListings");
             DropTable("dbo.Lines");
             DropTable("dbo.Customers");
