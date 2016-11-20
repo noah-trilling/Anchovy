@@ -439,7 +439,7 @@ namespace Anchovy.API.Client
             result.Response = httpResponse;
             
             // Deserialize Response
-            if (statusCode == HttpStatusCode.OK)
+            if (statusCode == HttpStatusCode.Created)
             {
                 Crust resultModel = new Crust();
                 JToken responseDoc = null;

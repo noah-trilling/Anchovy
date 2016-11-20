@@ -2,10 +2,8 @@
 // Changes may cause incorrect behavior and will be lost if the code is regenerated.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Anchovy.API.Client.Models;
-using Microsoft.Rest;
 using Newtonsoft.Json.Linq;
 
 namespace Anchovy.API.Client.Models
@@ -100,17 +98,6 @@ namespace Anchovy.API.Client.Models
             set { this._id = value; }
         }
         
-        private IList<Line> _lines;
-        
-        /// <summary>
-        /// Optional.
-        /// </summary>
-        public IList<Line> Lines
-        {
-            get { return this._lines; }
-            set { this._lines = value; }
-        }
-        
         private DateTimeOffset? _orderedTimeStamp;
         
         /// <summary>
@@ -138,7 +125,6 @@ namespace Anchovy.API.Client.Models
         /// </summary>
         public Order()
         {
-            this.Lines = new LazyList<Line>();
         }
         
         /// <summary>
@@ -191,16 +177,6 @@ namespace Anchovy.API.Client.Models
                 if (idValue != null && idValue.Type != JTokenType.Null)
                 {
                     this.Id = ((int)idValue);
-                }
-                JToken linesSequence = ((JToken)inputObject["Lines"]);
-                if (linesSequence != null && linesSequence.Type != JTokenType.Null)
-                {
-                    foreach (JToken linesValue in ((JArray)linesSequence))
-                    {
-                        Line line = new Line();
-                        line.DeserializeJson(linesValue);
-                        this.Lines.Add(line);
-                    }
                 }
                 JToken orderedTimeStampValue = inputObject["OrderedTimeStamp"];
                 if (orderedTimeStampValue != null && orderedTimeStampValue.Type != JTokenType.Null)
@@ -258,22 +234,6 @@ namespace Anchovy.API.Client.Models
             if (this.Id != null)
             {
                 outputObject["Id"] = this.Id.Value;
-            }
-            JArray linesSequence = null;
-            if (this.Lines != null)
-            {
-                if (this.Lines is ILazyCollection<Line> == false || ((ILazyCollection<Line>)this.Lines).IsInitialized)
-                {
-                    linesSequence = new JArray();
-                    outputObject["Lines"] = linesSequence;
-                    foreach (Line linesItem in this.Lines)
-                    {
-                        if (linesItem != null)
-                        {
-                            linesSequence.Add(linesItem.SerializeJson(null));
-                        }
-                    }
-                }
             }
             if (this.OrderedTimeStamp != null)
             {

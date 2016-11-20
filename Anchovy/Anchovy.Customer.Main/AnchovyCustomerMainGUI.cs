@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Anchovy.Customer.Main
 {
-    public partial class CustomerMain : Form
+    public partial class AnchovyCustomerMainGUI : Form
     {
-        public CustomerMain()
+        public AnchovyCustomerMainGUI()
         {
             InitializeComponent();
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

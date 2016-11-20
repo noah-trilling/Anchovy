@@ -20,14 +20,14 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/PizzaToppings
         public IQueryable<PizzaTopping> GetPizzaToppings()
         {
-            return db.PizzaToppings;
+            return db.PizzaToppings.Include("Topping");
         }
 
         // GET: api/PizzaToppings/5
         [ResponseType(typeof(PizzaTopping))]
         public IHttpActionResult GetPizzaTopping(int id)
         {
-            PizzaTopping pizzaTopping = db.PizzaToppings.Find(id);
+            PizzaTopping pizzaTopping = db.PizzaToppings.Include("Topping").FirstOrDefault(_ => _.Id == id);
             if (pizzaTopping == null)
             {
                 return NotFound();
@@ -51,6 +51,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Entry(pizzaTopping).State = EntityState.Modified;
+            db.Entry(pizzaTopping.Pizza).State = EntityState.Unchanged;
+            db.Entry(pizzaTopping.Topping).State = EntityState.Unchanged;
 
             try
             {
@@ -81,6 +83,8 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.PizzaToppings.Add(pizzaTopping);
+            db.Entry(pizzaTopping.Pizza).State = EntityState.Unchanged;
+            db.Entry(pizzaTopping.Topping).State = EntityState.Unchanged;
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = pizzaTopping.Id }, pizzaTopping);

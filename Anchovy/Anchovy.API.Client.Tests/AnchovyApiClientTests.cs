@@ -109,8 +109,7 @@ namespace Anchovy.API.Client.Tests
                 MenuItem = false,
                 Name = "Custom",
                 Sauce = this.Sauce,
-                Size = this.Size,
-                Toppings = this.Toppings
+                Size = this.Size
             };
 
             Line = new Line
@@ -129,7 +128,6 @@ namespace Anchovy.API.Client.Tests
                 CompletedTimeStamp = DateTimeOffset.UtcNow,
                 Cook = this.Cook,
                 Customer = this.Customer,
-                Lines = OrderLines,
                 OrderStatus = 4
             };
 
