@@ -32,7 +32,7 @@ namespace Anchovy.API.Service.Controllers
             {
                 return NotFound();
             }
-            pizza = db.Pizzas.Include(_ => _.Toppings).Single(_ => _.Id == pizza.Id);
+            //pizza = db.Pizzas.Include(_ => _.Toppings).Single(_ => _.Id == pizza.Id);
             return Ok(pizza);
         }
 
