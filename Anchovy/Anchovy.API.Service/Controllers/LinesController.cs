@@ -20,7 +20,7 @@ namespace Anchovy.API.Service.Controllers
         // GET: api/Lines
         public IQueryable<Line> GetLines()
         {
-            var lines = db.Lines.Include("MenuListing").Include("MenuListing.Size").Include("Pizza.Size").Include("Pizza.Crust").Include("Pizza.Sauce");
+            var lines = db.Lines.Include("MenuListing").Include("MenuListing.Size").Include("Pizza").Include("Pizza.Size").Include("Pizza.Crust").Include("Pizza.Sauce");
             return lines;
         }
 
