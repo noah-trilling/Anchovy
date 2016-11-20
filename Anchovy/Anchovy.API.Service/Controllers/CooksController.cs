@@ -84,7 +84,10 @@ namespace Anchovy.API.Service.Controllers
             }
 
             db.Cooks.Add(cook);
-            db.Entry(cook.Manager).State = EntityState.Unchanged;
+            if (cook.Manager != null)
+            {
+                db.Entry(cook.Manager).State = EntityState.Unchanged;
+            }
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = cook.Id }, cook);
