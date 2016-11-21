@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnchovyCustomerMainGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AnchovyCustomerMainGUI.Designer.cs">
+      <DependentUpon>AnchovyCustomerMainGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerForgotPasswordGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerForgotPasswordGUI.Designer.cs">
+      <DependentUpon>CustomerForgotPasswordGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="CustomerLoginGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,9 +65,24 @@
       <DependentUpon>CustomerLoginGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerLogin.cs" />
+    <Compile Include="CustomerSignUpGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerSignUpGUI.Designer.cs">
+      <DependentUpon>CustomerSignUpGUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AnchovyCustomerMainGUI.resx">
+      <DependentUpon>AnchovyCustomerMainGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerForgotPasswordGUI.resx">
+      <DependentUpon>CustomerForgotPasswordGUI.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerLoginGUI.resx">
       <DependentUpon>CustomerLoginGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerSignUpGUI.resx">
+      <DependentUpon>CustomerSignUpGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

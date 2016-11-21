@@ -108,6 +108,7 @@
             this.button1.TabIndex = 13;
             this.button1.Text = "Sign In!";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // linkLabel1
             // 
@@ -119,6 +120,7 @@
             this.linkLabel1.TabIndex = 14;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Forgot your password?";
+            this.linkLabel1.Click += new System.EventHandler(this.linkLabel1_Click);
             // 
             // button2
             // 
@@ -130,6 +132,7 @@
             this.button2.TabIndex = 15;
             this.button2.Text = "Create New Account!";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label5
             // 
