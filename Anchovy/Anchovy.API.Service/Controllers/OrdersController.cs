@@ -27,7 +27,7 @@ namespace Anchovy.API.Service.Controllers
         [ResponseType(typeof(Order))]
         public IHttpActionResult GetOrder(int id)
         {
-            Order order = db.Orders.Include("Cook").Include("Customer").Include("Customer.Manager").FirstOrDefault(_ => _.Id == id);
+            Order order = db.Orders.Include("Cook").Include("Customer").Include("Cook.Manager").FirstOrDefault(_ => _.Id == id);
             if (order == null)
             {
                 return NotFound();
