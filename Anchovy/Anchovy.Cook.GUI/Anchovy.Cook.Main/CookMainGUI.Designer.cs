@@ -42,6 +42,7 @@
             this.ingredientsLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.clearQueue = new System.Windows.Forms.Button();
+            this.refreshButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,6 +136,7 @@
             this.completedQueue.Name = "completedQueue";
             this.completedQueue.Size = new System.Drawing.Size(187, 166);
             this.completedQueue.TabIndex = 7;
+            this.completedQueue.Visible = false;
             this.completedQueue.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.completedQueue_DrawItem);
             this.completedQueue.DragDrop += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragDrop);
             this.completedQueue.DragEnter += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragEnter);
@@ -151,6 +153,7 @@
             this.completeQLabel.Size = new System.Drawing.Size(134, 20);
             this.completeQLabel.TabIndex = 6;
             this.completeQLabel.Text = "CompletedQueue";
+            this.completeQLabel.Visible = false;
             // 
             // ingredientsBox
             // 
@@ -195,13 +198,27 @@
             this.clearQueue.TabIndex = 12;
             this.clearQueue.Text = "Clear";
             this.clearQueue.UseVisualStyleBackColor = false;
+            this.clearQueue.Visible = false;
             this.clearQueue.Click += new System.EventHandler(this.clearQueue_Click);
+            // 
+            // refreshButton
+            // 
+            this.refreshButton.BackColor = System.Drawing.SystemColors.Control;
+            this.refreshButton.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.refreshButton.Location = new System.Drawing.Point(253, 257);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(75, 23);
+            this.refreshButton.TabIndex = 13;
+            this.refreshButton.Text = "Refresh";
+            this.refreshButton.UseVisualStyleBackColor = false;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // CookMainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(774, 586);
+            this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.clearQueue);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.ingredientsLabel);
@@ -216,6 +233,7 @@
             this.Name = "CookMainGUI";
             this.Text = "Form1";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CookMainGUI_FormClosed);
+            this.Load += new System.EventHandler(this.CookMainGUI_Load);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -236,6 +254,7 @@
         private System.Windows.Forms.Button clearQueue;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
+        private System.Windows.Forms.Button refreshButton;
     }
 }
 

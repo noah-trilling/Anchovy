@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.forgotEmail = new System.Windows.Forms.TextBox();
+            this.cancelForgot = new System.Windows.Forms.Button();
+            this.sendForgot = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.forgotMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -46,34 +47,35 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Email:";
             // 
-            // textBox4
+            // forgotEmail
             // 
-            this.textBox4.Location = new System.Drawing.Point(98, 112);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(268, 20);
-            this.textBox4.TabIndex = 11;
+            this.forgotEmail.Location = new System.Drawing.Point(98, 112);
+            this.forgotEmail.Name = "forgotEmail";
+            this.forgotEmail.Size = new System.Drawing.Size(268, 20);
+            this.forgotEmail.TabIndex = 11;
             // 
-            // button2
+            // cancelForgot
             // 
-            this.button2.ForeColor = System.Drawing.Color.Red;
-            this.button2.Location = new System.Drawing.Point(98, 138);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.cancelForgot.ForeColor = System.Drawing.Color.Red;
+            this.cancelForgot.Location = new System.Drawing.Point(98, 138);
+            this.cancelForgot.Name = "cancelForgot";
+            this.cancelForgot.Size = new System.Drawing.Size(116, 78);
+            this.cancelForgot.TabIndex = 13;
+            this.cancelForgot.Text = "Cancel";
+            this.cancelForgot.UseVisualStyleBackColor = true;
+            this.cancelForgot.Click += new System.EventHandler(this.cancelForgot_Click);
             // 
-            // button1
+            // sendForgot
             // 
-            this.button1.BackColor = System.Drawing.Color.ForestGreen;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(291, 138);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Send!";
-            this.button1.UseVisualStyleBackColor = false;
+            this.sendForgot.BackColor = System.Drawing.Color.ForestGreen;
+            this.sendForgot.ForeColor = System.Drawing.Color.White;
+            this.sendForgot.Location = new System.Drawing.Point(246, 138);
+            this.sendForgot.Name = "sendForgot";
+            this.sendForgot.Size = new System.Drawing.Size(120, 78);
+            this.sendForgot.TabIndex = 14;
+            this.sendForgot.Text = "Send!";
+            this.sendForgot.UseVisualStyleBackColor = false;
+            this.sendForgot.Click += new System.EventHandler(this.sendForgot_Click);
             // 
             // label1
             // 
@@ -86,16 +88,27 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Please enter your email";
             // 
+            // forgotMessage
+            // 
+            this.forgotMessage.AutoSize = true;
+            this.forgotMessage.ForeColor = System.Drawing.Color.LawnGreen;
+            this.forgotMessage.Location = new System.Drawing.Point(372, 117);
+            this.forgotMessage.Name = "forgotMessage";
+            this.forgotMessage.Size = new System.Drawing.Size(70, 13);
+            this.forgotMessage.TabIndex = 16;
+            this.forgotMessage.Text = "                     ";
+            // 
             // CustomerForgotPasswordGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(460, 274);
+            this.ClientSize = new System.Drawing.Size(620, 274);
+            this.Controls.Add(this.forgotMessage);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.sendForgot);
+            this.Controls.Add(this.cancelForgot);
+            this.Controls.Add(this.forgotEmail);
             this.Controls.Add(this.label2);
             this.Name = "CustomerForgotPasswordGUI";
             this.Text = "Form1";
@@ -107,10 +120,11 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox forgotEmail;
+        private System.Windows.Forms.Button cancelForgot;
+        private System.Windows.Forms.Button sendForgot;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label forgotMessage;
     }
 }
 

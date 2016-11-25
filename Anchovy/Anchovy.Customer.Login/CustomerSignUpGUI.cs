@@ -18,7 +18,7 @@ namespace Customer.SignUp
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void cancelSignup_Click(object sender, EventArgs e)
         {
             CustomerLoginGUI login = new CustomerLoginGUI();
             login.Show();
