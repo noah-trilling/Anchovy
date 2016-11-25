@@ -31,49 +31,51 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.AppetizersPanel = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
+            this.cancelApps = new System.Windows.Forms.Button();
+            this.addApps = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.button4 = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.customDesc = new System.Windows.Forms.Label();
+            this.veggieDesc = new System.Windows.Forms.Label();
+            this.supremeDesc = new System.Windows.Forms.Label();
+            this.pineappleSpecialDesc = new System.Windows.Forms.Label();
+            this.anchovySpecialDesc = new System.Windows.Forms.Label();
+            this.meatLoversDesc = new System.Windows.Forms.Label();
+            this.supremePic = new System.Windows.Forms.PictureBox();
+            this.anchovySpecialPic = new System.Windows.Forms.PictureBox();
+            this.pineappleSpecialPic = new System.Windows.Forms.PictureBox();
+            this.veggiePic = new System.Windows.Forms.PictureBox();
+            this.customPic = new System.Windows.Forms.PictureBox();
+            this.meatLoversPic = new System.Windows.Forms.PictureBox();
+            this.customButton = new System.Windows.Forms.RadioButton();
+            this.veggieButton = new System.Windows.Forms.RadioButton();
+            this.supremeButton = new System.Windows.Forms.RadioButton();
+            this.pineappleSpecialButton = new System.Windows.Forms.RadioButton();
+            this.anchovySpecialButton = new System.Windows.Forms.RadioButton();
+            this.meatLoversButton = new System.Windows.Forms.RadioButton();
+            this.appetizersButton = new System.Windows.Forms.Button();
+            this.shoppingCart1 = new System.Windows.Forms.LinkLabel();
+            this.logoutButton1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.shoppingCart2 = new System.Windows.Forms.LinkLabel();
+            this.logoutButton2 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.infoPassword2 = new System.Windows.Forms.TextBox();
+            this.infoPassword1 = new System.Windows.Forms.TextBox();
+            this.infoUsername = new System.Windows.Forms.TextBox();
+            this.infoEmail = new System.Windows.Forms.TextBox();
+            this.infoPhone = new System.Windows.Forms.TextBox();
+            this.infoState = new System.Windows.Forms.TextBox();
+            this.infoCity = new System.Windows.Forms.TextBox();
+            this.infoAddress = new System.Windows.Forms.TextBox();
+            this.infoLastName = new System.Windows.Forms.TextBox();
+            this.infoMiddleName = new System.Windows.Forms.TextBox();
+            this.infoFirstName = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -85,18 +87,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.shoppingCart3 = new System.Windows.Forms.LinkLabel();
+            this.logoutButton3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.AppetizersPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supremePic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anchovySpecialPic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pineappleSpecialPic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.veggiePic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customPic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.meatLoversPic)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
@@ -116,27 +117,27 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.AppetizersPanel);
-            this.tabPage1.Controls.Add(this.label18);
-            this.tabPage1.Controls.Add(this.label17);
-            this.tabPage1.Controls.Add(this.label16);
-            this.tabPage1.Controls.Add(this.label15);
-            this.tabPage1.Controls.Add(this.label14);
-            this.tabPage1.Controls.Add(this.label13);
-            this.tabPage1.Controls.Add(this.pictureBox6);
-            this.tabPage1.Controls.Add(this.pictureBox5);
-            this.tabPage1.Controls.Add(this.pictureBox4);
-            this.tabPage1.Controls.Add(this.pictureBox3);
-            this.tabPage1.Controls.Add(this.pictureBox2);
-            this.tabPage1.Controls.Add(this.pictureBox1);
-            this.tabPage1.Controls.Add(this.radioButton6);
-            this.tabPage1.Controls.Add(this.radioButton5);
-            this.tabPage1.Controls.Add(this.radioButton4);
-            this.tabPage1.Controls.Add(this.radioButton3);
-            this.tabPage1.Controls.Add(this.radioButton2);
-            this.tabPage1.Controls.Add(this.radioButton1);
-            this.tabPage1.Controls.Add(this.button4);
-            this.tabPage1.Controls.Add(this.linkLabel1);
-            this.tabPage1.Controls.Add(this.button3);
+            this.tabPage1.Controls.Add(this.customDesc);
+            this.tabPage1.Controls.Add(this.veggieDesc);
+            this.tabPage1.Controls.Add(this.supremeDesc);
+            this.tabPage1.Controls.Add(this.pineappleSpecialDesc);
+            this.tabPage1.Controls.Add(this.anchovySpecialDesc);
+            this.tabPage1.Controls.Add(this.meatLoversDesc);
+            this.tabPage1.Controls.Add(this.supremePic);
+            this.tabPage1.Controls.Add(this.anchovySpecialPic);
+            this.tabPage1.Controls.Add(this.pineappleSpecialPic);
+            this.tabPage1.Controls.Add(this.veggiePic);
+            this.tabPage1.Controls.Add(this.customPic);
+            this.tabPage1.Controls.Add(this.meatLoversPic);
+            this.tabPage1.Controls.Add(this.customButton);
+            this.tabPage1.Controls.Add(this.veggieButton);
+            this.tabPage1.Controls.Add(this.supremeButton);
+            this.tabPage1.Controls.Add(this.pineappleSpecialButton);
+            this.tabPage1.Controls.Add(this.anchovySpecialButton);
+            this.tabPage1.Controls.Add(this.meatLoversButton);
+            this.tabPage1.Controls.Add(this.appetizersButton);
+            this.tabPage1.Controls.Add(this.shoppingCart1);
+            this.tabPage1.Controls.Add(this.logoutButton1);
             this.tabPage1.Location = new System.Drawing.Point(4, 52);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -147,27 +148,38 @@
             // 
             // AppetizersPanel
             // 
-            this.AppetizersPanel.Controls.Add(this.button8);
-            this.AppetizersPanel.Controls.Add(this.button7);
+            this.AppetizersPanel.Controls.Add(this.cancelApps);
+            this.AppetizersPanel.Controls.Add(this.addApps);
             this.AppetizersPanel.Controls.Add(this.checkBox3);
             this.AppetizersPanel.Controls.Add(this.checkBox2);
             this.AppetizersPanel.Controls.Add(this.checkBox1);
-            this.AppetizersPanel.Location = new System.Drawing.Point(76, 77);
+            this.AppetizersPanel.Location = new System.Drawing.Point(74, 97);
             this.AppetizersPanel.Name = "AppetizersPanel";
             this.AppetizersPanel.Size = new System.Drawing.Size(717, 453);
             this.AppetizersPanel.TabIndex = 37;
             this.AppetizersPanel.Visible = false;
             // 
-            // button7
+            // cancelApps
             // 
-            this.button7.BackColor = System.Drawing.Color.ForestGreen;
-            this.button7.ForeColor = System.Drawing.Color.White;
-            this.button7.Location = new System.Drawing.Point(368, 286);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(134, 65);
-            this.button7.TabIndex = 19;
-            this.button7.Text = "Add";
-            this.button7.UseVisualStyleBackColor = false;
+            this.cancelApps.ForeColor = System.Drawing.Color.Red;
+            this.cancelApps.Location = new System.Drawing.Point(200, 286);
+            this.cancelApps.Name = "cancelApps";
+            this.cancelApps.Size = new System.Drawing.Size(111, 63);
+            this.cancelApps.TabIndex = 20;
+            this.cancelApps.Text = "Cancel";
+            this.cancelApps.UseVisualStyleBackColor = true;
+            this.cancelApps.Click += new System.EventHandler(this.cancelApps_Click);
+            // 
+            // addApps
+            // 
+            this.addApps.BackColor = System.Drawing.Color.ForestGreen;
+            this.addApps.ForeColor = System.Drawing.Color.White;
+            this.addApps.Location = new System.Drawing.Point(368, 286);
+            this.addApps.Name = "addApps";
+            this.addApps.Size = new System.Drawing.Size(134, 65);
+            this.addApps.TabIndex = 19;
+            this.addApps.Text = "Add";
+            this.addApps.UseVisualStyleBackColor = false;
             // 
             // checkBox3
             // 
@@ -199,213 +211,213 @@
             this.checkBox1.Text = "Wings";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label18
+            // customDesc
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(631, 506);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(66, 13);
-            this.label18.TabIndex = 36;
-            this.label18.Text = "(Description)";
+            this.customDesc.AutoSize = true;
+            this.customDesc.Location = new System.Drawing.Point(631, 506);
+            this.customDesc.Name = "customDesc";
+            this.customDesc.Size = new System.Drawing.Size(66, 13);
+            this.customDesc.TabIndex = 36;
+            this.customDesc.Text = "(Description)";
             // 
-            // label17
+            // veggieDesc
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(365, 506);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(66, 13);
-            this.label17.TabIndex = 35;
-            this.label17.Text = "(Description)";
+            this.veggieDesc.AutoSize = true;
+            this.veggieDesc.Location = new System.Drawing.Point(365, 506);
+            this.veggieDesc.Name = "veggieDesc";
+            this.veggieDesc.Size = new System.Drawing.Size(66, 13);
+            this.veggieDesc.TabIndex = 35;
+            this.veggieDesc.Text = "(Description)";
             // 
-            // label16
+            // supremeDesc
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(142, 506);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(66, 13);
-            this.label16.TabIndex = 34;
-            this.label16.Text = "(Description)";
+            this.supremeDesc.AutoSize = true;
+            this.supremeDesc.Location = new System.Drawing.Point(142, 506);
+            this.supremeDesc.Name = "supremeDesc";
+            this.supremeDesc.Size = new System.Drawing.Size(66, 13);
+            this.supremeDesc.TabIndex = 34;
+            this.supremeDesc.Text = "(Description)";
             // 
-            // label15
+            // pineappleSpecialDesc
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(631, 284);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(66, 13);
-            this.label15.TabIndex = 33;
-            this.label15.Text = "(Description)";
+            this.pineappleSpecialDesc.AutoSize = true;
+            this.pineappleSpecialDesc.Location = new System.Drawing.Point(631, 284);
+            this.pineappleSpecialDesc.Name = "pineappleSpecialDesc";
+            this.pineappleSpecialDesc.Size = new System.Drawing.Size(66, 13);
+            this.pineappleSpecialDesc.TabIndex = 33;
+            this.pineappleSpecialDesc.Text = "(Description)";
             // 
-            // label14
+            // anchovySpecialDesc
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(365, 284);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(66, 13);
-            this.label14.TabIndex = 32;
-            this.label14.Text = "(Description)";
+            this.anchovySpecialDesc.AutoSize = true;
+            this.anchovySpecialDesc.Location = new System.Drawing.Point(365, 284);
+            this.anchovySpecialDesc.Name = "anchovySpecialDesc";
+            this.anchovySpecialDesc.Size = new System.Drawing.Size(66, 13);
+            this.anchovySpecialDesc.TabIndex = 32;
+            this.anchovySpecialDesc.Text = "(Description)";
             // 
-            // label13
+            // meatLoversDesc
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(141, 284);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(66, 13);
-            this.label13.TabIndex = 31;
-            this.label13.Text = "(Description)";
+            this.meatLoversDesc.AutoSize = true;
+            this.meatLoversDesc.Location = new System.Drawing.Point(141, 284);
+            this.meatLoversDesc.Name = "meatLoversDesc";
+            this.meatLoversDesc.Size = new System.Drawing.Size(66, 13);
+            this.meatLoversDesc.TabIndex = 31;
+            this.meatLoversDesc.Text = "(Description)";
             // 
-            // pictureBox6
+            // supremePic
             // 
-            this.pictureBox6.Location = new System.Drawing.Point(141, 410);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(101, 84);
-            this.pictureBox6.TabIndex = 30;
-            this.pictureBox6.TabStop = false;
+            this.supremePic.Location = new System.Drawing.Point(141, 410);
+            this.supremePic.Name = "supremePic";
+            this.supremePic.Size = new System.Drawing.Size(101, 84);
+            this.supremePic.TabIndex = 30;
+            this.supremePic.TabStop = false;
             // 
-            // pictureBox5
+            // anchovySpecialPic
             // 
-            this.pictureBox5.Location = new System.Drawing.Point(368, 183);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(101, 84);
-            this.pictureBox5.TabIndex = 29;
-            this.pictureBox5.TabStop = false;
+            this.anchovySpecialPic.Location = new System.Drawing.Point(368, 183);
+            this.anchovySpecialPic.Name = "anchovySpecialPic";
+            this.anchovySpecialPic.Size = new System.Drawing.Size(101, 84);
+            this.anchovySpecialPic.TabIndex = 29;
+            this.anchovySpecialPic.TabStop = false;
             // 
-            // pictureBox4
+            // pineappleSpecialPic
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(634, 183);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(101, 84);
-            this.pictureBox4.TabIndex = 28;
-            this.pictureBox4.TabStop = false;
+            this.pineappleSpecialPic.Location = new System.Drawing.Point(634, 183);
+            this.pineappleSpecialPic.Name = "pineappleSpecialPic";
+            this.pineappleSpecialPic.Size = new System.Drawing.Size(101, 84);
+            this.pineappleSpecialPic.TabIndex = 28;
+            this.pineappleSpecialPic.TabStop = false;
             // 
-            // pictureBox3
+            // veggiePic
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(368, 410);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(101, 84);
-            this.pictureBox3.TabIndex = 27;
-            this.pictureBox3.TabStop = false;
+            this.veggiePic.Location = new System.Drawing.Point(368, 410);
+            this.veggiePic.Name = "veggiePic";
+            this.veggiePic.Size = new System.Drawing.Size(101, 84);
+            this.veggiePic.TabIndex = 27;
+            this.veggiePic.TabStop = false;
             // 
-            // pictureBox2
+            // customPic
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(634, 410);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(101, 84);
-            this.pictureBox2.TabIndex = 26;
-            this.pictureBox2.TabStop = false;
+            this.customPic.Location = new System.Drawing.Point(634, 410);
+            this.customPic.Name = "customPic";
+            this.customPic.Size = new System.Drawing.Size(101, 84);
+            this.customPic.TabIndex = 26;
+            this.customPic.TabStop = false;
             // 
-            // pictureBox1
+            // meatLoversPic
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(141, 184);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(101, 84);
-            this.pictureBox1.TabIndex = 25;
-            this.pictureBox1.TabStop = false;
+            this.meatLoversPic.Location = new System.Drawing.Point(141, 184);
+            this.meatLoversPic.Name = "meatLoversPic";
+            this.meatLoversPic.Size = new System.Drawing.Size(101, 84);
+            this.meatLoversPic.TabIndex = 25;
+            this.meatLoversPic.TabStop = false;
             // 
-            // radioButton6
+            // customButton
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(634, 387);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(60, 17);
-            this.radioButton6.TabIndex = 24;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Custom";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.customButton.AutoSize = true;
+            this.customButton.Location = new System.Drawing.Point(634, 387);
+            this.customButton.Name = "customButton";
+            this.customButton.Size = new System.Drawing.Size(60, 17);
+            this.customButton.TabIndex = 24;
+            this.customButton.TabStop = true;
+            this.customButton.Text = "Custom";
+            this.customButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton5
+            // veggieButton
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(368, 387);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(58, 17);
-            this.radioButton5.TabIndex = 23;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Veggie";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.veggieButton.AutoSize = true;
+            this.veggieButton.Location = new System.Drawing.Point(368, 387);
+            this.veggieButton.Name = "veggieButton";
+            this.veggieButton.Size = new System.Drawing.Size(58, 17);
+            this.veggieButton.TabIndex = 23;
+            this.veggieButton.TabStop = true;
+            this.veggieButton.Text = "Veggie";
+            this.veggieButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // supremeButton
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(141, 387);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(67, 17);
-            this.radioButton4.TabIndex = 22;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Supreme";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.supremeButton.AutoSize = true;
+            this.supremeButton.Location = new System.Drawing.Point(141, 387);
+            this.supremeButton.Name = "supremeButton";
+            this.supremeButton.Size = new System.Drawing.Size(67, 17);
+            this.supremeButton.TabIndex = 22;
+            this.supremeButton.TabStop = true;
+            this.supremeButton.Text = "Supreme";
+            this.supremeButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // pineappleSpecialButton
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(634, 160);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(110, 17);
-            this.radioButton3.TabIndex = 21;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Pineapple Special";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.pineappleSpecialButton.AutoSize = true;
+            this.pineappleSpecialButton.Location = new System.Drawing.Point(634, 160);
+            this.pineappleSpecialButton.Name = "pineappleSpecialButton";
+            this.pineappleSpecialButton.Size = new System.Drawing.Size(110, 17);
+            this.pineappleSpecialButton.TabIndex = 21;
+            this.pineappleSpecialButton.TabStop = true;
+            this.pineappleSpecialButton.Text = "Pineapple Special";
+            this.pineappleSpecialButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // anchovySpecialButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(368, 160);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(105, 17);
-            this.radioButton2.TabIndex = 20;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Anchovy Special";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.anchovySpecialButton.AutoSize = true;
+            this.anchovySpecialButton.Location = new System.Drawing.Point(368, 160);
+            this.anchovySpecialButton.Name = "anchovySpecialButton";
+            this.anchovySpecialButton.Size = new System.Drawing.Size(105, 17);
+            this.anchovySpecialButton.TabIndex = 20;
+            this.anchovySpecialButton.TabStop = true;
+            this.anchovySpecialButton.Text = "Anchovy Special";
+            this.anchovySpecialButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // meatLoversButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(141, 160);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(86, 17);
-            this.radioButton1.TabIndex = 19;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Meat Lover\'s";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.meatLoversButton.AutoSize = true;
+            this.meatLoversButton.Location = new System.Drawing.Point(141, 160);
+            this.meatLoversButton.Name = "meatLoversButton";
+            this.meatLoversButton.Size = new System.Drawing.Size(86, 17);
+            this.meatLoversButton.TabIndex = 19;
+            this.meatLoversButton.TabStop = true;
+            this.meatLoversButton.Text = "Meat Lover\'s";
+            this.meatLoversButton.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // appetizersButton
             // 
-            this.button4.BackColor = System.Drawing.Color.ForestGreen;
-            this.button4.ForeColor = System.Drawing.Color.White;
-            this.button4.Location = new System.Drawing.Point(6, 6);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(134, 65);
-            this.button4.TabIndex = 18;
-            this.button4.Text = "Appetizers";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.appetizersButton.BackColor = System.Drawing.Color.ForestGreen;
+            this.appetizersButton.ForeColor = System.Drawing.Color.White;
+            this.appetizersButton.Location = new System.Drawing.Point(6, 6);
+            this.appetizersButton.Name = "appetizersButton";
+            this.appetizersButton.Size = new System.Drawing.Size(134, 65);
+            this.appetizersButton.TabIndex = 18;
+            this.appetizersButton.Text = "Appetizers";
+            this.appetizersButton.UseVisualStyleBackColor = false;
+            this.appetizersButton.Click += new System.EventHandler(this.appetizersButton_Click);
             // 
-            // linkLabel1
+            // shoppingCart1
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(660, 21);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(151, 26);
-            this.linkLabel1.TabIndex = 16;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Shopping Cart";
+            this.shoppingCart1.AutoSize = true;
+            this.shoppingCart1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shoppingCart1.Location = new System.Drawing.Point(660, 21);
+            this.shoppingCart1.Name = "shoppingCart1";
+            this.shoppingCart1.Size = new System.Drawing.Size(151, 26);
+            this.shoppingCart1.TabIndex = 16;
+            this.shoppingCart1.TabStop = true;
+            this.shoppingCart1.Text = "Shopping Cart";
             // 
-            // button3
+            // logoutButton1
             // 
-            this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(817, 6);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(109, 61);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "Logout";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.logoutButton1.BackColor = System.Drawing.Color.Red;
+            this.logoutButton1.ForeColor = System.Drawing.Color.White;
+            this.logoutButton1.Location = new System.Drawing.Point(817, 6);
+            this.logoutButton1.Name = "logoutButton1";
+            this.logoutButton1.Size = new System.Drawing.Size(109, 61);
+            this.logoutButton1.TabIndex = 15;
+            this.logoutButton1.Text = "Logout";
+            this.logoutButton1.UseVisualStyleBackColor = false;
+            this.logoutButton1.Click += new System.EventHandler(this.logoutButton1_Click);
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.linkLabel2);
-            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.shoppingCart2);
+            this.tabPage2.Controls.Add(this.logoutButton2);
             this.tabPage2.Location = new System.Drawing.Point(4, 52);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -413,46 +425,47 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Order History";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
-            // linkLabel2
+            // shoppingCart2
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel2.Location = new System.Drawing.Point(655, 21);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(151, 26);
-            this.linkLabel2.TabIndex = 17;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Shopping Cart";
+            this.shoppingCart2.AutoSize = true;
+            this.shoppingCart2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shoppingCart2.Location = new System.Drawing.Point(655, 21);
+            this.shoppingCart2.Name = "shoppingCart2";
+            this.shoppingCart2.Size = new System.Drawing.Size(151, 26);
+            this.shoppingCart2.TabIndex = 17;
+            this.shoppingCart2.TabStop = true;
+            this.shoppingCart2.Text = "Shopping Cart";
             // 
-            // button1
+            // logoutButton2
             // 
-            this.button1.BackColor = System.Drawing.Color.Red;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(812, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 61);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "Logout";
-            this.button1.UseVisualStyleBackColor = false;
+            this.logoutButton2.BackColor = System.Drawing.Color.Red;
+            this.logoutButton2.ForeColor = System.Drawing.Color.White;
+            this.logoutButton2.Location = new System.Drawing.Point(812, 6);
+            this.logoutButton2.Name = "logoutButton2";
+            this.logoutButton2.Size = new System.Drawing.Size(109, 61);
+            this.logoutButton2.TabIndex = 15;
+            this.logoutButton2.Text = "Logout";
+            this.logoutButton2.UseVisualStyleBackColor = false;
+            this.logoutButton2.Click += new System.EventHandler(this.logoutButton2_Click);
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label19);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.button6);
             this.tabPage3.Controls.Add(this.button5);
-            this.tabPage3.Controls.Add(this.textBox11);
-            this.tabPage3.Controls.Add(this.textBox10);
-            this.tabPage3.Controls.Add(this.textBox9);
-            this.tabPage3.Controls.Add(this.textBox8);
-            this.tabPage3.Controls.Add(this.textBox7);
-            this.tabPage3.Controls.Add(this.textBox6);
-            this.tabPage3.Controls.Add(this.textBox5);
-            this.tabPage3.Controls.Add(this.textBox4);
-            this.tabPage3.Controls.Add(this.textBox3);
-            this.tabPage3.Controls.Add(this.textBox2);
-            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.infoPassword2);
+            this.tabPage3.Controls.Add(this.infoPassword1);
+            this.tabPage3.Controls.Add(this.infoUsername);
+            this.tabPage3.Controls.Add(this.infoEmail);
+            this.tabPage3.Controls.Add(this.infoPhone);
+            this.tabPage3.Controls.Add(this.infoState);
+            this.tabPage3.Controls.Add(this.infoCity);
+            this.tabPage3.Controls.Add(this.infoAddress);
+            this.tabPage3.Controls.Add(this.infoLastName);
+            this.tabPage3.Controls.Add(this.infoMiddleName);
+            this.tabPage3.Controls.Add(this.infoFirstName);
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label9);
@@ -464,8 +477,8 @@
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Controls.Add(this.linkLabel3);
-            this.tabPage3.Controls.Add(this.button2);
+            this.tabPage3.Controls.Add(this.shoppingCart3);
+            this.tabPage3.Controls.Add(this.logoutButton3);
             this.tabPage3.Location = new System.Drawing.Point(4, 52);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -473,6 +486,17 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Account Info";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label19.Location = new System.Drawing.Point(268, 256);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(204, 29);
+            this.label19.TabIndex = 43;
+            this.label19.Text = "Login Information:";
             // 
             // label12
             // 
@@ -490,7 +514,7 @@
             this.button6.ForeColor = System.Drawing.Color.Red;
             this.button6.Location = new System.Drawing.Point(187, 382);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(150, 84);
             this.button6.TabIndex = 41;
             this.button6.Text = "Cancel";
             this.button6.UseVisualStyleBackColor = true;
@@ -499,89 +523,91 @@
             // 
             this.button5.BackColor = System.Drawing.Color.ForestGreen;
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(439, 382);
+            this.button5.Location = new System.Drawing.Point(404, 382);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(134, 35);
+            this.button5.Size = new System.Drawing.Size(169, 84);
             this.button5.TabIndex = 40;
             this.button5.Text = "Update!";
             this.button5.UseVisualStyleBackColor = false;
             // 
-            // textBox11
+            // infoPassword2
             // 
-            this.textBox11.Location = new System.Drawing.Point(187, 356);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(386, 20);
-            this.textBox11.TabIndex = 39;
+            this.infoPassword2.Location = new System.Drawing.Point(187, 356);
+            this.infoPassword2.Name = "infoPassword2";
+            this.infoPassword2.Size = new System.Drawing.Size(386, 20);
+            this.infoPassword2.TabIndex = 39;
+            this.infoPassword2.UseSystemPasswordChar = true;
             // 
-            // textBox10
+            // infoPassword1
             // 
-            this.textBox10.Location = new System.Drawing.Point(187, 322);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(386, 20);
-            this.textBox10.TabIndex = 38;
+            this.infoPassword1.Location = new System.Drawing.Point(187, 322);
+            this.infoPassword1.Name = "infoPassword1";
+            this.infoPassword1.Size = new System.Drawing.Size(386, 20);
+            this.infoPassword1.TabIndex = 38;
+            this.infoPassword1.UseSystemPasswordChar = true;
             // 
-            // textBox9
+            // infoUsername
             // 
-            this.textBox9.Location = new System.Drawing.Point(187, 288);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(386, 20);
-            this.textBox9.TabIndex = 37;
+            this.infoUsername.Location = new System.Drawing.Point(187, 288);
+            this.infoUsername.Name = "infoUsername";
+            this.infoUsername.Size = new System.Drawing.Size(386, 20);
+            this.infoUsername.TabIndex = 37;
             // 
-            // textBox8
+            // infoEmail
             // 
-            this.textBox8.Location = new System.Drawing.Point(421, 222);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(161, 20);
-            this.textBox8.TabIndex = 36;
+            this.infoEmail.Location = new System.Drawing.Point(421, 222);
+            this.infoEmail.Name = "infoEmail";
+            this.infoEmail.Size = new System.Drawing.Size(161, 20);
+            this.infoEmail.TabIndex = 36;
             // 
-            // textBox7
+            // infoPhone
             // 
-            this.textBox7.Location = new System.Drawing.Point(187, 222);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(161, 20);
-            this.textBox7.TabIndex = 35;
+            this.infoPhone.Location = new System.Drawing.Point(187, 222);
+            this.infoPhone.Name = "infoPhone";
+            this.infoPhone.Size = new System.Drawing.Size(161, 20);
+            this.infoPhone.TabIndex = 35;
             // 
-            // textBox6
+            // infoState
             // 
-            this.textBox6.Location = new System.Drawing.Point(526, 190);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(47, 20);
-            this.textBox6.TabIndex = 34;
+            this.infoState.Location = new System.Drawing.Point(526, 190);
+            this.infoState.Name = "infoState";
+            this.infoState.Size = new System.Drawing.Size(47, 20);
+            this.infoState.TabIndex = 34;
             // 
-            // textBox5
+            // infoCity
             // 
-            this.textBox5.Location = new System.Drawing.Point(187, 192);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(268, 20);
-            this.textBox5.TabIndex = 33;
+            this.infoCity.Location = new System.Drawing.Point(187, 192);
+            this.infoCity.Name = "infoCity";
+            this.infoCity.Size = new System.Drawing.Size(268, 20);
+            this.infoCity.TabIndex = 33;
             // 
-            // textBox4
+            // infoAddress
             // 
-            this.textBox4.Location = new System.Drawing.Point(187, 158);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(386, 20);
-            this.textBox4.TabIndex = 32;
+            this.infoAddress.Location = new System.Drawing.Point(187, 158);
+            this.infoAddress.Name = "infoAddress";
+            this.infoAddress.Size = new System.Drawing.Size(386, 20);
+            this.infoAddress.TabIndex = 32;
             // 
-            // textBox3
+            // infoLastName
             // 
-            this.textBox3.Location = new System.Drawing.Point(187, 125);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(386, 20);
-            this.textBox3.TabIndex = 31;
+            this.infoLastName.Location = new System.Drawing.Point(187, 125);
+            this.infoLastName.Name = "infoLastName";
+            this.infoLastName.Size = new System.Drawing.Size(386, 20);
+            this.infoLastName.TabIndex = 31;
             // 
-            // textBox2
+            // infoMiddleName
             // 
-            this.textBox2.Location = new System.Drawing.Point(526, 89);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(47, 20);
-            this.textBox2.TabIndex = 30;
+            this.infoMiddleName.Location = new System.Drawing.Point(526, 89);
+            this.infoMiddleName.Name = "infoMiddleName";
+            this.infoMiddleName.Size = new System.Drawing.Size(47, 20);
+            this.infoMiddleName.TabIndex = 30;
             // 
-            // textBox1
+            // infoFirstName
             // 
-            this.textBox1.Location = new System.Drawing.Point(187, 89);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(268, 20);
-            this.textBox1.TabIndex = 29;
+            this.infoFirstName.Location = new System.Drawing.Point(187, 89);
+            this.infoFirstName.Name = "infoFirstName";
+            this.infoFirstName.Size = new System.Drawing.Size(268, 20);
+            this.infoFirstName.TabIndex = 29;
             // 
             // label11
             // 
@@ -704,38 +730,28 @@
             this.label3.TabIndex = 18;
             this.label3.Text = "Phone:";
             // 
-            // linkLabel3
+            // shoppingCart3
             // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel3.Location = new System.Drawing.Point(655, 21);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(151, 26);
-            this.linkLabel3.TabIndex = 17;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "Shopping Cart";
+            this.shoppingCart3.AutoSize = true;
+            this.shoppingCart3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shoppingCart3.Location = new System.Drawing.Point(655, 21);
+            this.shoppingCart3.Name = "shoppingCart3";
+            this.shoppingCart3.Size = new System.Drawing.Size(151, 26);
+            this.shoppingCart3.TabIndex = 17;
+            this.shoppingCart3.TabStop = true;
+            this.shoppingCart3.Text = "Shopping Cart";
             // 
-            // button2
+            // logoutButton3
             // 
-            this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(812, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(109, 61);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Logout";
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button8
-            // 
-            this.button8.ForeColor = System.Drawing.Color.Red;
-            this.button8.Location = new System.Drawing.Point(200, 286);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(111, 63);
-            this.button8.TabIndex = 20;
-            this.button8.Text = "Cancel";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.logoutButton3.BackColor = System.Drawing.Color.Red;
+            this.logoutButton3.ForeColor = System.Drawing.Color.White;
+            this.logoutButton3.Location = new System.Drawing.Point(812, 6);
+            this.logoutButton3.Name = "logoutButton3";
+            this.logoutButton3.Size = new System.Drawing.Size(109, 61);
+            this.logoutButton3.TabIndex = 14;
+            this.logoutButton3.Text = "Logout";
+            this.logoutButton3.UseVisualStyleBackColor = false;
+            this.logoutButton3.Click += new System.EventHandler(this.logoutButton3_Click);
             // 
             // AnchovyCustomerMainGUI
             // 
@@ -750,12 +766,12 @@
             this.tabPage1.PerformLayout();
             this.AppetizersPanel.ResumeLayout(false);
             this.AppetizersPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supremePic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anchovySpecialPic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pineappleSpecialPic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.veggiePic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customPic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.meatLoversPic)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -770,13 +786,13 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.LinkLabel shoppingCart1;
+        private System.Windows.Forms.Button logoutButton1;
+        private System.Windows.Forms.Button logoutButton2;
+        private System.Windows.Forms.Button logoutButton3;
+        private System.Windows.Forms.LinkLabel shoppingCart2;
+        private System.Windows.Forms.LinkLabel shoppingCart3;
+        private System.Windows.Forms.Button appetizersButton;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -788,44 +804,45 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox infoPassword2;
+        private System.Windows.Forms.TextBox infoPassword1;
+        private System.Windows.Forms.TextBox infoUsername;
+        private System.Windows.Forms.TextBox infoEmail;
+        private System.Windows.Forms.TextBox infoPhone;
+        private System.Windows.Forms.TextBox infoState;
+        private System.Windows.Forms.TextBox infoCity;
+        private System.Windows.Forms.TextBox infoAddress;
+        private System.Windows.Forms.TextBox infoLastName;
+        private System.Windows.Forms.TextBox infoMiddleName;
+        private System.Windows.Forms.TextBox infoFirstName;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton supremeButton;
+        private System.Windows.Forms.RadioButton pineappleSpecialButton;
+        private System.Windows.Forms.RadioButton anchovySpecialButton;
+        private System.Windows.Forms.RadioButton meatLoversButton;
+        private System.Windows.Forms.Label customDesc;
+        private System.Windows.Forms.Label veggieDesc;
+        private System.Windows.Forms.Label supremeDesc;
+        private System.Windows.Forms.Label pineappleSpecialDesc;
+        private System.Windows.Forms.Label anchovySpecialDesc;
+        private System.Windows.Forms.Label meatLoversDesc;
+        private System.Windows.Forms.PictureBox supremePic;
+        private System.Windows.Forms.PictureBox anchovySpecialPic;
+        private System.Windows.Forms.PictureBox pineappleSpecialPic;
+        private System.Windows.Forms.PictureBox veggiePic;
+        private System.Windows.Forms.PictureBox customPic;
+        private System.Windows.Forms.PictureBox meatLoversPic;
+        private System.Windows.Forms.RadioButton customButton;
+        private System.Windows.Forms.RadioButton veggieButton;
         private System.Windows.Forms.Panel AppetizersPanel;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button addApps;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button cancelApps;
+        private System.Windows.Forms.Label label19;
     }
 }
 

@@ -32,12 +32,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.passwordBox = new System.Windows.Forms.TextBox();
+            this.usernameBox = new System.Windows.Forms.TextBox();
+            this.signInButton = new System.Windows.Forms.Button();
+            this.forgotPassword = new System.Windows.Forms.LinkLabel();
+            this.createAccountButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.usernameError = new System.Windows.Forms.Label();
+            this.passwordError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -84,55 +86,56 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Password:";
             // 
-            // textBox4
+            // passwordBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(246, 222);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(268, 20);
-            this.textBox4.TabIndex = 11;
+            this.passwordBox.Location = new System.Drawing.Point(246, 222);
+            this.passwordBox.Name = "passwordBox";
+            this.passwordBox.Size = new System.Drawing.Size(268, 20);
+            this.passwordBox.TabIndex = 11;
+            this.passwordBox.UseSystemPasswordChar = true;
             // 
-            // textBox1
+            // usernameBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(246, 180);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(268, 20);
-            this.textBox1.TabIndex = 12;
+            this.usernameBox.Location = new System.Drawing.Point(246, 180);
+            this.usernameBox.Name = "usernameBox";
+            this.usernameBox.Size = new System.Drawing.Size(268, 20);
+            this.usernameBox.TabIndex = 12;
             // 
-            // button1
+            // signInButton
             // 
-            this.button1.BackColor = System.Drawing.Color.ForestGreen;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(312, 282);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 65);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Sign In!";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.signInButton.BackColor = System.Drawing.Color.ForestGreen;
+            this.signInButton.ForeColor = System.Drawing.Color.White;
+            this.signInButton.Location = new System.Drawing.Point(312, 282);
+            this.signInButton.Name = "signInButton";
+            this.signInButton.Size = new System.Drawing.Size(134, 65);
+            this.signInButton.TabIndex = 13;
+            this.signInButton.Text = "Sign In!";
+            this.signInButton.UseVisualStyleBackColor = false;
+            this.signInButton.Click += new System.EventHandler(this.signInButton_Click);
             // 
-            // linkLabel1
+            // forgotPassword
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.Location = new System.Drawing.Point(343, 245);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(171, 20);
-            this.linkLabel1.TabIndex = 14;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Forgot your password?";
-            this.linkLabel1.Click += new System.EventHandler(this.linkLabel1_Click);
+            this.forgotPassword.AutoSize = true;
+            this.forgotPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.forgotPassword.Location = new System.Drawing.Point(343, 245);
+            this.forgotPassword.Name = "forgotPassword";
+            this.forgotPassword.Size = new System.Drawing.Size(171, 20);
+            this.forgotPassword.TabIndex = 14;
+            this.forgotPassword.TabStop = true;
+            this.forgotPassword.Text = "Forgot your password?";
+            this.forgotPassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.forgotPassword_LinkClicked);
             // 
-            // button2
+            // createAccountButton
             // 
-            this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(246, 381);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(268, 78);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Create New Account!";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.createAccountButton.BackColor = System.Drawing.Color.Red;
+            this.createAccountButton.ForeColor = System.Drawing.Color.White;
+            this.createAccountButton.Location = new System.Drawing.Point(246, 381);
+            this.createAccountButton.Name = "createAccountButton";
+            this.createAccountButton.Size = new System.Drawing.Size(268, 78);
+            this.createAccountButton.TabIndex = 15;
+            this.createAccountButton.Text = "Create New Account!";
+            this.createAccountButton.UseVisualStyleBackColor = false;
+            this.createAccountButton.Click += new System.EventHandler(this.createAccountButton_Click);
             // 
             // label5
             // 
@@ -142,18 +145,40 @@
             this.label5.Size = new System.Drawing.Size(429, 2);
             this.label5.TabIndex = 16;
             // 
+            // usernameError
+            // 
+            this.usernameError.AutoSize = true;
+            this.usernameError.ForeColor = System.Drawing.Color.Red;
+            this.usernameError.Location = new System.Drawing.Point(521, 184);
+            this.usernameError.Name = "usernameError";
+            this.usernameError.Size = new System.Drawing.Size(94, 13);
+            this.usernameError.TabIndex = 17;
+            this.usernameError.Text = "                             ";
+            // 
+            // passwordError
+            // 
+            this.passwordError.AutoSize = true;
+            this.passwordError.ForeColor = System.Drawing.Color.Red;
+            this.passwordError.Location = new System.Drawing.Point(520, 227);
+            this.passwordError.Name = "passwordError";
+            this.passwordError.Size = new System.Drawing.Size(85, 13);
+            this.passwordError.TabIndex = 18;
+            this.passwordError.Text = "                          ";
+            // 
             // CustomerLoginGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(726, 496);
+            this.Controls.Add(this.passwordError);
+            this.Controls.Add(this.usernameError);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.createAccountButton);
+            this.Controls.Add(this.forgotPassword);
+            this.Controls.Add(this.signInButton);
+            this.Controls.Add(this.usernameBox);
+            this.Controls.Add(this.passwordBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -171,12 +196,14 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox passwordBox;
+        private System.Windows.Forms.TextBox usernameBox;
+        private System.Windows.Forms.Button signInButton;
+        private System.Windows.Forms.LinkLabel forgotPassword;
+        private System.Windows.Forms.Button createAccountButton;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label usernameError;
+        private System.Windows.Forms.Label passwordError;
     }
 }
 
