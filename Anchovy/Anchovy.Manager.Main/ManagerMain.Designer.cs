@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.ManagersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AnchovyContextDataSet = new Anchovy.Manager.Main.AnchovyContextDataSet();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -117,6 +117,7 @@
             this.tabControl.Controls.Add(this.tabPageSales);
             this.tabControl.Controls.Add(this.tabPageCooks);
             this.tabControl.Controls.Add(this.tabPageReports);
+            this.tabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl.Location = new System.Drawing.Point(12, 34);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -145,10 +146,11 @@
             this.tabPageInventory.Controls.Add(this.lblBacon);
             this.tabPageInventory.Controls.Add(this.lblPepperoni);
             this.tabPageInventory.Controls.Add(this.lblCheese);
-            this.tabPageInventory.Location = new System.Drawing.Point(4, 29);
+            this.tabPageInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPageInventory.Location = new System.Drawing.Point(4, 46);
             this.tabPageInventory.Name = "tabPageInventory";
             this.tabPageInventory.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageInventory.Size = new System.Drawing.Size(1752, 771);
+            this.tabPageInventory.Size = new System.Drawing.Size(1752, 754);
             this.tabPageInventory.TabIndex = 0;
             this.tabPageInventory.Text = "Inventory";
             this.tabPageInventory.UseVisualStyleBackColor = true;
@@ -365,10 +367,10 @@
             this.tabPageSales.Controls.Add(this.lblDailySales);
             this.tabPageSales.Controls.Add(this.lblAverageSales);
             this.tabPageSales.Controls.Add(this.lblCurrentSales);
-            this.tabPageSales.Location = new System.Drawing.Point(4, 29);
+            this.tabPageSales.Location = new System.Drawing.Point(4, 46);
             this.tabPageSales.Name = "tabPageSales";
             this.tabPageSales.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSales.Size = new System.Drawing.Size(1752, 771);
+            this.tabPageSales.Size = new System.Drawing.Size(1752, 754);
             this.tabPageSales.TabIndex = 1;
             this.tabPageSales.Text = "Sales";
             this.tabPageSales.UseVisualStyleBackColor = true;
@@ -527,10 +529,10 @@
             this.tabPageCooks.Controls.Add(this.lblOrdersOffered);
             this.tabPageCooks.Controls.Add(this.lblWeeklyStats);
             this.tabPageCooks.Controls.Add(this.comboCooks);
-            this.tabPageCooks.Location = new System.Drawing.Point(4, 29);
+            this.tabPageCooks.Location = new System.Drawing.Point(4, 46);
             this.tabPageCooks.Name = "tabPageCooks";
             this.tabPageCooks.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCooks.Size = new System.Drawing.Size(1752, 771);
+            this.tabPageCooks.Size = new System.Drawing.Size(1752, 754);
             this.tabPageCooks.TabIndex = 2;
             this.tabPageCooks.Text = "Cooks";
             this.tabPageCooks.UseVisualStyleBackColor = true;
@@ -664,52 +666,52 @@
             this.tabPageReports.Controls.Add(this.lblStartDate);
             this.tabPageReports.Controls.Add(this.comboReports);
             this.tabPageReports.Controls.Add(this.reportViewer1);
-            this.tabPageReports.Location = new System.Drawing.Point(4, 29);
+            this.tabPageReports.Location = new System.Drawing.Point(4, 46);
             this.tabPageReports.Name = "tabPageReports";
             this.tabPageReports.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageReports.Size = new System.Drawing.Size(1752, 771);
+            this.tabPageReports.Size = new System.Drawing.Size(1752, 754);
             this.tabPageReports.TabIndex = 3;
             this.tabPageReports.Text = "Reports";
             this.tabPageReports.UseVisualStyleBackColor = true;
             // 
             // btnRunReport
             // 
-            this.btnRunReport.Location = new System.Drawing.Point(1234, 6);
+            this.btnRunReport.Location = new System.Drawing.Point(1052, 36);
             this.btnRunReport.Name = "btnRunReport";
-            this.btnRunReport.Size = new System.Drawing.Size(130, 40);
+            this.btnRunReport.Size = new System.Drawing.Size(159, 49);
             this.btnRunReport.TabIndex = 6;
             this.btnRunReport.Text = "Run Report";
             this.btnRunReport.UseVisualStyleBackColor = true;
             // 
             // dateTimePickerEnd
             // 
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(869, 15);
+            this.dateTimePickerEnd.Location = new System.Drawing.Point(537, 64);
             this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(286, 26);
+            this.dateTimePickerEnd.Size = new System.Drawing.Size(509, 44);
             this.dateTimePickerEnd.TabIndex = 5;
             // 
             // dateTimePickerStart
             // 
-            this.dateTimePickerStart.Location = new System.Drawing.Point(460, 14);
+            this.dateTimePickerStart.Location = new System.Drawing.Point(537, 14);
             this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(286, 26);
+            this.dateTimePickerStart.Size = new System.Drawing.Size(509, 44);
             this.dateTimePickerStart.TabIndex = 4;
             // 
             // lblEndDate
             // 
             this.lblEndDate.AutoSize = true;
-            this.lblEndDate.Location = new System.Drawing.Point(786, 21);
+            this.lblEndDate.Location = new System.Drawing.Point(370, 64);
             this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(77, 20);
+            this.lblEndDate.Size = new System.Drawing.Size(150, 37);
             this.lblEndDate.TabIndex = 3;
             this.lblEndDate.Text = "End Date";
             // 
             // lblStartDate
             // 
             this.lblStartDate.AutoSize = true;
-            this.lblStartDate.Location = new System.Drawing.Point(370, 21);
+            this.lblStartDate.Location = new System.Drawing.Point(370, 14);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(83, 20);
+            this.lblStartDate.Size = new System.Drawing.Size(161, 37);
             this.lblStartDate.TabIndex = 2;
             this.lblStartDate.Text = "Start Date";
             // 
@@ -718,20 +720,20 @@
             this.comboReports.FormattingEnabled = true;
             this.comboReports.Location = new System.Drawing.Point(20, 18);
             this.comboReports.Name = "comboReports";
-            this.comboReports.Size = new System.Drawing.Size(327, 28);
+            this.comboReports.Size = new System.Drawing.Size(327, 45);
             this.comboReports.TabIndex = 1;
             this.comboReports.Text = "Choose Report...";
             this.comboReports.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // reportViewer1
             // 
-            reportDataSource2.Name = "DataSet1";
-            reportDataSource2.Value = this.ManagersBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource2);
+            reportDataSource1.Name = "DataSet1";
+            reportDataSource1.Value = this.ManagersBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Anchovy.Manager.Main.Report1.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(9, 108);
+            this.reportViewer1.Location = new System.Drawing.Point(9, 114);
             this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(1740, 633);
+            this.reportViewer1.Size = new System.Drawing.Size(1740, 627);
             this.reportViewer1.TabIndex = 0;
             this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
             // 

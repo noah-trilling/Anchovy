@@ -160,8 +160,8 @@ namespace Anchovy.Cook.Main
 						myQueue.ClearSelected();
 					}
 					clearQueue.Enabled = true;
-                   // Console.WriteLine("id: " + id);
-                     var order = _orders.GetOrder(id);
+                    // Console.WriteLine("id: " + id);
+                    var order = _orders.GetOrder(id);
                     order.OrderStatus = (int)OrderStatus.Completed;
                     order.CompletedTimeStamp = DateTimeOffset.UtcNow;
                     _orders.PutOrder((int)order.Id, order);
