@@ -44,7 +44,7 @@ namespace Anchovy.Cook.Main
 			_pizzaToppings = new AnchovyAPIService().PizzaToppings;
 		   _gQueue = new Queue<Anchovy.API.Client.Models.Order>();
 			_mQueue = new Queue<Anchovy.API.Client.Models.Order>();
-			if (completedQueue.Items.Count <= 0) clearQueue.Enabled = false;
+			//if (completedQueue.Items.Count <= 0) clearQueue.Enabled = false;
 		}
 
 		//Logout current cook and return to login screen
@@ -56,17 +56,17 @@ namespace Anchovy.Cook.Main
 		}
 
 		//Initialize a drag-and-drop operation
-		private void completedQueue_MouseDown(object sender, MouseEventArgs e)
+		/*private void completedQueue_MouseDown(object sender, MouseEventArgs e)
 		{
 			globalQueue.ClearSelected();
 			myQueue.ClearSelected();
 			if (completedQueue.SelectedIndex >= 0) myQueue.DoDragDrop(completedQueue.SelectedItem, DragDropEffects.All);
-		}
+		}*/
 
 		//Initialize a drag-and-drop operation
 		private void globalQueue_MouseDown(object sender, MouseEventArgs e)
 		{
-			completedQueue.ClearSelected();
+			//completedQueue.ClearSelected();
 			myQueue.ClearSelected();
 			if (globalQueue.SelectedIndex >= 0) myQueue.DoDragDrop(globalQueue.SelectedItem, DragDropEffects.All);
 		}
@@ -81,17 +81,17 @@ namespace Anchovy.Cook.Main
 			}
 			else
 			{
-				completedQueue.ClearSelected();
+				//completedQueue.ClearSelected();
 				globalQueue.ClearSelected();
-				if (e.Clicks == 1 && myQueue.SelectedIndex >= 0) completedQueue.DoDragDrop(myQueue.SelectedItem, DragDropEffects.All);
+				if (e.Clicks == 1 && myQueue.SelectedIndex >= 0) globalQueue.DoDragDrop(myQueue.SelectedItem, DragDropEffects.All);
 			}
 		}
 
-		private void completedQueue_DragEnter(object sender, DragEventArgs e)
+		/*private void completedQueue_DragEnter(object sender, DragEventArgs e)
 		{
 			if (e.Data.GetDataPresent(DataFormats.Text)) e.Effect = DragDropEffects.Move;
 			else e.Effect = DragDropEffects.None;
-		}
+		}*/
 
 		private void globalQueue_DragEnter(object sender, DragEventArgs e)
 		{
@@ -106,7 +106,7 @@ namespace Anchovy.Cook.Main
 		}
 
 		//Add the selected order to completedQueue
-		private void completedQueue_DragDrop(object sender, DragEventArgs e)
+		/*private void completedQueue_DragDrop(object sender, DragEventArgs e)
 		{
 			if (completedQueue.SelectedIndex == -1)
 			{
@@ -134,7 +134,7 @@ namespace Anchovy.Cook.Main
 					_orders.PutOrder((int)order.Id, order);
 				}
 			}
-		}
+		}*/
 
 		//Add the selected order to globalQueue
 		private void globalQueue_DragDrop(object sender, DragEventArgs e)
@@ -144,11 +144,11 @@ namespace Anchovy.Cook.Main
 				if (e.Effect == DragDropEffects.Move)
 				{
 					globalQueue.Items.Add(e.Data.GetData(DataFormats.Text));
-					if (completedQueue.SelectedIndex >= 0)
+					/*if (completedQueue.SelectedIndex >= 0)
 					{
 						completedQueue.Items.Remove(completedQueue.SelectedItem);
 						completedQueue.ClearSelected();
-					}
+					}*/
 					if (myQueue.SelectedIndex >= 0)
 					{
 						myQueue.Items.Remove(myQueue.SelectedItem);
@@ -202,20 +202,20 @@ namespace Anchovy.Cook.Main
 							_mQueue.Enqueue(order);
 						}
 					}
-					if (completedQueue.SelectedIndex >= 0)
+				/*	if (completedQueue.SelectedIndex >= 0)
 					{
 						completedQueue.Items.Remove(completedQueue.SelectedItem);
 						completedQueue.ClearSelected();
-					}
+					}*/
 				}
 			}
 		}
 
 		//Add selected order to the completedQueue
-		private void completedQueue_DragOver(object sender, DragEventArgs e)
+		/*private void completedQueue_DragOver(object sender, DragEventArgs e)
 		{
 			if (completedQueue.SelectedIndex >= 0) e.Effect = DragDropEffects.None;
-		}
+		}*/
 
 		private void globalQueue_DragOver(object sender, DragEventArgs e)
 		{
@@ -301,14 +301,14 @@ namespace Anchovy.Cook.Main
 		}
 
 		//Clear the completed queue
-		private void clearQueue_Click(object sender, EventArgs e)
+	/*	private void clearQueue_Click(object sender, EventArgs e)
 		{
 			if (completedQueue.Items.Count > 0)
 			{
 				completedQueue.Items.Clear();
 				clearQueue.Enabled = false;
 			}
-		}
+		}*/
 
 		private void CookMainGUI_FormClosed(object sender, FormClosedEventArgs e)
 		{
@@ -318,14 +318,14 @@ namespace Anchovy.Cook.Main
 		//Cancel an order and place it in the completed queue
 		private void contextMenuStrip1_Click(object sender, EventArgs e)
 		{
-			var item = myQueue.SelectedItem;
+			/*var item = myQueue.SelectedItem;
 			completedQueue.Items.Add(item+"  -C");
 			myQueue.Items.Remove(item);
-			ingredientsBox.Clear();
+			ingredientsBox.Clear();*/
 		}
 
 		//Place an item in completed queue. Make canceled orders red.
-		private void completedQueue_DrawItem(object sender, DrawItemEventArgs e)
+	/*	private void completedQueue_DrawItem(object sender, DrawItemEventArgs e)
 		{
 			e.DrawBackground();
 			if (e.Index >= 0)
@@ -333,11 +333,12 @@ namespace Anchovy.Cook.Main
 				var item = completedQueue.Items[e.Index].ToString();
 				var str = item.Split();
 				var isCancel = str[str.Length - 1] == "-C";
-				var color = isCancel ? Brushes.Red : Brushes.Black;
+                var isComplete = str[str.Length - 1] == "-Completed";
+				var color = isCancel ? Brushes.Red : isComplete ? Brushes.Green : Brushes.Black;
 				e.Graphics.DrawString(item, completedQueue.Font, color, e.Bounds);
 				clearQueue.Enabled = true;
 			}
-		}
+		}*/
 
 		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
 		{
@@ -381,5 +382,35 @@ namespace Anchovy.Cook.Main
 			_cookId = getCookId();
 			initGlobal();
 		}
-	}
+
+        private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var item = myQueue.SelectedItem;
+            //completedQueue.Items.Add(item + "  -C");
+            myQueue.Items.Remove(item);
+            ingredientsBox.Clear();
+            ingredientsLabel.Text = ingredientsLabel.Text.Split()[0] + " - " + myQueue.SelectedItem;
+            var ord = _mQueue.Dequeue();
+            ord.OrderStatus = (int)OrderStatus.Cancelled;
+            ord.CancelledTimeStamp = DateTimeOffset.UtcNow;
+            _orders.PutOrder((int)ord.Id,ord);
+            var d = _orders.GetOrder((int)ord.Id);
+            Console.WriteLine("order: " + ord.Customer.FirstName + ", stat: " + d.OrderStatus);
+        }
+
+        private void completeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var item = myQueue.SelectedItem;
+           // completedQueue.Items.Add(item + "  -Completed");
+            myQueue.Items.Remove(item);
+            ingredientsBox.Clear();
+            ingredientsLabel.Text = ingredientsLabel.Text.Split()[0] + " - " + myQueue.SelectedItem;
+            var ord = _mQueue.Dequeue();
+            ord.OrderStatus = (int)OrderStatus.Completed;
+            ord.CompletedTimeStamp = DateTimeOffset.UtcNow;
+            _orders.PutOrder((int)ord.Id, ord);
+            var d = _orders.GetOrder((int)ord.Id);
+            Console.WriteLine("order: " + ord.Customer.FirstName + ", stat: " + d.OrderStatus);
+        }
+    }
 }
