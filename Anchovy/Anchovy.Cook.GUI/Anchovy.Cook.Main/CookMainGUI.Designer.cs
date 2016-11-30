@@ -34,14 +34,12 @@
             this.myQueue = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.completeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalQueue = new System.Windows.Forms.ListBox();
             this.globalQLabel = new System.Windows.Forms.Label();
-            this.completedQueue = new System.Windows.Forms.ListBox();
-            this.completeQLabel = new System.Windows.Forms.Label();
             this.ingredientsBox = new System.Windows.Forms.ListView();
             this.ingredientsLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
-            this.clearQueue = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -88,9 +86,10 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.completeToolStripMenuItem,
             this.cancelToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(111, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
             this.contextMenuStrip1.Text = "can";
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             this.contextMenuStrip1.Click += new System.EventHandler(this.contextMenuStrip1_Click);
@@ -98,8 +97,16 @@
             // cancelToolStripMenuItem
             // 
             this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
-            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.cancelToolStripMenuItem.Text = "Cancel";
+            this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
+            // 
+            // completeToolStripMenuItem
+            // 
+            this.completeToolStripMenuItem.Name = "completeToolStripMenuItem";
+            this.completeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.completeToolStripMenuItem.Text = "Complete";
+            this.completeToolStripMenuItem.Click += new System.EventHandler(this.completeToolStripMenuItem_Click);
             // 
             // globalQueue
             // 
@@ -126,42 +133,13 @@
             this.globalQLabel.TabIndex = 4;
             this.globalQLabel.Text = "GloabalQueue";
             // 
-            // completedQueue
-            // 
-            this.completedQueue.AllowDrop = true;
-            this.completedQueue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.completedQueue.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.completedQueue.ItemHeight = 18;
-            this.completedQueue.Location = new System.Drawing.Point(430, 78);
-            this.completedQueue.Name = "completedQueue";
-            this.completedQueue.Size = new System.Drawing.Size(187, 166);
-            this.completedQueue.TabIndex = 7;
-            this.completedQueue.Visible = false;
-            this.completedQueue.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.completedQueue_DrawItem);
-            this.completedQueue.DragDrop += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragDrop);
-            this.completedQueue.DragEnter += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragEnter);
-            this.completedQueue.DragOver += new System.Windows.Forms.DragEventHandler(this.completedQueue_DragOver);
-            this.completedQueue.MouseDown += new System.Windows.Forms.MouseEventHandler(this.completedQueue_MouseDown);
-            // 
-            // completeQLabel
-            // 
-            this.completeQLabel.AutoSize = true;
-            this.completeQLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.completeQLabel.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.completeQLabel.Location = new System.Drawing.Point(439, 55);
-            this.completeQLabel.Name = "completeQLabel";
-            this.completeQLabel.Size = new System.Drawing.Size(134, 20);
-            this.completeQLabel.TabIndex = 6;
-            this.completeQLabel.Text = "CompletedQueue";
-            this.completeQLabel.Visible = false;
-            // 
             // ingredientsBox
             // 
             this.ingredientsBox.AllowDrop = true;
             this.ingredientsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ingredientsBox.Location = new System.Drawing.Point(12, 310);
+            this.ingredientsBox.Location = new System.Drawing.Point(409, 78);
             this.ingredientsBox.Name = "ingredientsBox";
-            this.ingredientsBox.Size = new System.Drawing.Size(229, 239);
+            this.ingredientsBox.Size = new System.Drawing.Size(323, 166);
             this.ingredientsBox.TabIndex = 8;
             this.ingredientsBox.UseCompatibleStateImageBehavior = false;
             this.ingredientsBox.View = System.Windows.Forms.View.List;
@@ -171,35 +149,22 @@
             this.ingredientsLabel.AutoSize = true;
             this.ingredientsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ingredientsLabel.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.ingredientsLabel.Location = new System.Drawing.Point(24, 287);
+            this.ingredientsLabel.Location = new System.Drawing.Point(515, 55);
             this.ingredientsLabel.Name = "ingredientsLabel";
-            this.ingredientsLabel.Size = new System.Drawing.Size(89, 20);
+            this.ingredientsLabel.Size = new System.Drawing.Size(49, 20);
             this.ingredientsLabel.TabIndex = 9;
-            this.ingredientsLabel.Text = "Ingredients";
+            this.ingredientsLabel.Text = "Order";
             // 
             // logoutButton
             // 
             this.logoutButton.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.logoutButton.Location = new System.Drawing.Point(620, 12);
+            this.logoutButton.Location = new System.Drawing.Point(664, 275);
             this.logoutButton.Name = "logoutButton";
             this.logoutButton.Size = new System.Drawing.Size(70, 23);
             this.logoutButton.TabIndex = 11;
             this.logoutButton.Text = "Logout";
             this.logoutButton.UseVisualStyleBackColor = true;
             this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
-            // 
-            // clearQueue
-            // 
-            this.clearQueue.BackColor = System.Drawing.SystemColors.Control;
-            this.clearQueue.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.clearQueue.Location = new System.Drawing.Point(470, 257);
-            this.clearQueue.Name = "clearQueue";
-            this.clearQueue.Size = new System.Drawing.Size(75, 23);
-            this.clearQueue.TabIndex = 12;
-            this.clearQueue.Text = "Clear";
-            this.clearQueue.UseVisualStyleBackColor = false;
-            this.clearQueue.Visible = false;
-            this.clearQueue.Click += new System.EventHandler(this.clearQueue_Click);
             // 
             // refreshButton
             // 
@@ -217,14 +182,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 586);
+            this.ClientSize = new System.Drawing.Size(746, 301);
             this.Controls.Add(this.refreshButton);
-            this.Controls.Add(this.clearQueue);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.ingredientsLabel);
             this.Controls.Add(this.ingredientsBox);
-            this.Controls.Add(this.completedQueue);
-            this.Controls.Add(this.completeQLabel);
             this.Controls.Add(this.globalQueue);
             this.Controls.Add(this.globalQLabel);
             this.Controls.Add(this.myQueue);
@@ -246,15 +208,13 @@
         private System.Windows.Forms.ListBox myQueue;
         private System.Windows.Forms.ListBox globalQueue;
         private System.Windows.Forms.Label globalQLabel;
-        private System.Windows.Forms.ListBox completedQueue;
-        private System.Windows.Forms.Label completeQLabel;
         private System.Windows.Forms.ListView ingredientsBox;
         private System.Windows.Forms.Label ingredientsLabel;
         private System.Windows.Forms.Button logoutButton;
-        private System.Windows.Forms.Button clearQueue;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
         private System.Windows.Forms.Button refreshButton;
+        private System.Windows.Forms.ToolStripMenuItem completeToolStripMenuItem;
     }
 }
 
