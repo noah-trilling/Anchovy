@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource6 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.ManagersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AnchovyContextDataSet = new Anchovy.Manager.Main.AnchovyContextDataSet();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -92,6 +92,22 @@
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnManLogout = new System.Windows.Forms.Button();
             this.ManagersTableAdapter = new Anchovy.Manager.Main.AnchovyContextDataSetTableAdapters.ManagersTableAdapter();
+            this.lblRedOnionsValue = new System.Windows.Forms.Label();
+            this.lblBlackOlivesValue = new System.Windows.Forms.Label();
+            this.lblGreenPeppersValue = new System.Windows.Forms.Label();
+            this.lnlPineapplesValue = new System.Windows.Forms.Label();
+            this.lblAnchoviesValue = new System.Windows.Forms.Label();
+            this.lblBaconValue = new System.Windows.Forms.Label();
+            this.lblPepperoniValue = new System.Windows.Forms.Label();
+            this.lblCheeseValue = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.anchovyContextDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toppingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.costDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lowLevelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ManagersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnchovyContextDataSet)).BeginInit();
             this.tabControl.SuspendLayout();
@@ -99,6 +115,9 @@
             this.tabPageSales.SuspendLayout();
             this.tabPageCooks.SuspendLayout();
             this.tabPageReports.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anchovyContextDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toppingBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // ManagersBindingSource
@@ -126,6 +145,15 @@
             // 
             // tabPageInventory
             // 
+            this.tabPageInventory.Controls.Add(this.dataGridView1);
+            this.tabPageInventory.Controls.Add(this.lblRedOnionsValue);
+            this.tabPageInventory.Controls.Add(this.lblBlackOlivesValue);
+            this.tabPageInventory.Controls.Add(this.lblGreenPeppersValue);
+            this.tabPageInventory.Controls.Add(this.lnlPineapplesValue);
+            this.tabPageInventory.Controls.Add(this.lblAnchoviesValue);
+            this.tabPageInventory.Controls.Add(this.lblBaconValue);
+            this.tabPageInventory.Controls.Add(this.lblPepperoniValue);
+            this.tabPageInventory.Controls.Add(this.lblCheeseValue);
             this.tabPageInventory.Controls.Add(this.btnSave);
             this.tabPageInventory.Controls.Add(this.btnEdit);
             this.tabPageInventory.Controls.Add(this.txtRedOnions);
@@ -159,7 +187,7 @@
             // 
             this.btnSave.BackColor = System.Drawing.Color.Green;
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(996, 365);
+            this.btnSave.Location = new System.Drawing.Point(1235, 375);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(153, 63);
             this.btnSave.TabIndex = 19;
@@ -170,7 +198,7 @@
             // btnEdit
             // 
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(996, 289);
+            this.btnEdit.Location = new System.Drawing.Point(1235, 299);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(153, 63);
             this.btnEdit.TabIndex = 18;
@@ -181,7 +209,7 @@
             // txtRedOnions
             // 
             this.txtRedOnions.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRedOnions.Location = new System.Drawing.Point(436, 688);
+            this.txtRedOnions.Location = new System.Drawing.Point(853, 688);
             this.txtRedOnions.Name = "txtRedOnions";
             this.txtRedOnions.ReadOnly = true;
             this.txtRedOnions.Size = new System.Drawing.Size(200, 44);
@@ -190,7 +218,7 @@
             // txtBlackOlives
             // 
             this.txtBlackOlives.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBlackOlives.Location = new System.Drawing.Point(436, 610);
+            this.txtBlackOlives.Location = new System.Drawing.Point(853, 610);
             this.txtBlackOlives.Name = "txtBlackOlives";
             this.txtBlackOlives.ReadOnly = true;
             this.txtBlackOlives.Size = new System.Drawing.Size(200, 44);
@@ -199,7 +227,7 @@
             // txtGreenPeppers
             // 
             this.txtGreenPeppers.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGreenPeppers.Location = new System.Drawing.Point(436, 526);
+            this.txtGreenPeppers.Location = new System.Drawing.Point(853, 526);
             this.txtGreenPeppers.Name = "txtGreenPeppers";
             this.txtGreenPeppers.ReadOnly = true;
             this.txtGreenPeppers.Size = new System.Drawing.Size(200, 44);
@@ -208,7 +236,7 @@
             // txtPinepples
             // 
             this.txtPinepples.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPinepples.Location = new System.Drawing.Point(436, 451);
+            this.txtPinepples.Location = new System.Drawing.Point(853, 451);
             this.txtPinepples.Name = "txtPinepples";
             this.txtPinepples.ReadOnly = true;
             this.txtPinepples.Size = new System.Drawing.Size(200, 44);
@@ -217,7 +245,7 @@
             // txtAnchovies
             // 
             this.txtAnchovies.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAnchovies.Location = new System.Drawing.Point(436, 358);
+            this.txtAnchovies.Location = new System.Drawing.Point(853, 358);
             this.txtAnchovies.Name = "txtAnchovies";
             this.txtAnchovies.ReadOnly = true;
             this.txtAnchovies.Size = new System.Drawing.Size(200, 44);
@@ -226,7 +254,7 @@
             // txtBacon
             // 
             this.txtBacon.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBacon.Location = new System.Drawing.Point(436, 282);
+            this.txtBacon.Location = new System.Drawing.Point(853, 282);
             this.txtBacon.Name = "txtBacon";
             this.txtBacon.ReadOnly = true;
             this.txtBacon.Size = new System.Drawing.Size(200, 44);
@@ -235,7 +263,7 @@
             // txtPepperoni
             // 
             this.txtPepperoni.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPepperoni.Location = new System.Drawing.Point(436, 197);
+            this.txtPepperoni.Location = new System.Drawing.Point(853, 197);
             this.txtPepperoni.Name = "txtPepperoni";
             this.txtPepperoni.ReadOnly = true;
             this.txtPepperoni.Size = new System.Drawing.Size(200, 44);
@@ -244,7 +272,7 @@
             // txtCheese
             // 
             this.txtCheese.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCheese.Location = new System.Drawing.Point(436, 118);
+            this.txtCheese.Location = new System.Drawing.Point(853, 118);
             this.txtCheese.Name = "txtCheese";
             this.txtCheese.ReadOnly = true;
             this.txtCheese.Size = new System.Drawing.Size(200, 44);
@@ -651,7 +679,7 @@
             // 
             this.comboCooks.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboCooks.FormattingEnabled = true;
-            this.comboCooks.Location = new System.Drawing.Point(40, 43);
+            this.comboCooks.Location = new System.Drawing.Point(36, 41);
             this.comboCooks.Name = "comboCooks";
             this.comboCooks.Size = new System.Drawing.Size(327, 45);
             this.comboCooks.TabIndex = 2;
@@ -727,9 +755,9 @@
             // 
             // reportViewer1
             // 
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.ManagersBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
+            reportDataSource6.Name = "DataSet1";
+            reportDataSource6.Value = this.ManagersBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource6);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Anchovy.Manager.Main.Report1.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(9, 114);
             this.reportViewer1.Name = "reportViewer1";
@@ -753,6 +781,143 @@
             // ManagersTableAdapter
             // 
             this.ManagersTableAdapter.ClearBeforeFill = true;
+            // 
+            // lblRedOnionsValue
+            // 
+            this.lblRedOnionsValue.AutoSize = true;
+            this.lblRedOnionsValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRedOnionsValue.Location = new System.Drawing.Point(444, 695);
+            this.lblRedOnionsValue.Name = "lblRedOnionsValue";
+            this.lblRedOnionsValue.Size = new System.Drawing.Size(36, 37);
+            this.lblRedOnionsValue.TabIndex = 27;
+            this.lblRedOnionsValue.Text = "0";
+            // 
+            // lblBlackOlivesValue
+            // 
+            this.lblBlackOlivesValue.AutoSize = true;
+            this.lblBlackOlivesValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBlackOlivesValue.Location = new System.Drawing.Point(444, 617);
+            this.lblBlackOlivesValue.Name = "lblBlackOlivesValue";
+            this.lblBlackOlivesValue.Size = new System.Drawing.Size(36, 37);
+            this.lblBlackOlivesValue.TabIndex = 26;
+            this.lblBlackOlivesValue.Text = "0";
+            // 
+            // lblGreenPeppersValue
+            // 
+            this.lblGreenPeppersValue.AutoSize = true;
+            this.lblGreenPeppersValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGreenPeppersValue.Location = new System.Drawing.Point(444, 533);
+            this.lblGreenPeppersValue.Name = "lblGreenPeppersValue";
+            this.lblGreenPeppersValue.Size = new System.Drawing.Size(36, 37);
+            this.lblGreenPeppersValue.TabIndex = 25;
+            this.lblGreenPeppersValue.Text = "0";
+            // 
+            // lnlPineapplesValue
+            // 
+            this.lnlPineapplesValue.AutoSize = true;
+            this.lnlPineapplesValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnlPineapplesValue.Location = new System.Drawing.Point(444, 451);
+            this.lnlPineapplesValue.Name = "lnlPineapplesValue";
+            this.lnlPineapplesValue.Size = new System.Drawing.Size(36, 37);
+            this.lnlPineapplesValue.TabIndex = 24;
+            this.lnlPineapplesValue.Text = "0";
+            // 
+            // lblAnchoviesValue
+            // 
+            this.lblAnchoviesValue.AutoSize = true;
+            this.lblAnchoviesValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAnchoviesValue.Location = new System.Drawing.Point(444, 365);
+            this.lblAnchoviesValue.Name = "lblAnchoviesValue";
+            this.lblAnchoviesValue.Size = new System.Drawing.Size(36, 37);
+            this.lblAnchoviesValue.TabIndex = 23;
+            this.lblAnchoviesValue.Text = "0";
+            // 
+            // lblBaconValue
+            // 
+            this.lblBaconValue.AutoSize = true;
+            this.lblBaconValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBaconValue.Location = new System.Drawing.Point(444, 289);
+            this.lblBaconValue.Name = "lblBaconValue";
+            this.lblBaconValue.Size = new System.Drawing.Size(36, 37);
+            this.lblBaconValue.TabIndex = 22;
+            this.lblBaconValue.Text = "0";
+            // 
+            // lblPepperoniValue
+            // 
+            this.lblPepperoniValue.AutoSize = true;
+            this.lblPepperoniValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPepperoniValue.Location = new System.Drawing.Point(444, 204);
+            this.lblPepperoniValue.Name = "lblPepperoniValue";
+            this.lblPepperoniValue.Size = new System.Drawing.Size(36, 37);
+            this.lblPepperoniValue.TabIndex = 21;
+            this.lblPepperoniValue.Text = "0";
+            // 
+            // lblCheeseValue
+            // 
+            this.lblCheeseValue.AutoSize = true;
+            this.lblCheeseValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCheeseValue.Location = new System.Drawing.Point(444, 125);
+            this.lblCheeseValue.Name = "lblCheeseValue";
+            this.lblCheeseValue.Size = new System.Drawing.Size(36, 37);
+            this.lblCheeseValue.TabIndex = 20;
+            this.lblCheeseValue.Text = "0";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.costDataGridViewTextBoxColumn,
+            this.idDataGridViewTextBoxColumn,
+            this.lowLevelDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.quantityDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.toppingBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(1087, 504);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 28;
+            this.dataGridView1.Size = new System.Drawing.Size(643, 150);
+            this.dataGridView1.TabIndex = 28;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // anchovyContextDataSetBindingSource
+            // 
+            this.anchovyContextDataSetBindingSource.DataSource = this.AnchovyContextDataSet;
+            this.anchovyContextDataSetBindingSource.Position = 0;
+            // 
+            // toppingBindingSource
+            // 
+            this.toppingBindingSource.DataSource = typeof(Anchovy.API.Client.Models.Topping);
+            // 
+            // costDataGridViewTextBoxColumn
+            // 
+            this.costDataGridViewTextBoxColumn.DataPropertyName = "Cost";
+            this.costDataGridViewTextBoxColumn.HeaderText = "Cost";
+            this.costDataGridViewTextBoxColumn.Name = "costDataGridViewTextBoxColumn";
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // lowLevelDataGridViewTextBoxColumn
+            // 
+            this.lowLevelDataGridViewTextBoxColumn.DataPropertyName = "LowLevel";
+            this.lowLevelDataGridViewTextBoxColumn.HeaderText = "LowLevel";
+            this.lowLevelDataGridViewTextBoxColumn.Name = "lowLevelDataGridViewTextBoxColumn";
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // quantityDataGridViewTextBoxColumn
+            // 
+            this.quantityDataGridViewTextBoxColumn.DataPropertyName = "Quantity";
+            this.quantityDataGridViewTextBoxColumn.HeaderText = "Quantity";
+            this.quantityDataGridViewTextBoxColumn.Name = "quantityDataGridViewTextBoxColumn";
             // 
             // ManagerMain
             // 
@@ -778,6 +943,9 @@
             this.tabPageCooks.PerformLayout();
             this.tabPageReports.ResumeLayout(false);
             this.tabPageReports.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.anchovyContextDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.toppingBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -846,5 +1014,21 @@
         private System.Windows.Forms.Label lblOrdersOffered;
         private System.Windows.Forms.Label lblWeeklyStats;
         private System.Windows.Forms.ComboBox comboCooks;
+        private System.Windows.Forms.Label lblRedOnionsValue;
+        private System.Windows.Forms.Label lblBlackOlivesValue;
+        private System.Windows.Forms.Label lblGreenPeppersValue;
+        private System.Windows.Forms.Label lnlPineapplesValue;
+        private System.Windows.Forms.Label lblAnchoviesValue;
+        private System.Windows.Forms.Label lblBaconValue;
+        private System.Windows.Forms.Label lblPepperoniValue;
+        private System.Windows.Forms.Label lblCheeseValue;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource anchovyContextDataSetBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn costDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lowLevelDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantityDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource toppingBindingSource;
     }
 }

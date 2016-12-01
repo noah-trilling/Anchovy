@@ -15,7 +15,7 @@ namespace Anchovy.Models.Utilities
             runningTotal += pizza.Crust.Cost;
             runningTotal += pizza.Sauce.Cost;
             runningTotal += pizza.Size.Cost;
-            runningTotal += pizza.Toppings.Sum(topping => topping.Cost);
+            //runningTotal += pizza.Toppings.Sum(topping => topping.Cost);
             return runningTotal;
         }
 

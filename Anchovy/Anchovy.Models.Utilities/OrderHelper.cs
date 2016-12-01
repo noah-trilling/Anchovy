@@ -14,7 +14,7 @@ namespace Anchovy.Models.Utilities
         public virtual double? CalculateOrderCost(Order order)
         {
             var lineHelper = new LineHelper();
-            return order.Lines.Sum(line => lineHelper.CalculateLineCost(line));
+            return 0.0;//order.Lines.Sum(line => lineHelper.CalculateLineCost(line));
         }
 
         public virtual IList<Order> GetOrdersByStatus(IList<Order> orders, OrderStatus orderStatus)

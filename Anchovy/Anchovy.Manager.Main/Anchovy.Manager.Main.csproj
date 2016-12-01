@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Anchovy.Manager.Main</RootNamespace>
     <AssemblyName>Anchovy.Manager.Main</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -82,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report1.rdlc" />
     <None Include="AnchovyContextDataSet.xsc">
@@ -95,6 +97,7 @@
     <None Include="AnchovyContextDataSet.xss">
       <DependentUpon>AnchovyContextDataSet.xsd</DependentUpon>
     </None>
+    <None Include="Properties\DataSources\Anchovy.API.Client.Models.Topping.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -107,6 +110,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Anchovy.API.Client\Anchovy.API.Client.csproj">
+      <Project>{9a289605-399f-4544-879c-d4310b9bf44e}</Project>
+      <Name>Anchovy.API.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Anchovy.API.Service\Anchovy.API.Service.csproj">
+      <Project>{d4808ee7-9978-4cff-a4a2-7274013c45f1}</Project>
+      <Name>Anchovy.API.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Anchovy.Models.Utilities\Anchovy.Models.Utilities.csproj">
+      <Project>{ff32d0c8-0801-47af-8283-9cecbb08b6c5}</Project>
+      <Name>Anchovy.Models.Utilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
