@@ -26,7 +26,7 @@ namespace Anchovy.Manager.Main
         {
             ManagerMain mm = new ManagerMain();
             mm.Show();
-            this.Hide();
+            Hide();
         }
     }
 }
