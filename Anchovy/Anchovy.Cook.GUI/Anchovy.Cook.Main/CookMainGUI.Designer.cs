@@ -33,11 +33,12 @@
             this.myQLabel = new System.Windows.Forms.Label();
             this.myQueue = new System.Windows.Forms.ListBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.completeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.globalQueue = new System.Windows.Forms.ListBox();
             this.globalQLabel = new System.Windows.Forms.Label();
             this.ingredientsBox = new System.Windows.Forms.ListView();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ingredientsLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.refreshButton = new System.Windows.Forms.Button();
@@ -89,17 +90,9 @@
             this.completeToolStripMenuItem,
             this.cancelToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(127, 48);
             this.contextMenuStrip1.Text = "can";
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            this.contextMenuStrip1.Click += new System.EventHandler(this.contextMenuStrip1_Click);
-            // 
-            // cancelToolStripMenuItem
-            // 
-            this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
-            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.cancelToolStripMenuItem.Text = "Cancel";
-            this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 
             // completeToolStripMenuItem
             // 
@@ -107,6 +100,13 @@
             this.completeToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.completeToolStripMenuItem.Text = "Complete";
             this.completeToolStripMenuItem.Click += new System.EventHandler(this.completeToolStripMenuItem_Click);
+            // 
+            // cancelToolStripMenuItem
+            // 
+            this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.cancelToolStripMenuItem.Text = "Cancel";
+            this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 
             // globalQueue
             // 
@@ -135,14 +135,20 @@
             // 
             // ingredientsBox
             // 
-            this.ingredientsBox.AllowDrop = true;
+            this.ingredientsBox.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2});
             this.ingredientsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ingredientsBox.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.ingredientsBox.Location = new System.Drawing.Point(409, 78);
             this.ingredientsBox.Name = "ingredientsBox";
             this.ingredientsBox.Size = new System.Drawing.Size(323, 166);
             this.ingredientsBox.TabIndex = 8;
             this.ingredientsBox.UseCompatibleStateImageBehavior = false;
-            this.ingredientsBox.View = System.Windows.Forms.View.List;
+            this.ingredientsBox.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Width = 320;
             // 
             // ingredientsLabel
             // 
@@ -182,7 +188,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 301);
+            this.ClientSize = new System.Drawing.Size(746, 316);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.logoutButton);
             this.Controls.Add(this.ingredientsLabel);
@@ -215,6 +221,7 @@
         private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
         private System.Windows.Forms.Button refreshButton;
         private System.Windows.Forms.ToolStripMenuItem completeToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 
