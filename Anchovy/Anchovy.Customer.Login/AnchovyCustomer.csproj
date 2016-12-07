@@ -7,7 +7,7 @@
     <ProjectGuid>{8666EE97-752F-452F-B413-AA3BCFAFB9D9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Anchovy.Customer.Login</RootNamespace>
+    <RootNamespace>AnchovyCustomer</RootNamespace>
     <AssemblyName>Anchovy.Customer.Login</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -34,8 +34,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RestSharp, Version=105.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.2\lib\net46\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,13 +50,17 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Twilio.Api, Version=3.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Twilio.4.7.2\lib\3.5\Twilio.Api.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnchovyCustomerMainGUI.cs">
+    <Compile Include="CustomerMainGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AnchovyCustomerMainGUI.Designer.cs">
-      <DependentUpon>AnchovyCustomerMainGUI.cs</DependentUpon>
+    <Compile Include="CustomerMainGUI.Designer.cs">
+      <DependentUpon>CustomerMainGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomerForgotPasswordGUI.cs">
       <SubType>Form</SubType>
@@ -73,8 +82,8 @@
       <DependentUpon>CustomerSignUpGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AnchovyCustomerMainGUI.resx">
-      <DependentUpon>AnchovyCustomerMainGUI.cs</DependentUpon>
+    <EmbeddedResource Include="CustomerMainGUI.resx">
+      <DependentUpon>CustomerMainGUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerForgotPasswordGUI.resx">
       <DependentUpon>CustomerForgotPasswordGUI.cs</DependentUpon>
@@ -95,6 +104,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -112,6 +122,10 @@
     <ProjectReference Include="..\Anchovy.API.Client\Anchovy.API.Client.csproj">
       <Project>{9a289605-399f-4544-879c-d4310b9bf44e}</Project>
       <Name>Anchovy.API.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Anchovy.API.Service\Anchovy.API.Service.csproj">
+      <Project>{d4808ee7-9978-4cff-a4a2-7274013c45f1}</Project>
+      <Name>Anchovy.API.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

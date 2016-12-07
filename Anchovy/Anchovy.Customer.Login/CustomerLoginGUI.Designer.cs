@@ -1,4 +1,4 @@
-﻿namespace Anchovy.Customer.Login
+﻿namespace CustomerLogin
 {
     partial class CustomerLoginGUI
     {
@@ -40,6 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.usernameError = new System.Windows.Forms.Label();
             this.passwordError = new System.Windows.Forms.Label();
+            this.guestCheckout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -104,6 +105,7 @@
             // signInButton
             // 
             this.signInButton.BackColor = System.Drawing.Color.ForestGreen;
+            this.signInButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signInButton.ForeColor = System.Drawing.Color.White;
             this.signInButton.Location = new System.Drawing.Point(312, 282);
             this.signInButton.Name = "signInButton";
@@ -128,6 +130,7 @@
             // createAccountButton
             // 
             this.createAccountButton.BackColor = System.Drawing.Color.Red;
+            this.createAccountButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.createAccountButton.ForeColor = System.Drawing.Color.White;
             this.createAccountButton.Location = new System.Drawing.Point(246, 381);
             this.createAccountButton.Name = "createAccountButton";
@@ -165,12 +168,26 @@
             this.passwordError.TabIndex = 18;
             this.passwordError.Text = "                          ";
             // 
+            // guestCheckout
+            // 
+            this.guestCheckout.BackColor = System.Drawing.Color.DodgerBlue;
+            this.guestCheckout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guestCheckout.ForeColor = System.Drawing.Color.White;
+            this.guestCheckout.Location = new System.Drawing.Point(580, 12);
+            this.guestCheckout.Name = "guestCheckout";
+            this.guestCheckout.Size = new System.Drawing.Size(134, 65);
+            this.guestCheckout.TabIndex = 19;
+            this.guestCheckout.Text = "Guest Checkout";
+            this.guestCheckout.UseVisualStyleBackColor = false;
+            this.guestCheckout.Click += new System.EventHandler(this.guestCheckout_Click);
+            // 
             // CustomerLoginGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(726, 496);
+            this.Controls.Add(this.guestCheckout);
             this.Controls.Add(this.passwordError);
             this.Controls.Add(this.usernameError);
             this.Controls.Add(this.label5);
@@ -184,6 +201,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "CustomerLoginGUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -204,6 +222,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label usernameError;
         private System.Windows.Forms.Label passwordError;
+        private System.Windows.Forms.Button guestCheckout;
     }
 }
 

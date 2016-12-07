@@ -1,4 +1,4 @@
-﻿namespace Customer.SignUp
+﻿namespace CustomerSignUp
 {
     partial class CustomerSignUpGUI
     {
@@ -39,6 +39,7 @@
             this.usernameSignup = new System.Windows.Forms.TextBox();
             this.signUpSignup = new System.Windows.Forms.Button();
             this.cancelSignup = new System.Windows.Forms.Button();
+            this.signUpError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -129,6 +130,7 @@
             // signUpSignup
             // 
             this.signUpSignup.BackColor = System.Drawing.Color.ForestGreen;
+            this.signUpSignup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpSignup.ForeColor = System.Drawing.Color.White;
             this.signUpSignup.Location = new System.Drawing.Point(331, 228);
             this.signUpSignup.Name = "signUpSignup";
@@ -136,9 +138,11 @@
             this.signUpSignup.TabIndex = 11;
             this.signUpSignup.Text = "Sign Up!";
             this.signUpSignup.UseVisualStyleBackColor = false;
+            this.signUpSignup.Click += new System.EventHandler(this.signUpSignup_Click);
             // 
             // cancelSignup
             // 
+            this.cancelSignup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelSignup.ForeColor = System.Drawing.Color.Red;
             this.cancelSignup.Location = new System.Drawing.Point(185, 228);
             this.cancelSignup.Name = "cancelSignup";
@@ -148,12 +152,23 @@
             this.cancelSignup.UseVisualStyleBackColor = true;
             this.cancelSignup.Click += new System.EventHandler(this.cancelSignup_Click);
             // 
+            // signUpError
+            // 
+            this.signUpError.AutoSize = true;
+            this.signUpError.ForeColor = System.Drawing.Color.Red;
+            this.signUpError.Location = new System.Drawing.Point(203, 34);
+            this.signUpError.Name = "signUpError";
+            this.signUpError.Size = new System.Drawing.Size(61, 13);
+            this.signUpError.TabIndex = 13;
+            this.signUpError.Text = "                  ";
+            // 
             // CustomerSignUpGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(541, 340);
+            this.Controls.Add(this.signUpError);
             this.Controls.Add(this.cancelSignup);
             this.Controls.Add(this.signUpSignup);
             this.Controls.Add(this.usernameSignup);
@@ -166,6 +181,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "CustomerSignUpGUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -185,6 +201,7 @@
         private System.Windows.Forms.TextBox usernameSignup;
         private System.Windows.Forms.Button signUpSignup;
         private System.Windows.Forms.Button cancelSignup;
+        private System.Windows.Forms.Label signUpError;
     }
 }
 

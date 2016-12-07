@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.Models.Utilities", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.Manager.Main", "Anchovy.Manager.Main\Anchovy.Manager.Main.csproj", "{6084834C-C3A6-40B5-80A3-1A9344B79E7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anchovy.Customer.Login", "Anchovy.Customer.Login\Anchovy.Customer.Login.csproj", "{8666EE97-752F-452F-B413-AA3BCFAFB9D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnchovyCustomer", "Anchovy.Customer.Login\AnchovyCustomer.csproj", "{8666EE97-752F-452F-B413-AA3BCFAFB9D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

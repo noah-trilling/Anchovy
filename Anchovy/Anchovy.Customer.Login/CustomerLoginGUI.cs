@@ -1,12 +1,13 @@
-﻿using Anchovy.Customer.ForgotPassword;
-using Anchovy.Customer.Main;
-using Customer.SignUp;
+﻿using CustomerForgotPassword;
+using CustomerMain;
+using CustomerSignUp;
 using System;
 using System.Windows.Forms;
 using Anchovy.API.Client;
+using Anchovy.API.Client.Models;
 using System.Linq;
 
-namespace Anchovy.Customer.Login
+namespace CustomerLogin
 {
     public partial class CustomerLoginGUI : Form
     {
@@ -34,7 +35,7 @@ namespace Anchovy.Customer.Login
             }
             else
             {
-                /*usernameError.Text = "";
+                usernameError.Text = "";
                 passwordError.Text = "";
                 var customers = _customers.GetCustomers();
 
@@ -49,7 +50,7 @@ namespace Anchovy.Customer.Login
                         {
                             usernameBox.Text = "";
                             passwordBox.Text = "";
-                            _main = new AnchovyCustomerMainGUI();
+                            _main = new AnchovyCustomerMainGUI(customer.First());
                             _main.Text = "Logged In As - " + customer.First().FirstName;
                             this.Hide();
                             _main.Show();
@@ -63,11 +64,7 @@ namespace Anchovy.Customer.Login
                     {
                         usernameError.Text = "Invalid Username";
                     }
-                }*/
-                _main = new AnchovyCustomerMainGUI();
-                //_main.Text = "Logged In As - " + customer.First().FirstName;
-                this.Hide();
-                _main.Show();
+                }
             }
         }
 
@@ -83,6 +80,34 @@ namespace Anchovy.Customer.Login
             CustomerForgotPasswordGUI forgotPword = new CustomerForgotPasswordGUI();
             forgotPword.Show();
             this.Hide();
+        }
+
+        private void guestCheckout_Click(object sender, EventArgs e)
+        {
+            var postResponse = generateGuest();
+            while (postResponse.Id == null)
+            {
+                postResponse = generateGuest();
+            }
+            _main = new AnchovyCustomerMainGUI(postResponse);
+            _main.Text = "Logged In As - " + postResponse.Username;
+            this.Hide();
+            _main.Show();
+        }
+
+        private Anchovy.API.Client.Models.Customer generateGuest()
+        {
+            Random rnd = new Random();
+            var randString = "Guest-";
+            for (int i = 0; i < 15; i++)
+            {
+                randString += rnd.Next(0, 9);
+            }
+            var customer1 = new Customer
+            {
+                Username = randString
+            };
+            return _customers.PostCustomer(customer1);
         }
     }
 }
