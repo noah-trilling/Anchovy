@@ -28,6 +28,7 @@ namespace Anchovy.Manager.Main
         private ISauces _sauses = new AnchovyAPIService().Sauces;
         private ICrusts _crust = new AnchovyAPIService().Crusts;
         private ICooks _cooks = new AnchovyAPIService().Cooks;
+        private IManagers _managers = new AnchovyAPIService().Managers;
 
 
         public ManagerMain()
@@ -37,6 +38,8 @@ namespace Anchovy.Manager.Main
 
         private void btnManLogout_Click(object sender, EventArgs e)
         {
+            ManagerLogin ml = new ManagerLogin();
+            ml.Show();
             this.Close();
         }
 
@@ -46,103 +49,125 @@ namespace Anchovy.Manager.Main
             this.ManagersTableAdapter.Fill(this.AnchovyContextDataSet.Managers);
             this.reportViewer1.RefreshReport();
             _toppings = new AnchovyAPIService().Toppings;
-            getAllToppingInventory();
-
+            // getAllToppingInventory();
+            PopulateInventoryListBox();
             PopulateSalesTab();
             PopulateCooksComboBox();
+            PopulateManagersComboBox();
+
+            //tabControl.TabPages.Remove(tabPageReports);
         }
 
-        public void getAllToppingInventory()
-        {
-            var AllToppings = _toppings.GetToppings().GetEnumerator();
+        //public void getAllToppingInventory()
+        //{
+        //    var AllToppings = _toppings.GetToppings().GetEnumerator();
 
+        //    while (AllToppings.MoveNext())
+        //    {
+        //       if(AllToppings.Current.Name == "Cheese")
+        //       {
+        //            lblCheeseValue.Text = "" + AllToppings.Current.Quantity;
+        //       }
+        //       if (AllToppings.Current.Name == "Onions")
+        //       {
+        //            lblRedOnionsValue.Text = "" + AllToppings.Current.Quantity;
+        //            if(AllToppings.Current.Quantity < AllToppings.Current.LowLevel)
+        //            {
+        //                lblRedOnionsValue.ForeColor = Color.Red;
+        //            }else
+        //            {
+        //                lblRedOnionsValue.ForeColor = Color.Black;
+        //            }
+        //       }
+
+        //    }
+
+        //}
+
+        //private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void reportViewer1_Load(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void lblCheese_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void btnEdit_Click(object sender, EventArgs e)
+        //{
+        //    txtCheese.ReadOnly = false;
+        //    txtPepperoni.ReadOnly = false;
+        //    txtBacon.ReadOnly = false;
+        //    txtAnchovies.ReadOnly = false;
+        //    txtPinepples.ReadOnly = false;
+        //    txtGreenPeppers.ReadOnly = false;
+        //    txtBlackOlives.ReadOnly = false;
+        //    txtRedOnions.ReadOnly = false;
+        //}
+
+        //private void btnSave_Click(object sender, EventArgs e)
+        //{
+        //    txtCheese.ReadOnly = true;
+        //    txtPepperoni.ReadOnly = true;
+        //    txtBacon.ReadOnly = true;
+        //    txtAnchovies.ReadOnly = true;
+        //    txtPinepples.ReadOnly = true;
+        //    txtGreenPeppers.ReadOnly = true;
+        //    txtBlackOlives.ReadOnly = true;
+        //    txtRedOnions.ReadOnly = true;
+
+
+        //    if(txtRedOnions.Text != "")
+        //    {
+        //        int amnt = Int32.Parse(txtRedOnions.Text);
+        //        var AllToppings = _toppings.GetToppings().GetEnumerator();
+        //        Anchovy.API.Client.Models.Topping onion = null;
+        //        while (AllToppings.MoveNext())
+        //        {
+                   
+        //            if (AllToppings.Current.Name == "Onions")
+        //            {
+                    
+        //                onion = AllToppings.Current;
+        //            }
+
+        //        }
+        //        onion.Quantity += amnt;
+        //        _toppings.PutTopping((int)onion.Id, onion);
+        //        getAllToppingInventory();
+
+
+        //    }
+        //}
+        
+        ///<summary>
+        ///Inventory Tab
+        ///All Functionality for Inventory Tab
+        ///</summary>
+        
+        private void PopulateInventoryListBox()
+        {
+            var AllToppings =  _toppings.GetToppings().GetEnumerator();
+            List<string> DataForListBox = new List<string>();
             while (AllToppings.MoveNext())
             {
-               if(AllToppings.Current.Name == "Cheese")
-               {
-                    lblCheeseValue.Text = "" + AllToppings.Current.Quantity;
-               }
-               if (AllToppings.Current.Name == "Onions")
-               {
-                    lblRedOnionsValue.Text = "" + AllToppings.Current.Quantity;
-                    if(AllToppings.Current.Quantity < AllToppings.Current.LowLevel)
-                    {
-                        lblRedOnionsValue.ForeColor = Color.Red;
-                    }else
-                    {
-                        lblRedOnionsValue.ForeColor = Color.Black;
-                    }
-               }
-
+                DataForListBox.Add("T"+AllToppings.Current.Id+": " +AllToppings.Current.Name+"\t\t"+AllToppings.Current.Quantity);
             }
 
-        }
+            lstBoxInventory.DataSource = DataForListBox;
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void reportViewer1_Load(object sender, EventArgs e)
-        {
 
         }
 
-        private void lblCheese_Click(object sender, EventArgs e)
+        private void lstBoxInventory_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            txtCheese.ReadOnly = false;
-            txtPepperoni.ReadOnly = false;
-            txtBacon.ReadOnly = false;
-            txtAnchovies.ReadOnly = false;
-            txtPinepples.ReadOnly = false;
-            txtGreenPeppers.ReadOnly = false;
-            txtBlackOlives.ReadOnly = false;
-            txtRedOnions.ReadOnly = false;
-        }
-
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            txtCheese.ReadOnly = true;
-            txtPepperoni.ReadOnly = true;
-            txtBacon.ReadOnly = true;
-            txtAnchovies.ReadOnly = true;
-            txtPinepples.ReadOnly = true;
-            txtGreenPeppers.ReadOnly = true;
-            txtBlackOlives.ReadOnly = true;
-            txtRedOnions.ReadOnly = true;
-
-
-            if(txtRedOnions.Text != "")
-            {
-                int amnt = Int32.Parse(txtRedOnions.Text);
-                var AllToppings = _toppings.GetToppings().GetEnumerator();
-                Anchovy.API.Client.Models.Topping onion = null;
-                while (AllToppings.MoveNext())
-                {
-                   
-                    if (AllToppings.Current.Name == "Onions")
-                    {
-                    
-                        onion = AllToppings.Current;
-                    }
-
-                }
-                onion.Quantity += amnt;
-                _toppings.PutTopping((int)onion.Id, onion);
-                getAllToppingInventory();
-
-
-            }
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-          //  e.RowIndex
         }
 
 
@@ -403,18 +428,17 @@ namespace Anchovy.Manager.Main
             {
                 lblCookPieceWrkError.Visible = false;
             }
-            txtCookFirstName.ReadOnly = true;
-            txtCookMiddleName.ReadOnly = true;
-            txtCookLastName.ReadOnly = true;
-            txtCookUsername.ReadOnly = true;
-            txtCookPassword.ReadOnly = true;
-            txtCookAddress.ReadOnly = true;
-            txtCookCity.ReadOnly = true;
-            txtCookState.ReadOnly = true;
-            txtCookEmail.ReadOnly = true;
-            txtCookPhoneNumber.ReadOnly = true;
-            txtCookHourlyWage.ReadOnly = true;
-            txtCookPieceWorkRate.ReadOnly = true;
+            txtManagerFName.ReadOnly = false;
+            txtManagerMName.ReadOnly = false;
+            txtManagerLName.ReadOnly = false;
+            txtManagerUName.ReadOnly = false;
+            txtManagerPwd.ReadOnly = false;
+            txtManagerAddress.ReadOnly = false;
+            txtManagerCity.ReadOnly = false;
+            txtManagerState.ReadOnly = false;
+            txtManagerEmail.ReadOnly = false;
+            txtManagerPhoneNumber.ReadOnly = false;
+            txtManagerSalary.ReadOnly = false;
 
             var AllCooks = _cooks.GetCooks().GetEnumerator();
             int cookId = -1;
@@ -454,5 +478,134 @@ namespace Anchovy.Manager.Main
             AddNewCook anc = new AddNewCook();
             anc.Show();
         }
+
+        ///<summary>
+        ///Managers Tab
+        ///All Functionality for Managers Tab
+        ///</summary>
+    
+        public void PopulateManagersComboBox()
+        {
+            List<string> managerNames = new List<string>();
+            var AllManagers = _managers.GetManagers().GetEnumerator();
+            while (AllManagers.MoveNext())
+            {
+                managerNames.Add("" + AllManagers.Current.FirstName + " " + AllManagers.Current.LastName);
+            }
+            comboManager.DataSource = managerNames;
+        }
+
+        private void comboManager_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var AllManagers = _managers.GetManagers().GetEnumerator();
+            int managerId = -1;
+            while (AllManagers.MoveNext())
+            {
+                if ((AllManagers.Current.FirstName + " " + AllManagers.Current.LastName).Equals(comboManager.Text))
+                {
+                    managerId = (int)AllManagers.Current.Id;
+                    break;
+                }
+            }
+
+            if (managerId == -1) return;
+
+            var selectedManager = _managers.GetManager(managerId);
+            txtManagerFName.Text = selectedManager.FirstName;
+            txtManagerMName.Text = selectedManager.MiddleName;
+            txtManagerLName.Text = selectedManager.LastName;
+            txtManagerUName.Text = selectedManager.Username;
+            txtManagerPwd.Text = selectedManager.Password;
+            txtManagerAddress.Text = selectedManager.Address;
+            txtManagerCity.Text = selectedManager.City;
+            txtManagerState.Text = selectedManager.State;
+            txtManagerEmail.Text = selectedManager.Email;
+            txtManagerPhoneNumber.Text = selectedManager.Phone;
+            txtManagerSalary.Text = selectedManager.Salary.ToString();
+            lblManagerIdValue.Text = selectedManager.Id.ToString();
+        }
+
+        private void btnManagerEdit_Click(object sender, EventArgs e)
+        {
+            txtManagerFName.ReadOnly = false;
+            txtManagerMName.ReadOnly = false;
+            txtManagerLName.ReadOnly = false;
+            txtManagerUName.ReadOnly = false;
+            txtManagerPwd.ReadOnly = false;
+            txtManagerAddress.ReadOnly = false;
+            txtManagerCity.ReadOnly = false;
+            txtManagerState.ReadOnly = false;
+            txtManagerEmail.ReadOnly = false;
+            txtManagerPhoneNumber.ReadOnly = false;
+            txtManagerSalary.ReadOnly = false;
+        }
+
+        private void btnManagerSave_Click(object sender, EventArgs e)
+        {
+            double x;
+            if(!double.TryParse(txtManagerSalary.Text,out x))
+            {
+                lblManagerSalaryError.Visible = true;
+                return;
+            }else
+            {
+                lblManagerSalaryError.Visible = false;
+            } 
+            txtManagerFName.ReadOnly = true;
+            txtManagerMName.ReadOnly = true;
+            txtManagerLName.ReadOnly = true;
+            txtManagerUName.ReadOnly = true;
+            txtManagerPwd.ReadOnly = true;
+            txtManagerAddress.ReadOnly = true;
+            txtManagerCity.ReadOnly = true;
+            txtManagerState.ReadOnly = true;
+            txtManagerEmail.ReadOnly = true;
+            txtManagerPhoneNumber.ReadOnly = true;
+            txtManagerSalary.ReadOnly = true;
+
+
+            var AllManagers = _managers.GetManagers().GetEnumerator();
+            int managerId = -1;
+            while (AllManagers.MoveNext())
+            {
+                if ((AllManagers.Current.FirstName + " " + AllManagers.Current.LastName).Equals(comboManager.Text))
+                {
+                    managerId = (int)AllManagers.Current.Id;
+                    break;
+                }
+            }
+
+            if (managerId == -1) return;
+            var selectedManager = _managers.GetManager(managerId);
+
+            selectedManager.FirstName = txtManagerFName.Text;
+            selectedManager.MiddleName = txtManagerMName.Text;
+            selectedManager.LastName = txtManagerLName.Text;
+            selectedManager.Username = txtManagerUName.Text;
+            selectedManager.Password = txtManagerPwd.Text;
+            selectedManager.Address = txtManagerAddress.Text;
+            selectedManager.City = txtManagerCity.Text;
+            selectedManager.State = txtManagerState.Text;
+            selectedManager.Email = txtManagerEmail.Text;
+            selectedManager.Phone = txtManagerPhoneNumber.Text;
+            selectedManager.Salary = Convert.ToDouble(txtManagerSalary.Text);
+
+            _managers.PutManager(managerId, selectedManager);
+            PopulateManagersComboBox();
+            comboManager.SelectedItem = selectedManager.FirstName + " " + selectedManager.LastName;
+        }
+
+        private void btnAddNewManager_Click(object sender, EventArgs e)
+        {
+            AddNewManager anm = new AddNewManager();
+            anm.Show();
+        }
+
+        public void selectManagerFromCombo(API.Client.Models.Manager manager)
+        {
+            comboManager.SelectedItem = manager.FirstName + " " + manager.LastName;
+        }
+
+        
     }
 }

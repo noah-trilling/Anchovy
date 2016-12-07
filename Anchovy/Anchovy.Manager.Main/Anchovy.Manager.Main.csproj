@@ -56,6 +56,12 @@
     <Compile Include="AddNewCook.Designer.cs">
       <DependentUpon>AddNewCook.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddNewManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewManager.Designer.cs">
+      <DependentUpon>AddNewManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="AnchovyContextDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,6 +83,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddNewCook.resx">
       <DependentUpon>AddNewCook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewManager.resx">
+      <DependentUpon>AddNewManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerLogin.resx">
       <DependentUpon>ManagerLogin.cs</DependentUpon>
