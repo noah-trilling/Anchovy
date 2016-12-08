@@ -155,21 +155,308 @@ namespace Anchovy.Manager.Main
         {
             var AllToppings =  _toppings.GetToppings().GetEnumerator();
             List<string> DataForListBox = new List<string>();
+            string low = "LOW";
             while (AllToppings.MoveNext())
             {
-                DataForListBox.Add("T"+AllToppings.Current.Id+": " +AllToppings.Current.Name+"\t\t"+AllToppings.Current.Quantity);
+                if (AllToppings.Current.Quantity <= AllToppings.Current.LowLevel)
+                {
+                    DataForListBox.Add("T" + AllToppings.Current.Id + ": " + AllToppings.Current.Name + "\t\t" + AllToppings.Current.Quantity+"  "+low);
+                }
+                else
+                {
+                    DataForListBox.Add("T" + AllToppings.Current.Id + ": " + AllToppings.Current.Name + "\t\t" + AllToppings.Current.Quantity);
+                }
+            }
+            
+            
+            var AllSizes = _sizes.GetSizes().GetEnumerator();
+            List<string> sizes = new List<string>();
+
+            while (AllSizes.MoveNext())
+            {
+                DataForListBox.Add("Z" + AllSizes.Current.Id + ": " + AllSizes.Current.Name+" (Size)");
             }
 
+            var AllSauses = _sauses.GetSauces().GetEnumerator();
+            while (AllSauses.MoveNext())
+            {
+                DataForListBox.Add("S" + AllSauses.Current.Id + ": " + AllSauses.Current.Name + " (Sause)");
+            }
+            var AllCrust = _crust.GetCrusts().GetEnumerator();
+            while (AllCrust.MoveNext())
+            {
+                DataForListBox.Add("C" + AllCrust.Current.Id + ": " + AllCrust.Current.Name + " (Crust)");
+            }
+            var AllMenuListings = _menulistings.GetMenuListings().GetEnumerator();
+            while (AllMenuListings.MoveNext())
+            {
+                DataForListBox.Add("M" + AllMenuListings.Current.Id + ": " + AllMenuListings.Current.Name);
+            }
+            PopulateComboInventorySize();
             lstBoxInventory.DataSource = DataForListBox;
+            
+        }
 
-
+        private void PopulateComboInventorySize()
+        {
+            var AllSizes = _sizes.GetSizes().GetEnumerator();
+            List<string> sizes = new List<string>();
+            while (AllSizes.MoveNext())
+            {
+                sizes.Add(AllSizes.Current.Name);
+            }
+            comboInventorySize.DataSource = sizes;
         }
 
         private void lstBoxInventory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string item = lstBoxInventory.SelectedItem.ToString();
+            string idstring = item.Substring(1, item.IndexOf(":") - 1);
+            int _id = Convert.ToInt32(idstring);
+            if (item.StartsWith("T"))
+            {
+                lblInventoryType.Text = "Topping";
+                lblInventoryLowLevel.Visible = true;
+                txtInventoryLowLevel.Visible = true;
+                txtInventoryQuantity.Visible = true;
+                lblInventoryQuantity.Visible = true;
+                comboInventorySize.Visible = false;
+                lblInventoryQuantity.Text = "Quantity";
+                
+                var topping = _toppings.GetTopping(_id);
+                txtInventoryName.Text = topping.Name;
+                txtInventoryQuantity.Text = "" + topping.Quantity;
+                txtInventoryLowLevel.Text = "" + topping.LowLevel;
+                txtInventoryCost.Text = ((double)topping.Cost).ToString("###########.00");
+            }
+            else if (item.StartsWith("M"))
+            {
+                lblInventoryType.Text = "Menu Item";
+                lblInventoryQuantity.Text = "Size";
+                lblInventoryQuantity.Visible = true;
+                lblInventoryLowLevel.Visible = false;
+                txtInventoryLowLevel.Visible = false;
+                txtInventoryQuantity.Visible = false;
+                comboInventorySize.Visible = true;
+                var MenuListing = _menulistings.GetMenuListing(_id);
+                txtInventoryName.Text = MenuListing.Name;
+                txtInventoryCost.Text = ((double)MenuListing.Cost).ToString("########.00");
+                PopulateComboInventorySize();
+                comboInventorySize.Text = _sizes.GetSize((int)MenuListing.SizeId).Name;
+            }
+            else if (item.StartsWith("Z"))
+            {
+                lblInventoryType.Text = "Size";
+                lblInventoryLowLevel.Visible = false;
+                lblInventoryQuantity.Visible = false;
+                txtInventoryLowLevel.Visible = false;
+                txtInventoryQuantity.Visible = false;
+                comboInventorySize.Visible = false;
+                txtInventoryName.Text = _sizes.GetSize(_id).Name;
+                txtInventoryCost.Text = ((double)_sizes.GetSize(_id).Cost).ToString("#########.00");
+            }
+            else if (item.StartsWith("C"))
+            {
+                lblInventoryType.Text = "Crust";
+                lblInventoryLowLevel.Visible = false;
+                lblInventoryQuantity.Visible = false;
+                txtInventoryLowLevel.Visible = false;
+                txtInventoryQuantity.Visible = false;
+                comboInventorySize.Visible = false;
+                txtInventoryName.Text = _crust.GetCrust(_id).Name;
+                txtInventoryCost.Text = ((double)_crust.GetCrust(_id).Cost).ToString("#########.00");
+            }
+            else if (item.StartsWith("S"))
+            {
+                lblInventoryType.Text = "Sause";
+                lblInventoryLowLevel.Visible = false;
+                lblInventoryQuantity.Visible = false;
+                txtInventoryLowLevel.Visible = false;
+                txtInventoryQuantity.Visible = false;
+                comboInventorySize.Visible = false;
+                txtInventoryName.Text = _sauses.GetSauce(_id).Name;
+                txtInventoryCost.Text = ((double)_sauses.GetSauce(_id).Cost).ToString("#########.00");
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void btnInventoryEdit_Click(object sender, EventArgs e)
+        {
+            comboInventorySize.Enabled = true;
+            txtInventoryCost.ReadOnly = false;
+            txtInventoryName.ReadOnly = false;
+            txtInventoryQuantity.ReadOnly = false;
+            txtInventoryLowLevel.ReadOnly = false;
+        }
+
+        private void btnInventorySave_Click(object sender, EventArgs e)
+        {
+            double x = 0.0;
+            int y = 0;
+            bool flag = true;
+            if(!double.TryParse(txtInventoryCost.Text, out x))
+            {
+                lblInventoryErrorCost.Visible = true;
+                flag = false;
+            }
+            else
+            {
+                lblInventoryErrorCost.Visible = false;
+            }
+            if(!int.TryParse(txtInventoryQuantity.Text,out y) && comboInventorySize.Visible == false)
+            {
+                lblInventoryQuantityError.Visible = true;
+                flag = false;
+            }
+            else
+            {
+                lblInventoryQuantityError.Visible = false;
+            }
+            if(!int.TryParse(txtInventoryLowLevel.Text, out y))
+            {
+                lblInventoryLowLevelError.Visible = true;
+                flag = false;
+            }
+            else
+            {
+                lblInventoryLowLevelError.Visible = false;
+            }
+            if (flag == false) return;
+
+
+            string item = lstBoxInventory.SelectedItem.ToString();
+            string idstring = item.Substring(1, item.IndexOf(":") - 1);
+            int _id = Convert.ToInt32(idstring);
+            if (item.StartsWith("T"))
+            {
+                var topping = _toppings.GetTopping(_id);
+                topping.Name = txtInventoryName.Text;
+                topping.Cost = Convert.ToDouble(txtInventoryCost.Text);
+                topping.Quantity = Convert.ToInt32(txtInventoryQuantity.Text);
+                topping.LowLevel = Convert.ToInt32(txtInventoryLowLevel.Text);
+
+                _toppings.PutTopping(_id, topping);
+                
+            }
+            else if (item.StartsWith("M"))
+            {
+                var MenuListing = _menulistings.GetMenuListing(_id);
+                MenuListing.Name = txtInventoryName.Text;
+                MenuListing.Cost = Convert.ToDouble(txtInventoryCost.Text);
+                var AllSizes = _sizes.GetSizes().GetEnumerator();
+                while (AllSizes.MoveNext())
+                {
+                    if (AllSizes.Current.Name.Equals(comboInventorySize.Text))
+                    {
+                        MenuListing.SizeId = AllSizes.Current.Id;
+                        MenuListing.Size = AllSizes.Current;
+                    }
+                }
+                _menulistings.PutMenuListing(_id, MenuListing);
+            }
+            else if (item.StartsWith("Z"))
+            {
+                var size = _sizes.GetSize(_id);
+                size.Name = txtInventoryName.Text;
+                size.Cost = Convert.ToDouble(txtInventoryCost.Text);
+                _sizes.PutSize(_id, size);
+            }
+            else if (item.StartsWith("C"))
+            {
+                var crust = _crust.GetCrust(_id);
+                crust.Cost = Convert.ToDouble(txtInventoryCost.Text);
+                crust.Name = txtInventoryName.Text;
+                _crust.PutCrust(_id, crust);
+            }
+            else if (item.StartsWith("S"))
+            {
+                var sause = _sauses.GetSauce(_id);
+                sause.Cost = Convert.ToDouble(txtInventoryCost.Text);
+                sause.Name = txtInventoryName.Text;
+                _sauses.PutSauce(_id, sause);
+            }
+            else
+            {
+                return;
+            }
+
+            comboInventorySize.Enabled = false;
+            txtInventoryCost.ReadOnly = true;
+            txtInventoryName.ReadOnly = true;
+            txtInventoryQuantity.ReadOnly = true;
+            txtInventoryLowLevel.ReadOnly = true;
+
+            
+            PopulateInventoryListBox();
+
+        }
+        
+        private void btnInvtAddNewItem_Click(object sender, EventArgs e)
+        {
+            panelInventoryAddNew.Visible = true;
+            comboInventoryAddList.Text = "Select one...";
+            txtInventoryAddNewName.Text = "";
+            if (btnInvtAddNewItem.Text.Equals("Cancel"))
+            {
+                btnInvtAddNewItem.Text = "Add New Item";
+                panelInventoryAddNew.Visible = false;
+            }
+            else
+            {
+               btnInvtAddNewItem.Text = "Cancel";
+                panelInventoryAddNew.Visible = true;
+            }
+            
 
         }
 
+        private void btnInventoryAddNewDone_Click(object sender, EventArgs e)
+        {
+            if (comboInventoryAddList.Text.Equals("Topping"))
+            {
+                Anchovy.API.Client.Models.Topping topping = new API.Client.Models.Topping();
+                topping.Name = txtInventoryAddNewName.Text;
+                _toppings.PostTopping(topping);
+            }
+            else if (comboInventoryAddList.Text.Equals("Crust"))
+            {
+                Anchovy.API.Client.Models.Crust crust = new API.Client.Models.Crust();
+                crust.Name = txtInventoryAddNewName.Text;
+                _crust.PostCrust(crust);
+            }
+            else if (comboInventoryAddList.Text.Equals("Sause"))
+            {
+                Anchovy.API.Client.Models.Sauce sause = new API.Client.Models.Sauce();
+                sause.Name = txtInventoryAddNewName.Text;
+                _sauses.PostSauce(sause);
+            }
+            else if (comboInventoryAddList.Text.Equals("Size"))
+            {
+                Anchovy.API.Client.Models.Size size = new API.Client.Models.Size();
+                size.Name = txtInventoryAddNewName.Text;
+                _sizes.PostSize(size);
+            }
+            else if(comboInventoryAddList.Text.Equals("Menu Listing"))
+            {
+                Anchovy.API.Client.Models.MenuListing menulist = new API.Client.Models.MenuListing();
+                menulist.Name = txtInventoryAddNewName.Text;
+                var AllSizes = _sizes.GetSizes().GetEnumerator();
+                Anchovy.API.Client.Models.Size size = new API.Client.Models.Size();
+                while (AllSizes.MoveNext())
+                {
+                    size = AllSizes.Current;
+                }
+                menulist.SizeId =(int)size.Id;
+                menulist.Size = size;
+                _menulistings.PostMenuListing(menulist);
+            }
+            PopulateInventoryListBox();
+            panelInventoryAddNew.Visible = false;
+            btnInvtAddNewItem.Text = "Add New Item";
+        }
 
         /// <summary>
         /// Sales Tab
@@ -428,17 +715,17 @@ namespace Anchovy.Manager.Main
             {
                 lblCookPieceWrkError.Visible = false;
             }
-            txtManagerFName.ReadOnly = false;
-            txtManagerMName.ReadOnly = false;
-            txtManagerLName.ReadOnly = false;
-            txtManagerUName.ReadOnly = false;
-            txtManagerPwd.ReadOnly = false;
-            txtManagerAddress.ReadOnly = false;
-            txtManagerCity.ReadOnly = false;
-            txtManagerState.ReadOnly = false;
-            txtManagerEmail.ReadOnly = false;
-            txtManagerPhoneNumber.ReadOnly = false;
-            txtManagerSalary.ReadOnly = false;
+            txtManagerFName.ReadOnly = true;
+            txtManagerMName.ReadOnly = true;
+            txtManagerLName.ReadOnly = true;
+            txtManagerUName.ReadOnly = true;
+            txtManagerPwd.ReadOnly = true;
+            txtManagerAddress.ReadOnly = true;
+            txtManagerCity.ReadOnly = true;
+            txtManagerState.ReadOnly = true;
+            txtManagerEmail.ReadOnly = true;
+            txtManagerPhoneNumber.ReadOnly = true;
+            txtManagerSalary.ReadOnly = true;
 
             var AllCooks = _cooks.GetCooks().GetEnumerator();
             int cookId = -1;
@@ -606,6 +893,6 @@ namespace Anchovy.Manager.Main
             comboManager.SelectedItem = manager.FirstName + " " + manager.LastName;
         }
 
-        
+
     }
 }

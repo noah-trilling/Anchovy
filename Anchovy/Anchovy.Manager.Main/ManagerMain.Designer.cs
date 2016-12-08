@@ -29,11 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource9 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.ManagersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AnchovyContextDataSet = new Anchovy.Manager.Main.AnchovyContextDataSet();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageInventory = new System.Windows.Forms.TabPage();
+            this.panelInventoryAddNew = new System.Windows.Forms.Panel();
+            this.btnInventoryAddNewDone = new System.Windows.Forms.Button();
+            this.txtInventoryAddNewName = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.comboInventoryAddList = new System.Windows.Forms.ComboBox();
+            this.btnInvtAddNewItem = new System.Windows.Forms.Button();
+            this.lblInventoryLowLevelError = new System.Windows.Forms.Label();
+            this.lblInventoryQuantityError = new System.Windows.Forms.Label();
+            this.lblInventoryErrorCost = new System.Windows.Forms.Label();
+            this.btnInventorySave = new System.Windows.Forms.Button();
+            this.btnInventoryEdit = new System.Windows.Forms.Button();
+            this.lblInventoryType = new System.Windows.Forms.Label();
+            this.comboInventorySize = new System.Windows.Forms.ComboBox();
+            this.txtInventoryLowLevel = new System.Windows.Forms.TextBox();
+            this.txtInventoryQuantity = new System.Windows.Forms.TextBox();
+            this.txtInventoryCost = new System.Windows.Forms.TextBox();
+            this.txtInventoryName = new System.Windows.Forms.TextBox();
+            this.lblInventoryLowLevel = new System.Windows.Forms.Label();
+            this.lblInventoryQuantity = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.lstBoxInventory = new System.Windows.Forms.ListBox();
+            this.tabPagePizzas = new System.Windows.Forms.TabPage();
             this.tabPageSales = new System.Windows.Forms.TabPage();
             this.btnRefreshSales = new System.Windows.Forms.Button();
             this.lblMonthlyAveragesValue = new System.Windows.Forms.Label();
@@ -81,14 +106,6 @@
             this.lblCookMiddleName = new System.Windows.Forms.Label();
             this.lblCookFirstName = new System.Windows.Forms.Label();
             this.comboCooks = new System.Windows.Forms.ComboBox();
-            this.tabPageReports = new System.Windows.Forms.TabPage();
-            this.btnRunReport = new System.Windows.Forms.Button();
-            this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
-            this.lblEndDate = new System.Windows.Forms.Label();
-            this.lblStartDate = new System.Windows.Forms.Label();
-            this.comboReports = new System.Windows.Forms.ComboBox();
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabPageManagers = new System.Windows.Forms.TabPage();
             this.lblManagerIdValue = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -119,29 +136,27 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.comboManager = new System.Windows.Forms.ComboBox();
+            this.tabPageReports = new System.Windows.Forms.TabPage();
+            this.btnRunReport = new System.Windows.Forms.Button();
+            this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
+            this.lblEndDate = new System.Windows.Forms.Label();
+            this.lblStartDate = new System.Windows.Forms.Label();
+            this.comboReports = new System.Windows.Forms.ComboBox();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.btnManLogout = new System.Windows.Forms.Button();
             this.ManagersTableAdapter = new Anchovy.Manager.Main.AnchovyContextDataSetTableAdapters.ManagersTableAdapter();
             this.anchovyContextDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toppingBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.lstBoxInventory = new System.Windows.Forms.ListBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.txtInventoryName = new System.Windows.Forms.TextBox();
-            this.txtInventoryCost = new System.Windows.Forms.TextBox();
-            this.txtInventoryQuantity = new System.Windows.Forms.TextBox();
-            this.txtInventoryLowLevel = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.ManagersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnchovyContextDataSet)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageInventory.SuspendLayout();
+            this.panelInventoryAddNew.SuspendLayout();
             this.tabPageSales.SuspendLayout();
             this.tabPageCooks.SuspendLayout();
-            this.tabPageReports.SuspendLayout();
             this.tabPageManagers.SuspendLayout();
+            this.tabPageReports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.anchovyContextDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toppingBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -159,6 +174,7 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPageInventory);
+            this.tabControl.Controls.Add(this.tabPagePizzas);
             this.tabControl.Controls.Add(this.tabPageSales);
             this.tabControl.Controls.Add(this.tabPageCooks);
             this.tabControl.Controls.Add(this.tabPageManagers);
@@ -172,12 +188,21 @@
             // 
             // tabPageInventory
             // 
+            this.tabPageInventory.Controls.Add(this.panelInventoryAddNew);
+            this.tabPageInventory.Controls.Add(this.btnInvtAddNewItem);
+            this.tabPageInventory.Controls.Add(this.lblInventoryLowLevelError);
+            this.tabPageInventory.Controls.Add(this.lblInventoryQuantityError);
+            this.tabPageInventory.Controls.Add(this.lblInventoryErrorCost);
+            this.tabPageInventory.Controls.Add(this.btnInventorySave);
+            this.tabPageInventory.Controls.Add(this.btnInventoryEdit);
+            this.tabPageInventory.Controls.Add(this.lblInventoryType);
+            this.tabPageInventory.Controls.Add(this.comboInventorySize);
             this.tabPageInventory.Controls.Add(this.txtInventoryLowLevel);
             this.tabPageInventory.Controls.Add(this.txtInventoryQuantity);
             this.tabPageInventory.Controls.Add(this.txtInventoryCost);
             this.tabPageInventory.Controls.Add(this.txtInventoryName);
-            this.tabPageInventory.Controls.Add(this.label28);
-            this.tabPageInventory.Controls.Add(this.label27);
+            this.tabPageInventory.Controls.Add(this.lblInventoryLowLevel);
+            this.tabPageInventory.Controls.Add(this.lblInventoryQuantity);
             this.tabPageInventory.Controls.Add(this.label26);
             this.tabPageInventory.Controls.Add(this.label25);
             this.tabPageInventory.Controls.Add(this.label13);
@@ -191,6 +216,273 @@
             this.tabPageInventory.TabIndex = 0;
             this.tabPageInventory.Text = "Inventory";
             this.tabPageInventory.UseVisualStyleBackColor = true;
+            // 
+            // panelInventoryAddNew
+            // 
+            this.panelInventoryAddNew.Controls.Add(this.btnInventoryAddNewDone);
+            this.panelInventoryAddNew.Controls.Add(this.txtInventoryAddNewName);
+            this.panelInventoryAddNew.Controls.Add(this.label27);
+            this.panelInventoryAddNew.Controls.Add(this.comboInventoryAddList);
+            this.panelInventoryAddNew.Location = new System.Drawing.Point(1325, 86);
+            this.panelInventoryAddNew.Name = "panelInventoryAddNew";
+            this.panelInventoryAddNew.Size = new System.Drawing.Size(403, 184);
+            this.panelInventoryAddNew.TabIndex = 74;
+            this.panelInventoryAddNew.Visible = false;
+            // 
+            // btnInventoryAddNewDone
+            // 
+            this.btnInventoryAddNewDone.BackColor = System.Drawing.Color.Green;
+            this.btnInventoryAddNewDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInventoryAddNewDone.Location = new System.Drawing.Point(10, 104);
+            this.btnInventoryAddNewDone.Name = "btnInventoryAddNewDone";
+            this.btnInventoryAddNewDone.Size = new System.Drawing.Size(390, 63);
+            this.btnInventoryAddNewDone.TabIndex = 70;
+            this.btnInventoryAddNewDone.Text = "Done";
+            this.btnInventoryAddNewDone.UseVisualStyleBackColor = false;
+            this.btnInventoryAddNewDone.Click += new System.EventHandler(this.btnInventoryAddNewDone_Click);
+            // 
+            // txtInventoryAddNewName
+            // 
+            this.txtInventoryAddNewName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInventoryAddNewName.Location = new System.Drawing.Point(116, 54);
+            this.txtInventoryAddNewName.Name = "txtInventoryAddNewName";
+            this.txtInventoryAddNewName.Size = new System.Drawing.Size(284, 44);
+            this.txtInventoryAddNewName.TabIndex = 62;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(3, 57);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(107, 37);
+            this.label27.TabIndex = 61;
+            this.label27.Text = "Name";
+            // 
+            // comboInventoryAddList
+            // 
+            this.comboInventoryAddList.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboInventoryAddList.FormattingEnabled = true;
+            this.comboInventoryAddList.Items.AddRange(new object[] {
+            "Select one...",
+            "Topping",
+            "Menu Listing",
+            "Size",
+            "Crust",
+            "Sause"});
+            this.comboInventoryAddList.Location = new System.Drawing.Point(3, 3);
+            this.comboInventoryAddList.Name = "comboInventoryAddList";
+            this.comboInventoryAddList.Size = new System.Drawing.Size(397, 45);
+            this.comboInventoryAddList.TabIndex = 60;
+            this.comboInventoryAddList.Text = "Select one...";
+            // 
+            // btnInvtAddNewItem
+            // 
+            this.btnInvtAddNewItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInvtAddNewItem.Location = new System.Drawing.Point(1362, 17);
+            this.btnInvtAddNewItem.Name = "btnInvtAddNewItem";
+            this.btnInvtAddNewItem.Size = new System.Drawing.Size(322, 63);
+            this.btnInvtAddNewItem.TabIndex = 73;
+            this.btnInvtAddNewItem.Text = "Add New Item";
+            this.btnInvtAddNewItem.UseVisualStyleBackColor = true;
+            this.btnInvtAddNewItem.Click += new System.EventHandler(this.btnInvtAddNewItem_Click);
+            // 
+            // lblInventoryLowLevelError
+            // 
+            this.lblInventoryLowLevelError.AutoSize = true;
+            this.lblInventoryLowLevelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInventoryLowLevelError.ForeColor = System.Drawing.Color.Red;
+            this.lblInventoryLowLevelError.Location = new System.Drawing.Point(1070, 420);
+            this.lblInventoryLowLevelError.Name = "lblInventoryLowLevelError";
+            this.lblInventoryLowLevelError.Size = new System.Drawing.Size(317, 29);
+            this.lblInventoryLowLevelError.TabIndex = 72;
+            this.lblInventoryLowLevelError.Text = "Please enter a valid Number";
+            this.lblInventoryLowLevelError.Visible = false;
+            // 
+            // lblInventoryQuantityError
+            // 
+            this.lblInventoryQuantityError.AutoSize = true;
+            this.lblInventoryQuantityError.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInventoryQuantityError.ForeColor = System.Drawing.Color.Red;
+            this.lblInventoryQuantityError.Location = new System.Drawing.Point(1070, 347);
+            this.lblInventoryQuantityError.Name = "lblInventoryQuantityError";
+            this.lblInventoryQuantityError.Size = new System.Drawing.Size(317, 29);
+            this.lblInventoryQuantityError.TabIndex = 71;
+            this.lblInventoryQuantityError.Text = "Please enter a valid Number";
+            this.lblInventoryQuantityError.Visible = false;
+            // 
+            // lblInventoryErrorCost
+            // 
+            this.lblInventoryErrorCost.AutoSize = true;
+            this.lblInventoryErrorCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInventoryErrorCost.ForeColor = System.Drawing.Color.Red;
+            this.lblInventoryErrorCost.Location = new System.Drawing.Point(1070, 273);
+            this.lblInventoryErrorCost.Name = "lblInventoryErrorCost";
+            this.lblInventoryErrorCost.Size = new System.Drawing.Size(317, 29);
+            this.lblInventoryErrorCost.TabIndex = 70;
+            this.lblInventoryErrorCost.Text = "Please enter a valid Number";
+            this.lblInventoryErrorCost.Visible = false;
+            // 
+            // btnInventorySave
+            // 
+            this.btnInventorySave.BackColor = System.Drawing.Color.Green;
+            this.btnInventorySave.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInventorySave.Location = new System.Drawing.Point(911, 503);
+            this.btnInventorySave.Name = "btnInventorySave";
+            this.btnInventorySave.Size = new System.Drawing.Size(153, 63);
+            this.btnInventorySave.TabIndex = 69;
+            this.btnInventorySave.Text = "Save";
+            this.btnInventorySave.UseVisualStyleBackColor = false;
+            this.btnInventorySave.Click += new System.EventHandler(this.btnInventorySave_Click);
+            // 
+            // btnInventoryEdit
+            // 
+            this.btnInventoryEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInventoryEdit.Location = new System.Drawing.Point(636, 503);
+            this.btnInventoryEdit.Name = "btnInventoryEdit";
+            this.btnInventoryEdit.Size = new System.Drawing.Size(153, 63);
+            this.btnInventoryEdit.TabIndex = 68;
+            this.btnInventoryEdit.Text = "Edit";
+            this.btnInventoryEdit.UseVisualStyleBackColor = true;
+            this.btnInventoryEdit.Click += new System.EventHandler(this.btnInventoryEdit_Click);
+            // 
+            // lblInventoryType
+            // 
+            this.lblInventoryType.AutoSize = true;
+            this.lblInventoryType.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInventoryType.Location = new System.Drawing.Point(789, 81);
+            this.lblInventoryType.Name = "lblInventoryType";
+            this.lblInventoryType.Size = new System.Drawing.Size(101, 40);
+            this.lblInventoryType.TabIndex = 60;
+            this.lblInventoryType.Text = "Type";
+            // 
+            // comboInventorySize
+            // 
+            this.comboInventorySize.Enabled = false;
+            this.comboInventorySize.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboInventorySize.FormattingEnabled = true;
+            this.comboInventorySize.Location = new System.Drawing.Point(825, 337);
+            this.comboInventorySize.Name = "comboInventorySize";
+            this.comboInventorySize.Size = new System.Drawing.Size(239, 45);
+            this.comboInventorySize.TabIndex = 59;
+            this.comboInventorySize.Text = "Choose Size...";
+            this.comboInventorySize.Visible = false;
+            // 
+            // txtInventoryLowLevel
+            // 
+            this.txtInventoryLowLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInventoryLowLevel.Location = new System.Drawing.Point(825, 417);
+            this.txtInventoryLowLevel.Name = "txtInventoryLowLevel";
+            this.txtInventoryLowLevel.ReadOnly = true;
+            this.txtInventoryLowLevel.Size = new System.Drawing.Size(239, 44);
+            this.txtInventoryLowLevel.TabIndex = 58;
+            // 
+            // txtInventoryQuantity
+            // 
+            this.txtInventoryQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInventoryQuantity.Location = new System.Drawing.Point(825, 338);
+            this.txtInventoryQuantity.Name = "txtInventoryQuantity";
+            this.txtInventoryQuantity.ReadOnly = true;
+            this.txtInventoryQuantity.Size = new System.Drawing.Size(239, 44);
+            this.txtInventoryQuantity.TabIndex = 57;
+            // 
+            // txtInventoryCost
+            // 
+            this.txtInventoryCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInventoryCost.Location = new System.Drawing.Point(825, 264);
+            this.txtInventoryCost.Name = "txtInventoryCost";
+            this.txtInventoryCost.ReadOnly = true;
+            this.txtInventoryCost.Size = new System.Drawing.Size(239, 44);
+            this.txtInventoryCost.TabIndex = 56;
+            // 
+            // txtInventoryName
+            // 
+            this.txtInventoryName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInventoryName.Location = new System.Drawing.Point(825, 196);
+            this.txtInventoryName.Name = "txtInventoryName";
+            this.txtInventoryName.ReadOnly = true;
+            this.txtInventoryName.Size = new System.Drawing.Size(239, 44);
+            this.txtInventoryName.TabIndex = 55;
+            // 
+            // lblInventoryLowLevel
+            // 
+            this.lblInventoryLowLevel.AutoSize = true;
+            this.lblInventoryLowLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInventoryLowLevel.Location = new System.Drawing.Point(629, 420);
+            this.lblInventoryLowLevel.Name = "lblInventoryLowLevel";
+            this.lblInventoryLowLevel.Size = new System.Drawing.Size(168, 37);
+            this.lblInventoryLowLevel.TabIndex = 17;
+            this.lblInventoryLowLevel.Text = "Low Level";
+            // 
+            // lblInventoryQuantity
+            // 
+            this.lblInventoryQuantity.AutoSize = true;
+            this.lblInventoryQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInventoryQuantity.Location = new System.Drawing.Point(629, 341);
+            this.lblInventoryQuantity.Name = "lblInventoryQuantity";
+            this.lblInventoryQuantity.Size = new System.Drawing.Size(144, 37);
+            this.lblInventoryQuantity.TabIndex = 16;
+            this.lblInventoryQuantity.Text = "Quantity";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(629, 267);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(87, 37);
+            this.label26.TabIndex = 15;
+            this.label26.Text = "Cost";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(629, 199);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(107, 37);
+            this.label25.TabIndex = 14;
+            this.label25.Text = "Name";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(384, 4);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(144, 37);
+            this.label13.TabIndex = 13;
+            this.label13.Text = "Quantity";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(28, 4);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(107, 37);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "Name";
+            // 
+            // lstBoxInventory
+            // 
+            this.lstBoxInventory.FormattingEnabled = true;
+            this.lstBoxInventory.ItemHeight = 37;
+            this.lstBoxInventory.Location = new System.Drawing.Point(7, 44);
+            this.lstBoxInventory.Name = "lstBoxInventory";
+            this.lstBoxInventory.Size = new System.Drawing.Size(616, 707);
+            this.lstBoxInventory.TabIndex = 0;
+            this.lstBoxInventory.SelectedIndexChanged += new System.EventHandler(this.lstBoxInventory_SelectedIndexChanged);
+            // 
+            // tabPagePizzas
+            // 
+            this.tabPagePizzas.Location = new System.Drawing.Point(4, 46);
+            this.tabPagePizzas.Name = "tabPagePizzas";
+            this.tabPagePizzas.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePizzas.Size = new System.Drawing.Size(1752, 754);
+            this.tabPagePizzas.TabIndex = 5;
+            this.tabPagePizzas.Text = "Pizzas";
+            this.tabPagePizzas.UseVisualStyleBackColor = true;
             // 
             // tabPageSales
             // 
@@ -704,84 +996,6 @@
             this.comboCooks.Text = "Choose Cook...";
             this.comboCooks.SelectedIndexChanged += new System.EventHandler(this.comboCooks_SelectedIndexChanged);
             // 
-            // tabPageReports
-            // 
-            this.tabPageReports.Controls.Add(this.btnRunReport);
-            this.tabPageReports.Controls.Add(this.dateTimePickerEnd);
-            this.tabPageReports.Controls.Add(this.dateTimePickerStart);
-            this.tabPageReports.Controls.Add(this.lblEndDate);
-            this.tabPageReports.Controls.Add(this.lblStartDate);
-            this.tabPageReports.Controls.Add(this.comboReports);
-            this.tabPageReports.Controls.Add(this.reportViewer1);
-            this.tabPageReports.Location = new System.Drawing.Point(4, 46);
-            this.tabPageReports.Name = "tabPageReports";
-            this.tabPageReports.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageReports.Size = new System.Drawing.Size(1752, 754);
-            this.tabPageReports.TabIndex = 3;
-            this.tabPageReports.Text = "Reports";
-            this.tabPageReports.UseVisualStyleBackColor = true;
-            // 
-            // btnRunReport
-            // 
-            this.btnRunReport.Location = new System.Drawing.Point(1052, 36);
-            this.btnRunReport.Name = "btnRunReport";
-            this.btnRunReport.Size = new System.Drawing.Size(159, 49);
-            this.btnRunReport.TabIndex = 6;
-            this.btnRunReport.Text = "Run Report";
-            this.btnRunReport.UseVisualStyleBackColor = true;
-            // 
-            // dateTimePickerEnd
-            // 
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(537, 64);
-            this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(509, 44);
-            this.dateTimePickerEnd.TabIndex = 5;
-            // 
-            // dateTimePickerStart
-            // 
-            this.dateTimePickerStart.Location = new System.Drawing.Point(537, 14);
-            this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(509, 44);
-            this.dateTimePickerStart.TabIndex = 4;
-            // 
-            // lblEndDate
-            // 
-            this.lblEndDate.AutoSize = true;
-            this.lblEndDate.Location = new System.Drawing.Point(370, 64);
-            this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(150, 37);
-            this.lblEndDate.TabIndex = 3;
-            this.lblEndDate.Text = "End Date";
-            // 
-            // lblStartDate
-            // 
-            this.lblStartDate.AutoSize = true;
-            this.lblStartDate.Location = new System.Drawing.Point(370, 14);
-            this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(161, 37);
-            this.lblStartDate.TabIndex = 2;
-            this.lblStartDate.Text = "Start Date";
-            // 
-            // comboReports
-            // 
-            this.comboReports.FormattingEnabled = true;
-            this.comboReports.Location = new System.Drawing.Point(20, 18);
-            this.comboReports.Name = "comboReports";
-            this.comboReports.Size = new System.Drawing.Size(327, 45);
-            this.comboReports.TabIndex = 1;
-            this.comboReports.Text = "Choose Report...";
-            // 
-            // reportViewer1
-            // 
-            reportDataSource1.Name = "DataSet1";
-            reportDataSource1.Value = this.ManagersBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource1);
-            this.reportViewer1.LocalReport.ReportEmbeddedResource = "Anchovy.Manager.Main.Report1.rdlc";
-            this.reportViewer1.Location = new System.Drawing.Point(9, 114);
-            this.reportViewer1.Name = "reportViewer1";
-            this.reportViewer1.Size = new System.Drawing.Size(1740, 627);
-            this.reportViewer1.TabIndex = 0;
-            // 
             // tabPageManagers
             // 
             this.tabPageManagers.Controls.Add(this.lblManagerIdValue);
@@ -1107,6 +1321,84 @@
             this.comboManager.Text = "Choose Manager...";
             this.comboManager.SelectedIndexChanged += new System.EventHandler(this.comboManager_SelectedIndexChanged);
             // 
+            // tabPageReports
+            // 
+            this.tabPageReports.Controls.Add(this.btnRunReport);
+            this.tabPageReports.Controls.Add(this.dateTimePickerEnd);
+            this.tabPageReports.Controls.Add(this.dateTimePickerStart);
+            this.tabPageReports.Controls.Add(this.lblEndDate);
+            this.tabPageReports.Controls.Add(this.lblStartDate);
+            this.tabPageReports.Controls.Add(this.comboReports);
+            this.tabPageReports.Controls.Add(this.reportViewer1);
+            this.tabPageReports.Location = new System.Drawing.Point(4, 46);
+            this.tabPageReports.Name = "tabPageReports";
+            this.tabPageReports.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageReports.Size = new System.Drawing.Size(1752, 754);
+            this.tabPageReports.TabIndex = 3;
+            this.tabPageReports.Text = "Reports";
+            this.tabPageReports.UseVisualStyleBackColor = true;
+            // 
+            // btnRunReport
+            // 
+            this.btnRunReport.Location = new System.Drawing.Point(1052, 36);
+            this.btnRunReport.Name = "btnRunReport";
+            this.btnRunReport.Size = new System.Drawing.Size(159, 49);
+            this.btnRunReport.TabIndex = 6;
+            this.btnRunReport.Text = "Run Report";
+            this.btnRunReport.UseVisualStyleBackColor = true;
+            // 
+            // dateTimePickerEnd
+            // 
+            this.dateTimePickerEnd.Location = new System.Drawing.Point(537, 64);
+            this.dateTimePickerEnd.Name = "dateTimePickerEnd";
+            this.dateTimePickerEnd.Size = new System.Drawing.Size(509, 44);
+            this.dateTimePickerEnd.TabIndex = 5;
+            // 
+            // dateTimePickerStart
+            // 
+            this.dateTimePickerStart.Location = new System.Drawing.Point(537, 14);
+            this.dateTimePickerStart.Name = "dateTimePickerStart";
+            this.dateTimePickerStart.Size = new System.Drawing.Size(509, 44);
+            this.dateTimePickerStart.TabIndex = 4;
+            // 
+            // lblEndDate
+            // 
+            this.lblEndDate.AutoSize = true;
+            this.lblEndDate.Location = new System.Drawing.Point(370, 64);
+            this.lblEndDate.Name = "lblEndDate";
+            this.lblEndDate.Size = new System.Drawing.Size(150, 37);
+            this.lblEndDate.TabIndex = 3;
+            this.lblEndDate.Text = "End Date";
+            // 
+            // lblStartDate
+            // 
+            this.lblStartDate.AutoSize = true;
+            this.lblStartDate.Location = new System.Drawing.Point(370, 14);
+            this.lblStartDate.Name = "lblStartDate";
+            this.lblStartDate.Size = new System.Drawing.Size(161, 37);
+            this.lblStartDate.TabIndex = 2;
+            this.lblStartDate.Text = "Start Date";
+            // 
+            // comboReports
+            // 
+            this.comboReports.FormattingEnabled = true;
+            this.comboReports.Location = new System.Drawing.Point(20, 18);
+            this.comboReports.Name = "comboReports";
+            this.comboReports.Size = new System.Drawing.Size(327, 45);
+            this.comboReports.TabIndex = 1;
+            this.comboReports.Text = "Choose Report...";
+            // 
+            // reportViewer1
+            // 
+            reportDataSource9.Name = "DataSet1";
+            reportDataSource9.Value = this.ManagersBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource9);
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "Anchovy.Manager.Main.Report1.rdlc";
+            this.reportViewer1.Location = new System.Drawing.Point(9, 114);
+            this.reportViewer1.Name = "reportViewer1";
+            this.reportViewer1.Size = new System.Drawing.Size(1740, 627);
+            this.reportViewer1.TabIndex = 0;
+            // 
             // btnManLogout
             // 
             this.btnManLogout.BackColor = System.Drawing.SystemColors.Control;
@@ -1133,112 +1425,6 @@
             // 
             this.toppingBindingSource.DataSource = typeof(Anchovy.API.Client.Models.Topping);
             // 
-            // lstBoxInventory
-            // 
-            this.lstBoxInventory.FormattingEnabled = true;
-            this.lstBoxInventory.ItemHeight = 37;
-            this.lstBoxInventory.Location = new System.Drawing.Point(7, 44);
-            this.lstBoxInventory.Name = "lstBoxInventory";
-            this.lstBoxInventory.Size = new System.Drawing.Size(546, 707);
-            this.lstBoxInventory.TabIndex = 0;
-            this.lstBoxInventory.SelectedIndexChanged += new System.EventHandler(this.lstBoxInventory_SelectedIndexChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(35, 4);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(107, 37);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "Name";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(409, 4);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(144, 37);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "Quantity";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(629, 199);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(107, 37);
-            this.label25.TabIndex = 14;
-            this.label25.Text = "Name";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(629, 267);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(87, 37);
-            this.label26.TabIndex = 15;
-            this.label26.Text = "Cost";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(629, 341);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(144, 37);
-            this.label27.TabIndex = 16;
-            this.label27.Text = "Quantity";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(629, 420);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(168, 37);
-            this.label28.TabIndex = 17;
-            this.label28.Text = "Low Level";
-            // 
-            // txtInventoryName
-            // 
-            this.txtInventoryName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInventoryName.Location = new System.Drawing.Point(825, 196);
-            this.txtInventoryName.Name = "txtInventoryName";
-            this.txtInventoryName.ReadOnly = true;
-            this.txtInventoryName.Size = new System.Drawing.Size(239, 44);
-            this.txtInventoryName.TabIndex = 55;
-            // 
-            // txtInventoryCost
-            // 
-            this.txtInventoryCost.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInventoryCost.Location = new System.Drawing.Point(825, 264);
-            this.txtInventoryCost.Name = "txtInventoryCost";
-            this.txtInventoryCost.ReadOnly = true;
-            this.txtInventoryCost.Size = new System.Drawing.Size(239, 44);
-            this.txtInventoryCost.TabIndex = 56;
-            // 
-            // txtInventoryQuantity
-            // 
-            this.txtInventoryQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInventoryQuantity.Location = new System.Drawing.Point(825, 338);
-            this.txtInventoryQuantity.Name = "txtInventoryQuantity";
-            this.txtInventoryQuantity.ReadOnly = true;
-            this.txtInventoryQuantity.Size = new System.Drawing.Size(239, 44);
-            this.txtInventoryQuantity.TabIndex = 57;
-            // 
-            // txtInventoryLowLevel
-            // 
-            this.txtInventoryLowLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInventoryLowLevel.Location = new System.Drawing.Point(825, 417);
-            this.txtInventoryLowLevel.Name = "txtInventoryLowLevel";
-            this.txtInventoryLowLevel.ReadOnly = true;
-            this.txtInventoryLowLevel.Size = new System.Drawing.Size(239, 44);
-            this.txtInventoryLowLevel.TabIndex = 58;
-            // 
             // ManagerMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1257,14 +1443,16 @@
             this.tabControl.ResumeLayout(false);
             this.tabPageInventory.ResumeLayout(false);
             this.tabPageInventory.PerformLayout();
+            this.panelInventoryAddNew.ResumeLayout(false);
+            this.panelInventoryAddNew.PerformLayout();
             this.tabPageSales.ResumeLayout(false);
             this.tabPageSales.PerformLayout();
             this.tabPageCooks.ResumeLayout(false);
             this.tabPageCooks.PerformLayout();
-            this.tabPageReports.ResumeLayout(false);
-            this.tabPageReports.PerformLayout();
             this.tabPageManagers.ResumeLayout(false);
             this.tabPageManagers.PerformLayout();
+            this.tabPageReports.ResumeLayout(false);
+            this.tabPageReports.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.anchovyContextDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toppingBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -1373,9 +1561,23 @@
         private System.Windows.Forms.TextBox txtInventoryQuantity;
         private System.Windows.Forms.TextBox txtInventoryCost;
         private System.Windows.Forms.TextBox txtInventoryName;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label lblInventoryLowLevel;
+        private System.Windows.Forms.Label lblInventoryQuantity;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ComboBox comboInventorySize;
+        private System.Windows.Forms.Label lblInventoryType;
+        private System.Windows.Forms.TabPage tabPagePizzas;
+        private System.Windows.Forms.Button btnInventorySave;
+        private System.Windows.Forms.Button btnInventoryEdit;
+        private System.Windows.Forms.Label lblInventoryLowLevelError;
+        private System.Windows.Forms.Label lblInventoryQuantityError;
+        private System.Windows.Forms.Label lblInventoryErrorCost;
+        private System.Windows.Forms.Panel panelInventoryAddNew;
+        private System.Windows.Forms.Button btnInventoryAddNewDone;
+        private System.Windows.Forms.TextBox txtInventoryAddNewName;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ComboBox comboInventoryAddList;
+        private System.Windows.Forms.Button btnInvtAddNewItem;
     }
 }
