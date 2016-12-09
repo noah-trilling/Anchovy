@@ -30,6 +30,7 @@ namespace Anchovy.Manager.Main
         private ICooks _cooks = new AnchovyAPIService().Cooks;
         private IManagers _managers = new AnchovyAPIService().Managers;
 
+        
 
         public ManagerMain()
         {
@@ -43,6 +44,11 @@ namespace Anchovy.Manager.Main
             this.Close();
         }
 
+        public void hideManagersTab()
+        {
+            tabControl.TabPages.Remove(tabPageManagers);
+        }
+
         private void ManagerMain_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'AnchovyContextDataSet.Managers' table. You can move, or remove it, as needed.
@@ -54,6 +60,7 @@ namespace Anchovy.Manager.Main
             PopulateSalesTab();
             PopulateCooksComboBox();
             PopulateManagersComboBox();
+            populatelstPizzasList();
 
             //tabControl.TabPages.Remove(tabPageReports);
         }
@@ -456,6 +463,283 @@ namespace Anchovy.Manager.Main
             PopulateInventoryListBox();
             panelInventoryAddNew.Visible = false;
             btnInvtAddNewItem.Text = "Add New Item";
+        }
+
+        ///<summary>
+        ///Pizzas Tab
+        ///All fumctionality for adding and editing pizzas
+        ///</summary>
+        private void populatelstPizzasList()
+        {
+            var AllMenuPizzas = _pizzas.GetPizzas().GetEnumerator();
+            List<string> DataforpizzaList = new List<string>();
+            while (AllMenuPizzas.MoveNext())
+            {
+                if((bool)AllMenuPizzas.Current.MenuItem)
+                {
+                    DataforpizzaList.Add(AllMenuPizzas.Current.Id+": "+AllMenuPizzas.Current.Name);
+                }
+            }
+
+            lstPizzasList.DataSource = DataforpizzaList;
+            PopulateAllPizzaCombos();
+            PopulatePizzaAllToppingsList();
+        }
+
+        private void lstPizzasList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string item = lstPizzasList.SelectedItem.ToString();
+            string idstring = item.Substring(0, item.IndexOf(":"));
+            int _id = Convert.ToInt32(idstring);
+
+            var pizza = _pizzas.GetPizza(_id);
+            txtPizzasTabName.Text = pizza.Name;
+
+            PopulateAllPizzaCombos();
+        }
+
+        private void PopulateAllPizzaCombos()
+        {
+            var AllSizes = _sizes.GetSizes().GetEnumerator();
+            List<string> sizes = new List<string>();
+            while (AllSizes.MoveNext())
+            {
+                sizes.Add(AllSizes.Current.Name);
+            }
+            comboPizzasSize.DataSource = sizes;
+            comboPizzaAddNewSize.DataSource = sizes;
+            var AllCrusts = _crust.GetCrusts().GetEnumerator();
+            List<string> crusts = new List<string>();
+            while (AllCrusts.MoveNext())
+            {
+                crusts.Add(AllCrusts.Current.Name);
+            }
+            comboPizzasCrust.DataSource = crusts;
+            comboPizzaAddNewCrust.DataSource = crusts;
+            var AllSauces = _sauses.GetSauces().GetEnumerator();
+            List<string> sauces = new List<string>();
+            while (AllSauces.MoveNext())
+            {
+                sauces.Add(AllSauces.Current.Name);
+            }
+            comboPizzasSauce.DataSource = sauces;
+            comboPizzaAddNewSauce.DataSource = sauces;
+
+            string item = lstPizzasList.SelectedItem.ToString();
+            string idstring = item.Substring(0, item.IndexOf(":"));
+            int _id = Convert.ToInt32(idstring);
+            var pizza = _pizzas.GetPizza(_id);
+            int sizeId = (int)pizza.SizeId;
+            int sauceId = (int)pizza.SauceId;
+            int crustId = (int)pizza.CrustId;
+            comboPizzasSize.Text = _sizes.GetSize(sizeId).Name;
+            comboPizzasSauce.Text = _sauses.GetSauce(sauceId).Name;
+            comboPizzasCrust.Text = _crust.GetCrust(crustId).Name;
+
+            var AllToppingsOnPizzas = _pizzaToppings.GetPizzaToppings().GetEnumerator();
+            List<int> toppingIds = new List<int>();
+            while (AllToppingsOnPizzas.MoveNext())
+            {
+                if(AllToppingsOnPizzas.Current.PizzaId == _id)
+                {
+                    toppingIds.Add((int)AllToppingsOnPizzas.Current.ToppingId);
+                }
+            }
+            List<string> toppingNames = new List<string>();
+            lstPizzasToppingOnPizza.Items.Clear();
+            foreach (var x in toppingIds)
+                lstPizzasToppingOnPizza.Items.Add(_toppings.GetTopping(x).Name);
+            
+        }
+
+        private void PopulatePizzaAllToppingsList()
+        {
+            var AllToppings = _toppings.GetToppings().GetEnumerator();
+            List<string> toppinglist = new List<string>();
+            while (AllToppings.MoveNext())
+            {
+                toppinglist.Add(AllToppings.Current.Name);
+            }
+            lstPizzasAllToppings.DataSource = toppinglist;
+        }
+
+        private void btnPizzasEdit_Click(object sender, EventArgs e)
+        {
+            txtPizzasTabName.ReadOnly = false;
+            comboPizzasCrust.Enabled = true;
+            comboPizzasSauce.Enabled = true;
+            comboPizzasSize.Enabled = true;
+            btnPizzasAddAllToppings.Enabled = true;
+            btnPizzasToppingsAddOne.Enabled = true;
+            btnPizzasRemoveOneTopping.Enabled = true;
+            btnPizzasToppingRemoveAll.Enabled = true;
+        }
+
+        private void btnPizzasSave_Click(object sender, EventArgs e)
+        {
+            string item = lstPizzasList.SelectedItem.ToString();
+            string idstring = item.Substring(0, item.IndexOf(":"));
+            int _id = Convert.ToInt32(idstring);
+            var pizza = _pizzas.GetPizza(_id);
+            var AllSizes = _sizes.GetSizes().GetEnumerator();
+            var AllSauces = _sauses.GetSauces().GetEnumerator();
+            var AllCrusts = _crust.GetCrusts().GetEnumerator();
+            int sizeId = 0;
+            int sauceId = 0;
+            int crustId = 0;
+            while (AllSizes.MoveNext())
+            {
+                if (AllSizes.Current.Name.Equals(comboPizzasSize.Text))
+                {
+                    sizeId = (int)AllSizes.Current.Id;
+                }
+            }
+            while (AllSauces.MoveNext())
+            {
+                if (AllSauces.Current.Name.Equals(comboPizzasSauce.Text))
+                {
+                    sauceId = (int)AllSauces.Current.Id;
+                }
+            }
+            while (AllCrusts.MoveNext())
+            {
+                if (AllCrusts.Current.Name.Equals(comboPizzasCrust.Text))
+                {
+                    crustId = (int)AllCrusts.Current.Id;
+                }
+            }
+            pizza.Name = txtPizzasTabName.Text;
+            pizza.SizeId = sizeId;
+            pizza.Size = _sizes.GetSize(sizeId);
+            pizza.SauceId = sauceId;
+            pizza.Sauce = _sauses.GetSauce(sauceId);
+            pizza.CrustId = crustId;
+            pizza.Crust = _crust.GetCrust(crustId);
+            _pizzas.PutPizza(_id, pizza);
+
+            var AllToppingsOnPizzas = _pizzaToppings.GetPizzaToppings().GetEnumerator();
+            while (AllToppingsOnPizzas.MoveNext())
+            {
+                if (AllToppingsOnPizzas.Current.PizzaId == _id)
+                {
+                    _pizzaToppings.DeletePizzaTopping((int)AllToppingsOnPizzas.Current.Id);
+                }
+            }
+            List<int> toppingIds = new List<int>();
+            var AllToppings = _toppings.GetToppings().GetEnumerator();
+            while (AllToppings.MoveNext())
+            {
+                foreach(var i in lstPizzasToppingOnPizza.Items)
+                {
+                    if (i.Equals(AllToppings.Current.Name))
+                    {
+                        toppingIds.Add((int)AllToppings.Current.Id);
+                    }
+                }
+            }
+            API.Client.Models.PizzaTopping pt = new API.Client.Models.PizzaTopping();
+            foreach(int topId in toppingIds)
+            {
+                pt.PizzaId = _id;
+                pt.ToppingId = topId;
+                _pizzaToppings.PostPizzaTopping(pt);
+            }
+
+            txtPizzasTabName.ReadOnly = true;
+            comboPizzasCrust.Enabled = false;
+            comboPizzasSauce.Enabled = false;
+            comboPizzasSize.Enabled = false;
+            btnPizzasAddAllToppings.Enabled = false;
+            btnPizzasToppingsAddOne.Enabled = false;
+            btnPizzasRemoveOneTopping.Enabled = false;
+            btnPizzasToppingRemoveAll.Enabled = false;
+            populatelstPizzasList();
+        }
+
+        private void btnPizzasAddPizzas_Click(object sender, EventArgs e)
+        {
+            if (btnPizzasAddPizzas.Text.Equals("Cancel"))
+            {
+                panelPizzasAddPizza.Visible = false;
+                btnPizzasAddPizzas.Text = "Add New Pizza";
+                return;
+            }
+            btnPizzasAddPizzas.Text = "Cancel";
+            panelPizzasAddPizza.Visible = true;
+        }
+
+        private void btnPizzasAddDone_Click(object sender, EventArgs e)
+        {
+            API.Client.Models.Pizza pizza = new API.Client.Models.Pizza();
+            var AllSizes = _sizes.GetSizes().GetEnumerator();
+            var AllSauces = _sauses.GetSauces().GetEnumerator();
+            var AllCrusts = _crust.GetCrusts().GetEnumerator();
+            int sizeId = 0;
+            int sauceId = 0;
+            int crustId = 0;
+            while (AllSizes.MoveNext())
+            {
+                if (AllSizes.Current.Name.Equals(comboPizzaAddNewSize.Text))
+                {
+                    sizeId = (int)AllSizes.Current.Id;
+                }
+            }
+            while (AllSauces.MoveNext())
+            {
+                if (AllSauces.Current.Name.Equals(comboPizzaAddNewSauce.Text))
+                {
+                    sauceId = (int)AllSauces.Current.Id;
+                }
+            }
+            while (AllCrusts.MoveNext())
+            {
+                if (AllCrusts.Current.Name.Equals(comboPizzaAddNewCrust.Text))
+                {
+                    crustId = (int)AllCrusts.Current.Id;
+                }
+            }
+            pizza.Name = txtPizzaAddNewName.Text;
+            pizza.SizeId = sizeId;
+            pizza.Size = _sizes.GetSize(sizeId);
+            pizza.SauceId = sauceId;
+            pizza.Sauce = _sauses.GetSauce(sauceId);
+            pizza.CrustId = crustId;
+            pizza.Crust = _crust.GetCrust(crustId);
+            pizza.MenuItem = true;
+
+            _pizzas.PostPizza(pizza);
+            txtPizzaAddNewName.Text = "";
+            btnPizzasAddPizzas.Text = "Add New Pizza";
+            panelPizzasAddPizza.Visible = false;
+            populatelstPizzasList();
+        }
+
+        private void btnPizzasAddAllToppings_Click(object sender, EventArgs e)
+        {
+            foreach (var item in lstPizzasAllToppings.Items)
+            {
+                lstPizzasToppingOnPizza.Items.Add(item);
+            }
+           
+        }
+
+        private void btnPizzasToppingsAddOne_Click(object sender, EventArgs e)
+        {
+            foreach (var item in lstPizzasAllToppings.SelectedItems)
+            {
+                lstPizzasToppingOnPizza.Items.Add(item);
+            }
+        }
+
+        private void btnPizzasRemoveOneTopping_Click(object sender, EventArgs e)
+        {
+            foreach (string s in lstPizzasToppingOnPizza.SelectedItems.OfType<string>().ToList())
+                lstPizzasToppingOnPizza.Items.Remove(s);
+        }
+
+        private void btnPizzasToppingRemoveAll_Click(object sender, EventArgs e)
+        {
+            lstPizzasToppingOnPizza.Items.Clear();
         }
 
         /// <summary>

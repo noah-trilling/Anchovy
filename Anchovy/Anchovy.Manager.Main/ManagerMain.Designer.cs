@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource9 = new Microsoft.Reporting.WinForms.ReportDataSource();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource7 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.ManagersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AnchovyContextDataSet = new Anchovy.Manager.Main.AnchovyContextDataSet();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -148,17 +148,49 @@
             this.ManagersTableAdapter = new Anchovy.Manager.Main.AnchovyContextDataSetTableAdapters.ManagersTableAdapter();
             this.anchovyContextDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toppingBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lstPizzasList = new System.Windows.Forms.ListBox();
+            this.txtPizzasTabName = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.comboPizzasSize = new System.Windows.Forms.ComboBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.comboPizzasCrust = new System.Windows.Forms.ComboBox();
+            this.comboPizzasSauce = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.lstPizzasAllToppings = new System.Windows.Forms.ListBox();
+            this.lstPizzasToppingOnPizza = new System.Windows.Forms.ListBox();
+            this.btnPizzasAddAllToppings = new System.Windows.Forms.Button();
+            this.btnPizzasToppingsAddOne = new System.Windows.Forms.Button();
+            this.btnPizzasRemoveOneTopping = new System.Windows.Forms.Button();
+            this.btnPizzasToppingRemoveAll = new System.Windows.Forms.Button();
+            this.btnPizzasSave = new System.Windows.Forms.Button();
+            this.btnPizzasEdit = new System.Windows.Forms.Button();
+            this.panelPizzasAddPizza = new System.Windows.Forms.Panel();
+            this.btnPizzasAddPizzas = new System.Windows.Forms.Button();
+            this.comboPizzaAddNewSauce = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.comboPizzaAddNewCrust = new System.Windows.Forms.ComboBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.comboPizzaAddNewSize = new System.Windows.Forms.ComboBox();
+            this.txtPizzaAddNewName = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.btnPizzasAddDone = new System.Windows.Forms.Button();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ManagersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnchovyContextDataSet)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageInventory.SuspendLayout();
             this.panelInventoryAddNew.SuspendLayout();
+            this.tabPagePizzas.SuspendLayout();
             this.tabPageSales.SuspendLayout();
             this.tabPageCooks.SuspendLayout();
             this.tabPageManagers.SuspendLayout();
             this.tabPageReports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.anchovyContextDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toppingBindingSource)).BeginInit();
+            this.panelPizzasAddPizza.SuspendLayout();
             this.SuspendLayout();
             // 
             // ManagersBindingSource
@@ -476,6 +508,27 @@
             // 
             // tabPagePizzas
             // 
+            this.tabPagePizzas.Controls.Add(this.btnPizzasAddPizzas);
+            this.tabPagePizzas.Controls.Add(this.panelPizzasAddPizza);
+            this.tabPagePizzas.Controls.Add(this.btnPizzasSave);
+            this.tabPagePizzas.Controls.Add(this.btnPizzasEdit);
+            this.tabPagePizzas.Controls.Add(this.btnPizzasToppingRemoveAll);
+            this.tabPagePizzas.Controls.Add(this.btnPizzasRemoveOneTopping);
+            this.tabPagePizzas.Controls.Add(this.btnPizzasToppingsAddOne);
+            this.tabPagePizzas.Controls.Add(this.btnPizzasAddAllToppings);
+            this.tabPagePizzas.Controls.Add(this.lstPizzasToppingOnPizza);
+            this.tabPagePizzas.Controls.Add(this.lstPizzasAllToppings);
+            this.tabPagePizzas.Controls.Add(this.comboPizzasSauce);
+            this.tabPagePizzas.Controls.Add(this.label31);
+            this.tabPagePizzas.Controls.Add(this.comboPizzasCrust);
+            this.tabPagePizzas.Controls.Add(this.label30);
+            this.tabPagePizzas.Controls.Add(this.label29);
+            this.tabPagePizzas.Controls.Add(this.comboPizzasSize);
+            this.tabPagePizzas.Controls.Add(this.txtPizzasTabName);
+            this.tabPagePizzas.Controls.Add(this.label28);
+            this.tabPagePizzas.Controls.Add(this.lstPizzasList);
+            this.tabPagePizzas.Controls.Add(this.label36);
+            this.tabPagePizzas.Controls.Add(this.label37);
             this.tabPagePizzas.Location = new System.Drawing.Point(4, 46);
             this.tabPagePizzas.Name = "tabPagePizzas";
             this.tabPagePizzas.Padding = new System.Windows.Forms.Padding(3);
@@ -1390,9 +1443,9 @@
             // 
             // reportViewer1
             // 
-            reportDataSource9.Name = "DataSet1";
-            reportDataSource9.Value = this.ManagersBindingSource;
-            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource9);
+            reportDataSource7.Name = "DataSet1";
+            reportDataSource7.Value = this.ManagersBindingSource;
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource7);
             this.reportViewer1.LocalReport.ReportEmbeddedResource = "Anchovy.Manager.Main.Report1.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(9, 114);
             this.reportViewer1.Name = "reportViewer1";
@@ -1425,6 +1478,324 @@
             // 
             this.toppingBindingSource.DataSource = typeof(Anchovy.API.Client.Models.Topping);
             // 
+            // lstPizzasList
+            // 
+            this.lstPizzasList.FormattingEnabled = true;
+            this.lstPizzasList.ItemHeight = 37;
+            this.lstPizzasList.Location = new System.Drawing.Point(6, 41);
+            this.lstPizzasList.Name = "lstPizzasList";
+            this.lstPizzasList.Size = new System.Drawing.Size(616, 707);
+            this.lstPizzasList.TabIndex = 1;
+            this.lstPizzasList.SelectedIndexChanged += new System.EventHandler(this.lstPizzasList_SelectedIndexChanged);
+            // 
+            // txtPizzasTabName
+            // 
+            this.txtPizzasTabName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPizzasTabName.Location = new System.Drawing.Point(765, 110);
+            this.txtPizzasTabName.Name = "txtPizzasTabName";
+            this.txtPizzasTabName.ReadOnly = true;
+            this.txtPizzasTabName.Size = new System.Drawing.Size(239, 44);
+            this.txtPizzasTabName.TabIndex = 57;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(647, 113);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(107, 37);
+            this.label28.TabIndex = 56;
+            this.label28.Text = "Name";
+            // 
+            // comboPizzasSize
+            // 
+            this.comboPizzasSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPizzasSize.Enabled = false;
+            this.comboPizzasSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPizzasSize.FormattingEnabled = true;
+            this.comboPizzasSize.Location = new System.Drawing.Point(765, 209);
+            this.comboPizzasSize.Name = "comboPizzasSize";
+            this.comboPizzasSize.Size = new System.Drawing.Size(239, 45);
+            this.comboPizzasSize.TabIndex = 60;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(647, 212);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(82, 37);
+            this.label29.TabIndex = 61;
+            this.label29.Text = "Size";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.Location = new System.Drawing.Point(647, 314);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(99, 37);
+            this.label30.TabIndex = 62;
+            this.label30.Text = "Crust";
+            // 
+            // comboPizzasCrust
+            // 
+            this.comboPizzasCrust.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPizzasCrust.Enabled = false;
+            this.comboPizzasCrust.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPizzasCrust.FormattingEnabled = true;
+            this.comboPizzasCrust.Location = new System.Drawing.Point(765, 311);
+            this.comboPizzasCrust.Name = "comboPizzasCrust";
+            this.comboPizzasCrust.Size = new System.Drawing.Size(239, 45);
+            this.comboPizzasCrust.TabIndex = 63;
+            // 
+            // comboPizzasSauce
+            // 
+            this.comboPizzasSauce.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPizzasSauce.Enabled = false;
+            this.comboPizzasSauce.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPizzasSauce.FormattingEnabled = true;
+            this.comboPizzasSauce.Location = new System.Drawing.Point(765, 412);
+            this.comboPizzasSauce.Name = "comboPizzasSauce";
+            this.comboPizzasSauce.Size = new System.Drawing.Size(239, 45);
+            this.comboPizzasSauce.TabIndex = 65;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(647, 415);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(112, 37);
+            this.label31.TabIndex = 64;
+            this.label31.Text = "Sauce";
+            // 
+            // lstPizzasAllToppings
+            // 
+            this.lstPizzasAllToppings.FormattingEnabled = true;
+            this.lstPizzasAllToppings.ItemHeight = 37;
+            this.lstPizzasAllToppings.Location = new System.Drawing.Point(1010, 110);
+            this.lstPizzasAllToppings.Name = "lstPizzasAllToppings";
+            this.lstPizzasAllToppings.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstPizzasAllToppings.Size = new System.Drawing.Size(285, 374);
+            this.lstPizzasAllToppings.TabIndex = 66;
+            // 
+            // lstPizzasToppingOnPizza
+            // 
+            this.lstPizzasToppingOnPizza.FormattingEnabled = true;
+            this.lstPizzasToppingOnPizza.ItemHeight = 37;
+            this.lstPizzasToppingOnPizza.Location = new System.Drawing.Point(1461, 110);
+            this.lstPizzasToppingOnPizza.Name = "lstPizzasToppingOnPizza";
+            this.lstPizzasToppingOnPizza.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstPizzasToppingOnPizza.Size = new System.Drawing.Size(285, 374);
+            this.lstPizzasToppingOnPizza.TabIndex = 67;
+            // 
+            // btnPizzasAddAllToppings
+            // 
+            this.btnPizzasAddAllToppings.Enabled = false;
+            this.btnPizzasAddAllToppings.Location = new System.Drawing.Point(1301, 110);
+            this.btnPizzasAddAllToppings.Name = "btnPizzasAddAllToppings";
+            this.btnPizzasAddAllToppings.Size = new System.Drawing.Size(154, 83);
+            this.btnPizzasAddAllToppings.TabIndex = 68;
+            this.btnPizzasAddAllToppings.Text = ">>";
+            this.btnPizzasAddAllToppings.UseVisualStyleBackColor = true;
+            this.btnPizzasAddAllToppings.Click += new System.EventHandler(this.btnPizzasAddAllToppings_Click);
+            // 
+            // btnPizzasToppingsAddOne
+            // 
+            this.btnPizzasToppingsAddOne.Enabled = false;
+            this.btnPizzasToppingsAddOne.Location = new System.Drawing.Point(1301, 199);
+            this.btnPizzasToppingsAddOne.Name = "btnPizzasToppingsAddOne";
+            this.btnPizzasToppingsAddOne.Size = new System.Drawing.Size(154, 83);
+            this.btnPizzasToppingsAddOne.TabIndex = 69;
+            this.btnPizzasToppingsAddOne.Text = ">";
+            this.btnPizzasToppingsAddOne.UseVisualStyleBackColor = true;
+            this.btnPizzasToppingsAddOne.Click += new System.EventHandler(this.btnPizzasToppingsAddOne_Click);
+            // 
+            // btnPizzasRemoveOneTopping
+            // 
+            this.btnPizzasRemoveOneTopping.Enabled = false;
+            this.btnPizzasRemoveOneTopping.Location = new System.Drawing.Point(1301, 288);
+            this.btnPizzasRemoveOneTopping.Name = "btnPizzasRemoveOneTopping";
+            this.btnPizzasRemoveOneTopping.Size = new System.Drawing.Size(154, 83);
+            this.btnPizzasRemoveOneTopping.TabIndex = 70;
+            this.btnPizzasRemoveOneTopping.Text = "<";
+            this.btnPizzasRemoveOneTopping.UseVisualStyleBackColor = true;
+            this.btnPizzasRemoveOneTopping.Click += new System.EventHandler(this.btnPizzasRemoveOneTopping_Click);
+            // 
+            // btnPizzasToppingRemoveAll
+            // 
+            this.btnPizzasToppingRemoveAll.Enabled = false;
+            this.btnPizzasToppingRemoveAll.Location = new System.Drawing.Point(1301, 377);
+            this.btnPizzasToppingRemoveAll.Name = "btnPizzasToppingRemoveAll";
+            this.btnPizzasToppingRemoveAll.Size = new System.Drawing.Size(154, 83);
+            this.btnPizzasToppingRemoveAll.TabIndex = 71;
+            this.btnPizzasToppingRemoveAll.Text = "<<";
+            this.btnPizzasToppingRemoveAll.UseVisualStyleBackColor = true;
+            this.btnPizzasToppingRemoveAll.Click += new System.EventHandler(this.btnPizzasToppingRemoveAll_Click);
+            // 
+            // btnPizzasSave
+            // 
+            this.btnPizzasSave.BackColor = System.Drawing.Color.Green;
+            this.btnPizzasSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPizzasSave.Location = new System.Drawing.Point(1155, 601);
+            this.btnPizzasSave.Name = "btnPizzasSave";
+            this.btnPizzasSave.Size = new System.Drawing.Size(153, 63);
+            this.btnPizzasSave.TabIndex = 73;
+            this.btnPizzasSave.Text = "Save";
+            this.btnPizzasSave.UseVisualStyleBackColor = false;
+            this.btnPizzasSave.Click += new System.EventHandler(this.btnPizzasSave_Click);
+            // 
+            // btnPizzasEdit
+            // 
+            this.btnPizzasEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPizzasEdit.Location = new System.Drawing.Point(996, 601);
+            this.btnPizzasEdit.Name = "btnPizzasEdit";
+            this.btnPizzasEdit.Size = new System.Drawing.Size(153, 63);
+            this.btnPizzasEdit.TabIndex = 72;
+            this.btnPizzasEdit.Text = "Edit";
+            this.btnPizzasEdit.UseVisualStyleBackColor = true;
+            this.btnPizzasEdit.Click += new System.EventHandler(this.btnPizzasEdit_Click);
+            // 
+            // panelPizzasAddPizza
+            // 
+            this.panelPizzasAddPizza.Controls.Add(this.btnPizzasAddDone);
+            this.panelPizzasAddPizza.Controls.Add(this.comboPizzaAddNewSauce);
+            this.panelPizzasAddPizza.Controls.Add(this.label32);
+            this.panelPizzasAddPizza.Controls.Add(this.comboPizzaAddNewCrust);
+            this.panelPizzasAddPizza.Controls.Add(this.label33);
+            this.panelPizzasAddPizza.Controls.Add(this.label34);
+            this.panelPizzasAddPizza.Controls.Add(this.comboPizzaAddNewSize);
+            this.panelPizzasAddPizza.Controls.Add(this.txtPizzaAddNewName);
+            this.panelPizzasAddPizza.Controls.Add(this.label35);
+            this.panelPizzasAddPizza.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelPizzasAddPizza.Location = new System.Drawing.Point(654, 70);
+            this.panelPizzasAddPizza.Name = "panelPizzasAddPizza";
+            this.panelPizzasAddPizza.Size = new System.Drawing.Size(1092, 626);
+            this.panelPizzasAddPizza.TabIndex = 74;
+            this.panelPizzasAddPizza.Visible = false;
+            // 
+            // btnPizzasAddPizzas
+            // 
+            this.btnPizzasAddPizzas.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPizzasAddPizzas.Location = new System.Drawing.Point(677, 3);
+            this.btnPizzasAddPizzas.Name = "btnPizzasAddPizzas";
+            this.btnPizzasAddPizzas.Size = new System.Drawing.Size(350, 63);
+            this.btnPizzasAddPizzas.TabIndex = 75;
+            this.btnPizzasAddPizzas.Text = "Add New Pizza";
+            this.btnPizzasAddPizzas.UseVisualStyleBackColor = true;
+            this.btnPizzasAddPizzas.Click += new System.EventHandler(this.btnPizzasAddPizzas_Click);
+            // 
+            // comboPizzaAddNewSauce
+            // 
+            this.comboPizzaAddNewSauce.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPizzaAddNewSauce.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPizzaAddNewSauce.FormattingEnabled = true;
+            this.comboPizzaAddNewSauce.Location = new System.Drawing.Point(134, 213);
+            this.comboPizzaAddNewSauce.Name = "comboPizzaAddNewSauce";
+            this.comboPizzaAddNewSauce.Size = new System.Drawing.Size(239, 45);
+            this.comboPizzaAddNewSauce.TabIndex = 73;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(16, 216);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(112, 37);
+            this.label32.TabIndex = 72;
+            this.label32.Text = "Sauce";
+            // 
+            // comboPizzaAddNewCrust
+            // 
+            this.comboPizzaAddNewCrust.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPizzaAddNewCrust.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPizzaAddNewCrust.FormattingEnabled = true;
+            this.comboPizzaAddNewCrust.Location = new System.Drawing.Point(134, 144);
+            this.comboPizzaAddNewCrust.Name = "comboPizzaAddNewCrust";
+            this.comboPizzaAddNewCrust.Size = new System.Drawing.Size(239, 45);
+            this.comboPizzaAddNewCrust.TabIndex = 71;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(16, 147);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(99, 37);
+            this.label33.TabIndex = 70;
+            this.label33.Text = "Crust";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(16, 76);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(82, 37);
+            this.label34.TabIndex = 69;
+            this.label34.Text = "Size";
+            // 
+            // comboPizzaAddNewSize
+            // 
+            this.comboPizzaAddNewSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPizzaAddNewSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboPizzaAddNewSize.FormattingEnabled = true;
+            this.comboPizzaAddNewSize.Location = new System.Drawing.Point(134, 73);
+            this.comboPizzaAddNewSize.Name = "comboPizzaAddNewSize";
+            this.comboPizzaAddNewSize.Size = new System.Drawing.Size(239, 45);
+            this.comboPizzaAddNewSize.TabIndex = 68;
+            // 
+            // txtPizzaAddNewName
+            // 
+            this.txtPizzaAddNewName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPizzaAddNewName.Location = new System.Drawing.Point(134, 7);
+            this.txtPizzaAddNewName.Name = "txtPizzaAddNewName";
+            this.txtPizzaAddNewName.Size = new System.Drawing.Size(239, 44);
+            this.txtPizzaAddNewName.TabIndex = 67;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label35.Location = new System.Drawing.Point(16, 10);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(107, 37);
+            this.label35.TabIndex = 66;
+            this.label35.Text = "Name";
+            // 
+            // btnPizzasAddDone
+            // 
+            this.btnPizzasAddDone.BackColor = System.Drawing.Color.Green;
+            this.btnPizzasAddDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPizzasAddDone.Location = new System.Drawing.Point(23, 264);
+            this.btnPizzasAddDone.Name = "btnPizzasAddDone";
+            this.btnPizzasAddDone.Size = new System.Drawing.Size(350, 63);
+            this.btnPizzasAddDone.TabIndex = 76;
+            this.btnPizzasAddDone.Text = "Done";
+            this.btnPizzasAddDone.UseVisualStyleBackColor = false;
+            this.btnPizzasAddDone.Click += new System.EventHandler(this.btnPizzasAddDone_Click);
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(1057, 70);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(207, 37);
+            this.label36.TabIndex = 76;
+            this.label36.Text = "All Toppings";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(1513, 70);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(155, 37);
+            this.label37.TabIndex = 77;
+            this.label37.Text = "On Pizza";
+            // 
             // ManagerMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1445,6 +1816,8 @@
             this.tabPageInventory.PerformLayout();
             this.panelInventoryAddNew.ResumeLayout(false);
             this.panelInventoryAddNew.PerformLayout();
+            this.tabPagePizzas.ResumeLayout(false);
+            this.tabPagePizzas.PerformLayout();
             this.tabPageSales.ResumeLayout(false);
             this.tabPageSales.PerformLayout();
             this.tabPageCooks.ResumeLayout(false);
@@ -1455,6 +1828,8 @@
             this.tabPageReports.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.anchovyContextDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toppingBindingSource)).EndInit();
+            this.panelPizzasAddPizza.ResumeLayout(false);
+            this.panelPizzasAddPizza.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1579,5 +1954,35 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.ComboBox comboInventoryAddList;
         private System.Windows.Forms.Button btnInvtAddNewItem;
+        private System.Windows.Forms.ListBox lstPizzasList;
+        private System.Windows.Forms.ComboBox comboPizzasSauce;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.ComboBox comboPizzasCrust;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.ComboBox comboPizzasSize;
+        private System.Windows.Forms.TextBox txtPizzasTabName;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Button btnPizzasToppingRemoveAll;
+        private System.Windows.Forms.Button btnPizzasRemoveOneTopping;
+        private System.Windows.Forms.Button btnPizzasToppingsAddOne;
+        private System.Windows.Forms.Button btnPizzasAddAllToppings;
+        private System.Windows.Forms.ListBox lstPizzasToppingOnPizza;
+        private System.Windows.Forms.ListBox lstPizzasAllToppings;
+        private System.Windows.Forms.Button btnPizzasSave;
+        private System.Windows.Forms.Button btnPizzasEdit;
+        private System.Windows.Forms.Button btnPizzasAddPizzas;
+        private System.Windows.Forms.Panel panelPizzasAddPizza;
+        private System.Windows.Forms.Button btnPizzasAddDone;
+        private System.Windows.Forms.ComboBox comboPizzaAddNewSauce;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox comboPizzaAddNewCrust;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ComboBox comboPizzaAddNewSize;
+        private System.Windows.Forms.TextBox txtPizzaAddNewName;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label37;
     }
 }
