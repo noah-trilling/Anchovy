@@ -35,22 +35,10 @@
             this.removeOne = new System.Windows.Forms.Button();
             this.addOne = new System.Windows.Forms.Button();
             this.addAll = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.cancelApps = new System.Windows.Forms.Button();
-            this.addApps = new System.Windows.Forms.Button();
-            this.customDesc = new System.Windows.Forms.Label();
-            this.veggieDesc = new System.Windows.Forms.Label();
-            this.supremeDesc = new System.Windows.Forms.Label();
-            this.pineappleSpecialDesc = new System.Windows.Forms.Label();
-            this.anchovySpecialDesc = new System.Windows.Forms.Label();
-            this.meatLoversDesc = new System.Windows.Forms.Label();
-            this.customButton = new System.Windows.Forms.RadioButton();
-            this.veggieButton = new System.Windows.Forms.RadioButton();
-            this.supremeButton = new System.Windows.Forms.RadioButton();
-            this.pineappleSpecialButton = new System.Windows.Forms.RadioButton();
-            this.anchovySpecialButton = new System.Windows.Forms.RadioButton();
-            this.meatLoversButton = new System.Windows.Forms.RadioButton();
+            this.selectedToppings = new System.Windows.Forms.ListBox();
+            this.allToppings = new System.Windows.Forms.ListBox();
+            this.cancelToppings = new System.Windows.Forms.Button();
+            this.saveToppings = new System.Windows.Forms.Button();
             this.appetizersButton = new System.Windows.Forms.Button();
             this.shoppingCart1 = new System.Windows.Forms.LinkLabel();
             this.logoutButton1 = new System.Windows.Forms.Button();
@@ -109,18 +97,6 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.AppetizersPanel);
-            this.tabPage1.Controls.Add(this.customDesc);
-            this.tabPage1.Controls.Add(this.veggieDesc);
-            this.tabPage1.Controls.Add(this.supremeDesc);
-            this.tabPage1.Controls.Add(this.pineappleSpecialDesc);
-            this.tabPage1.Controls.Add(this.anchovySpecialDesc);
-            this.tabPage1.Controls.Add(this.meatLoversDesc);
-            this.tabPage1.Controls.Add(this.customButton);
-            this.tabPage1.Controls.Add(this.veggieButton);
-            this.tabPage1.Controls.Add(this.supremeButton);
-            this.tabPage1.Controls.Add(this.pineappleSpecialButton);
-            this.tabPage1.Controls.Add(this.anchovySpecialButton);
-            this.tabPage1.Controls.Add(this.meatLoversButton);
             this.tabPage1.Controls.Add(this.appetizersButton);
             this.tabPage1.Controls.Add(this.shoppingCart1);
             this.tabPage1.Controls.Add(this.logoutButton1);
@@ -138,11 +114,11 @@
             this.AppetizersPanel.Controls.Add(this.removeOne);
             this.AppetizersPanel.Controls.Add(this.addOne);
             this.AppetizersPanel.Controls.Add(this.addAll);
-            this.AppetizersPanel.Controls.Add(this.listBox2);
-            this.AppetizersPanel.Controls.Add(this.listBox1);
-            this.AppetizersPanel.Controls.Add(this.cancelApps);
-            this.AppetizersPanel.Controls.Add(this.addApps);
-            this.AppetizersPanel.Location = new System.Drawing.Point(122, 77);
+            this.AppetizersPanel.Controls.Add(this.selectedToppings);
+            this.AppetizersPanel.Controls.Add(this.allToppings);
+            this.AppetizersPanel.Controls.Add(this.cancelToppings);
+            this.AppetizersPanel.Controls.Add(this.saveToppings);
+            this.AppetizersPanel.Location = new System.Drawing.Point(106, 77);
             this.AppetizersPanel.Name = "AppetizersPanel";
             this.AppetizersPanel.Size = new System.Drawing.Size(717, 453);
             this.AppetizersPanel.TabIndex = 37;
@@ -156,6 +132,7 @@
             this.removeAll.TabIndex = 26;
             this.removeAll.Text = "<<";
             this.removeAll.UseVisualStyleBackColor = true;
+            this.removeAll.Click += new System.EventHandler(this.removeAll_Click);
             // 
             // removeOne
             // 
@@ -165,6 +142,7 @@
             this.removeOne.TabIndex = 25;
             this.removeOne.Text = "<";
             this.removeOne.UseVisualStyleBackColor = true;
+            this.removeOne.Click += new System.EventHandler(this.removeOne_Click);
             // 
             // addOne
             // 
@@ -174,6 +152,7 @@
             this.addOne.TabIndex = 24;
             this.addOne.Text = ">";
             this.addOne.UseVisualStyleBackColor = true;
+            this.addOne.Click += new System.EventHandler(this.addOne_Click);
             // 
             // addAll
             // 
@@ -183,166 +162,47 @@
             this.addAll.TabIndex = 23;
             this.addAll.Text = ">>";
             this.addAll.UseVisualStyleBackColor = true;
+            this.addAll.Click += new System.EventHandler(this.addAll_Click);
             // 
-            // listBox2
+            // selectedToppings
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(417, 32);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(171, 212);
-            this.listBox2.TabIndex = 22;
+            this.selectedToppings.FormattingEnabled = true;
+            this.selectedToppings.Location = new System.Drawing.Point(417, 32);
+            this.selectedToppings.Name = "selectedToppings";
+            this.selectedToppings.Size = new System.Drawing.Size(171, 212);
+            this.selectedToppings.TabIndex = 22;
             // 
-            // listBox1
+            // allToppings
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(121, 32);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(171, 212);
-            this.listBox1.TabIndex = 21;
+            this.allToppings.FormattingEnabled = true;
+            this.allToppings.Location = new System.Drawing.Point(121, 32);
+            this.allToppings.Name = "allToppings";
+            this.allToppings.Size = new System.Drawing.Size(171, 212);
+            this.allToppings.TabIndex = 21;
             // 
-            // cancelApps
+            // cancelToppings
             // 
-            this.cancelApps.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelApps.ForeColor = System.Drawing.Color.Red;
-            this.cancelApps.Location = new System.Drawing.Point(200, 286);
-            this.cancelApps.Name = "cancelApps";
-            this.cancelApps.Size = new System.Drawing.Size(111, 63);
-            this.cancelApps.TabIndex = 20;
-            this.cancelApps.Text = "Cancel";
-            this.cancelApps.UseVisualStyleBackColor = true;
-            this.cancelApps.Click += new System.EventHandler(this.cancelApps_Click);
+            this.cancelToppings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelToppings.ForeColor = System.Drawing.Color.Red;
+            this.cancelToppings.Location = new System.Drawing.Point(200, 286);
+            this.cancelToppings.Name = "cancelToppings";
+            this.cancelToppings.Size = new System.Drawing.Size(111, 63);
+            this.cancelToppings.TabIndex = 20;
+            this.cancelToppings.Text = "Cancel";
+            this.cancelToppings.UseVisualStyleBackColor = true;
+            this.cancelToppings.Click += new System.EventHandler(this.cancelApps_Click);
             // 
-            // addApps
+            // saveToppings
             // 
-            this.addApps.BackColor = System.Drawing.Color.ForestGreen;
-            this.addApps.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addApps.ForeColor = System.Drawing.Color.White;
-            this.addApps.Location = new System.Drawing.Point(368, 286);
-            this.addApps.Name = "addApps";
-            this.addApps.Size = new System.Drawing.Size(134, 65);
-            this.addApps.TabIndex = 19;
-            this.addApps.Text = "Save";
-            this.addApps.UseVisualStyleBackColor = false;
-            // 
-            // customDesc
-            // 
-            this.customDesc.AutoSize = true;
-            this.customDesc.Location = new System.Drawing.Point(631, 506);
-            this.customDesc.Name = "customDesc";
-            this.customDesc.Size = new System.Drawing.Size(66, 13);
-            this.customDesc.TabIndex = 36;
-            this.customDesc.Text = "(Description)";
-            // 
-            // veggieDesc
-            // 
-            this.veggieDesc.AutoSize = true;
-            this.veggieDesc.Location = new System.Drawing.Point(365, 506);
-            this.veggieDesc.Name = "veggieDesc";
-            this.veggieDesc.Size = new System.Drawing.Size(66, 13);
-            this.veggieDesc.TabIndex = 35;
-            this.veggieDesc.Text = "(Description)";
-            // 
-            // supremeDesc
-            // 
-            this.supremeDesc.AutoSize = true;
-            this.supremeDesc.Location = new System.Drawing.Point(142, 506);
-            this.supremeDesc.Name = "supremeDesc";
-            this.supremeDesc.Size = new System.Drawing.Size(66, 13);
-            this.supremeDesc.TabIndex = 34;
-            this.supremeDesc.Text = "(Description)";
-            // 
-            // pineappleSpecialDesc
-            // 
-            this.pineappleSpecialDesc.AutoSize = true;
-            this.pineappleSpecialDesc.Location = new System.Drawing.Point(631, 284);
-            this.pineappleSpecialDesc.Name = "pineappleSpecialDesc";
-            this.pineappleSpecialDesc.Size = new System.Drawing.Size(66, 13);
-            this.pineappleSpecialDesc.TabIndex = 33;
-            this.pineappleSpecialDesc.Text = "(Description)";
-            // 
-            // anchovySpecialDesc
-            // 
-            this.anchovySpecialDesc.AutoSize = true;
-            this.anchovySpecialDesc.Location = new System.Drawing.Point(365, 284);
-            this.anchovySpecialDesc.Name = "anchovySpecialDesc";
-            this.anchovySpecialDesc.Size = new System.Drawing.Size(66, 13);
-            this.anchovySpecialDesc.TabIndex = 32;
-            this.anchovySpecialDesc.Text = "(Description)";
-            // 
-            // meatLoversDesc
-            // 
-            this.meatLoversDesc.AutoSize = true;
-            this.meatLoversDesc.Location = new System.Drawing.Point(141, 284);
-            this.meatLoversDesc.Name = "meatLoversDesc";
-            this.meatLoversDesc.Size = new System.Drawing.Size(66, 13);
-            this.meatLoversDesc.TabIndex = 31;
-            this.meatLoversDesc.Text = "(Description)";
-            // 
-            // customButton
-            // 
-            this.customButton.AutoSize = true;
-            this.customButton.Location = new System.Drawing.Point(634, 387);
-            this.customButton.Name = "customButton";
-            this.customButton.Size = new System.Drawing.Size(60, 17);
-            this.customButton.TabIndex = 24;
-            this.customButton.TabStop = true;
-            this.customButton.Text = "Custom";
-            this.customButton.UseVisualStyleBackColor = true;
-            // 
-            // veggieButton
-            // 
-            this.veggieButton.AutoSize = true;
-            this.veggieButton.Location = new System.Drawing.Point(368, 387);
-            this.veggieButton.Name = "veggieButton";
-            this.veggieButton.Size = new System.Drawing.Size(58, 17);
-            this.veggieButton.TabIndex = 23;
-            this.veggieButton.TabStop = true;
-            this.veggieButton.Text = "Veggie";
-            this.veggieButton.UseVisualStyleBackColor = true;
-            // 
-            // supremeButton
-            // 
-            this.supremeButton.AutoSize = true;
-            this.supremeButton.Location = new System.Drawing.Point(141, 387);
-            this.supremeButton.Name = "supremeButton";
-            this.supremeButton.Size = new System.Drawing.Size(67, 17);
-            this.supremeButton.TabIndex = 22;
-            this.supremeButton.TabStop = true;
-            this.supremeButton.Text = "Supreme";
-            this.supremeButton.UseVisualStyleBackColor = true;
-            // 
-            // pineappleSpecialButton
-            // 
-            this.pineappleSpecialButton.AutoSize = true;
-            this.pineappleSpecialButton.Location = new System.Drawing.Point(634, 160);
-            this.pineappleSpecialButton.Name = "pineappleSpecialButton";
-            this.pineappleSpecialButton.Size = new System.Drawing.Size(110, 17);
-            this.pineappleSpecialButton.TabIndex = 21;
-            this.pineappleSpecialButton.TabStop = true;
-            this.pineappleSpecialButton.Text = "Pineapple Special";
-            this.pineappleSpecialButton.UseVisualStyleBackColor = true;
-            // 
-            // anchovySpecialButton
-            // 
-            this.anchovySpecialButton.AutoSize = true;
-            this.anchovySpecialButton.Location = new System.Drawing.Point(368, 160);
-            this.anchovySpecialButton.Name = "anchovySpecialButton";
-            this.anchovySpecialButton.Size = new System.Drawing.Size(105, 17);
-            this.anchovySpecialButton.TabIndex = 20;
-            this.anchovySpecialButton.TabStop = true;
-            this.anchovySpecialButton.Text = "Anchovy Special";
-            this.anchovySpecialButton.UseVisualStyleBackColor = true;
-            // 
-            // meatLoversButton
-            // 
-            this.meatLoversButton.AutoSize = true;
-            this.meatLoversButton.Location = new System.Drawing.Point(141, 160);
-            this.meatLoversButton.Name = "meatLoversButton";
-            this.meatLoversButton.Size = new System.Drawing.Size(86, 17);
-            this.meatLoversButton.TabIndex = 19;
-            this.meatLoversButton.TabStop = true;
-            this.meatLoversButton.Text = "Meat Lover\'s";
-            this.meatLoversButton.UseVisualStyleBackColor = true;
+            this.saveToppings.BackColor = System.Drawing.Color.ForestGreen;
+            this.saveToppings.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveToppings.ForeColor = System.Drawing.Color.White;
+            this.saveToppings.Location = new System.Drawing.Point(368, 286);
+            this.saveToppings.Name = "saveToppings";
+            this.saveToppings.Size = new System.Drawing.Size(134, 65);
+            this.saveToppings.TabIndex = 19;
+            this.saveToppings.Text = "Save";
+            this.saveToppings.UseVisualStyleBackColor = false;
             // 
             // appetizersButton
             // 
@@ -796,29 +656,17 @@
         private System.Windows.Forms.TextBox infoFirstName;
         private System.Windows.Forms.Button updateInfo;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.RadioButton supremeButton;
-        private System.Windows.Forms.RadioButton pineappleSpecialButton;
-        private System.Windows.Forms.RadioButton anchovySpecialButton;
-        private System.Windows.Forms.RadioButton meatLoversButton;
-        private System.Windows.Forms.Label customDesc;
-        private System.Windows.Forms.Label veggieDesc;
-        private System.Windows.Forms.Label supremeDesc;
-        private System.Windows.Forms.Label pineappleSpecialDesc;
-        private System.Windows.Forms.Label anchovySpecialDesc;
-        private System.Windows.Forms.Label meatLoversDesc;
-        private System.Windows.Forms.RadioButton customButton;
-        private System.Windows.Forms.RadioButton veggieButton;
         private System.Windows.Forms.Panel AppetizersPanel;
-        private System.Windows.Forms.Button addApps;
-        private System.Windows.Forms.Button cancelApps;
+        private System.Windows.Forms.Button saveToppings;
+        private System.Windows.Forms.Button cancelToppings;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label infoError;
         private System.Windows.Forms.Button removeAll;
         private System.Windows.Forms.Button removeOne;
         private System.Windows.Forms.Button addOne;
         private System.Windows.Forms.Button addAll;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox selectedToppings;
+        private System.Windows.Forms.ListBox allToppings;
         private System.Windows.Forms.Button cancelInfo;
     }
 }

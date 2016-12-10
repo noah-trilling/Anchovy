@@ -9,15 +9,43 @@ namespace CustomerMain
 {
     public partial class AnchovyCustomerMainGUI : Form
     {
+        private IOrders _orders;
+        private ICooks _cooks;
         private ICustomers _customers;
+        private IToppings _toppings;
+        private IPizzas _pizzas;
+        private ISauces _sauces;
+        private ICrusts _crusts;
+        private IMenuListings _menuListings;
+        private ISizes _sizes;
+        private ILines _lines;
+        private IOrderLines _orderLines;
+        private IPizzaToppings _pizzaToppings;
         private Anchovy.API.Client.Models.Customer _currentCusty;
 
         public AnchovyCustomerMainGUI(Anchovy.API.Client.Models.Customer currentCustomer)
         {
-            _currentCusty = currentCustomer;
+            _orders = new AnchovyAPIService().Orders;
+            _cooks = new AnchovyAPIService().Cooks;
             _customers = new AnchovyAPIService().Customers;
+            _toppings = new AnchovyAPIService().Toppings;
+            _pizzas = new AnchovyAPIService().Pizzas;
+            _sauces = new AnchovyAPIService().Sauces;
+            _crusts = new AnchovyAPIService().Crusts;
+            _menuListings = new AnchovyAPIService().MenuListings;
+            _sizes = new AnchovyAPIService().Sizes;
+            _lines = new AnchovyAPIService().Lines;
+            _orderLines = new AnchovyAPIService().OrderLines;
+            _pizzaToppings = new AnchovyAPIService().PizzaToppings;
+            _currentCusty = currentCustomer;
             InitializeComponent();
             fillOutFields();
+            var pizzaToppings = _toppings.GetToppings();
+            
+            foreach (var ptopping in pizzaToppings)
+            {
+                allToppings.Items.Add(new ListViewItem(ptopping.Name));
+            }
         }
 
         private void cancelApps_Click(object sender, EventArgs e)
@@ -121,6 +149,48 @@ namespace CustomerMain
             {
                 infoError.Text = "passwords do not match.";
             } 
+        }
+
+        private void addOne_Click(object sender, EventArgs e)
+        {
+            MoveListBoxItems(allToppings, selectedToppings);
+        }
+
+        private void removeOne_Click(object sender, EventArgs e)
+        {
+            MoveListBoxItems(selectedToppings, allToppings);
+        }
+
+        private void MoveListBoxItems(ListBox source, ListBox destination)
+        {
+            ListBox.SelectedObjectCollection sourceItems = source.SelectedItems;
+            foreach (var item in sourceItems)
+            {
+                destination.Items.Add(item);
+            }
+            while (source.SelectedItems.Count > 0)
+            {
+                source.Items.Remove(source.SelectedItems[0]);
+            }
+        }
+
+        private void addAll_Click(object sender, EventArgs e)
+        {
+            MoveAllListBoxItems(allToppings, selectedToppings);
+        }
+
+        private void removeAll_Click(object sender, EventArgs e)
+        {
+            MoveAllListBoxItems(selectedToppings, allToppings);
+        }
+
+        private void MoveAllListBoxItems(ListBox source, ListBox destination)
+        {
+            foreach (var item in source.Items)
+            {
+                destination.Items.Add(item);
+            }
+            source.Items.Clear();
         }
     }
 }
