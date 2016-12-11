@@ -22,6 +22,9 @@ namespace CustomerMain
         private IOrderLines _orderLines;
         private IPizzaToppings _pizzaToppings;
         private Anchovy.API.Client.Models.Customer _currentCusty;
+        private Anchovy.API.Client.Models.Order _currentOrder;
+
+        private RadioButton customButton;
 
         public AnchovyCustomerMainGUI(Anchovy.API.Client.Models.Customer currentCustomer)
         {
@@ -41,11 +44,19 @@ namespace CustomerMain
             InitializeComponent();
             fillOutFields();
             var pizzaToppings = _toppings.GetToppings();
-            
+
             foreach (var ptopping in pizzaToppings)
             {
                 allToppings.Items.Add(new ListViewItem(ptopping.Name));
             }
+            int pizzas = addPremadePizzas();
+            customButton = new RadioButton();
+            customButton.Text = "Custom Pizza";
+            customButton.Location = new System.Drawing.Point(20, 20 + (pizzas + 1) * 30);
+            this.pizzaGroup.Controls.Add(customButton);
+            addSizeButtons();
+            addSauceButtons();
+            addCrustButtons();
         }
 
         private void cancelApps_Click(object sender, EventArgs e)
@@ -55,7 +66,11 @@ namespace CustomerMain
 
         private void appetizersButton_Click(object sender, EventArgs e)
         {
-            AppetizersPanel.Show();
+            if (customButton.Checked)
+            {
+                AppetizersPanel.Show();
+            }
+
         }
 
         private void logoutButton_Click(object sender, EventArgs e)
@@ -191,6 +206,99 @@ namespace CustomerMain
                 destination.Items.Add(item);
             }
             source.Items.Clear();
+        }
+
+        private void addSizeButtons()
+        {
+            var allSizes = _sizes.GetSizes();
+            string[] sizeArray = new String[allSizes.Count];
+            int i = 0;
+            foreach (var s in allSizes)
+            {
+                sizeArray[i] = s.Name;
+                i++;
+            }
+            System.Windows.Forms.RadioButton[] radioButtons =
+                new System.Windows.Forms.RadioButton[allSizes.Count];
+            for (i = 0; i < allSizes.Count; ++i)
+            {
+                radioButtons[i] = new RadioButton();
+                radioButtons[i].Text = sizeArray[i];
+                radioButtons[i].Location = new System.Drawing.Point(10, 10 + i * 20);
+                this.sizeGroup.Controls.Add(radioButtons[i]);
+            }
+        }
+
+        private void addSauceButtons()
+        {
+            var allSauces = _sauces.GetSauces();
+            string[] sauceArray = new String[allSauces.Count];
+            int i = 0;
+            foreach (var s in allSauces)
+            {
+                sauceArray[i] = s.Name;
+                i++;
+            }
+            System.Windows.Forms.RadioButton[] radioButtons =
+                new System.Windows.Forms.RadioButton[allSauces.Count];
+            for (i = 0; i < allSauces.Count; ++i)
+            {
+                radioButtons[i] = new RadioButton();
+                radioButtons[i].Text = sauceArray[i];
+                radioButtons[i].Location = new System.Drawing.Point(10, 10 + i * 20);
+                this.sauceGroup.Controls.Add(radioButtons[i]);
+            }
+        }
+
+        private void addCrustButtons()
+        {
+            var allCrusts = _crusts.GetCrusts();
+            string[] crustArray = new String[allCrusts.Count];
+            int i = 0;
+            foreach (var s in allCrusts)
+            {
+                crustArray[i] = s.Name;
+                i++;
+            }
+            System.Windows.Forms.RadioButton[] radioButtons =
+                new System.Windows.Forms.RadioButton[allCrusts.Count];
+            for (i = 0; i < allCrusts.Count; ++i)
+            {
+                radioButtons[i] = new RadioButton();
+                radioButtons[i].Text = crustArray[i];
+                radioButtons[i].Location = new System.Drawing.Point(10, 10 + i * 20);
+                this.crustGroup.Controls.Add(radioButtons[i]);
+            }
+        }
+
+        private int addPremadePizzas()
+        {
+            var premadePizzas = _pizzaToppings.GetPizzaToppings();
+            string[] pizzaArray = new String[premadePizzas.Count];
+            string[] descArray = new String[premadePizzas.Count];
+            int i = 0;
+            foreach (var s in premadePizzas)
+            {
+                var za = _pizzas.GetPizza((int)s.PizzaId);
+                if ((bool)za.MenuItem)
+                {
+                    pizzaArray[i] = za.Name;
+                    string toppingsStr = "";
+                    //TODO: add tops
+                    descArray[i] = "Sauce: " + za.Sauce.Name + " - Toppings: " + toppingsStr;
+                    i++;
+                }
+            }
+            System.Windows.Forms.RadioButton[] radioButtons =
+                new System.Windows.Forms.RadioButton[premadePizzas.Count + 1];
+            for (i = 0; i < premadePizzas.Count; ++i)
+            {
+                radioButtons[i] = new RadioButton();
+                radioButtons[i].Text = pizzaArray[i];
+                radioButtons[i].Location = new System.Drawing.Point(20, 20 + i * 30);
+                this.pizzaGroup.Controls.Add(radioButtons[i]);
+            }
+            return premadePizzas.Count;
         }
     }
 }

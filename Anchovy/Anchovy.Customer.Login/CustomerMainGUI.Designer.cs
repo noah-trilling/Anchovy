@@ -75,6 +75,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.shoppingCart3 = new System.Windows.Forms.LinkLabel();
             this.logoutButton3 = new System.Windows.Forms.Button();
+            this.sauceGroup = new System.Windows.Forms.GroupBox();
+            this.pizzaGroup = new System.Windows.Forms.GroupBox();
+            this.sizeGroup = new System.Windows.Forms.GroupBox();
+            this.crustGroup = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.AppetizersPanel.SuspendLayout();
@@ -97,7 +101,10 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.AppetizersPanel);
+            this.tabPage1.Controls.Add(this.crustGroup);
+            this.tabPage1.Controls.Add(this.sizeGroup);
             this.tabPage1.Controls.Add(this.appetizersButton);
+            this.tabPage1.Controls.Add(this.pizzaGroup);
             this.tabPage1.Controls.Add(this.shoppingCart1);
             this.tabPage1.Controls.Add(this.logoutButton1);
             this.tabPage1.Location = new System.Drawing.Point(4, 52);
@@ -110,23 +117,24 @@
             // 
             // AppetizersPanel
             // 
+            this.AppetizersPanel.Controls.Add(this.selectedToppings);
+            this.AppetizersPanel.Controls.Add(this.sauceGroup);
             this.AppetizersPanel.Controls.Add(this.removeAll);
             this.AppetizersPanel.Controls.Add(this.removeOne);
             this.AppetizersPanel.Controls.Add(this.addOne);
             this.AppetizersPanel.Controls.Add(this.addAll);
-            this.AppetizersPanel.Controls.Add(this.selectedToppings);
             this.AppetizersPanel.Controls.Add(this.allToppings);
             this.AppetizersPanel.Controls.Add(this.cancelToppings);
             this.AppetizersPanel.Controls.Add(this.saveToppings);
-            this.AppetizersPanel.Location = new System.Drawing.Point(106, 77);
+            this.AppetizersPanel.Location = new System.Drawing.Point(21, 81);
             this.AppetizersPanel.Name = "AppetizersPanel";
-            this.AppetizersPanel.Size = new System.Drawing.Size(717, 453);
+            this.AppetizersPanel.Size = new System.Drawing.Size(882, 492);
             this.AppetizersPanel.TabIndex = 37;
             this.AppetizersPanel.Visible = false;
             // 
             // removeAll
             // 
-            this.removeAll.Location = new System.Drawing.Point(314, 191);
+            this.removeAll.Location = new System.Drawing.Point(484, 184);
             this.removeAll.Name = "removeAll";
             this.removeAll.Size = new System.Drawing.Size(75, 23);
             this.removeAll.TabIndex = 26;
@@ -136,7 +144,7 @@
             // 
             // removeOne
             // 
-            this.removeOne.Location = new System.Drawing.Point(314, 145);
+            this.removeOne.Location = new System.Drawing.Point(484, 140);
             this.removeOne.Name = "removeOne";
             this.removeOne.Size = new System.Drawing.Size(75, 23);
             this.removeOne.TabIndex = 25;
@@ -146,7 +154,7 @@
             // 
             // addOne
             // 
-            this.addOne.Location = new System.Drawing.Point(314, 104);
+            this.addOne.Location = new System.Drawing.Point(484, 91);
             this.addOne.Name = "addOne";
             this.addOne.Size = new System.Drawing.Size(75, 23);
             this.addOne.TabIndex = 24;
@@ -156,7 +164,7 @@
             // 
             // addAll
             // 
-            this.addAll.Location = new System.Drawing.Point(314, 60);
+            this.addAll.Location = new System.Drawing.Point(484, 49);
             this.addAll.Name = "addAll";
             this.addAll.Size = new System.Drawing.Size(75, 23);
             this.addAll.TabIndex = 23;
@@ -167,7 +175,7 @@
             // selectedToppings
             // 
             this.selectedToppings.FormattingEnabled = true;
-            this.selectedToppings.Location = new System.Drawing.Point(417, 32);
+            this.selectedToppings.Location = new System.Drawing.Point(593, 32);
             this.selectedToppings.Name = "selectedToppings";
             this.selectedToppings.Size = new System.Drawing.Size(171, 212);
             this.selectedToppings.TabIndex = 22;
@@ -175,7 +183,7 @@
             // allToppings
             // 
             this.allToppings.FormattingEnabled = true;
-            this.allToppings.Location = new System.Drawing.Point(121, 32);
+            this.allToppings.Location = new System.Drawing.Point(284, 32);
             this.allToppings.Name = "allToppings";
             this.allToppings.Size = new System.Drawing.Size(171, 212);
             this.allToppings.TabIndex = 21;
@@ -209,11 +217,11 @@
             this.appetizersButton.BackColor = System.Drawing.Color.ForestGreen;
             this.appetizersButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.appetizersButton.ForeColor = System.Drawing.Color.White;
-            this.appetizersButton.Location = new System.Drawing.Point(6, 6);
+            this.appetizersButton.Location = new System.Drawing.Point(745, 495);
             this.appetizersButton.Name = "appetizersButton";
             this.appetizersButton.Size = new System.Drawing.Size(134, 65);
             this.appetizersButton.TabIndex = 18;
-            this.appetizersButton.Text = "Appetizers";
+            this.appetizersButton.Text = "Select";
             this.appetizersButton.UseVisualStyleBackColor = false;
             this.appetizersButton.Click += new System.EventHandler(this.appetizersButton_Click);
             // 
@@ -598,6 +606,42 @@
             this.logoutButton3.UseVisualStyleBackColor = false;
             this.logoutButton3.Click += new System.EventHandler(this.logoutButton3_Click);
             // 
+            // sauceGroup
+            // 
+            this.sauceGroup.Location = new System.Drawing.Point(17, 32);
+            this.sauceGroup.Name = "sauceGroup";
+            this.sauceGroup.Size = new System.Drawing.Size(166, 212);
+            this.sauceGroup.TabIndex = 28;
+            this.sauceGroup.TabStop = false;
+            this.sauceGroup.Text = "Sauces";
+            // 
+            // pizzaGroup
+            // 
+            this.pizzaGroup.Location = new System.Drawing.Point(21, 63);
+            this.pizzaGroup.Name = "pizzaGroup";
+            this.pizzaGroup.Size = new System.Drawing.Size(703, 508);
+            this.pizzaGroup.TabIndex = 38;
+            this.pizzaGroup.TabStop = false;
+            this.pizzaGroup.Text = "Pizza Selections";
+            // 
+            // sizeGroup
+            // 
+            this.sizeGroup.Location = new System.Drawing.Point(745, 92);
+            this.sizeGroup.Name = "sizeGroup";
+            this.sizeGroup.Size = new System.Drawing.Size(164, 198);
+            this.sizeGroup.TabIndex = 39;
+            this.sizeGroup.TabStop = false;
+            this.sizeGroup.Text = "Sizes";
+            // 
+            // crustGroup
+            // 
+            this.crustGroup.Location = new System.Drawing.Point(745, 309);
+            this.crustGroup.Name = "crustGroup";
+            this.crustGroup.Size = new System.Drawing.Size(164, 172);
+            this.crustGroup.TabIndex = 40;
+            this.crustGroup.TabStop = false;
+            this.crustGroup.Text = "Crusts";
+            // 
             // AnchovyCustomerMainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -668,6 +712,10 @@
         private System.Windows.Forms.ListBox selectedToppings;
         private System.Windows.Forms.ListBox allToppings;
         private System.Windows.Forms.Button cancelInfo;
+        private System.Windows.Forms.GroupBox sauceGroup;
+        private System.Windows.Forms.GroupBox pizzaGroup;
+        private System.Windows.Forms.GroupBox sizeGroup;
+        private System.Windows.Forms.GroupBox crustGroup;
     }
 }
 
