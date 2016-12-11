@@ -74,5 +74,6 @@ namespace Anchovy.Cook.GUI
         {
             Application.Run(_mainG);
         }
+
     }
 }

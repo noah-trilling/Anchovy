@@ -23,6 +23,8 @@ namespace Anchovy.Cook.Main
 		private Queue<Anchovy.API.Client.Models.Order> _gQueue;
 		private Queue<Anchovy.API.Client.Models.Order> _mQueue;
 		private int _cookId;
+        private IShifts _shifts;
+        private Anchovy.API.Client.Models.Shift _myShift;
 
 		public CookMainGUI()
 		{
@@ -34,6 +36,7 @@ namespace Anchovy.Cook.Main
 			_pizzas = new AnchovyAPIService().Pizzas;
 			_sauces = new AnchovyAPIService().Sauces;
 			_crusts = new AnchovyAPIService().Crusts;
+            _shifts = new AnchovyAPIService().Shifts;
 			_menuListings = new AnchovyAPIService().MenuListings;
 			_sizes = new AnchovyAPIService().Sizes;
 			_lines = new AnchovyAPIService().Lines;
@@ -44,9 +47,10 @@ namespace Anchovy.Cook.Main
 			ingredientsBox.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
 		}
 
-		//Logout current cook and return to login screen
+		//Logout current cook and return to login screen; end shift
 		private void logoutButton_Click(object sender, EventArgs e)
 		{
+            endShift();
 			Owner.Show();
 			Owner = null;
 			Close();
@@ -256,10 +260,14 @@ namespace Anchovy.Cook.Main
 			} 
 		}
 
-		//Close both this form and the loggin form
+		//Close both this form and the loggin form and end shift
 		private void CookMainGUI_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			if (Owner != null) Application.Exit();
+            if (Owner != null)
+            {
+                endShift();
+                Application.Exit();
+            }
 		}
 
 		//Prevent the contextmenustrip from showing if an item is not selected
@@ -299,11 +307,12 @@ namespace Anchovy.Cook.Main
 			}
 		}
 
-		//Get the id of the cook and initialize the global queue
+		//Get the id of the cook, initialize the global queue, and set the start time of the shift
 		private void CookMainGUI_Load(object sender, EventArgs e)
 		{
 			_cookId = getCookId();
 			initGlobal();
+            beginShift();
 		}
 
 		//cancel order
@@ -333,5 +342,36 @@ namespace Anchovy.Cook.Main
 			_orders.PutOrder((int)ord.Id, ord);
 			var d = _orders.GetOrder((int)ord.Id);
 		}
+
+        //set time for beginning of shift
+        private void beginShift()
+        {
+            var cook = _cooks.GetCook(_cookId);
+            _myShift = new Anchovy.API.Client.Models.Shift()
+            {
+                CookId = _cookId,
+                StartTime = DateTimeOffset.UtcNow,
+            };
+            _shifts.PostShift(_myShift);
+        }
+
+        //set time for end of shift
+        private void endShift()
+        {
+            var allShifts = _shifts.GetShifts().GetEnumerator();
+            int shiftId = 0;
+
+            while (allShifts.MoveNext())
+            {
+                if (allShifts.Current.CookId == _cookId && allShifts.Current.StartTime == _myShift.StartTime)
+                {
+                    shiftId = (int)allShifts.Current.Id;
+                    break;
+                }
+            }
+            var shift = _shifts.GetShift(shiftId);
+            shift.EndTime = DateTimeOffset.UtcNow;
+            _shifts.PutShift((int)shift.Id, shift);
+        }
 	}
 }
