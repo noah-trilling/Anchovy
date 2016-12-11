@@ -10,7 +10,6 @@ namespace CustomerMain
     public partial class AnchovyCustomerMainGUI : Form
     {
         private IOrders _orders;
-        private ICooks _cooks;
         private ICustomers _customers;
         private IToppings _toppings;
         private IPizzas _pizzas;
@@ -22,14 +21,16 @@ namespace CustomerMain
         private IOrderLines _orderLines;
         private IPizzaToppings _pizzaToppings;
         private Anchovy.API.Client.Models.Customer _currentCusty;
-        private Anchovy.API.Client.Models.Order _currentOrder;
+        private Anchovy.API.Client.Models.Order _currentOrder = new Anchovy.API.Client.Models.Order();
+        private Anchovy.API.Client.Models.Pizza _currentPizza = new Anchovy.API.Client.Models.Pizza();
+        private Anchovy.API.Client.Models.Size thisSize = null;
+        private Anchovy.API.Client.Models.Crust thisCrust = null;
 
         private RadioButton customButton;
 
         public AnchovyCustomerMainGUI(Anchovy.API.Client.Models.Customer currentCustomer)
         {
             _orders = new AnchovyAPIService().Orders;
-            _cooks = new AnchovyAPIService().Cooks;
             _customers = new AnchovyAPIService().Customers;
             _toppings = new AnchovyAPIService().Toppings;
             _pizzas = new AnchovyAPIService().Pizzas;
@@ -49,6 +50,7 @@ namespace CustomerMain
             {
                 allToppings.Items.Add(new ListViewItem(ptopping.Name));
             }
+
             int pizzas = addPremadePizzas();
             customButton = new RadioButton();
             customButton.Text = "Custom Pizza";
@@ -66,9 +68,23 @@ namespace CustomerMain
 
         private void appetizersButton_Click(object sender, EventArgs e)
         {
-            if (customButton.Checked)
+            checkSize();
+            checkCrust();
+
+
+            if (thisCrust == null)
             {
-                AppetizersPanel.Show();
+                orderError.Text = "Please select a crust type.";
+            }
+            else if (thisSize == null)
+            {
+                orderError.Text = "Please select a size.";
+            } else
+            {
+                if (customButton.Checked)
+                {
+                    AppetizersPanel.Show();
+                }
             }
 
         }
@@ -299,6 +315,82 @@ namespace CustomerMain
                 this.pizzaGroup.Controls.Add(radioButtons[i]);
             }
             return premadePizzas.Count;
+        }
+
+        private void saveToppings_Click(object sender, EventArgs e)
+        {
+            Anchovy.API.Client.Models.Sauce thisSauce = null;
+            foreach (var but in this.sauceGroup.Controls)
+            {
+                if (but is RadioButton)
+                {
+                    RadioButton thing = (RadioButton)but;
+                    if (thing.Checked == true)
+                    {
+                        foreach (var sauc in _sauces.GetSauces())
+                        {
+                            if (sauc.Name.Equals(thing.Text))
+                            {
+                                thisSauce = sauc;
+                            }
+                        }
+                    }
+
+                }
+            }
+            if (thisSauce == null)
+            {
+                toppingsError.Text = "Please select a sauce type.";
+            }
+            else
+            {
+                //TODO: Add toppings and sauce
+                this.Hide();
+            }
+        }
+
+        private void checkSize()
+        {
+            foreach (var but in this.sizeGroup.Controls)
+            {
+                if (but is RadioButton)
+                {
+                    RadioButton thing = (RadioButton)but;
+                    if (thing.Checked == true)
+                    {
+                        foreach (var sz in _sizes.GetSizes())
+                        {
+                            if (sz.Name.Equals(thing.Text))
+                            {
+                                thisSize = sz;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        private void checkCrust()
+        {
+            foreach (var but in this.crustGroup.Controls)
+            {
+                if (but is RadioButton)
+                {
+                    RadioButton thing = (RadioButton)but;
+                    if (thing.Checked == true)
+                    {
+                        foreach (var crus in _crusts.GetCrusts())
+                        {
+                            if (crus.Name.Equals(thing.Text))
+                            {
+                                thisCrust = crus;
+                            }
+                        }
+                    }
+
+                }
+            }
         }
     }
 }
