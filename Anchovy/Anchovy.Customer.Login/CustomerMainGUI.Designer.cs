@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.orderError = new System.Windows.Forms.Label();
             this.AppetizersPanel = new System.Windows.Forms.Panel();
             this.outOfStock = new System.Windows.Forms.GroupBox();
             this.crustGroup = new System.Windows.Forms.GroupBox();
@@ -43,15 +44,14 @@
             this.allToppings = new System.Windows.Forms.ListBox();
             this.cancelToppings = new System.Windows.Forms.Button();
             this.saveToppings = new System.Windows.Forms.Button();
-            this.orderError = new System.Windows.Forms.Label();
             this.sizeGroup = new System.Windows.Forms.GroupBox();
-            this.appetizersButton = new System.Windows.Forms.Button();
+            this.selectPizza = new System.Windows.Forms.Button();
             this.pizzaGroup = new System.Windows.Forms.GroupBox();
+            this.scrollPanel = new System.Windows.Forms.Panel();
             this.shoppingCart1 = new System.Windows.Forms.LinkLabel();
             this.logoutButton1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.orderHistory = new System.Windows.Forms.GroupBox();
-            this.shoppingCart2 = new System.Windows.Forms.LinkLabel();
             this.logoutButton2 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.infoError = new System.Windows.Forms.Label();
@@ -81,15 +81,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.shoppingCart3 = new System.Windows.Forms.LinkLabel();
             this.logoutButton3 = new System.Windows.Forms.Button();
-            this.scrollPanel = new System.Windows.Forms.Panel();
+            this.shoppingPanel = new System.Windows.Forms.Panel();
+            this.cancelOrder = new System.Windows.Forms.Button();
+            this.submitOrder = new System.Windows.Forms.Button();
+            this.resetOrder = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.AppetizersPanel.SuspendLayout();
             this.pizzaGroup.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.shoppingPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -106,10 +109,11 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.shoppingPanel);
             this.tabPage1.Controls.Add(this.orderError);
             this.tabPage1.Controls.Add(this.AppetizersPanel);
             this.tabPage1.Controls.Add(this.sizeGroup);
-            this.tabPage1.Controls.Add(this.appetizersButton);
+            this.tabPage1.Controls.Add(this.selectPizza);
             this.tabPage1.Controls.Add(this.pizzaGroup);
             this.tabPage1.Controls.Add(this.shoppingCart1);
             this.tabPage1.Controls.Add(this.logoutButton1);
@@ -120,6 +124,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "New Order";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // orderError
+            // 
+            this.orderError.AutoSize = true;
+            this.orderError.ForeColor = System.Drawing.Color.Red;
+            this.orderError.Location = new System.Drawing.Point(65, 30);
+            this.orderError.Name = "orderError";
+            this.orderError.Size = new System.Drawing.Size(139, 13);
+            this.orderError.TabIndex = 41;
+            this.orderError.Text = "                                            ";
             // 
             // AppetizersPanel
             // 
@@ -135,9 +149,9 @@
             this.AppetizersPanel.Controls.Add(this.allToppings);
             this.AppetizersPanel.Controls.Add(this.cancelToppings);
             this.AppetizersPanel.Controls.Add(this.saveToppings);
-            this.AppetizersPanel.Location = new System.Drawing.Point(6, 68);
+            this.AppetizersPanel.Location = new System.Drawing.Point(21, 73);
             this.AppetizersPanel.Name = "AppetizersPanel";
-            this.AppetizersPanel.Size = new System.Drawing.Size(882, 492);
+            this.AppetizersPanel.Size = new System.Drawing.Size(882, 482);
             this.AppetizersPanel.TabIndex = 37;
             this.AppetizersPanel.Visible = false;
             // 
@@ -244,7 +258,7 @@
             this.cancelToppings.TabIndex = 20;
             this.cancelToppings.Text = "Cancel";
             this.cancelToppings.UseVisualStyleBackColor = true;
-            this.cancelToppings.Click += new System.EventHandler(this.cancelApps_Click);
+            this.cancelToppings.Click += new System.EventHandler(this.cancelToppings_Click);
             // 
             // saveToppings
             // 
@@ -259,16 +273,6 @@
             this.saveToppings.UseVisualStyleBackColor = false;
             this.saveToppings.Click += new System.EventHandler(this.saveToppings_Click);
             // 
-            // orderError
-            // 
-            this.orderError.AutoSize = true;
-            this.orderError.ForeColor = System.Drawing.Color.Red;
-            this.orderError.Location = new System.Drawing.Point(65, 30);
-            this.orderError.Name = "orderError";
-            this.orderError.Size = new System.Drawing.Size(139, 13);
-            this.orderError.TabIndex = 41;
-            this.orderError.Text = "                                            ";
-            // 
             // sizeGroup
             // 
             this.sizeGroup.Location = new System.Drawing.Point(745, 92);
@@ -278,18 +282,18 @@
             this.sizeGroup.TabStop = false;
             this.sizeGroup.Text = "Sizes";
             // 
-            // appetizersButton
+            // selectPizza
             // 
-            this.appetizersButton.BackColor = System.Drawing.Color.ForestGreen;
-            this.appetizersButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.appetizersButton.ForeColor = System.Drawing.Color.White;
-            this.appetizersButton.Location = new System.Drawing.Point(745, 495);
-            this.appetizersButton.Name = "appetizersButton";
-            this.appetizersButton.Size = new System.Drawing.Size(134, 65);
-            this.appetizersButton.TabIndex = 18;
-            this.appetizersButton.Text = "Select";
-            this.appetizersButton.UseVisualStyleBackColor = false;
-            this.appetizersButton.Click += new System.EventHandler(this.appetizersButton_Click);
+            this.selectPizza.BackColor = System.Drawing.Color.ForestGreen;
+            this.selectPizza.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.selectPizza.ForeColor = System.Drawing.Color.White;
+            this.selectPizza.Location = new System.Drawing.Point(745, 495);
+            this.selectPizza.Name = "selectPizza";
+            this.selectPizza.Size = new System.Drawing.Size(134, 65);
+            this.selectPizza.TabIndex = 18;
+            this.selectPizza.Text = "Select";
+            this.selectPizza.UseVisualStyleBackColor = false;
+            this.selectPizza.Click += new System.EventHandler(this.selectPizza_Click);
             // 
             // pizzaGroup
             // 
@@ -301,6 +305,14 @@
             this.pizzaGroup.TabStop = false;
             this.pizzaGroup.Text = "Pizza Selections";
             // 
+            // scrollPanel
+            // 
+            this.scrollPanel.AutoScroll = true;
+            this.scrollPanel.Location = new System.Drawing.Point(6, 19);
+            this.scrollPanel.Name = "scrollPanel";
+            this.scrollPanel.Size = new System.Drawing.Size(697, 489);
+            this.scrollPanel.TabIndex = 38;
+            // 
             // shoppingCart1
             // 
             this.shoppingCart1.AutoSize = true;
@@ -311,6 +323,7 @@
             this.shoppingCart1.TabIndex = 16;
             this.shoppingCart1.TabStop = true;
             this.shoppingCart1.Text = "Shopping Cart";
+            this.shoppingCart1.Click += new System.EventHandler(this.shoppingCart1_Click);
             // 
             // logoutButton1
             // 
@@ -328,7 +341,6 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.orderHistory);
-            this.tabPage2.Controls.Add(this.shoppingCart2);
             this.tabPage2.Controls.Add(this.logoutButton2);
             this.tabPage2.Location = new System.Drawing.Point(4, 52);
             this.tabPage2.Name = "tabPage2";
@@ -346,17 +358,6 @@
             this.orderHistory.TabIndex = 18;
             this.orderHistory.TabStop = false;
             this.orderHistory.Text = "Order History";
-            // 
-            // shoppingCart2
-            // 
-            this.shoppingCart2.AutoSize = true;
-            this.shoppingCart2.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shoppingCart2.Location = new System.Drawing.Point(655, 21);
-            this.shoppingCart2.Name = "shoppingCart2";
-            this.shoppingCart2.Size = new System.Drawing.Size(151, 26);
-            this.shoppingCart2.TabIndex = 17;
-            this.shoppingCart2.TabStop = true;
-            this.shoppingCart2.Text = "Shopping Cart";
             // 
             // logoutButton2
             // 
@@ -400,7 +401,6 @@
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.label3);
-            this.tabPage3.Controls.Add(this.shoppingCart3);
             this.tabPage3.Controls.Add(this.logoutButton3);
             this.tabPage3.Location = new System.Drawing.Point(4, 52);
             this.tabPage3.Name = "tabPage3";
@@ -668,17 +668,6 @@
             this.label3.TabIndex = 18;
             this.label3.Text = "Phone:";
             // 
-            // shoppingCart3
-            // 
-            this.shoppingCart3.AutoSize = true;
-            this.shoppingCart3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shoppingCart3.Location = new System.Drawing.Point(655, 21);
-            this.shoppingCart3.Name = "shoppingCart3";
-            this.shoppingCart3.Size = new System.Drawing.Size(151, 26);
-            this.shoppingCart3.TabIndex = 17;
-            this.shoppingCart3.TabStop = true;
-            this.shoppingCart3.Text = "Shopping Cart";
-            // 
             // logoutButton3
             // 
             this.logoutButton3.BackColor = System.Drawing.Color.Red;
@@ -692,13 +681,55 @@
             this.logoutButton3.UseVisualStyleBackColor = false;
             this.logoutButton3.Click += new System.EventHandler(this.logoutButton3_Click);
             // 
-            // scrollPanel
+            // shoppingPanel
             // 
-            this.scrollPanel.AutoScroll = true;
-            this.scrollPanel.Location = new System.Drawing.Point(6, 19);
-            this.scrollPanel.Name = "scrollPanel";
-            this.scrollPanel.Size = new System.Drawing.Size(697, 489);
-            this.scrollPanel.TabIndex = 38;
+            this.shoppingPanel.Controls.Add(this.resetOrder);
+            this.shoppingPanel.Controls.Add(this.submitOrder);
+            this.shoppingPanel.Controls.Add(this.cancelOrder);
+            this.shoppingPanel.Location = new System.Drawing.Point(10, 73);
+            this.shoppingPanel.Name = "shoppingPanel";
+            this.shoppingPanel.Size = new System.Drawing.Size(869, 495);
+            this.shoppingPanel.TabIndex = 42;
+            // 
+            // cancelOrder
+            // 
+            this.cancelOrder.BackColor = System.Drawing.Color.Gray;
+            this.cancelOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelOrder.ForeColor = System.Drawing.Color.White;
+            this.cancelOrder.Location = new System.Drawing.Point(379, 421);
+            this.cancelOrder.Name = "cancelOrder";
+            this.cancelOrder.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cancelOrder.Size = new System.Drawing.Size(109, 61);
+            this.cancelOrder.TabIndex = 16;
+            this.cancelOrder.Text = "Cancel";
+            this.cancelOrder.UseVisualStyleBackColor = false;
+            this.cancelOrder.Click += new System.EventHandler(this.cancelOrder_Click);
+            // 
+            // submitOrder
+            // 
+            this.submitOrder.BackColor = System.Drawing.Color.ForestGreen;
+            this.submitOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.submitOrder.ForeColor = System.Drawing.Color.White;
+            this.submitOrder.Location = new System.Drawing.Point(735, 421);
+            this.submitOrder.Name = "submitOrder";
+            this.submitOrder.Size = new System.Drawing.Size(109, 61);
+            this.submitOrder.TabIndex = 17;
+            this.submitOrder.Text = "Submit";
+            this.submitOrder.UseVisualStyleBackColor = false;
+            this.submitOrder.Click += new System.EventHandler(this.submitOrder_Click);
+            // 
+            // resetOrder
+            // 
+            this.resetOrder.BackColor = System.Drawing.Color.Red;
+            this.resetOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resetOrder.ForeColor = System.Drawing.Color.White;
+            this.resetOrder.Location = new System.Drawing.Point(28, 418);
+            this.resetOrder.Name = "resetOrder";
+            this.resetOrder.Size = new System.Drawing.Size(109, 61);
+            this.resetOrder.TabIndex = 18;
+            this.resetOrder.Text = "Reset";
+            this.resetOrder.UseVisualStyleBackColor = false;
+            this.resetOrder.Click += new System.EventHandler(this.resetOrder_Click);
             // 
             // AnchovyCustomerMainGUI
             // 
@@ -716,9 +747,9 @@
             this.AppetizersPanel.PerformLayout();
             this.pizzaGroup.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.shoppingPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -733,9 +764,7 @@
         private System.Windows.Forms.Button logoutButton1;
         private System.Windows.Forms.Button logoutButton2;
         private System.Windows.Forms.Button logoutButton3;
-        private System.Windows.Forms.LinkLabel shoppingCart2;
-        private System.Windows.Forms.LinkLabel shoppingCart3;
-        private System.Windows.Forms.Button appetizersButton;
+        private System.Windows.Forms.Button selectPizza;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -781,6 +810,10 @@
         private System.Windows.Forms.Label toppingsError;
         private System.Windows.Forms.GroupBox outOfStock;
         private System.Windows.Forms.Panel scrollPanel;
+        private System.Windows.Forms.Panel shoppingPanel;
+        private System.Windows.Forms.Button resetOrder;
+        private System.Windows.Forms.Button submitOrder;
+        private System.Windows.Forms.Button cancelOrder;
     }
 }
 

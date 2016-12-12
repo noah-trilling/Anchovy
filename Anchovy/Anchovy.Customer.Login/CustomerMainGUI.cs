@@ -35,10 +35,9 @@ namespace CustomerMain
         // Create a variable that can be used when customer creates new pizza
         private Anchovy.API.Client.Models.Pizza _currentPizza;
 
-        // Create variables that allow each pizza to set a size, crust, sauce
+        // Create variables that allow each pizza to set a size and crust
         private Anchovy.API.Client.Models.Size thisSize = null;
         private Anchovy.API.Client.Models.Crust thisCrust = null;
-        private Anchovy.API.Client.Models.Sauce thisSauce = null;
 
         // Create custom pizza button at the end of all the premade pizzas
         private RadioButton customButton;
@@ -110,38 +109,11 @@ namespace CustomerMain
             addSauceButtons();
             addCrustButtons();
 
+            // Hide shopping cart
+            shoppingPanel.Hide();
+
             // Call method to fill out all account info 
             fillOutFields();
-        }
-
-        // Hide custom pizza 
-        private void cancelApps_Click(object sender, EventArgs e)
-        {
-            _currentPizza = new Anchovy.API.Client.Models.Pizza();
-            AppetizersPanel.Hide();
-        }
-
-        private void appetizersButton_Click(object sender, EventArgs e)
-        {
-
-            // Check if size and crust buttons are selected
-            checkSize();
-             if (thisSize == null)
-            {
-                orderError.Text = "Please select a size.";
-            } else
-            {
-                if (customButton.Checked)
-                {
-                    AppetizersPanel.Show();
-                }
-            }
-            // TODO: Add if preselected pizza to order
-            // TODO: Otherwise generate custom pizza
-
-            checkCrust();
-            checkSize();
-
         }
 
         // If logout hide this and return to login page
@@ -370,7 +342,7 @@ namespace CustomerMain
             {
                 if ((bool)za.MenuItem)
                 {
-                    prePizzas.Add(za.Name);
+                    double topCost = 0;
                     string sauceDesc = "Sauce: " + za.Sauce.Name;
                     string crustDesc = "Crust: " + za.Crust.Name;
                     string toppings = "Toppings: ";
@@ -381,8 +353,11 @@ namespace CustomerMain
                         {
                             var currTop = _toppings.GetTopping((int)pTops.ToppingId);
                             toppings += currTop.Name + ", ";
+                            topCost += (double)currTop.Cost;
                         }
                     }
+                    var cost = za.Sauce.Cost + za.Crust.Cost + topCost;
+                    prePizzas.Add(za.Name + " ($" + cost + ")");
                     preSauce.Add(sauceDesc);
                     preCrust.Add(crustDesc);
                     preTops.Add(toppings.Trim(','));
@@ -447,6 +422,9 @@ namespace CustomerMain
             else if (thisCrust == null)
             {
                 toppingsError.Text = "Please select a crust type.";
+            }
+            else
+            {
                 //TODO: Add toppings and sauce
                 this.Hide();
             }
@@ -586,6 +564,7 @@ namespace CustomerMain
             var order = _orders.GetOrder(temp);
             order.OrderStatus = 4;
             _orders.PutOrder((int)temp, order);
+            fillOrderHistory();
         }
 
         // Generate a status string from the enum
@@ -599,6 +578,172 @@ namespace CustomerMain
                 case 4: return "Cancelled";
                 default: return "Unordered";
             }
+        }
+
+        // Hide custom pizza 
+        private void cancelToppings_Click(object sender, EventArgs e)
+        {
+            _currentPizza = new Anchovy.API.Client.Models.Pizza();
+            AppetizersPanel.Hide();
+        }
+
+        private void selectPizza_Click(object sender, EventArgs e)
+        {
+            // Check if size and crust buttons are selected
+            checkSize();
+            if (thisSize == null)
+            {
+                orderError.ForeColor = System.Drawing.Color.Red;
+                orderError.Text = "Please select a size.";
+            }
+            else
+            {
+                if (customButton.Checked)
+                {
+                    AppetizersPanel.Show();
+
+                    // TODO: generate custom pizza
+                }
+                else
+                {
+                    foreach (var button in this.scrollPanel.Controls)
+                    {
+                        if (button.GetType() == typeof(RadioButton))
+                        {
+                            var temp = (RadioButton)button;
+                            if (temp.Checked == true)
+                            {
+                                try
+                                {
+                                    var allPizzas = _pizzas.GetPizzas();
+                                    var currLine = new Anchovy.API.Client.Models.Line();
+                                    foreach (var pizza in allPizzas)
+                                    {
+                                        if (temp.Text.Contains(pizza.Name))
+                                        {
+                                            currLine.PizzaId = pizza.Id;
+                                            currLine = _lines.PostLine(currLine);
+                                        }
+                                    }
+                                    var currOrdLine = new Anchovy.API.Client.Models.OrderLine();
+                                    currOrdLine.OrderId = _currentOrder.Id;
+                                    currOrdLine.LineId = currLine.Id;
+                                    currOrdLine = _orderLines.PostOrderLine(currOrdLine);
+                                    orderError.ForeColor = System.Drawing.Color.Green;
+                                    orderError.Text = "Item added successfully.";
+                                }
+                                catch (Exception a)
+                                {
+                                    orderError.ForeColor = System.Drawing.Color.Red;
+                                    orderError.Text = "Error adding item";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            checkCrust();
+            checkSize();
+        }
+
+        private void shoppingCart1_Click(object sender, EventArgs e)
+        {
+            var orderLines = _orderLines.GetOrderLines();
+            foreach (var orderLine in orderLines)
+            {
+                if (orderLine.OrderId == _currentOrder.Id)
+                {
+                    var lines = _lines.GetLines();
+                    foreach (var line in lines)
+                    {
+                        if (orderLine.LineId == line.Id)
+                        {
+                            var pizzas = _pizzas.GetPizzas();
+                            List<String> prePizzas = new List<String>();
+                            List<String> preSauce = new List<String>();
+                            List<String> preCrust = new List<String>();
+                            List<String> preTops = new List<String>();
+                            int i = 0;
+                            foreach (var pizza in pizzas)
+                            {
+                                if (pizza.Id == line.PizzaId)
+                                {
+                                    double topCost = 0;
+                                    string sauceDesc = "Sauce: " + pizza.Sauce.Name;
+                                    string crustDesc = "Crust: " + pizza.Crust.Name;
+                                    string toppings = "Toppings: ";
+                                    var pizzaTops = _pizzaToppings.GetPizzaToppings();
+                                    foreach (var pTops in pizzaTops)
+                                    {
+                                        if (pTops.PizzaId == pizza.Id)
+                                        {
+                                            var currTop = _toppings.GetTopping((int)pTops.ToppingId);
+                                            toppings += currTop.Name + ", ";
+                                            topCost += (double)currTop.Cost;
+                                        }
+                                    }
+                                    var cost = pizza.Sauce.Cost + pizza.Crust.Cost + topCost;
+                                    prePizzas.Add(pizza.Name + " ($" + cost + ")");
+                                    preSauce.Add(sauceDesc);
+                                    preCrust.Add(crustDesc);
+                                    preTops.Add(toppings.Trim(','));
+                                    i++;
+                                }
+                            }
+                            System.Windows.Forms.Label[] nameLabels = new System.Windows.Forms.Label[i + 1];
+                            System.Windows.Forms.Label[] sauceLabels = new System.Windows.Forms.Label[i + 1];
+                            System.Windows.Forms.Label[] crustLabels = new System.Windows.Forms.Label[i + 1];
+                            System.Windows.Forms.Label[] toppingLabels = new System.Windows.Forms.Label[i + 1];
+                            for (int x = 0; x < i; x++)
+                            {
+                                nameLabels[x] = new Label();
+                                nameLabels[x].Text = prePizzas[x];
+                                nameLabels[x].Font = new Font(nameLabels[x].Font.Name, nameLabels[x].Font.Size, FontStyle.Bold);
+                                nameLabels[x].Location = new System.Drawing.Point(20, 20 + x * 110);
+                                this.shoppingPanel.Controls.Add(nameLabels[x]);
+                                sauceLabels[x] = new Label();
+                                sauceLabels[x].AutoSize = true;
+                                sauceLabels[x].Text = preSauce[x];
+                                sauceLabels[x].Location = new System.Drawing.Point(20, 80 * x + 50 + x * 30);
+                                this.shoppingPanel.Controls.Add(sauceLabels[x]);
+                                crustLabels[x] = new Label();
+                                crustLabels[x].AutoSize = true;
+                                crustLabels[x].Text = preCrust[x];
+                                crustLabels[x].Location = new System.Drawing.Point(20, 80 * x + 80 + x * 30);
+                                this.shoppingPanel.Controls.Add(crustLabels[x]);
+                                toppingLabels[x] = new Label();
+                                toppingLabels[x].AutoSize = true;
+                                toppingLabels[x].Text = preTops[x];
+                                toppingLabels[x].Location = new System.Drawing.Point(20, 80 * x + 110 + x * 30);
+                                this.shoppingPanel.Controls.Add(toppingLabels[x]);
+                            }
+                        }
+                    }
+                }
+            }
+            shoppingPanel.Show();
+        }
+
+        private void cancelOrder_Click(object sender, EventArgs e)
+        {
+            shoppingPanel.Hide();
+        }
+
+        private void submitOrder_Click(object sender, EventArgs e)
+        {
+            _currentOrder.OrderStatus = 1;
+            _currentOrder = (Anchovy.API.Client.Models.Order)_orders.PutOrder((int)_currentOrder.Id, _currentOrder);
+            orderError.Text = "Order submitted successfully";
+            orderError.ForeColor = System.Drawing.Color.Green;
+            shoppingPanel.Hide();
+            fillOrderHistory();
+        }
+
+        private void resetOrder_Click(object sender, EventArgs e)
+        {
+            _currentOrder = new Anchovy.API.Client.Models.Order();
+            shoppingPanel.Hide();
         }
     }
 }
