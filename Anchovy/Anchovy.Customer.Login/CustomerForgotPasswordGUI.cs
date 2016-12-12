@@ -54,28 +54,35 @@ namespace CustomerForgotPassword
                         var customer = customers.Where(_ => _.Email == email);
                         if (customer.Any())
                         {
-                            MailMessage message = new System.Net.Mail.MailMessage();
-                            string fromEmail = "anchovy.app.email@gmail.com";
-                            string fromPW = "p1n34ppl3";
-                            string toEmail = email;
-                            message.From = new MailAddress(fromEmail);
-                            message.To.Add(toEmail);
-                            message.Subject = "Your Anchovy Password";
-                            message.Body = "Your current Anchovy password is: " + customer.First().Password;
-                            message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-
-                            using (SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587))
+                            try
                             {
-                                smtpClient.EnableSsl = true;
-                                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                                smtpClient.UseDefaultCredentials = false;
-                                smtpClient.Credentials = new NetworkCredential(fromEmail, fromPW);
+                                MailMessage message = new System.Net.Mail.MailMessage();
+                                string fromEmail = "anchovy.app.email@gmail.com";
+                                string fromPW = "p1n34ppl3";
+                                string toEmail = email;
+                                message.From = new MailAddress(fromEmail);
+                                message.To.Add(toEmail);
+                                message.Subject = "Your Anchovy Password";
+                                message.Body = "Your current Anchovy password is: " + customer.First().Password;
+                                message.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
 
-                                smtpClient.Send(message.From.ToString(), message.To.ToString(),
-                                                message.Subject, message.Body);
+                                using (SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587))
+                                {
+                                    smtpClient.EnableSsl = true;
+                                    smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                                    smtpClient.UseDefaultCredentials = false;
+                                    smtpClient.Credentials = new NetworkCredential(fromEmail, fromPW);
+
+                                    smtpClient.Send(message.From.ToString(), message.To.ToString(),
+                                                    message.Subject, message.Body);
+                                }
+                                forgotMessage.ForeColor = System.Drawing.Color.Green;
+                                forgotMessage.Text = "Password sent sucessfully!";
                             }
-                            forgotMessage.ForeColor = System.Drawing.Color.Green;
-                            forgotMessage.Text = "Password sent sucessfully!";
+                            catch (Exception a)
+                            {
+                                forgotMessage.Text = "Error sending password.";
+                            }
                         }
                         else
                         {

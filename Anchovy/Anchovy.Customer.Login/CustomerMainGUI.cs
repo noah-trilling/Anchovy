@@ -6,6 +6,7 @@ using System.Web.Services.Description;
 using System.Text.RegularExpressions;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace CustomerMain
 {
@@ -34,9 +35,10 @@ namespace CustomerMain
         // Create a variable that can be used when customer creates new pizza
         private Anchovy.API.Client.Models.Pizza _currentPizza;
 
-        // Create two variables that allow each pizza to set a size and crust
+        // Create variables that allow each pizza to set a size, crust, sauce
         private Anchovy.API.Client.Models.Size thisSize = null;
         private Anchovy.API.Client.Models.Crust thisCrust = null;
+        private Anchovy.API.Client.Models.Sauce thisSauce = null;
 
         // Create custom pizza button at the end of all the premade pizzas
         private RadioButton customButton;
@@ -63,6 +65,7 @@ namespace CustomerMain
             // Create a new order for this customer
             _currentOrder = new Anchovy.API.Client.Models.Order();
             _currentOrder.CustomerId = currentCustomer.Id;
+            _currentOrder = _orders.PostOrder(_currentOrder);
 
             // Get all pizza toppings from DB and add them into the listview for custom pizzas
             var pizzaToppings = _toppings.GetToppings();
@@ -87,8 +90,8 @@ namespace CustomerMain
                     ptop.Add(ptopping.Name + " ($" + ptopping.Cost + ")");
                 }
             }
-
             this.allToppings.DataSource = ptop;
+
              // Create a new custom pizza immediately upon logging in
             _currentPizza = new Anchovy.API.Client.Models.Pizza();
 
@@ -98,7 +101,8 @@ namespace CustomerMain
             // Create and add custom pizza button at the end of the premade pizzas
             customButton = new RadioButton();
             customButton.Text = "Custom Pizza";
-            customButton.Location = new System.Drawing.Point(20, 20 + (pizzas + 1) * 30);
+            customButton.Font = new Font(customButton.Font.Name, customButton.Font.Size, FontStyle.Bold);
+            customButton.Location = new System.Drawing.Point(20, 20 + (pizzas + 1) * 80);
             this.pizzaGroup.Controls.Add(customButton);
 
             // Create size, sauce, and crust buttons dynamically
@@ -122,13 +126,7 @@ namespace CustomerMain
 
             // Check if size and crust buttons are selected
             checkSize();
-            checkCrust();
-
-            if (thisCrust == null)
-            {
-                orderError.Text = "Please select a crust type.";
-            }
-            else if (thisSize == null)
+             if (thisSize == null)
             {
                 orderError.Text = "Please select a size.";
             } else
@@ -138,6 +136,12 @@ namespace CustomerMain
                     AppetizersPanel.Show();
                 }
             }
+            // TODO: Add if preselected pizza to order
+            // TODO: Otherwise generate custom pizza
+
+            checkCrust();
+            checkSize();
+
         }
 
         // If logout hide this and return to login page
@@ -355,32 +359,64 @@ namespace CustomerMain
 
         private int addPremadePizzas()
         {
-            var premadePizzas = _pizzaToppings.GetPizzaToppings();
-            string[] pizzaArray = new String[premadePizzas.Count];
-            string[] descArray = new String[premadePizzas.Count];
+            var premadePizzas = _pizzas.GetPizzas();
+            List<String> prePizzas = new List<String>();
+            List<String> preSauce = new List<String>();
+            List<String> preCrust = new List<String>();
+            List<String> preTops = new List<String>();
+
             int i = 0;
-            foreach (var s in premadePizzas)
+            foreach (var za in premadePizzas)
             {
-                var za = _pizzas.GetPizza((int)s.PizzaId);
                 if ((bool)za.MenuItem)
                 {
-                    pizzaArray[i] = za.Name;
-                    string toppingsStr = "";
-                    //TODO: add tops
-                    descArray[i] = "Sauce: " + za.Sauce.Name + " - Toppings: " + toppingsStr;
+                    prePizzas.Add(za.Name);
+                    string sauceDesc = "Sauce: " + za.Sauce.Name;
+                    string crustDesc = "Crust: " + za.Crust.Name;
+                    string toppings = "Toppings: ";
+                    var pizzaTops = _pizzaToppings.GetPizzaToppings();
+                    foreach (var pTops in pizzaTops)
+                    {
+                        if (pTops.PizzaId == za.Id)
+                        {
+                            var currTop = _toppings.GetTopping((int)pTops.ToppingId);
+                            toppings += currTop.Name + ", ";
+                        }
+                    }
+                    preSauce.Add(sauceDesc);
+                    preCrust.Add(crustDesc);
+                    preTops.Add(toppings.Trim(','));
                     i++;
                 }
             }
-            System.Windows.Forms.RadioButton[] radioButtons =
-                new System.Windows.Forms.RadioButton[premadePizzas.Count + 1];
-            for (i = 0; i < premadePizzas.Count; ++i)
+            System.Windows.Forms.RadioButton[] radioButtons = new System.Windows.Forms.RadioButton[i + 1];
+            System.Windows.Forms.Label[] sauceLabels = new System.Windows.Forms.Label[i + 1];
+            System.Windows.Forms.Label[] crustLabels = new System.Windows.Forms.Label[i + 1];
+            System.Windows.Forms.Label[] toppingLabels = new System.Windows.Forms.Label[i + 1];
+            for (int x = 0; x < i; x++)
             {
-                radioButtons[i] = new RadioButton();
-                radioButtons[i].Text = pizzaArray[i];
-                radioButtons[i].Location = new System.Drawing.Point(20, 20 + i * 30);
-                this.pizzaGroup.Controls.Add(radioButtons[i]);
+                radioButtons[x] = new RadioButton();
+                radioButtons[x].Text = prePizzas[x];
+                radioButtons[x].Font = new Font(radioButtons[x].Font.Name, radioButtons[x].Font.Size, FontStyle.Bold);
+                radioButtons[x].Location = new System.Drawing.Point(20, 20 + x * 110);
+                this.pizzaGroup.Controls.Add(radioButtons[x]);
+                sauceLabels[x] = new Label();
+                sauceLabels[x].AutoSize = true;
+                sauceLabels[x].Text = preSauce[x];
+                sauceLabels[x].Location = new System.Drawing.Point(20, 80 * x + 50 + x * 30);
+                this.pizzaGroup.Controls.Add(sauceLabels[x]);
+                crustLabels[x] = new Label();
+                crustLabels[x].AutoSize = true;
+                crustLabels[x].Text = preCrust[x];
+                crustLabels[x].Location = new System.Drawing.Point(20, 80 * x + 80 + x * 30);
+                this.pizzaGroup.Controls.Add(crustLabels[x]);
+                toppingLabels[x] = new Label();
+                toppingLabels[x].AutoSize = true;
+                toppingLabels[x].Text = preTops[x];
+                toppingLabels[x].Location = new System.Drawing.Point(20, 80 * x + 110 + x * 30);
+                this.pizzaGroup.Controls.Add(toppingLabels[x]);
             }
-            return premadePizzas.Count;
+            return i;
         }
 
         private void saveToppings_Click(object sender, EventArgs e)
@@ -408,8 +444,9 @@ namespace CustomerMain
             {
                 toppingsError.Text = "Please select a sauce type.";
             }
-            else
+            else if (thisCrust == null)
             {
+                toppingsError.Text = "Please select a crust type.";
                 //TODO: Add toppings and sauce
                 this.Hide();
             }
@@ -454,7 +491,6 @@ namespace CustomerMain
                             }
                         }
                     }
-
                 }
             }
         }
@@ -552,6 +588,7 @@ namespace CustomerMain
             _orders.PutOrder((int)temp, order);
         }
 
+        // Generate a status string from the enum
         private String getStatusString(int temp)
         {
             switch (temp)
@@ -562,11 +599,6 @@ namespace CustomerMain
                 case 4: return "Cancelled";
                 default: return "Unordered";
             }
-        }
-
-        private void selectedToppings_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

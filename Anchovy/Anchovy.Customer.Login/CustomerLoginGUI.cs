@@ -42,27 +42,33 @@ namespace CustomerLogin
                 if (!customers.Any()) Console.WriteLine("There are no customers in the database");
                 else
                 {
-                    var customer = customers.Where(_ => _.Username == username);
-
-                    if (customer.Any())
+                    try
                     {
-                        if (password == customer.First().Password)
+                        var customer = customers.Where(_ => _.Username == username);
+
+                        if (customer.Any())
                         {
-                            usernameBox.Text = "";
-                            passwordBox.Text = "";
-                            _main = new AnchovyCustomerMainGUI(customer.First());
-                            _main.Text = "Logged In As - " + customer.First().FirstName;
-                            this.Hide();
-                            _main.Show();
+                            if (password == customer.First().Password)
+                            {
+                                usernameBox.Text = "";
+                                passwordBox.Text = "";
+                                _main = new AnchovyCustomerMainGUI(customer.First());
+                                _main.Text = "Logged In As - " + customer.First().FirstName;
+                                this.Hide();
+                                _main.Show();
+                            }
+                            else
+                            {
+                                passwordError.Text = "Invalid Password";
+                            }
                         }
                         else
                         {
-                            passwordError.Text = "Invalid Password";
+                            usernameError.Text = "Invalid Username";
                         }
-                    }
-                    else
+                    } catch (Exception a)
                     {
-                        usernameError.Text = "Invalid Username";
+                        usernameError.Text = "Error logging in.";
                     }
                 }
             }

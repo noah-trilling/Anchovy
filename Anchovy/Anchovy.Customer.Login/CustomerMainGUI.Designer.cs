@@ -31,6 +31,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.AppetizersPanel = new System.Windows.Forms.Panel();
+            this.outOfStock = new System.Windows.Forms.GroupBox();
             this.toppingsError = new System.Windows.Forms.Label();
             this.selectedToppings = new System.Windows.Forms.ListBox();
             this.sauceGroup = new System.Windows.Forms.GroupBox();
@@ -82,7 +83,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.shoppingCart3 = new System.Windows.Forms.LinkLabel();
             this.logoutButton3 = new System.Windows.Forms.Button();
-            this.outOfStock = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.AppetizersPanel.SuspendLayout();
@@ -106,7 +106,6 @@
             // 
             this.tabPage1.Controls.Add(this.AppetizersPanel);
             this.tabPage1.Controls.Add(this.orderError);
-            this.tabPage1.Controls.Add(this.crustGroup);
             this.tabPage1.Controls.Add(this.sizeGroup);
             this.tabPage1.Controls.Add(this.appetizersButton);
             this.tabPage1.Controls.Add(this.pizzaGroup);
@@ -123,6 +122,7 @@
             // AppetizersPanel
             // 
             this.AppetizersPanel.Controls.Add(this.outOfStock);
+            this.AppetizersPanel.Controls.Add(this.crustGroup);
             this.AppetizersPanel.Controls.Add(this.toppingsError);
             this.AppetizersPanel.Controls.Add(this.selectedToppings);
             this.AppetizersPanel.Controls.Add(this.sauceGroup);
@@ -133,11 +133,20 @@
             this.AppetizersPanel.Controls.Add(this.allToppings);
             this.AppetizersPanel.Controls.Add(this.cancelToppings);
             this.AppetizersPanel.Controls.Add(this.saveToppings);
-            this.AppetizersPanel.Location = new System.Drawing.Point(21, 73);
+            this.AppetizersPanel.Location = new System.Drawing.Point(21, 84);
             this.AppetizersPanel.Name = "AppetizersPanel";
             this.AppetizersPanel.Size = new System.Drawing.Size(882, 492);
             this.AppetizersPanel.TabIndex = 37;
             this.AppetizersPanel.Visible = false;
+            // 
+            // outOfStock
+            // 
+            this.outOfStock.Location = new System.Drawing.Point(593, 275);
+            this.outOfStock.Name = "outOfStock";
+            this.outOfStock.Size = new System.Drawing.Size(171, 189);
+            this.outOfStock.TabIndex = 30;
+            this.outOfStock.TabStop = false;
+            this.outOfStock.Text = "Out Of Stock";
             // 
             // toppingsError
             // 
@@ -156,7 +165,6 @@
             this.selectedToppings.Name = "selectedToppings";
             this.selectedToppings.Size = new System.Drawing.Size(171, 212);
             this.selectedToppings.TabIndex = 22;
-            this.selectedToppings.SelectedIndexChanged += new System.EventHandler(this.selectedToppings_SelectedIndexChanged);
             // 
             // sauceGroup
             // 
@@ -252,9 +260,9 @@
             // 
             // crustGroup
             // 
-            this.crustGroup.Location = new System.Drawing.Point(745, 309);
+            this.crustGroup.Location = new System.Drawing.Point(17, 264);
             this.crustGroup.Name = "crustGroup";
-            this.crustGroup.Size = new System.Drawing.Size(164, 172);
+            this.crustGroup.Size = new System.Drawing.Size(164, 183);
             this.crustGroup.TabIndex = 40;
             this.crustGroup.TabStop = false;
             this.crustGroup.Text = "Crusts";
@@ -680,15 +688,6 @@
             this.logoutButton3.Text = "Logout";
             this.logoutButton3.UseVisualStyleBackColor = false;
             this.logoutButton3.Click += new System.EventHandler(this.logoutButton3_Click);
-            // 
-            // outOfStock
-            // 
-            this.outOfStock.Location = new System.Drawing.Point(593, 275);
-            this.outOfStock.Name = "outOfStock";
-            this.outOfStock.Size = new System.Drawing.Size(171, 189);
-            this.outOfStock.TabIndex = 30;
-            this.outOfStock.TabStop = false;
-            this.outOfStock.Text = "Out Of Stock";
             // 
             // AnchovyCustomerMainGUI
             // 
