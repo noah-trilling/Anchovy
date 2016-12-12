@@ -30,7 +30,7 @@ namespace Anchovy.Manager.Main
         private ICooks _cooks = new AnchovyAPIService().Cooks;
         private IManagers _managers = new AnchovyAPIService().Managers;
 
-        
+
 
         public ManagerMain()
         {
@@ -51,9 +51,17 @@ namespace Anchovy.Manager.Main
 
         private void ManagerMain_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'AnchovyContextCustomerDataSet.Customers' table. You can move, or remove it, as needed.
+            this.CustomersTableAdapter.Fill(this.AnchovyContextCustomerDataSet.Customers);
+            // TODO: This line of code loads data into the 'AnchovyContextCookHourPay.CookHoursPayView' table. You can move, or remove it, as needed.
+            this.CookHoursPayViewTableAdapter.Fill(this.AnchovyContextCookHourPay.CookHoursPayView);
+            // TODO: This line of code loads data into the 'AnchovyContextCookPreformanceDataSet.CookPreformanceView' table. You can move, or remove it, as needed.
+            this.CookPreformanceViewTableAdapter.Fill(this.AnchovyContextCookPreformanceDataSet.CookPreformanceView);
+            // TODO: This line of code loads data into the 'AnchovyContextDataSetToppingCountView.ToppingCountView' table. You can move, or remove it, as needed.
+            this.ToppingCountViewTableAdapter.Fill(this.AnchovyContextDataSetToppingCountView.ToppingCountView);
             // TODO: This line of code loads data into the 'AnchovyContextDataSet.Managers' table. You can move, or remove it, as needed.
             this.ManagersTableAdapter.Fill(this.AnchovyContextDataSet.Managers);
-            this.reportViewer1.RefreshReport();
+            //   this.rptViewToppingUsage.RefreshReport();
             _toppings = new AnchovyAPIService().Toppings;
             // getAllToppingInventory();
             PopulateInventoryListBox();
@@ -63,131 +71,49 @@ namespace Anchovy.Manager.Main
             populatelstPizzasList();
 
             //tabControl.TabPages.Remove(tabPageReports);
+            this.rptViewCooksPreformance.RefreshReport();
+            this.rptViewToppingUsage.RefreshReport();
+            this.rptViewCookHourPay.RefreshReport();
+            this.rptViewCustomersList.RefreshReport();
+            this.rptViewCustomersList.RefreshReport();
         }
 
-        //public void getAllToppingInventory()
-        //{
-        //    var AllToppings = _toppings.GetToppings().GetEnumerator();
 
-        //    while (AllToppings.MoveNext())
-        //    {
-        //       if(AllToppings.Current.Name == "Cheese")
-        //       {
-        //            lblCheeseValue.Text = "" + AllToppings.Current.Quantity;
-        //       }
-        //       if (AllToppings.Current.Name == "Onions")
-        //       {
-        //            lblRedOnionsValue.Text = "" + AllToppings.Current.Quantity;
-        //            if(AllToppings.Current.Quantity < AllToppings.Current.LowLevel)
-        //            {
-        //                lblRedOnionsValue.ForeColor = Color.Red;
-        //            }else
-        //            {
-        //                lblRedOnionsValue.ForeColor = Color.Black;
-        //            }
-        //       }
-
-        //    }
-
-        //}
-
-        //private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void reportViewer1_Load(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void lblCheese_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void btnEdit_Click(object sender, EventArgs e)
-        //{
-        //    txtCheese.ReadOnly = false;
-        //    txtPepperoni.ReadOnly = false;
-        //    txtBacon.ReadOnly = false;
-        //    txtAnchovies.ReadOnly = false;
-        //    txtPinepples.ReadOnly = false;
-        //    txtGreenPeppers.ReadOnly = false;
-        //    txtBlackOlives.ReadOnly = false;
-        //    txtRedOnions.ReadOnly = false;
-        //}
-
-        //private void btnSave_Click(object sender, EventArgs e)
-        //{
-        //    txtCheese.ReadOnly = true;
-        //    txtPepperoni.ReadOnly = true;
-        //    txtBacon.ReadOnly = true;
-        //    txtAnchovies.ReadOnly = true;
-        //    txtPinepples.ReadOnly = true;
-        //    txtGreenPeppers.ReadOnly = true;
-        //    txtBlackOlives.ReadOnly = true;
-        //    txtRedOnions.ReadOnly = true;
-
-
-        //    if(txtRedOnions.Text != "")
-        //    {
-        //        int amnt = Int32.Parse(txtRedOnions.Text);
-        //        var AllToppings = _toppings.GetToppings().GetEnumerator();
-        //        Anchovy.API.Client.Models.Topping onion = null;
-        //        while (AllToppings.MoveNext())
-        //        {
-                   
-        //            if (AllToppings.Current.Name == "Onions")
-        //            {
-                    
-        //                onion = AllToppings.Current;
-        //            }
-
-        //        }
-        //        onion.Quantity += amnt;
-        //        _toppings.PutTopping((int)onion.Id, onion);
-        //        getAllToppingInventory();
-
-
-        //    }
-        //}
-        
         ///<summary>
         ///Inventory Tab
         ///All Functionality for Inventory Tab
         ///</summary>
-        
+
         private void PopulateInventoryListBox()
         {
-            var AllToppings =  _toppings.GetToppings().GetEnumerator();
+            var AllToppings = _toppings.GetToppings().GetEnumerator();
             List<string> DataForListBox = new List<string>();
             string low = "LOW";
             while (AllToppings.MoveNext())
             {
                 if (AllToppings.Current.Quantity <= AllToppings.Current.LowLevel)
                 {
-                    DataForListBox.Add("T" + AllToppings.Current.Id + ": " + AllToppings.Current.Name + "\t\t" + AllToppings.Current.Quantity+"  "+low);
+                    DataForListBox.Add("T" + AllToppings.Current.Id + ": " + AllToppings.Current.Name + "\t\t" + AllToppings.Current.Quantity + "  " + low);
                 }
                 else
                 {
                     DataForListBox.Add("T" + AllToppings.Current.Id + ": " + AllToppings.Current.Name + "\t\t" + AllToppings.Current.Quantity);
                 }
             }
-            
-            
+
+
             var AllSizes = _sizes.GetSizes().GetEnumerator();
             List<string> sizes = new List<string>();
 
             while (AllSizes.MoveNext())
             {
-                DataForListBox.Add("Z" + AllSizes.Current.Id + ": " + AllSizes.Current.Name+" (Size)");
+                DataForListBox.Add("Z" + AllSizes.Current.Id + ": " + AllSizes.Current.Name + " (Size)");
             }
 
             var AllSauses = _sauses.GetSauces().GetEnumerator();
             while (AllSauses.MoveNext())
             {
-                DataForListBox.Add("S" + AllSauses.Current.Id + ": " + AllSauses.Current.Name + " (Sause)");
+                DataForListBox.Add("S" + AllSauses.Current.Id + ": " + AllSauses.Current.Name + " (Sauce)");
             }
             var AllCrust = _crust.GetCrusts().GetEnumerator();
             while (AllCrust.MoveNext())
@@ -201,7 +127,7 @@ namespace Anchovy.Manager.Main
             }
             PopulateComboInventorySize();
             lstBoxInventory.DataSource = DataForListBox;
-            
+
         }
 
         private void PopulateComboInventorySize()
@@ -229,7 +155,7 @@ namespace Anchovy.Manager.Main
                 lblInventoryQuantity.Visible = true;
                 comboInventorySize.Visible = false;
                 lblInventoryQuantity.Text = "Quantity";
-                
+
                 var topping = _toppings.GetTopping(_id);
                 txtInventoryName.Text = topping.Name;
                 txtInventoryQuantity.Text = "" + topping.Quantity;
@@ -304,7 +230,7 @@ namespace Anchovy.Manager.Main
             double x = 0.0;
             int y = 0;
             bool flag = true;
-            if(!double.TryParse(txtInventoryCost.Text, out x))
+            if (!double.TryParse(txtInventoryCost.Text, out x))
             {
                 lblInventoryErrorCost.Visible = true;
                 flag = false;
@@ -313,7 +239,7 @@ namespace Anchovy.Manager.Main
             {
                 lblInventoryErrorCost.Visible = false;
             }
-            if(!int.TryParse(txtInventoryQuantity.Text,out y) && comboInventorySize.Visible == false)
+            if (!int.TryParse(txtInventoryQuantity.Text, out y) && comboInventorySize.Visible == false)
             {
                 lblInventoryQuantityError.Visible = true;
                 flag = false;
@@ -322,7 +248,7 @@ namespace Anchovy.Manager.Main
             {
                 lblInventoryQuantityError.Visible = false;
             }
-            if(!int.TryParse(txtInventoryLowLevel.Text, out y))
+            if (!int.TryParse(txtInventoryLowLevel.Text, out y))
             {
                 lblInventoryLowLevelError.Visible = true;
                 flag = false;
@@ -346,7 +272,7 @@ namespace Anchovy.Manager.Main
                 topping.LowLevel = Convert.ToInt32(txtInventoryLowLevel.Text);
 
                 _toppings.PutTopping(_id, topping);
-                
+
             }
             else if (item.StartsWith("M"))
             {
@@ -396,11 +322,11 @@ namespace Anchovy.Manager.Main
             txtInventoryQuantity.ReadOnly = true;
             txtInventoryLowLevel.ReadOnly = true;
 
-            
+
             PopulateInventoryListBox();
 
         }
-        
+
         private void btnInvtAddNewItem_Click(object sender, EventArgs e)
         {
             panelInventoryAddNew.Visible = true;
@@ -413,10 +339,10 @@ namespace Anchovy.Manager.Main
             }
             else
             {
-               btnInvtAddNewItem.Text = "Cancel";
+                btnInvtAddNewItem.Text = "Cancel";
                 panelInventoryAddNew.Visible = true;
             }
-            
+
 
         }
 
@@ -446,7 +372,7 @@ namespace Anchovy.Manager.Main
                 size.Name = txtInventoryAddNewName.Text;
                 _sizes.PostSize(size);
             }
-            else if(comboInventoryAddList.Text.Equals("Menu Listing"))
+            else if (comboInventoryAddList.Text.Equals("Menu Listing"))
             {
                 Anchovy.API.Client.Models.MenuListing menulist = new API.Client.Models.MenuListing();
                 menulist.Name = txtInventoryAddNewName.Text;
@@ -456,13 +382,46 @@ namespace Anchovy.Manager.Main
                 {
                     size = AllSizes.Current;
                 }
-                menulist.SizeId =(int)size.Id;
+                menulist.SizeId = (int)size.Id;
                 menulist.Size = size;
                 _menulistings.PostMenuListing(menulist);
             }
             PopulateInventoryListBox();
             panelInventoryAddNew.Visible = false;
             btnInvtAddNewItem.Text = "Add New Item";
+        }
+
+        private void btnInventoryDelete_Click(object sender, EventArgs e)
+        {
+            string item = lstBoxInventory.SelectedItem.ToString();
+            string idstring = item.Substring(1, item.IndexOf(":") - 1);
+            int _id = Convert.ToInt32(idstring);
+            if (item.StartsWith("T"))
+            {
+                _toppings.DeleteTopping(_id);
+
+            }
+            else if (item.StartsWith("M"))
+            {
+                _menulistings.DeleteMenuListing(_id);
+            }
+            else if (item.StartsWith("Z"))
+            {
+                _sizes.DeleteSize(_id);
+            }
+            else if (item.StartsWith("C"))
+            {
+                _crust.DeleteCrust(_id);
+            }
+            else if (item.StartsWith("S"))
+            {
+                _sauses.DeleteSauce(_id);
+            }
+            else
+            {
+                return;
+            }
+            PopulateInventoryListBox();
         }
 
         ///<summary>
@@ -475,9 +434,9 @@ namespace Anchovy.Manager.Main
             List<string> DataforpizzaList = new List<string>();
             while (AllMenuPizzas.MoveNext())
             {
-                if((bool)AllMenuPizzas.Current.MenuItem)
+                if ((bool)AllMenuPizzas.Current.MenuItem)
                 {
-                    DataforpizzaList.Add(AllMenuPizzas.Current.Id+": "+AllMenuPizzas.Current.Name);
+                    DataforpizzaList.Add(AllMenuPizzas.Current.Id + ": " + AllMenuPizzas.Current.Name);
                 }
             }
 
@@ -540,7 +499,7 @@ namespace Anchovy.Manager.Main
             List<int> toppingIds = new List<int>();
             while (AllToppingsOnPizzas.MoveNext())
             {
-                if(AllToppingsOnPizzas.Current.PizzaId == _id)
+                if (AllToppingsOnPizzas.Current.PizzaId == _id)
                 {
                     toppingIds.Add((int)AllToppingsOnPizzas.Current.ToppingId);
                 }
@@ -549,7 +508,7 @@ namespace Anchovy.Manager.Main
             lstPizzasToppingOnPizza.Items.Clear();
             foreach (var x in toppingIds)
                 lstPizzasToppingOnPizza.Items.Add(_toppings.GetTopping(x).Name);
-            
+
         }
 
         private void PopulatePizzaAllToppingsList()
@@ -629,7 +588,7 @@ namespace Anchovy.Manager.Main
             var AllToppings = _toppings.GetToppings().GetEnumerator();
             while (AllToppings.MoveNext())
             {
-                foreach(var i in lstPizzasToppingOnPizza.Items)
+                foreach (var i in lstPizzasToppingOnPizza.Items)
                 {
                     if (i.Equals(AllToppings.Current.Name))
                     {
@@ -638,7 +597,7 @@ namespace Anchovy.Manager.Main
                 }
             }
             API.Client.Models.PizzaTopping pt = new API.Client.Models.PizzaTopping();
-            foreach(int topId in toppingIds)
+            foreach (int topId in toppingIds)
             {
                 pt.PizzaId = _id;
                 pt.ToppingId = topId;
@@ -720,7 +679,7 @@ namespace Anchovy.Manager.Main
             {
                 lstPizzasToppingOnPizza.Items.Add(item);
             }
-           
+
         }
 
         private void btnPizzasToppingsAddOne_Click(object sender, EventArgs e)
@@ -761,7 +720,7 @@ namespace Anchovy.Manager.Main
             if (getSalesByDate(startDate, endDate) == 0) lblDailySalesValue.Text = "$0";
 
             startDate = DateTime.Today.AddDays(-7);
-            lblWeeklySalesValue.Text = "$" + getSalesByDate(startDate,endDate).ToString("##########.##");
+            lblWeeklySalesValue.Text = "$" + getSalesByDate(startDate, endDate).ToString("##########.##");
             if (getSalesByDate(startDate, endDate) == 0) lblWeeklySalesValue.Text = "$0";
 
             startDate = DateTime.Today.AddDays(-30);
@@ -777,7 +736,7 @@ namespace Anchovy.Manager.Main
             DateTimeOffset oldestdate = DateTime.Today;
             while (AllOrders.MoveNext())
             {
-                if(AllOrders.Current.CompletedTimeStamp != null)
+                if (AllOrders.Current.CompletedTimeStamp != null)
                 {
                     if (((DateTimeOffset)AllOrders.Current.CompletedTimeStamp).DateTime <= oldestdate.DateTime)
                     {
@@ -795,7 +754,7 @@ namespace Anchovy.Manager.Main
             lblDailyAveragesValue.Text = "$" + dailyAverage.ToString("########.##");
             lbllblWeeklyAveragesValue.Text = "$" + weeklyAverage.ToString("########.##");
             lblMonthlyAveragesValue.Text = "$" + monthlyAverage.ToString("########.##");
-            
+
         }
 
         public double getAllSales()
@@ -806,43 +765,6 @@ namespace Anchovy.Manager.Main
             while (AllOrders.MoveNext())
             {
                 orderIds.Add((int)AllOrders.Current.Id);
-            }
-
-            //getting all line ids from orderlines that match with orderids in list
-            List<int> lineIds = new List<int>();
-            var AllOrderLines = _orderLines.GetOrderLines().GetEnumerator();
-            while (AllOrderLines.MoveNext())
-            {
-                if(orderIds.IndexOf((int) AllOrderLines.Current.OrderId) != -1)
-                {
-                    lineIds.Add((int)AllOrderLines.Current.LineId);
-                }
-            }
-
-            var AllLines = _lines.GetLines().GetEnumerator();
-            double total = 0;
-            while (AllLines.MoveNext())
-            {
-                if(lineIds.IndexOf((int)AllLines.Current.Id) != -1)
-                {
-                    total += getMenuListingCost((int)AllLines.Current.MenuListingId);
-                    total += getPizzaCost((int)AllLines.Current.PizzaId);
-                }
-            }
-
-            return total;
-        }
-
-        public double getSalesByDate(DateTime startDate, DateTime endDate)
-        {
-            //Getting All orders and saving there ids in orderIds list
-            var AllOrders = _orders.GetOrders().GetEnumerator();
-            List<int> orderIds = new List<int>();
-            while (AllOrders.MoveNext())
-            {
-                DateTime compDate = ((DateTimeOffset)AllOrders.Current.CompletedTimeStamp).DateTime;
-                if(compDate > startDate && compDate < endDate)
-                    orderIds.Add((int)AllOrders.Current.Id);
             }
 
             //getting all line ids from orderlines that match with orderids in list
@@ -868,14 +790,53 @@ namespace Anchovy.Manager.Main
             }
 
             return total;
-    }
+        }
+
+        public double getSalesByDate(DateTime startDate, DateTime endDate)
+        {
+            //Getting All orders and saving there ids in orderIds list
+            var AllOrders = _orders.GetOrders().GetEnumerator();
+            List<int> orderIds = new List<int>();
+            while (AllOrders.MoveNext())
+            {
+                if(AllOrders.Current.CompletedTimeStamp != null) { 
+                DateTime compDate = ((DateTimeOffset)AllOrders.Current.CompletedTimeStamp).DateTime;
+                if (compDate > startDate && compDate < endDate)
+                    orderIds.Add((int)AllOrders.Current.Id);
+                }
+            }
+
+            //getting all line ids from orderlines that match with orderids in list
+            List<int> lineIds = new List<int>();
+            var AllOrderLines = _orderLines.GetOrderLines().GetEnumerator();
+            while (AllOrderLines.MoveNext())
+            {
+                if (orderIds.IndexOf((int)AllOrderLines.Current.OrderId) != -1)
+                {
+                    lineIds.Add((int)AllOrderLines.Current.LineId);
+                }
+            }
+
+            var AllLines = _lines.GetLines().GetEnumerator();
+            double total = 0;
+            while (AllLines.MoveNext())
+            {
+                if (lineIds.IndexOf((int)AllLines.Current.Id) != -1)
+                {
+                    total += getMenuListingCost((int)AllLines.Current.MenuListingId);
+                    total += getPizzaCost((int)AllLines.Current.PizzaId);
+                }
+            }
+
+            return total;
+        }
 
         private double getMenuListingCost(int menuListingId)
         {
             if (menuListingId == null || menuListingId == -1) return 0.0;
             var menuListing = _menulistings.GetMenuListing(menuListingId);
             var size = _sizes.GetSize((int)menuListing.SizeId);
-            return (double)(menuListing.Cost + size.Cost); 
+            return (double)(menuListing.Cost + size.Cost);
         }
 
         private double getPizzaCost(int pizzaId)
@@ -891,7 +852,7 @@ namespace Anchovy.Manager.Main
             List<int> ToppingsIdList = new List<int>();
             while (AllPizzaToppings.MoveNext())
             {
-                if(AllPizzaToppings.Current.PizzaId == pizzaId)
+                if (AllPizzaToppings.Current.PizzaId == pizzaId)
                 {
                     ToppingsIdList.Add((int)AllPizzaToppings.Current.ToppingId);
                 }
@@ -930,6 +891,14 @@ namespace Anchovy.Manager.Main
                 cookNames.Add("" + AllCooks.Current.FirstName + " " + AllCooks.Current.LastName);
             }
             comboCooks.DataSource = cookNames;
+
+            var AllManagers = _managers.GetManagers().GetEnumerator();
+            List<int> managers = new List<int>();
+            while (AllManagers.MoveNext())
+            {
+                managers.Add((int)AllManagers.Current.Id);
+            }
+            comboCookNewCookManager.DataSource = managers;
         }
 
         private void comboCooks_SelectedIndexChanged(object sender, EventArgs e)
@@ -938,7 +907,7 @@ namespace Anchovy.Manager.Main
             int cookId = -1;
             while (AllCooks.MoveNext())
             {
-                if((AllCooks.Current.FirstName+" " + AllCooks.Current.LastName).Equals(comboCooks.Text))
+                if ((AllCooks.Current.FirstName + " " + AllCooks.Current.LastName).Equals(comboCooks.Text))
                 {
                     cookId = (int)AllCooks.Current.Id;
                     break;
@@ -981,12 +950,26 @@ namespace Anchovy.Manager.Main
 
         private void btnCookSave_Click(object sender, EventArgs e)
         {
+            txtCookFirstName.ReadOnly = true;
+            txtCookMiddleName.ReadOnly = true;
+            txtCookLastName.ReadOnly = true;
+            txtCookUsername.ReadOnly = true;
+            txtCookPassword.ReadOnly = true;
+            txtCookAddress.ReadOnly = true;
+            txtCookCity.ReadOnly = true;
+            txtCookState.ReadOnly = true;
+            txtCookEmail.ReadOnly = true;
+            txtCookPhoneNumber.ReadOnly = true;
+            txtCookHourlyWage.ReadOnly = true;
+            txtCookPieceWorkRate.ReadOnly = true;
+
             double x = 0.0;
-            if(!double.TryParse(txtCookHourlyWage.Text, out x))
+            if (!double.TryParse(txtCookHourlyWage.Text, out x))
             {
                 lblCookHourError.Visible = true;
                 return;
-            }else
+            }
+            else
             {
                 lblCookHourError.Visible = false;
             }
@@ -999,17 +982,7 @@ namespace Anchovy.Manager.Main
             {
                 lblCookPieceWrkError.Visible = false;
             }
-            txtManagerFName.ReadOnly = true;
-            txtManagerMName.ReadOnly = true;
-            txtManagerLName.ReadOnly = true;
-            txtManagerUName.ReadOnly = true;
-            txtManagerPwd.ReadOnly = true;
-            txtManagerAddress.ReadOnly = true;
-            txtManagerCity.ReadOnly = true;
-            txtManagerState.ReadOnly = true;
-            txtManagerEmail.ReadOnly = true;
-            txtManagerPhoneNumber.ReadOnly = true;
-            txtManagerSalary.ReadOnly = true;
+            
 
             var AllCooks = _cooks.GetCooks().GetEnumerator();
             int cookId = -1;
@@ -1041,20 +1014,44 @@ namespace Anchovy.Manager.Main
             _cooks.PutCook(cookId, selectedCook);
             PopulateCooksComboBox();
             comboCooks.SelectedItem = selectedCook.FirstName + " " + selectedCook.LastName;
-            
+
         }
 
         private void btnAddNewCook_Click(object sender, EventArgs e)
         {
-            AddNewCook anc = new AddNewCook();
-            anc.Show();
+            if (btnAddNewCook.Text.Equals("Cancel"))
+            {
+                panalCooksAddNewCook.Visible = false;
+                btnAddNewCook.Text = "Add New Cook";
+            }
+            else
+            {
+                btnAddNewCook.Text = "Cancel";
+                panalCooksAddNewCook.Visible = true;
+            }
+            
+            //AddNewCook anc = new AddNewCook();
+            //anc.Show();
+        }
+
+        private void btnCookAddNewCookDone_Click(object sender, EventArgs e)
+        {
+            
+            API.Client.Models.Cook cook = new API.Client.Models.Cook();
+            cook.FirstName = txtCookNewCookName.Text;
+            cook.ManagerId = Convert.ToInt32(comboCookNewCookManager.Text);
+            _cooks.PostCook(cook);
+            PopulateCooksComboBox();
+            txtCookNewCookName.Text = "";
+            btnAddNewCook.Text = "Add New Cook";
+            panalCooksAddNewCook.Visible = false;
         }
 
         ///<summary>
         ///Managers Tab
         ///All Functionality for Managers Tab
         ///</summary>
-    
+
         public void PopulateManagersComboBox()
         {
             List<string> managerNames = new List<string>();
@@ -1114,14 +1111,15 @@ namespace Anchovy.Manager.Main
         private void btnManagerSave_Click(object sender, EventArgs e)
         {
             double x;
-            if(!double.TryParse(txtManagerSalary.Text,out x))
+            if (!double.TryParse(txtManagerSalary.Text, out x))
             {
                 lblManagerSalaryError.Visible = true;
                 return;
-            }else
+            }
+            else
             {
                 lblManagerSalaryError.Visible = false;
-            } 
+            }
             txtManagerFName.ReadOnly = true;
             txtManagerMName.ReadOnly = true;
             txtManagerLName.ReadOnly = true;
@@ -1168,13 +1166,85 @@ namespace Anchovy.Manager.Main
 
         private void btnAddNewManager_Click(object sender, EventArgs e)
         {
-            AddNewManager anm = new AddNewManager();
-            anm.Show();
+            if (btnAddNewManager.Text.Equals("Cancel"))
+            {
+                panelManagersAddNewManager.Visible = false;
+                btnAddNewManager.Text = "Add New Manager";
+            }
+            else
+            {
+                btnAddNewManager.Text = "Cancel";
+                panelManagersAddNewManager.Visible = true;
+            }
+
+            //AddNewManager anm = new AddNewManager();
+            //anm.Show();
+        }
+
+        private void btnManagerAddNewManagerDone_Click(object sender, EventArgs e)
+        {
+            API.Client.Models.Manager manager = new API.Client.Models.Manager();
+            manager.FirstName = txtManagerAddNewManagerName.Text;
+            _managers.PostManager(manager);
+            PopulateManagersComboBox();
+            txtManagerAddNewManagerName.Text = "";
+            btnAddNewManager.Text = "Add New Manager";
+            panelManagersAddNewManager.Visible = false;
         }
 
         public void selectManagerFromCombo(API.Client.Models.Manager manager)
         {
             comboManager.SelectedItem = manager.FirstName + " " + manager.LastName;
+        }
+
+
+        ///<summary>
+        ///Reports Tab
+        ///All Functionality for Reports
+        ///</summary>
+
+        private void btnRunReport_Click(object sender, EventArgs e)
+        {
+            //        Cook Preformance
+            //Cooks Hours and Pay
+            //Topping Usage Report
+            //Customers List
+
+            if (comboReports.Text.Equals("Cook Preformance"))
+            {
+                rptViewCooksPreformance.Visible = true;
+                rptViewToppingUsage.Visible = false;
+                rptViewCookHourPay.Visible = false;
+                rptViewCustomersList.Visible = false;
+            }
+            else if (comboReports.Text.Equals("Topping Usage Report"))
+            {
+                rptViewCooksPreformance.Visible = false;
+                rptViewToppingUsage.Visible = true;
+                rptViewCookHourPay.Visible = false;
+                rptViewCustomersList.Visible = false;
+            }
+            else if(comboReports.Text.Equals("Cooks Hours and Pay"))
+            {
+                rptViewCooksPreformance.Visible = false;
+                rptViewToppingUsage.Visible = false;
+                rptViewCookHourPay.Visible = true;
+                rptViewCustomersList.Visible = false;
+            }
+            else if(comboReports.Text.Equals("Customers List"))
+            {
+                rptViewCooksPreformance.Visible = false;
+                rptViewToppingUsage.Visible = false;
+                rptViewCookHourPay.Visible = false;
+                rptViewCustomersList.Visible = true;
+            }
+            else
+            {
+                rptViewCooksPreformance.Visible = false;
+                rptViewToppingUsage.Visible = false;
+                rptViewCookHourPay.Visible = false;
+                rptViewCustomersList.Visible = false;
+            }
         }
 
 

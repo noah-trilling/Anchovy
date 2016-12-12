@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AnchovyContextCookPreformanceDataSet" targetNamespace="http://tempuri.org/AnchovyContextCookPreformanceDataSet.xsd" xmlns:mstns="http://tempuri.org/AnchovyContextCookPreformanceDataSet.xsd" xmlns="http://tempuri.org/AnchovyContextCookPreformanceDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="AnchovyContextConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="AnchovyContextConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Anchovy.Manager.Main.Properties.Settings.GlobalReference.Default.AnchovyContextConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="CookPreformanceViewTableAdapter" GeneratorDataComponentClassName="CookPreformanceViewTableAdapter" Name="CookPreformanceView" UserDataComponentName="CookPreformanceViewTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="AnchovyContextConnectionString (Settings)" DbObjectName="AnchovyContext.dbo.CookPreformanceView" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT CookId, Name, OrdersAccepted FROM dbo.CookPreformanceView</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="CookId" DataSetColumn="CookId" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="OrdersAccepted" DataSetColumn="OrdersAccepted" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AnchovyContextCookPreformanceDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="AnchovyContextCookPreformanceDataSet" msprop:Generator_UserDSName="AnchovyContextCookPreformanceDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="CookPreformanceView" msprop:Generator_TableClassName="CookPreformanceViewDataTable" msprop:Generator_TableVarName="tableCookPreformanceView" msprop:Generator_TablePropName="CookPreformanceView" msprop:Generator_RowDeletingName="CookPreformanceViewRowDeleting" msprop:Generator_RowChangingName="CookPreformanceViewRowChanging" msprop:Generator_RowEvHandlerName="CookPreformanceViewRowChangeEventHandler" msprop:Generator_RowDeletedName="CookPreformanceViewRowDeleted" msprop:Generator_UserTableName="CookPreformanceView" msprop:Generator_RowChangedName="CookPreformanceViewRowChanged" msprop:Generator_RowEvArgName="CookPreformanceViewRowChangeEvent" msprop:Generator_RowClassName="CookPreformanceViewRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CookId" msprop:Generator_ColumnVarNameInTable="columnCookId" msprop:Generator_ColumnPropNameInRow="CookId" msprop:Generator_ColumnPropNameInTable="CookIdColumn" msprop:Generator_UserColumnName="CookId" type="xs:int" minOccurs="0" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OrdersAccepted" msprop:Generator_ColumnVarNameInTable="columnOrdersAccepted" msprop:Generator_ColumnPropNameInRow="OrdersAccepted" msprop:Generator_ColumnPropNameInTable="OrdersAcceptedColumn" msprop:Generator_UserColumnName="OrdersAccepted" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -34,10 +34,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -62,10 +73,30 @@
     <Compile Include="AddNewManager.Designer.cs">
       <DependentUpon>AddNewManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="AnchovyContextCookHourPay.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnchovyContextCookHourPay.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AnchovyContextCookPreformanceDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnchovyContextCookPreformanceDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AnchovyContextCustomerDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnchovyContextCustomerDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="AnchovyContextDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AnchovyContextDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AnchovyContextDataSetToppingCountView.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnchovyContextDataSetToppingCountView.xsd</DependentUpon>
     </Compile>
     <Compile Include="ManagerLogin.cs">
       <SubType>Form</SubType>
@@ -87,6 +118,9 @@
     <EmbeddedResource Include="AddNewManager.resx">
       <DependentUpon>AddNewManager.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CookHourPayReport.rdlc" />
+    <EmbeddedResource Include="CookPreformanceReport.rdlc" />
+    <EmbeddedResource Include="CustomersListReport.rdlc" />
     <EmbeddedResource Include="ManagerLogin.resx">
       <DependentUpon>ManagerLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +138,40 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="ToppingCountsReport.rdlc" />
+    <None Include="AnchovyContextCookHourPay.xsc">
+      <DependentUpon>AnchovyContextCookHourPay.xsd</DependentUpon>
+    </None>
+    <None Include="AnchovyContextCookHourPay.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AnchovyContextCookHourPay.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AnchovyContextCookHourPay.xss">
+      <DependentUpon>AnchovyContextCookHourPay.xsd</DependentUpon>
+    </None>
+    <None Include="AnchovyContextCookPreformanceDataSet.xsc">
+      <DependentUpon>AnchovyContextCookPreformanceDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AnchovyContextCookPreformanceDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AnchovyContextCookPreformanceDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AnchovyContextCookPreformanceDataSet.xss">
+      <DependentUpon>AnchovyContextCookPreformanceDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AnchovyContextCustomerDataSet.xsc">
+      <DependentUpon>AnchovyContextCustomerDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="AnchovyContextCustomerDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AnchovyContextCustomerDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AnchovyContextCustomerDataSet.xss">
+      <DependentUpon>AnchovyContextCustomerDataSet.xsd</DependentUpon>
+    </None>
     <None Include="AnchovyContextDataSet.xsc">
       <DependentUpon>AnchovyContextDataSet.xsd</DependentUpon>
     </None>
@@ -115,6 +183,18 @@
     <None Include="AnchovyContextDataSet.xss">
       <DependentUpon>AnchovyContextDataSet.xsd</DependentUpon>
     </None>
+    <None Include="AnchovyContextDataSetToppingCountView.xsc">
+      <DependentUpon>AnchovyContextDataSetToppingCountView.xsd</DependentUpon>
+    </None>
+    <None Include="AnchovyContextDataSetToppingCountView.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AnchovyContextDataSetToppingCountView.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AnchovyContextDataSetToppingCountView.xss">
+      <DependentUpon>AnchovyContextDataSetToppingCountView.xsd</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\Anchovy.API.Client.Models.Topping.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -145,6 +225,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
