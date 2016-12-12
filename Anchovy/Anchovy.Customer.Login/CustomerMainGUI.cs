@@ -194,6 +194,7 @@ namespace CustomerMain
             }
             else if (infoPassword1.Text == infoPassword2.Text)
             {
+                infoError.ForeColor = System.Drawing.Color.Green;
                 infoError.Text = "information updated successfully!";
                 _currentCusty.FirstName = infoFirstName.Text;
                 _currentCusty.MiddleName = infoMiddleName.Text;
@@ -539,7 +540,7 @@ namespace CustomerMain
                             break;
                         }
                     }
-                    var labelString = "Ordered Date: " + String.Format("{0:dddd, MMMM d, yyyy}", order.OrderedTimeStamp);
+                    var labelString = "Ordered Date: " + String.Format("{0:dddd, MMMM d, yyyy}", order.OrderedTimeStamp.ToString());
                     labelString += " - Status: " + getStatusString((int)order.OrderStatus);
                     status = (int)order.OrderStatus;
 

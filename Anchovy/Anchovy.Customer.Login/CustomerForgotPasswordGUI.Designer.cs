@@ -87,7 +87,7 @@
             // 
             this.forgotMessage.AutoSize = true;
             this.forgotMessage.ForeColor = System.Drawing.Color.LawnGreen;
-            this.forgotMessage.Location = new System.Drawing.Point(439, 97);
+            this.forgotMessage.Location = new System.Drawing.Point(429, 93);
             this.forgotMessage.Name = "forgotMessage";
             this.forgotMessage.Size = new System.Drawing.Size(70, 13);
             this.forgotMessage.TabIndex = 16;
@@ -155,7 +155,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(620, 274);
+            this.ClientSize = new System.Drawing.Size(786, 274);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.forgotPhone);
