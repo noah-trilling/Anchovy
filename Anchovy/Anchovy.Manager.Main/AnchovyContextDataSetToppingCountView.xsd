@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="AnchovyContextDataSetToppingCountView" targetNamespace="http://tempuri.org/AnchovyContextDataSetToppingCountView.xsd" xmlns:mstns="http://tempuri.org/AnchovyContextDataSetToppingCountView.xsd" xmlns="http://tempuri.org/AnchovyContextDataSetToppingCountView.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="AnchovyContextConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="AnchovyContextConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Anchovy.Manager.Main.Properties.Settings.GlobalReference.Default.AnchovyContextConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="ToppingCountViewTableAdapter" GeneratorDataComponentClassName="ToppingCountViewTableAdapter" Name="ToppingCountView" UserDataComponentName="ToppingCountViewTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="AnchovyContextConnectionString (Settings)" DbObjectName="AnchovyContext.dbo.ToppingCountView" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Name, Counts FROM dbo.ToppingCountView</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
+              <Mapping SourceColumn="Counts" DataSetColumn="Counts" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="AnchovyContextDataSetToppingCountView" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="AnchovyContextDataSetToppingCountView" msprop:Generator_UserDSName="AnchovyContextDataSetToppingCountView">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ToppingCountView" msprop:Generator_TableClassName="ToppingCountViewDataTable" msprop:Generator_TableVarName="tableToppingCountView" msprop:Generator_TablePropName="ToppingCountView" msprop:Generator_RowDeletingName="ToppingCountViewRowDeleting" msprop:Generator_RowChangingName="ToppingCountViewRowChanging" msprop:Generator_RowEvHandlerName="ToppingCountViewRowChangeEventHandler" msprop:Generator_RowDeletedName="ToppingCountViewRowDeleted" msprop:Generator_UserTableName="ToppingCountView" msprop:Generator_RowChangedName="ToppingCountViewRowChanged" msprop:Generator_RowEvArgName="ToppingCountViewRowChangeEvent" msprop:Generator_RowClassName="ToppingCountViewRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2147483647" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Counts" msprop:Generator_ColumnVarNameInTable="columnCounts" msprop:Generator_ColumnPropNameInRow="Counts" msprop:Generator_ColumnPropNameInTable="CountsColumn" msprop:Generator_UserColumnName="Counts" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
