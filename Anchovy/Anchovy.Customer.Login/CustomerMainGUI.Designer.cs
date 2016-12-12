@@ -86,12 +86,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.logoutButton3 = new System.Windows.Forms.Button();
+            this.historyPanel = new System.Windows.Forms.Panel();
+            this.historyMessage = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.shoppingPanel.SuspendLayout();
             this.AppetizersPanel.SuspendLayout();
             this.pizzaGroup.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.orderHistory.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -391,6 +394,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.historyMessage);
             this.tabPage2.Controls.Add(this.orderHistory);
             this.tabPage2.Controls.Add(this.logoutButton2);
             this.tabPage2.Location = new System.Drawing.Point(4, 52);
@@ -403,6 +407,7 @@
             // 
             // orderHistory
             // 
+            this.orderHistory.Controls.Add(this.historyPanel);
             this.orderHistory.Location = new System.Drawing.Point(50, 85);
             this.orderHistory.Name = "orderHistory";
             this.orderHistory.Size = new System.Drawing.Size(824, 456);
@@ -732,6 +737,24 @@
             this.logoutButton3.UseVisualStyleBackColor = false;
             this.logoutButton3.Click += new System.EventHandler(this.logoutButton3_Click);
             // 
+            // historyPanel
+            // 
+            this.historyPanel.AutoScroll = true;
+            this.historyPanel.Location = new System.Drawing.Point(6, 19);
+            this.historyPanel.Name = "historyPanel";
+            this.historyPanel.Size = new System.Drawing.Size(818, 437);
+            this.historyPanel.TabIndex = 0;
+            // 
+            // historyMessage
+            // 
+            this.historyMessage.AutoSize = true;
+            this.historyMessage.ForeColor = System.Drawing.Color.Red;
+            this.historyMessage.Location = new System.Drawing.Point(118, 31);
+            this.historyMessage.Name = "historyMessage";
+            this.historyMessage.Size = new System.Drawing.Size(139, 13);
+            this.historyMessage.TabIndex = 42;
+            this.historyMessage.Text = "                                            ";
+            // 
             // AnchovyCustomerMainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -749,6 +772,8 @@
             this.AppetizersPanel.PerformLayout();
             this.pizzaGroup.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.orderHistory.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
@@ -815,6 +840,8 @@
         private System.Windows.Forms.Button resetOrder;
         private System.Windows.Forms.Button submitOrder;
         private System.Windows.Forms.Button cancelOrder;
+        private System.Windows.Forms.Panel historyPanel;
+        private System.Windows.Forms.Label historyMessage;
     }
 }
 

@@ -117,6 +117,9 @@ namespace CustomerMain
             // Call method to fill out all account info 
             fillOutFields();
 
+            // Call method to fill out order history
+            fillOrderHistory();
+
         }
 
         // If logout hide this and return to login page
@@ -515,6 +518,11 @@ namespace CustomerMain
         private void fillOrderHistory()
         {
             var allOrders = _orders.GetOrders();
+            var allOrderLines = _orderLines.GetOrderLines();
+            var allLines = _lines.GetLines();
+            var allPizzas = _pizzas.GetPizzas();
+            var allPizzaToppings = _pizzaToppings.GetPizzaToppings();
+
             List<Anchovy.API.Client.Models.OrderLine> orderHistory = new List<Anchovy.API.Client.Models.OrderLine>();
             var loc = 0;
             int status = -1;
@@ -524,7 +532,6 @@ namespace CustomerMain
                 if (order.CustomerId == _currentCusty.Id)
                 {
                     loc += 1;
-                    var allOrderLines = _orderLines.GetOrderLines();
                     foreach (var orderLine in allOrderLines)
                     {
                         if (orderLine.OrderId == order.Id)
@@ -536,43 +543,44 @@ namespace CustomerMain
                     var labelString = "Ordered Date: " + String.Format("{0:dddd, MMMM d, yyyy}", order.OrderedTimeStamp);
                     labelString += " - Status: " + getStatusString((int)order.OrderStatus);
                     status = (int)order.OrderStatus;
-                    var allLines = _lines.GetLines();
-                    var allPizzas = _pizzas.GetPizzas();
-                    var allPizzaToppings = _pizzaToppings.GetPizzaToppings();
 
                     double totalCost = 0;
                     double toppingCost = 0;
                     // Get order line, check if in order history
-                    foreach (var orderLine in orderHistory)
+                    foreach (var orderLine in allOrderLines)
                     {
-                        // Get each line check if line.id equals orderline line.id
-                        foreach (var line in allLines)
+                        if (orderLine.OrderId == order.Id)
                         {
-                            if (orderLine.LineId == line.Id)
+                            // Get each line check if line.id equals orderline line.id
+                            foreach (var line in allLines)
                             {
-                                // Get each pizza in each line
-                                foreach (var pizza in allPizzas)
+                                if (orderLine.LineId == line.Id)
                                 {
-                                    if (line.PizzaId == pizza.Id)
+                                    // Get each pizza in each line
+                                    foreach (var pizza in allPizzas)
                                     {
-                                        // Get each Pizza topping for pizzaID
-                                        foreach (var topp in allPizzaToppings)
+                                        if (line.PizzaId == pizza.Id)
                                         {
-                                            if (pizza.Id == topp.PizzaId)
+                                            // Get each Pizza topping for pizzaID
+                                            foreach (var topp in allPizzaToppings)
                                             {
-                                                toppingCost += (double)topp.Topping.Cost;
+                                                if (pizza.Id == topp.PizzaId)
+                                                {
+                                                    toppingCost += (double)topp.Topping.Cost;
+                                                }
                                             }
                                         }
+                                        // Now we've got a pizza - calculate cost
+                                        totalCost += (double)(toppingCost + toppingCost + pizza.Crust.Cost + pizza.Sauce.Cost + pizza.Size.Cost);
                                     }
-                                    // Now we've got a pizza - calculate cost
-                                    totalCost += (double)(toppingCost + toppingCost + pizza.Crust.Cost + pizza.Sauce.Cost + pizza.Size.Cost);                                   
                                 }
                             }
                         }
                     }
                     labelString += " - Cost: " + (totalCost);
-                    System.Windows.Forms.Label currLabel =  new System.Windows.Forms.Label();
+                    System.Windows.Forms.Label currLabel = new System.Windows.Forms.Label();
                     currLabel.Text = labelString;
+                    currLabel.AutoSize = true;
                     currLabel.Location = new System.Drawing.Point(10, 10 + loc * 20);
                     // Check if status is Ordered or Unordered to cancel
                     if (status == 0 || status == 1)
@@ -581,21 +589,21 @@ namespace CustomerMain
                         cancelLink.AutoSize = true;
                         cancelLink.Text = "Cancel Order (Est. Time - " + calcEstTime() + ")";
                         cancelLink.Click += (sender, e) => cancelHandler(orderId);
-                        this.orderHistory.Controls.Add(currLabel);
+                        this.historyPanel.Controls.Add(currLabel);
                         loc++;
-                        cancelLink.Location = new System.Drawing.Point(10, 10 + loc * 40);
-                        this.orderHistory.Controls.Add(cancelLink);
+                        cancelLink.Location = new System.Drawing.Point(10, 10 + loc * 20);
+                        this.historyPanel.Controls.Add(cancelLink);
                         loc++;
 
                     }
                     else
                     {
-                        this.orderHistory.Controls.Add(currLabel);
+                        loc++;
+                        this.historyPanel.Controls.Add(currLabel);
                         loc++;
                     }
                 }
             }
-
         }
 
         // Cancel order handler
@@ -603,8 +611,10 @@ namespace CustomerMain
         {
             var order = _orders.GetOrder(temp);
             order.OrderStatus = 4;
-            _orders.PutOrder((int)temp, order);
+            var res = _orders.PutOrder((int)temp, order);
             fillOrderHistory();
+            this.historyPanel.Refresh();
+            historyMessage.Text = "Order ID: " + order.Id + " has been cancelled.";
         }
 
         // Generate a status string from the enum
@@ -862,14 +872,7 @@ namespace CustomerMain
             foreach (var ord in orders)
             {
                 if (ord.OrderStatus == 1) {
-                    if (ord.CustomerId == _currentCusty.Id)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        totalTime += 20;
-                    }
+                    totalTime += 20;
                 }
             }
             return totalTime;
