@@ -103,7 +103,7 @@ namespace CustomerMain
             customButton = new RadioButton();
             customButton.Text = "Custom Pizza";
             customButton.Font = new Font(customButton.Font.Name, customButton.Font.Size, FontStyle.Bold);
-            customButton.Location = new System.Drawing.Point(20, 20 + (pizzas + 1) * 95);
+            customButton.Location = new System.Drawing.Point(20, 20 + (pizzas + 1) * 110);
             this.scrollPanel.Controls.Add(customButton);
 
             // Create size, sauce, and crust buttons dynamically
@@ -835,6 +835,7 @@ namespace CustomerMain
                 }
             }
             _currentOrder.OrderStatus = 1;
+            _currentOrder.OrderedTimeStamp = DateTimeOffset.Now;
             _currentOrder = (Anchovy.API.Client.Models.Order)_orders.PutOrder((int)_currentOrder.Id, _currentOrder);
             orderError.Text = "Order submitted successfully";
             orderError.ForeColor = System.Drawing.Color.Green;

@@ -55,7 +55,9 @@
             this.shoppingCart1 = new System.Windows.Forms.LinkLabel();
             this.logoutButton1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.historyMessage = new System.Windows.Forms.Label();
             this.orderHistory = new System.Windows.Forms.GroupBox();
+            this.historyPanel = new System.Windows.Forms.Panel();
             this.logoutButton2 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.infoError = new System.Windows.Forms.Label();
@@ -86,8 +88,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.logoutButton3 = new System.Windows.Forms.Button();
-            this.historyPanel = new System.Windows.Forms.Panel();
-            this.historyMessage = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.shoppingPanel.SuspendLayout();
@@ -182,10 +182,11 @@
             // orderError
             // 
             this.orderError.AutoSize = true;
+            this.orderError.Font = new System.Drawing.Font("Adobe Gothic Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.orderError.ForeColor = System.Drawing.Color.Red;
             this.orderError.Location = new System.Drawing.Point(65, 30);
             this.orderError.Name = "orderError";
-            this.orderError.Size = new System.Drawing.Size(139, 13);
+            this.orderError.Size = new System.Drawing.Size(141, 20);
             this.orderError.TabIndex = 41;
             this.orderError.Text = "                                            ";
             // 
@@ -405,6 +406,17 @@
             this.tabPage2.Text = "Order History";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // historyMessage
+            // 
+            this.historyMessage.AutoSize = true;
+            this.historyMessage.Font = new System.Drawing.Font("Adobe Gothic Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.historyMessage.ForeColor = System.Drawing.Color.Red;
+            this.historyMessage.Location = new System.Drawing.Point(118, 31);
+            this.historyMessage.Name = "historyMessage";
+            this.historyMessage.Size = new System.Drawing.Size(141, 20);
+            this.historyMessage.TabIndex = 42;
+            this.historyMessage.Text = "                                            ";
+            // 
             // orderHistory
             // 
             this.orderHistory.Controls.Add(this.historyPanel);
@@ -414,6 +426,14 @@
             this.orderHistory.TabIndex = 18;
             this.orderHistory.TabStop = false;
             this.orderHistory.Text = "Order History";
+            // 
+            // historyPanel
+            // 
+            this.historyPanel.AutoScroll = true;
+            this.historyPanel.Location = new System.Drawing.Point(6, 19);
+            this.historyPanel.Name = "historyPanel";
+            this.historyPanel.Size = new System.Drawing.Size(818, 437);
+            this.historyPanel.TabIndex = 0;
             // 
             // logoutButton2
             // 
@@ -469,10 +489,11 @@
             // infoError
             // 
             this.infoError.AutoSize = true;
+            this.infoError.Font = new System.Drawing.Font("Adobe Gothic Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.infoError.ForeColor = System.Drawing.Color.Red;
             this.infoError.Location = new System.Drawing.Point(621, 190);
             this.infoError.Name = "infoError";
-            this.infoError.Size = new System.Drawing.Size(106, 13);
+            this.infoError.Size = new System.Drawing.Size(108, 20);
             this.infoError.TabIndex = 44;
             this.infoError.Text = "                                 ";
             // 
@@ -736,24 +757,6 @@
             this.logoutButton3.Text = "Logout";
             this.logoutButton3.UseVisualStyleBackColor = false;
             this.logoutButton3.Click += new System.EventHandler(this.logoutButton3_Click);
-            // 
-            // historyPanel
-            // 
-            this.historyPanel.AutoScroll = true;
-            this.historyPanel.Location = new System.Drawing.Point(6, 19);
-            this.historyPanel.Name = "historyPanel";
-            this.historyPanel.Size = new System.Drawing.Size(818, 437);
-            this.historyPanel.TabIndex = 0;
-            // 
-            // historyMessage
-            // 
-            this.historyMessage.AutoSize = true;
-            this.historyMessage.ForeColor = System.Drawing.Color.Red;
-            this.historyMessage.Location = new System.Drawing.Point(118, 31);
-            this.historyMessage.Name = "historyMessage";
-            this.historyMessage.Size = new System.Drawing.Size(139, 13);
-            this.historyMessage.TabIndex = 42;
-            this.historyMessage.Text = "                                            ";
             // 
             // AnchovyCustomerMainGUI
             // 
