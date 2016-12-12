@@ -45,6 +45,7 @@ namespace CustomerMain
         public AnchovyCustomerMainGUI(Anchovy.API.Client.Models.Customer currentCustomer)
         {
             InitializeComponent();
+
             // Create all services
             _orders = new AnchovyAPIService().Orders; 
             _customers = new AnchovyAPIService().Customers;
@@ -64,6 +65,7 @@ namespace CustomerMain
             // Create a new order for this customer
             _currentOrder = new Anchovy.API.Client.Models.Order();
             _currentOrder.CustomerId = currentCustomer.Id;
+            _currentOrder.OrderStatus = 0;
             _currentOrder = _orders.PostOrder(_currentOrder);
 
             // Get all pizza toppings from DB and add them into the listview for custom pizzas
@@ -114,6 +116,10 @@ namespace CustomerMain
 
             // Call method to fill out all account info 
             fillOutFields();
+
+            // Call method to fill out order history
+            fillOrderHistory();
+
         }
 
         // If logout hide this and return to login page
@@ -188,6 +194,7 @@ namespace CustomerMain
             }
             else if (infoPassword1.Text == infoPassword2.Text)
             {
+                infoError.ForeColor = System.Drawing.Color.Green;
                 infoError.Text = "information updated successfully!";
                 _currentCusty.FirstName = infoFirstName.Text;
                 _currentCusty.MiddleName = infoMiddleName.Text;
@@ -332,6 +339,7 @@ namespace CustomerMain
         private int addPremadePizzas()
         {
             var premadePizzas = _pizzas.GetPizzas();
+            var pizzaTops = _pizzaToppings.GetPizzaToppings();
             List<String> prePizzas = new List<String>();
             List<String> preSauce = new List<String>();
             List<String> preCrust = new List<String>();
@@ -346,7 +354,6 @@ namespace CustomerMain
                     string sauceDesc = "Sauce: " + za.Sauce.Name;
                     string crustDesc = "Crust: " + za.Crust.Name;
                     string toppings = "Toppings: ";
-                    var pizzaTops = _pizzaToppings.GetPizzaToppings();
                     foreach (var pTops in pizzaTops)
                     {
                         if (pTops.PizzaId == za.Id)
@@ -425,8 +432,44 @@ namespace CustomerMain
             }
             else
             {
-                //TODO: Add toppings and sauce
-                this.Hide();
+                _currentPizza.MenuItem = false;
+                _currentPizza.CrustId = thisCrust.Id;
+                _currentPizza.SauceId = thisSauce.Id;
+                _currentPizza.SizeId = thisSize.Id;
+                Random rnd = new Random();
+                var randString = "NewCustom-";
+                for (int i = 0; i < 6; i++)
+                {
+                    randString += rnd.Next(0, 9);
+                }
+                _currentPizza.Name = randString;
+                _currentPizza = _pizzas.PostPizza(_currentPizza);
+                var allToppings = _toppings.GetToppings();
+                foreach (var top in this.selectedToppings.Items)
+                {
+                    foreach (var top2 in allToppings)
+                    {
+                        if (((String)top).Contains(top2.Name))
+                        {
+                            var temp = new Anchovy.API.Client.Models.PizzaTopping();
+                            temp.PizzaId = _currentPizza.Id;
+                            temp.ToppingId = top2.Id;
+                            var currTop = _pizzaToppings.PostPizzaTopping(temp);
+                        }
+                    }
+                }
+                var currLine = new Anchovy.API.Client.Models.Line();
+                currLine.PizzaId = _currentPizza.Id;
+                currLine = _lines.PostLine(currLine);
+                var currOrdLine = new Anchovy.API.Client.Models.OrderLine();
+                currOrdLine.OrderId = _currentOrder.Id;
+                currOrdLine.LineId = currLine.Id;
+                currOrdLine = _orderLines.PostOrderLine(currOrdLine);
+                orderError.ForeColor = System.Drawing.Color.Green;
+                orderError.Text = "Item added successfully.";
+                _currentOrder = new Anchovy.API.Client.Models.Order();
+                selectedToppings.Items.Clear();
+                AppetizersPanel.Hide();
             }
         }
 
@@ -476,7 +519,11 @@ namespace CustomerMain
         private void fillOrderHistory()
         {
             var allOrders = _orders.GetOrders();
-            List<Anchovy.API.Client.Models.OrderLine> orderHistory = new List<Anchovy.API.Client.Models.OrderLine>();
+            var allOrderLines = _orderLines.GetOrderLines();
+            var allLines = _lines.GetLines();
+            var allPizzas = _pizzas.GetPizzas();
+            var allPizzaToppings = _pizzaToppings.GetPizzaToppings();
+
             var loc = 0;
             int status = -1;
             int orderId = -1;
@@ -485,86 +532,97 @@ namespace CustomerMain
                 if (order.CustomerId == _currentCusty.Id)
                 {
                     loc += 1;
-                    var allOrderLines = _orderLines.GetOrderLines();
                     foreach (var orderLine in allOrderLines)
                     {
                         if (orderLine.OrderId == order.Id)
                         {
-                            orderId = (int)orderLine.OrderId;
-                            orderHistory.Add(orderLine);
+                            orderId = (int)order.Id;
+                            break;
                         }
                     }
-                    var labelString = "Ordered Date: " + String.Format("{0:dddd, MMMM d, yyyy}", order.OrderedTimeStamp);
+                    var labelString = "Ordered Date: " + String.Format("{0:dddd, MMMM d, yyyy}", order.OrderedTimeStamp.ToString());
                     labelString += " - Status: " + getStatusString((int)order.OrderStatus);
                     status = (int)order.OrderStatus;
-                    var allLines = _lines.GetLines();
-                    var allPizzas = _pizzas.GetPizzas();
-                    var allPizzaToppings = _pizzaToppings.GetPizzaToppings();
 
                     double totalCost = 0;
                     double toppingCost = 0;
                     // Get order line, check if in order history
-                    foreach (var orderLine in orderHistory)
+                    foreach (var orderLine in allOrderLines)
                     {
-                        // Get each line check if line.id equals orderline line.id
-                        foreach (var line in allLines)
+                        if (orderLine.OrderId == order.Id)
                         {
-                            if (orderLine.LineId == line.Id)
+                            // Get each line check if line.id equals orderline line.id
+                            foreach (var line in allLines)
                             {
-                                // Get each pizza in each line
-                                foreach (var pizza in allPizzas)
+                                if (orderLine.LineId == line.Id)
                                 {
-                                    if (line.PizzaId == pizza.Id)
+                                    // Get each pizza in each line
+                                    foreach (var pizza in allPizzas)
                                     {
-                                        // Get each Pizza topping for pizzaID
-                                        foreach (var topp in allPizzaToppings)
+                                        if (line.PizzaId == pizza.Id)
                                         {
-                                            if (pizza.Id == topp.PizzaId)
+                                            // Get each Pizza topping for pizzaID
+                                            foreach (var topp in allPizzaToppings)
                                             {
-                                                toppingCost += (double)topp.Topping.Cost;
+                                                if (pizza.Id == topp.PizzaId)
+                                                {
+                                                    toppingCost += (double)topp.Topping.Cost;
+                                                }
                                             }
                                         }
+                                        // Now we've got a pizza - calculate cost
+                                        totalCost += (double)(toppingCost + toppingCost + pizza.Crust.Cost + pizza.Sauce.Cost + pizza.Size.Cost);
                                     }
-                                    // Now we've got a pizza - calculate cost
-                                    totalCost += (double)(toppingCost + toppingCost + pizza.Crust.Cost + pizza.Sauce.Cost + pizza.Size.Cost);                                   
                                 }
                             }
                         }
                     }
                     labelString += " - Cost: " + (totalCost);
-                    System.Windows.Forms.Label currLabel =  new System.Windows.Forms.Label();
+                    System.Windows.Forms.Label currLabel = new System.Windows.Forms.Label();
                     currLabel.Text = labelString;
+                    currLabel.AutoSize = true;
                     currLabel.Location = new System.Drawing.Point(10, 10 + loc * 20);
                     // Check if status is Ordered or Unordered to cancel
                     if (status == 0 || status == 1)
                     {
                         System.Windows.Forms.LinkLabel cancelLink = new System.Windows.Forms.LinkLabel();
-                        cancelLink.Text = "Cancel Order";
+                        cancelLink.AutoSize = true;
+                        cancelLink.Text = "Cancel Order (Est. Time - " + calcEstTime() + ")";
                         cancelLink.Click += (sender, e) => cancelHandler(orderId);
-                        this.orderHistory.Controls.Add(currLabel);
+                        this.historyPanel.Controls.Add(currLabel);
                         loc++;
                         cancelLink.Location = new System.Drawing.Point(10, 10 + loc * 20);
-                        this.orderHistory.Controls.Add(cancelLink);
+                        this.historyPanel.Controls.Add(cancelLink);
                         loc++;
 
                     }
                     else
                     {
-                        this.orderHistory.Controls.Add(currLabel);
+                        loc++;
+                        this.historyPanel.Controls.Add(currLabel);
                         loc++;
                     }
                 }
             }
-
         }
 
         // Cancel order handler
         private void cancelHandler(int temp)
         {
-            var order = _orders.GetOrder(temp);
-            order.OrderStatus = 4;
-            _orders.PutOrder((int)temp, order);
-            fillOrderHistory();
+            try
+            {
+                var order = _orders.GetOrder(temp);
+                order.OrderStatus = 4;
+                var res = _orders.PutOrder((int)temp, order);
+                historyPanel.Controls.Clear();
+                fillOrderHistory();
+                this.historyPanel.Refresh();
+                historyMessage.Text = "Order ID: " + order.Id + " has been cancelled.";
+            }
+            catch (Exception d)
+            {
+                historyMessage.Text = "Error cancelling order!";
+            }
         }
 
         // Generate a status string from the enum
@@ -601,11 +659,12 @@ namespace CustomerMain
                 if (customButton.Checked)
                 {
                     AppetizersPanel.Show();
-
-                    // TODO: generate custom pizza
+                    
                 }
                 else
                 {
+                    var allPizzas = _pizzas.GetPizzas();
+                    var allPizzaToppings = _pizzaToppings.GetPizzaToppings();
                     foreach (var button in this.scrollPanel.Controls)
                     {
                         if (button.GetType() == typeof(RadioButton))
@@ -615,14 +674,36 @@ namespace CustomerMain
                             {
                                 try
                                 {
-                                    var allPizzas = _pizzas.GetPizzas();
                                     var currLine = new Anchovy.API.Client.Models.Line();
                                     foreach (var pizza in allPizzas)
                                     {
-                                        if (temp.Text.Contains(pizza.Name))
+                                        if (pizza.Name != null && temp.Text.Contains(pizza.Name))
                                         {
-                                            currLine.PizzaId = pizza.Id;
+                                            pizza.SizeId = thisSize.Id;
+                                            var pizzId = pizza.Id;
+                                            pizza.Id = null;
+                                            pizza.MenuItem = false;
+                                            Random rnd = new Random();
+                                            var randString = " #";
+                                            for (int i = 0; i < 6; i++)
+                                            {
+                                                randString += rnd.Next(0, 9);
+                                            }
+                                            pizza.Name += randString;
+                                            _currentPizza = _pizzas.PostPizza(pizza);
+                                            foreach (var pizzaTop in allPizzaToppings)
+                                            {
+                                                if (pizzaTop.PizzaId == pizzId)
+                                                {
+                                                    var tempTop = pizzaTop;
+                                                    tempTop.Id = null;
+                                                    tempTop.PizzaId = _currentPizza.Id;
+                                                    tempTop = _pizzaToppings.PostPizzaTopping(tempTop);
+                                                }
+                                            }
+                                            currLine.PizzaId = _currentPizza.Id;
                                             currLine = _lines.PostLine(currLine);
+                                            break;
                                         }
                                     }
                                     var currOrdLine = new Anchovy.API.Client.Models.OrderLine();
@@ -631,6 +712,10 @@ namespace CustomerMain
                                     currOrdLine = _orderLines.PostOrderLine(currOrdLine);
                                     orderError.ForeColor = System.Drawing.Color.Green;
                                     orderError.Text = "Item added successfully.";
+                                    _currentOrder = new Anchovy.API.Client.Models.Order();
+                                    _currentOrder.CustomerId = _currentCusty.Id;
+                                    _currentOrder.OrderStatus = 0;
+                                    _currentOrder = _orders.PostOrder(_currentOrder);
                                 }
                                 catch (Exception a)
                                 {
@@ -642,81 +727,90 @@ namespace CustomerMain
                     }
                 }
             }
-
             checkCrust();
             checkSize();
         }
 
         private void shoppingCart1_Click(object sender, EventArgs e)
         {
+            var orders = _orders.GetOrders();
             var orderLines = _orderLines.GetOrderLines();
-            foreach (var orderLine in orderLines)
+            var pizzas = _pizzas.GetPizzas();
+            var pizzaTops = _pizzaToppings.GetPizzaToppings();
+            var lines = _lines.GetLines();
+
+            foreach (var order in orders)
             {
-                if (orderLine.OrderId == _currentOrder.Id)
+                if (order.CustomerId == _currentCusty.Id)
                 {
-                    var lines = _lines.GetLines();
-                    foreach (var line in lines)
+                    foreach (var orderLine in orderLines)
                     {
-                        if (orderLine.LineId == line.Id)
+                        if (orderLine.OrderId == order.Id)
                         {
-                            var pizzas = _pizzas.GetPizzas();
                             List<String> prePizzas = new List<String>();
                             List<String> preSauce = new List<String>();
                             List<String> preCrust = new List<String>();
                             List<String> preTops = new List<String>();
                             int i = 0;
-                            foreach (var pizza in pizzas)
+                            foreach (var line in lines)
                             {
-                                if (pizza.Id == line.PizzaId)
+                                if (orderLine.LineId == line.Id)
                                 {
-                                    double topCost = 0;
-                                    string sauceDesc = "Sauce: " + pizza.Sauce.Name;
-                                    string crustDesc = "Crust: " + pizza.Crust.Name;
-                                    string toppings = "Toppings: ";
-                                    var pizzaTops = _pizzaToppings.GetPizzaToppings();
-                                    foreach (var pTops in pizzaTops)
+                                    foreach (var pizza in pizzas)
                                     {
-                                        if (pTops.PizzaId == pizza.Id)
+                                        if (pizza.Id == line.PizzaId)
                                         {
-                                            var currTop = _toppings.GetTopping((int)pTops.ToppingId);
-                                            toppings += currTop.Name + ", ";
-                                            topCost += (double)currTop.Cost;
+                                            double topCost = 0;
+                                            string sauceDesc = "Sauce: " + pizza.Sauce.Name;
+                                            string crustDesc = "Crust: " + pizza.Crust.Name;
+                                            string toppings = "Toppings: ";
+                                            foreach (var pTops in pizzaTops)
+                                            {
+                                                if (pTops.PizzaId == pizza.Id)
+                                                {
+                                                    var currTop = _toppings.GetTopping((int)pTops.ToppingId);
+                                                    toppings += currTop.Name + ", ";
+                                                    topCost += (double)currTop.Cost;
+                                                }
+                                            }
+                                            var cost = pizza.Sauce.Cost + pizza.Crust.Cost + topCost;
+                                            var labelString = pizza.Name + " ($" + cost + ")" + " - " + pizza.Size.Name;
+                                            prePizzas.Add(labelString);
+                                            preSauce.Add(sauceDesc);
+                                            preCrust.Add(crustDesc);
+                                            preTops.Add(toppings.Trim(','));
+                                            i++;
                                         }
                                     }
-                                    var cost = pizza.Sauce.Cost + pizza.Crust.Cost + topCost;
-                                    prePizzas.Add(pizza.Name + " ($" + cost + ")");
-                                    preSauce.Add(sauceDesc);
-                                    preCrust.Add(crustDesc);
-                                    preTops.Add(toppings.Trim(','));
-                                    i++;
                                 }
-                            }
-                            System.Windows.Forms.Label[] nameLabels = new System.Windows.Forms.Label[i + 1];
-                            System.Windows.Forms.Label[] sauceLabels = new System.Windows.Forms.Label[i + 1];
-                            System.Windows.Forms.Label[] crustLabels = new System.Windows.Forms.Label[i + 1];
-                            System.Windows.Forms.Label[] toppingLabels = new System.Windows.Forms.Label[i + 1];
-                            for (int x = 0; x < i; x++)
-                            {
-                                nameLabels[x] = new Label();
-                                nameLabels[x].Text = prePizzas[x];
-                                nameLabels[x].Font = new Font(nameLabels[x].Font.Name, nameLabels[x].Font.Size, FontStyle.Bold);
-                                nameLabels[x].Location = new System.Drawing.Point(20, 20 + x * 110);
-                                this.shoppingPanel.Controls.Add(nameLabels[x]);
-                                sauceLabels[x] = new Label();
-                                sauceLabels[x].AutoSize = true;
-                                sauceLabels[x].Text = preSauce[x];
-                                sauceLabels[x].Location = new System.Drawing.Point(20, 80 * x + 50 + x * 30);
-                                this.shoppingPanel.Controls.Add(sauceLabels[x]);
-                                crustLabels[x] = new Label();
-                                crustLabels[x].AutoSize = true;
-                                crustLabels[x].Text = preCrust[x];
-                                crustLabels[x].Location = new System.Drawing.Point(20, 80 * x + 80 + x * 30);
-                                this.shoppingPanel.Controls.Add(crustLabels[x]);
-                                toppingLabels[x] = new Label();
-                                toppingLabels[x].AutoSize = true;
-                                toppingLabels[x].Text = preTops[x];
-                                toppingLabels[x].Location = new System.Drawing.Point(20, 80 * x + 110 + x * 30);
-                                this.shoppingPanel.Controls.Add(toppingLabels[x]);
+                                System.Windows.Forms.Label[] nameLabels = new System.Windows.Forms.Label[i + 1];
+                                System.Windows.Forms.Label[] sauceLabels = new System.Windows.Forms.Label[i + 1];
+                                System.Windows.Forms.Label[] crustLabels = new System.Windows.Forms.Label[i + 1];
+                                System.Windows.Forms.Label[] toppingLabels = new System.Windows.Forms.Label[i + 1];
+                                for (int x = 0; x < i; x++)
+                                {
+                                    nameLabels[x] = new Label();
+                                    nameLabels[x].AutoSize = true;
+                                    nameLabels[x].Text = prePizzas[x] + " (Est. Time: " + calcEstTime() + ")";
+                                    nameLabels[x].Font = new Font(nameLabels[x].Font.Name, nameLabels[x].Font.Size, FontStyle.Bold);
+                                    nameLabels[x].Location = new System.Drawing.Point(20, 20 + x * 110);
+                                    this.shoppingPanel.Controls.Add(nameLabels[x]);
+                                    sauceLabels[x] = new Label();
+                                    sauceLabels[x].AutoSize = true;
+                                    sauceLabels[x].Text = preSauce[x];
+                                    sauceLabels[x].Location = new System.Drawing.Point(20, 80 * x + 50 + x * 30);
+                                    this.shoppingPanel.Controls.Add(sauceLabels[x]);
+                                    crustLabels[x] = new Label();
+                                    crustLabels[x].AutoSize = true;
+                                    crustLabels[x].Text = preCrust[x];
+                                    crustLabels[x].Location = new System.Drawing.Point(20, 80 * x + 80 + x * 30);
+                                    this.shoppingPanel.Controls.Add(crustLabels[x]);
+                                    toppingLabels[x] = new Label();
+                                    toppingLabels[x].AutoSize = true;
+                                    toppingLabels[x].Text = preTops[x];
+                                    toppingLabels[x].Location = new System.Drawing.Point(20, 80 * x + 110 + x * 30);
+                                    this.shoppingPanel.Controls.Add(toppingLabels[x]);
+                                }
                             }
                         }
                     }
@@ -732,18 +826,72 @@ namespace CustomerMain
 
         private void submitOrder_Click(object sender, EventArgs e)
         {
+            var allOrders = _orders.GetOrders();
+            foreach (var order in allOrders)
+            {
+                if (order.CustomerId == _currentCusty.Id && order.OrderStatus == 0)
+                {
+                    _currentOrder = order;
+                }
+            }
             _currentOrder.OrderStatus = 1;
             _currentOrder = (Anchovy.API.Client.Models.Order)_orders.PutOrder((int)_currentOrder.Id, _currentOrder);
             orderError.Text = "Order submitted successfully";
             orderError.ForeColor = System.Drawing.Color.Green;
-            shoppingPanel.Hide();
             fillOrderHistory();
+            foreach (var item in shoppingPanel.Controls)
+            {
+                if (item.GetType() != typeof(Button))
+                {
+                    shoppingPanel.Controls.Remove((System.Windows.Forms.Control)item);
+                }
+            }
+            _currentOrder = new Anchovy.API.Client.Models.Order();
+            _currentOrder.OrderStatus = 0;
+            _currentOrder.CustomerId = _currentCusty.Id;
+            _currentOrder = _orders.PostOrder(_currentOrder);
+            orderError.ForeColor = System.Drawing.Color.Green;
+            shoppingPanel.Hide();
         }
 
         private void resetOrder_Click(object sender, EventArgs e)
         {
+            var allOrders = _orders.GetOrders();
+            foreach (var order in allOrders)
+            {
+                if (order.CustomerId == _currentCusty.Id && order.OrderStatus == 0)
+                {
+                    _orders.DeleteOrder((int)order.Id);
+                }
+            }
+            foreach (var item in shoppingPanel.Controls)
+            {
+                if (item.GetType() != typeof(Button))
+                {
+                    shoppingPanel.Controls.Remove((System.Windows.Forms.Control)item);
+                }
+            }
             _currentOrder = new Anchovy.API.Client.Models.Order();
+            _currentOrder.OrderStatus = 0;
+            _currentOrder.CustomerId = _currentCusty.Id;
+            _currentOrder = _orders.PostOrder(_currentOrder);
+            orderError.ForeColor = System.Drawing.Color.Green;
+            orderError.Text = "Unordered items removed successfully.";
             shoppingPanel.Hide();
+        }
+
+        //Initialize the global queue with orders from database with statuscode == ordered
+        private int calcEstTime()
+        {
+            int totalTime = 0;
+            var orders = _orders.GetOrders();
+            foreach (var ord in orders)
+            {
+                if (ord.OrderStatus == 1) {
+                    totalTime += 20;
+                }
+            }
+            return totalTime;
         }
     }
 }
