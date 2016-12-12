@@ -31,6 +31,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.AppetizersPanel = new System.Windows.Forms.Panel();
+            this.toppingsError = new System.Windows.Forms.Label();
             this.selectedToppings = new System.Windows.Forms.ListBox();
             this.sauceGroup = new System.Windows.Forms.GroupBox();
             this.removeAll = new System.Windows.Forms.Button();
@@ -40,6 +41,7 @@
             this.allToppings = new System.Windows.Forms.ListBox();
             this.cancelToppings = new System.Windows.Forms.Button();
             this.saveToppings = new System.Windows.Forms.Button();
+            this.orderError = new System.Windows.Forms.Label();
             this.crustGroup = new System.Windows.Forms.GroupBox();
             this.sizeGroup = new System.Windows.Forms.GroupBox();
             this.appetizersButton = new System.Windows.Forms.Button();
@@ -80,8 +82,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.shoppingCart3 = new System.Windows.Forms.LinkLabel();
             this.logoutButton3 = new System.Windows.Forms.Button();
-            this.orderError = new System.Windows.Forms.Label();
-            this.toppingsError = new System.Windows.Forms.Label();
+            this.outOfStock = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.AppetizersPanel.SuspendLayout();
@@ -121,6 +122,7 @@
             // 
             // AppetizersPanel
             // 
+            this.AppetizersPanel.Controls.Add(this.outOfStock);
             this.AppetizersPanel.Controls.Add(this.toppingsError);
             this.AppetizersPanel.Controls.Add(this.selectedToppings);
             this.AppetizersPanel.Controls.Add(this.sauceGroup);
@@ -137,6 +139,16 @@
             this.AppetizersPanel.TabIndex = 37;
             this.AppetizersPanel.Visible = false;
             // 
+            // toppingsError
+            // 
+            this.toppingsError.AutoSize = true;
+            this.toppingsError.ForeColor = System.Drawing.Color.Red;
+            this.toppingsError.Location = new System.Drawing.Point(200, 379);
+            this.toppingsError.Name = "toppingsError";
+            this.toppingsError.Size = new System.Drawing.Size(130, 13);
+            this.toppingsError.TabIndex = 29;
+            this.toppingsError.Text = "                                         ";
+            // 
             // selectedToppings
             // 
             this.selectedToppings.FormattingEnabled = true;
@@ -144,6 +156,7 @@
             this.selectedToppings.Name = "selectedToppings";
             this.selectedToppings.Size = new System.Drawing.Size(171, 212);
             this.selectedToppings.TabIndex = 22;
+            this.selectedToppings.SelectedIndexChanged += new System.EventHandler(this.selectedToppings_SelectedIndexChanged);
             // 
             // sauceGroup
             // 
@@ -226,6 +239,16 @@
             this.saveToppings.Text = "Save";
             this.saveToppings.UseVisualStyleBackColor = false;
             this.saveToppings.Click += new System.EventHandler(this.saveToppings_Click);
+            // 
+            // orderError
+            // 
+            this.orderError.AutoSize = true;
+            this.orderError.ForeColor = System.Drawing.Color.Red;
+            this.orderError.Location = new System.Drawing.Point(65, 30);
+            this.orderError.Name = "orderError";
+            this.orderError.Size = new System.Drawing.Size(139, 13);
+            this.orderError.TabIndex = 41;
+            this.orderError.Text = "                                            ";
             // 
             // crustGroup
             // 
@@ -658,25 +681,14 @@
             this.logoutButton3.UseVisualStyleBackColor = false;
             this.logoutButton3.Click += new System.EventHandler(this.logoutButton3_Click);
             // 
-            // orderError
+            // outOfStock
             // 
-            this.orderError.AutoSize = true;
-            this.orderError.ForeColor = System.Drawing.Color.Red;
-            this.orderError.Location = new System.Drawing.Point(65, 30);
-            this.orderError.Name = "orderError";
-            this.orderError.Size = new System.Drawing.Size(139, 13);
-            this.orderError.TabIndex = 41;
-            this.orderError.Text = "                                            ";
-            // 
-            // toppingsError
-            // 
-            this.toppingsError.AutoSize = true;
-            this.toppingsError.ForeColor = System.Drawing.Color.Red;
-            this.toppingsError.Location = new System.Drawing.Point(200, 379);
-            this.toppingsError.Name = "toppingsError";
-            this.toppingsError.Size = new System.Drawing.Size(130, 13);
-            this.toppingsError.TabIndex = 29;
-            this.toppingsError.Text = "                                         ";
+            this.outOfStock.Location = new System.Drawing.Point(593, 275);
+            this.outOfStock.Name = "outOfStock";
+            this.outOfStock.Size = new System.Drawing.Size(171, 189);
+            this.outOfStock.TabIndex = 30;
+            this.outOfStock.TabStop = false;
+            this.outOfStock.Text = "Out Of Stock";
             // 
             // AnchovyCustomerMainGUI
             // 
@@ -756,6 +768,7 @@
         private System.Windows.Forms.GroupBox orderHistory;
         private System.Windows.Forms.Label orderError;
         private System.Windows.Forms.Label toppingsError;
+        private System.Windows.Forms.GroupBox outOfStock;
     }
 }
 

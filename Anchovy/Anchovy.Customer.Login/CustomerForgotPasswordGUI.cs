@@ -20,6 +20,7 @@ namespace CustomerForgotPassword
             InitializeComponent();
             radioButton1.Checked = true;
             forgotPhone.Enabled = false;
+            forgotMessage.ForeColor = System.Drawing.Color.Red;
             _customers = new AnchovyAPIService().Customers;
         }
 
@@ -73,11 +74,12 @@ namespace CustomerForgotPassword
                                 smtpClient.Send(message.From.ToString(), message.To.ToString(),
                                                 message.Subject, message.Body);
                             }
-
+                            forgotMessage.ForeColor = System.Drawing.Color.Green;
+                            forgotMessage.Text = "Password sent sucessfully!";
                         }
                         else
                         {
-                            forgotMessage.Text = "No customer with that email currently registered.";
+                            forgotMessage.Text = "No customer with that email.";
                         }
                     }
                 }
@@ -99,8 +101,17 @@ namespace CustomerForgotPassword
                         var customer = customers.Where(_ => _.Phone == phone);
                         if (customer.Any())
                         {
-                            var client = new TwilioRestClient("AC6b1ab19dfbb464b09c38b6d04bd18e83", "2c4498eb9d0953f50fd5bd08e353476f");
-                            client.SendMessage("+14149399443", "+1" + phone, "Your current Anchovy password is: " + customer.First().Password);
+                            try
+                            {
+                                var client = new TwilioRestClient("AC6b1ab19dfbb464b09c38b6d04bd18e83", "2c4498eb9d0953f50fd5bd08e353476f");
+                                client.SendMessage("+14149399443", "+1" + phone, "Your current Anchovy password is: " + customer.First().Password);
+                                forgotMessage.ForeColor = System.Drawing.Color.Green;
+                                forgotMessage.Text = "Password sent sucessfully, check your phone!";
+                            }
+                            catch (Exception a)
+                            {
+                                forgotMessage.Text = "Error sending password.";
+                            }
                         }
                     }
                 }

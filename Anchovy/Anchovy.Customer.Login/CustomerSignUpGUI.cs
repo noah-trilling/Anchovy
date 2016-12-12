@@ -14,6 +14,7 @@ namespace CustomerSignUp
         public CustomerSignUpGUI()
         {
             InitializeComponent();
+            signUpError.ForeColor = System.Drawing.Color.Red;
             _customers = new AnchovyAPIService().Customers;
         }
 
@@ -68,6 +69,7 @@ namespace CustomerSignUp
                 var postResponse = _customers.PostCustomer(customer1);
                 if (postResponse.Id != null)
                 {
+                    signUpError.ForeColor = System.Drawing.Color.Green;
                     signUpError.Text = "Account created successfully!";
                     CustomerLoginGUI login = new CustomerLoginGUI();
                     login.Show();
