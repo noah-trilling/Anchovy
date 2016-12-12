@@ -23,6 +23,8 @@ namespace Anchovy.Cook.Main
 		private Queue<Anchovy.API.Client.Models.Order> _gQueue;
 		private Queue<Anchovy.API.Client.Models.Order> _mQueue;
 		private int _cookId;
+        private IShifts _shifts;
+        private Anchovy.API.Client.Models.Shift _myShift;
 
 		public CookMainGUI()
 		{
@@ -34,6 +36,7 @@ namespace Anchovy.Cook.Main
 			_pizzas = new AnchovyAPIService().Pizzas;
 			_sauces = new AnchovyAPIService().Sauces;
 			_crusts = new AnchovyAPIService().Crusts;
+            _shifts = new AnchovyAPIService().Shifts;
 			_menuListings = new AnchovyAPIService().MenuListings;
 			_sizes = new AnchovyAPIService().Sizes;
 			_lines = new AnchovyAPIService().Lines;
@@ -41,12 +44,13 @@ namespace Anchovy.Cook.Main
 			_pizzaToppings = new AnchovyAPIService().PizzaToppings;
 		   _gQueue = new Queue<Anchovy.API.Client.Models.Order>();
 			_mQueue = new Queue<Anchovy.API.Client.Models.Order>();
-            ingredientsBox.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-        }
+			ingredientsBox.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+		}
 
-		//Logout current cook and return to login screen
+		//Logout current cook and return to login screen; end shift
 		private void logoutButton_Click(object sender, EventArgs e)
 		{
+            endShift();
 			Owner.Show();
 			Owner = null;
 			Close();
@@ -105,6 +109,7 @@ namespace Anchovy.Cook.Main
 			}
 		}
 
+		//Get the id of the cook hat is logged in
 		private int getCookId()
 		{
 			var user = Text;
@@ -153,6 +158,7 @@ namespace Anchovy.Cook.Main
 			}
 		}
 
+		//Prevent an item to be dragged and dropped into the same queue it is currently in
 		private void globalQueue_DragOver(object sender, DragEventArgs e)
 		{
 			if (globalQueue.SelectedIndex >= 0) e.Effect = DragDropEffects.None;
@@ -169,34 +175,32 @@ namespace Anchovy.Cook.Main
 			if (myQueue.SelectedIndex >= 0)
 			{
 				ingredientsBox.Items.Clear();
-                
 				ingredientsLabel.Text = ingredientsLabel.Text.Split()[0] + " - " + myQueue.SelectedItem;
 				var order = myQueue.SelectedItem.ToString().Split();
 				var orderId = Int32.Parse(order[order.Length - 1]);
-
 				var orderLine = _orderLines.GetOrderLines().GetEnumerator();
 				
-                var count = 0;//print divider or not
+				var count = 0;//print divider or not
 				while (orderLine.MoveNext())
 				{
-                    var pizzaToppings = _pizzaToppings.GetPizzaToppings().GetEnumerator();
-                    if (orderLine.Current.OrderId == orderId)
+					var pizzaToppings = _pizzaToppings.GetPizzaToppings().GetEnumerator();
+					if (orderLine.Current.OrderId == orderId)
 					{
 						//**************** add one line from the order to ingredients box ************************\\
 						var line = _lines.GetLine((int)orderLine.Current.LineId);
-                        if (count > 0) ingredientsBox.Items.Add(new ListViewItem("_____________________________"));
+						if (count > 0) ingredientsBox.Items.Add(new ListViewItem("_____________________________"));
 
-                        if (line.MenuListingId != null)
-                        {
-                            var menuItem = _menuListings.GetMenuListing((int)line.MenuListingId);
-                          
-                            if (menuItem.SizeId != null)
-                            {
-                                var ms = _sizes.GetSize((int)menuItem.SizeId);
-                                ingredientsBox.Items.Add(new ListViewItem("Pizza: " + menuItem.Name + "    Size: " + ms.Name));
-                            }
-                            else ingredientsBox.Items.Add(new ListViewItem("Item: " + menuItem.Name));
-                        }
+						if (line.MenuListingId != null)
+						{
+							var menuItem = _menuListings.GetMenuListing((int)line.MenuListingId);
+						  
+							if (menuItem.SizeId != null)
+							{
+								var ms = _sizes.GetSize((int)menuItem.SizeId);
+								ingredientsBox.Items.Add(new ListViewItem("Pizza: " + menuItem.Name + "    Size: " + ms.Name));
+							}
+							else ingredientsBox.Items.Add(new ListViewItem("Item: " + menuItem.Name));
+						}
 
 						var pizza = _pizzas.GetPizza((int)line.PizzaId);
 
@@ -217,21 +221,21 @@ namespace Anchovy.Cook.Main
 
 						//************ add toppings to ingredients box *********************\\
 						
-                        var c1 = 0; // print toppings or not
+						var c1 = 0; // print toppings or not
 						while (pizzaToppings.MoveNext())
 						{
-                            if (pizzaToppings.Current.PizzaId == pizza.Id)
+							if (pizzaToppings.Current.PizzaId == pizza.Id)
 							{
-                                if (c1 < 1) ingredientsBox.Items.Add(new ListViewItem("Toppings:"));
-                                var topping = _toppings.GetTopping((int)pizzaToppings.Current.ToppingId).Name;
+								if (c1 < 1) ingredientsBox.Items.Add(new ListViewItem("Toppings:"));
+								var topping = _toppings.GetTopping((int)pizzaToppings.Current.ToppingId).Name;
 								ingredientsBox.Items.Add(new ListViewItem("    -" + topping));
-                                c1++;
-                            }
+								c1++;
+							}
 						}
-                        ingredientsBox.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                        count++;
-                    }
-                }
+						ingredientsBox.Columns[0].AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+						count++;
+					}
+				}
 			}
 		}
 
@@ -256,11 +260,17 @@ namespace Anchovy.Cook.Main
 			} 
 		}
 
+		//Close both this form and the loggin form and end shift
 		private void CookMainGUI_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			if (Owner != null) Application.Exit();
+            if (Owner != null)
+            {
+                endShift();
+                Application.Exit();
+            }
 		}
 
+		//Prevent the contextmenustrip from showing if an item is not selected
 		private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			if (!contextMenuStrip1.Enabled) e.Cancel = true;
@@ -297,39 +307,71 @@ namespace Anchovy.Cook.Main
 			}
 		}
 
-		//Get the id of the cook and initialize the global queue
+		//Get the id of the cook, initialize the global queue, and set the start time of the shift
 		private void CookMainGUI_Load(object sender, EventArgs e)
 		{
 			_cookId = getCookId();
 			initGlobal();
+            beginShift();
 		}
 
-        //cancel order
-        private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
+		//cancel order
+		private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var item = myQueue.SelectedItem;
+			myQueue.Items.Remove(item);
+			ingredientsBox.Items.Clear();
+			ingredientsLabel.Text = ingredientsLabel.Text.Split()[0] + " - " + myQueue.SelectedItem;
+			var ord = _mQueue.Dequeue();
+			ord.OrderStatus = (int)OrderStatus.Cancelled;
+			ord.CancelledTimeStamp = DateTimeOffset.UtcNow;
+			_orders.PutOrder((int)ord.Id,ord);
+			var d = _orders.GetOrder((int)ord.Id);
+		}
+
+		//complete order
+		private void completeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			var item = myQueue.SelectedItem;
+			myQueue.Items.Remove(item);
+			ingredientsBox.Items.Clear();
+			ingredientsLabel.Text = ingredientsLabel.Text.Split()[0] + " - " + myQueue.SelectedItem;
+			var ord = _mQueue.Dequeue();
+			ord.OrderStatus = (int)OrderStatus.Completed;
+			ord.CompletedTimeStamp = DateTimeOffset.UtcNow;
+			_orders.PutOrder((int)ord.Id, ord);
+			var d = _orders.GetOrder((int)ord.Id);
+		}
+
+        //set time for beginning of shift
+        private void beginShift()
         {
-            var item = myQueue.SelectedItem;
-            myQueue.Items.Remove(item);
-            ingredientsBox.Items.Clear();
-            ingredientsLabel.Text = ingredientsLabel.Text.Split()[0] + " - " + myQueue.SelectedItem;
-            var ord = _mQueue.Dequeue();
-            ord.OrderStatus = (int)OrderStatus.Cancelled;
-            ord.CancelledTimeStamp = DateTimeOffset.UtcNow;
-            _orders.PutOrder((int)ord.Id,ord);
-            var d = _orders.GetOrder((int)ord.Id);
+            var cook = _cooks.GetCook(_cookId);
+            _myShift = new Anchovy.API.Client.Models.Shift()
+            {
+                CookId = _cookId,
+                StartTime = DateTimeOffset.UtcNow,
+            };
+            _shifts.PostShift(_myShift);
         }
 
-        //complete order
-        private void completeToolStripMenuItem_Click(object sender, EventArgs e)
+        //set time for end of shift
+        private void endShift()
         {
-            var item = myQueue.SelectedItem;
-            myQueue.Items.Remove(item);
-            ingredientsBox.Items.Clear();
-            ingredientsLabel.Text = ingredientsLabel.Text.Split()[0] + " - " + myQueue.SelectedItem;
-            var ord = _mQueue.Dequeue();
-            ord.OrderStatus = (int)OrderStatus.Completed;
-            ord.CompletedTimeStamp = DateTimeOffset.UtcNow;
-            _orders.PutOrder((int)ord.Id, ord);
-            var d = _orders.GetOrder((int)ord.Id);
+            var allShifts = _shifts.GetShifts().GetEnumerator();
+            int shiftId = 0;
+
+            while (allShifts.MoveNext())
+            {
+                if (allShifts.Current.CookId == _cookId && allShifts.Current.StartTime == _myShift.StartTime)
+                {
+                    shiftId = (int)allShifts.Current.Id;
+                    break;
+                }
+            }
+            var shift = _shifts.GetShift(shiftId);
+            shift.EndTime = DateTimeOffset.UtcNow;
+            _shifts.PutShift((int)shift.Id, shift);
         }
-    }
+	}
 }

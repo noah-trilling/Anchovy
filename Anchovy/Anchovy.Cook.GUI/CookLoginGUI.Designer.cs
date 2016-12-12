@@ -36,6 +36,7 @@
             this.anchovyLabel = new System.Windows.Forms.Label();
             this.invalidUserLabel = new System.Windows.Forms.Label();
             this.invalidPassLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // usernameLabel
@@ -93,7 +94,7 @@
             this.anchovyLabel.Name = "anchovyLabel";
             this.anchovyLabel.Size = new System.Drawing.Size(102, 29);
             this.anchovyLabel.TabIndex = 5;
-            this.anchovyLabel.Text = "Anchovy";
+            this.anchovyLabel.Text = "Anchovy\r\n";
             // 
             // invalidUserLabel
             // 
@@ -115,12 +116,24 @@
             this.invalidPassLabel.TabIndex = 7;
             this.invalidPassLabel.Text = "          ";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.label1.Location = new System.Drawing.Point(186, 41);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 20);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "(Cook)";
+            // 
             // CookLoginGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Window;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(413, 268);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.invalidPassLabel);
             this.Controls.Add(this.invalidUserLabel);
             this.Controls.Add(this.anchovyLabel);
@@ -131,7 +144,7 @@
             this.Controls.Add(this.usernameLabel);
             this.ForeColor = System.Drawing.Color.DodgerBlue;
             this.Name = "CookLoginGUI";
-            this.Text = "Login";
+            this.Text = "Cook Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -147,6 +160,7 @@
         private System.Windows.Forms.Label anchovyLabel;
         private System.Windows.Forms.Label invalidUserLabel;
         private System.Windows.Forms.Label invalidPassLabel;
+        private System.Windows.Forms.Label label1;
     }
 }
 
