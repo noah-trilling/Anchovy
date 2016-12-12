@@ -559,6 +559,7 @@ namespace CustomerMain
                                     // Get each pizza in each line
                                     foreach (var pizza in allPizzas)
                                     {
+                                        totalCost = 0;
                                         if (line.PizzaId == pizza.Id)
                                         {
                                             toppingCost = 0;
@@ -579,30 +580,33 @@ namespace CustomerMain
                         }
                     }
                     labelString += " - Cost: " + (totalCost);
-                    System.Windows.Forms.Label currLabel = new System.Windows.Forms.Label();
-                    currLabel.Text = labelString;
-                    currLabel.AutoSize = true;
-                    currLabel.Location = new System.Drawing.Point(10, 10 + loc * 20);
-                    // Check if status is Ordered or Unordered to cancel
-                    if (status == 0 || status == 1)
+                    if (totalCost != 0)
                     {
-                        System.Windows.Forms.LinkLabel cancelLink = new System.Windows.Forms.LinkLabel();
-                        cancelLink.AutoSize = true;
-                        cancelLink.Text = "Cancel Order (Est. Time - " + calcEstTime() + ")";
-                        cancelLink.Click += (sender, e) => cancelHandler(orderId);
-                        //cancelLink.Visible = false;
-                        this.historyPanel.Controls.Add(currLabel);
-                        loc++;
-                        cancelLink.Location = new System.Drawing.Point(10, 10 + loc * 20);
-                        this.historyPanel.Controls.Add(cancelLink);
-                        loc++;
+                        System.Windows.Forms.Label currLabel = new System.Windows.Forms.Label();
+                        currLabel.Text = labelString;
+                        currLabel.AutoSize = true;
+                        currLabel.Location = new System.Drawing.Point(10, 10 + loc * 20);
+                        // Check if status is Ordered or Unordered to cancel
+                        if (status == 0 || status == 1)
+                        {
+                            System.Windows.Forms.LinkLabel cancelLink = new System.Windows.Forms.LinkLabel();
+                            cancelLink.AutoSize = true;
+                            cancelLink.Text = "Cancel Order (Est. Time - " + calcEstTime() + ")";
+                            cancelLink.Click += (sender, e) => cancelHandler(orderId);
+                            //cancelLink.Visible = false;
+                            this.historyPanel.Controls.Add(currLabel);
+                            loc++;
+                            cancelLink.Location = new System.Drawing.Point(10, 10 + loc * 20);
+                            this.historyPanel.Controls.Add(cancelLink);
+                            loc++;
 
-                    }
-                    else
-                    {
-                        loc++;
-                        this.historyPanel.Controls.Add(currLabel);
-                        loc++;
+                        }
+                        else
+                        {
+                            loc++;
+                            this.historyPanel.Controls.Add(currLabel);
+                            loc++;
+                        }
                     }
                 }
             }
@@ -744,7 +748,7 @@ namespace CustomerMain
 
             foreach (var order in orders)
             {
-                if (order.CustomerId == _currentCusty.Id)
+                if (order.CustomerId == _currentCusty.Id && order.OrderStatus == 0)
                 {
                     foreach (var orderLine in orderLines)
                     {

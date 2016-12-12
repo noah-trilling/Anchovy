@@ -148,7 +148,7 @@
             this.resetOrder.Name = "resetOrder";
             this.resetOrder.Size = new System.Drawing.Size(109, 61);
             this.resetOrder.TabIndex = 18;
-            this.resetOrder.Text = "Reset";
+            this.resetOrder.Text = "Reset All Unordered";
             this.resetOrder.UseVisualStyleBackColor = false;
             this.resetOrder.Click += new System.EventHandler(this.resetOrder_Click);
             // 
@@ -175,7 +175,7 @@
             this.cancelOrder.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.cancelOrder.Size = new System.Drawing.Size(109, 61);
             this.cancelOrder.TabIndex = 16;
-            this.cancelOrder.Text = "Cancel";
+            this.cancelOrder.Text = "Back";
             this.cancelOrder.UseVisualStyleBackColor = false;
             this.cancelOrder.Click += new System.EventHandler(this.cancelOrder_Click);
             // 
