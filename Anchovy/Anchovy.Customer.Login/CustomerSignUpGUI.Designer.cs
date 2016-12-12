@@ -155,10 +155,11 @@
             // signUpError
             // 
             this.signUpError.AutoSize = true;
+            this.signUpError.Font = new System.Drawing.Font("Adobe Gothic Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signUpError.ForeColor = System.Drawing.Color.Red;
             this.signUpError.Location = new System.Drawing.Point(203, 34);
             this.signUpError.Name = "signUpError";
-            this.signUpError.Size = new System.Drawing.Size(61, 13);
+            this.signUpError.Size = new System.Drawing.Size(63, 20);
             this.signUpError.TabIndex = 13;
             this.signUpError.Text = "                  ";
             // 

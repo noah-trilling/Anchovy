@@ -86,10 +86,11 @@
             // forgotMessage
             // 
             this.forgotMessage.AutoSize = true;
+            this.forgotMessage.Font = new System.Drawing.Font("Adobe Gothic Std B", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.forgotMessage.ForeColor = System.Drawing.Color.LawnGreen;
             this.forgotMessage.Location = new System.Drawing.Point(429, 93);
             this.forgotMessage.Name = "forgotMessage";
-            this.forgotMessage.Size = new System.Drawing.Size(70, 13);
+            this.forgotMessage.Size = new System.Drawing.Size(72, 20);
             this.forgotMessage.TabIndex = 16;
             this.forgotMessage.Text = "                     ";
             // 
