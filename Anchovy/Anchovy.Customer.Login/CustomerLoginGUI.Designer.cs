@@ -92,7 +92,7 @@
             this.passwordBox.Location = new System.Drawing.Point(246, 222);
             this.passwordBox.Name = "passwordBox";
             this.passwordBox.Size = new System.Drawing.Size(268, 20);
-            this.passwordBox.TabIndex = 11;
+            this.passwordBox.TabIndex = 13;
             this.passwordBox.UseSystemPasswordChar = true;
             // 
             // usernameBox
@@ -110,7 +110,7 @@
             this.signInButton.Location = new System.Drawing.Point(312, 282);
             this.signInButton.Name = "signInButton";
             this.signInButton.Size = new System.Drawing.Size(134, 65);
-            this.signInButton.TabIndex = 13;
+            this.signInButton.TabIndex = 15;
             this.signInButton.Text = "Sign In!";
             this.signInButton.UseVisualStyleBackColor = false;
             this.signInButton.Click += new System.EventHandler(this.signInButton_Click);
@@ -135,7 +135,7 @@
             this.createAccountButton.Location = new System.Drawing.Point(246, 381);
             this.createAccountButton.Name = "createAccountButton";
             this.createAccountButton.Size = new System.Drawing.Size(268, 78);
-            this.createAccountButton.TabIndex = 15;
+            this.createAccountButton.TabIndex = 16;
             this.createAccountButton.Text = "Create New Account!";
             this.createAccountButton.UseVisualStyleBackColor = false;
             this.createAccountButton.Click += new System.EventHandler(this.createAccountButton_Click);
@@ -176,7 +176,7 @@
             this.guestCheckout.Location = new System.Drawing.Point(580, 12);
             this.guestCheckout.Name = "guestCheckout";
             this.guestCheckout.Size = new System.Drawing.Size(134, 65);
-            this.guestCheckout.TabIndex = 19;
+            this.guestCheckout.TabIndex = 17;
             this.guestCheckout.Text = "Guest Checkout";
             this.guestCheckout.UseVisualStyleBackColor = false;
             this.guestCheckout.Click += new System.EventHandler(this.guestCheckout_Click);

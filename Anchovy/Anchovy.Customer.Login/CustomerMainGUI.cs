@@ -698,6 +698,9 @@ namespace CustomerMain
                                             }
                                             pizza.Name += randString;
                                             _currentPizza = _pizzas.PostPizza(pizza);
+                                            currLine.PizzaId = _currentPizza.Id;
+                                            currLine.Quantity = 1;
+                                            currLine = _lines.PostLine(currLine);
                                             foreach (var pizzaTop in allPizzaToppings)
                                             {
                                                 if (pizzaTop.PizzaId == pizzId)
@@ -708,8 +711,6 @@ namespace CustomerMain
                                                     tempTop = _pizzaToppings.PostPizzaTopping(tempTop);
                                                 }
                                             }
-                                            currLine.PizzaId = _currentPizza.Id;
-                                            currLine = _lines.PostLine(currLine);
                                             break;
                                         }
                                     }

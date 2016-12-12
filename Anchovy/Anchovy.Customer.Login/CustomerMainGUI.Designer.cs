@@ -526,7 +526,7 @@
             this.cancelInfo.Location = new System.Drawing.Point(187, 382);
             this.cancelInfo.Name = "cancelInfo";
             this.cancelInfo.Size = new System.Drawing.Size(150, 84);
-            this.cancelInfo.TabIndex = 41;
+            this.cancelInfo.TabIndex = 40;
             this.cancelInfo.Text = "Cancel";
             this.cancelInfo.UseVisualStyleBackColor = true;
             this.cancelInfo.Click += new System.EventHandler(this.cancelInfo_Click);
@@ -539,7 +539,7 @@
             this.updateInfo.Location = new System.Drawing.Point(404, 382);
             this.updateInfo.Name = "updateInfo";
             this.updateInfo.Size = new System.Drawing.Size(169, 84);
-            this.updateInfo.TabIndex = 40;
+            this.updateInfo.TabIndex = 41;
             this.updateInfo.Text = "Update!";
             this.updateInfo.UseVisualStyleBackColor = false;
             this.updateInfo.Click += new System.EventHandler(this.updateInfo_Click);
@@ -753,7 +753,7 @@
             this.logoutButton3.Location = new System.Drawing.Point(812, 6);
             this.logoutButton3.Name = "logoutButton3";
             this.logoutButton3.Size = new System.Drawing.Size(109, 61);
-            this.logoutButton3.TabIndex = 14;
+            this.logoutButton3.TabIndex = 42;
             this.logoutButton3.Text = "Logout";
             this.logoutButton3.UseVisualStyleBackColor = false;
             this.logoutButton3.Click += new System.EventHandler(this.logoutButton3_Click);

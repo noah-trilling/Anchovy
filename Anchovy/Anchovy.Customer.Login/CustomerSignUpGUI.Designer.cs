@@ -102,7 +102,7 @@
             this.passwordSignup1.Location = new System.Drawing.Point(185, 176);
             this.passwordSignup1.Name = "passwordSignup1";
             this.passwordSignup1.Size = new System.Drawing.Size(268, 20);
-            this.passwordSignup1.TabIndex = 6;
+            this.passwordSignup1.TabIndex = 12;
             this.passwordSignup1.UseSystemPasswordChar = true;
             // 
             // passwordSignup2
@@ -110,7 +110,7 @@
             this.passwordSignup2.Location = new System.Drawing.Point(185, 202);
             this.passwordSignup2.Name = "passwordSignup2";
             this.passwordSignup2.Size = new System.Drawing.Size(268, 20);
-            this.passwordSignup2.TabIndex = 7;
+            this.passwordSignup2.TabIndex = 13;
             this.passwordSignup2.UseSystemPasswordChar = true;
             // 
             // emailSignup
@@ -118,7 +118,7 @@
             this.emailSignup.Location = new System.Drawing.Point(185, 150);
             this.emailSignup.Name = "emailSignup";
             this.emailSignup.Size = new System.Drawing.Size(268, 20);
-            this.emailSignup.TabIndex = 8;
+            this.emailSignup.TabIndex = 11;
             // 
             // usernameSignup
             // 
@@ -135,7 +135,7 @@
             this.signUpSignup.Location = new System.Drawing.Point(331, 228);
             this.signUpSignup.Name = "signUpSignup";
             this.signUpSignup.Size = new System.Drawing.Size(122, 63);
-            this.signUpSignup.TabIndex = 11;
+            this.signUpSignup.TabIndex = 15;
             this.signUpSignup.Text = "Sign Up!";
             this.signUpSignup.UseVisualStyleBackColor = false;
             this.signUpSignup.Click += new System.EventHandler(this.signUpSignup_Click);
@@ -147,7 +147,7 @@
             this.cancelSignup.Location = new System.Drawing.Point(185, 228);
             this.cancelSignup.Name = "cancelSignup";
             this.cancelSignup.Size = new System.Drawing.Size(111, 63);
-            this.cancelSignup.TabIndex = 12;
+            this.cancelSignup.TabIndex = 14;
             this.cancelSignup.Text = "Cancel";
             this.cancelSignup.UseVisualStyleBackColor = true;
             this.cancelSignup.Click += new System.EventHandler(this.cancelSignup_Click);
