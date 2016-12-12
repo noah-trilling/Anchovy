@@ -32,6 +32,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.AppetizersPanel = new System.Windows.Forms.Panel();
             this.outOfStock = new System.Windows.Forms.GroupBox();
+            this.crustGroup = new System.Windows.Forms.GroupBox();
             this.toppingsError = new System.Windows.Forms.Label();
             this.selectedToppings = new System.Windows.Forms.ListBox();
             this.sauceGroup = new System.Windows.Forms.GroupBox();
@@ -43,7 +44,6 @@
             this.cancelToppings = new System.Windows.Forms.Button();
             this.saveToppings = new System.Windows.Forms.Button();
             this.orderError = new System.Windows.Forms.Label();
-            this.crustGroup = new System.Windows.Forms.GroupBox();
             this.sizeGroup = new System.Windows.Forms.GroupBox();
             this.appetizersButton = new System.Windows.Forms.Button();
             this.pizzaGroup = new System.Windows.Forms.GroupBox();
@@ -83,9 +83,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.shoppingCart3 = new System.Windows.Forms.LinkLabel();
             this.logoutButton3 = new System.Windows.Forms.Button();
+            this.scrollPanel = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.AppetizersPanel.SuspendLayout();
+            this.pizzaGroup.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
@@ -104,8 +106,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.AppetizersPanel);
             this.tabPage1.Controls.Add(this.orderError);
+            this.tabPage1.Controls.Add(this.AppetizersPanel);
             this.tabPage1.Controls.Add(this.sizeGroup);
             this.tabPage1.Controls.Add(this.appetizersButton);
             this.tabPage1.Controls.Add(this.pizzaGroup);
@@ -133,7 +135,7 @@
             this.AppetizersPanel.Controls.Add(this.allToppings);
             this.AppetizersPanel.Controls.Add(this.cancelToppings);
             this.AppetizersPanel.Controls.Add(this.saveToppings);
-            this.AppetizersPanel.Location = new System.Drawing.Point(21, 84);
+            this.AppetizersPanel.Location = new System.Drawing.Point(6, 68);
             this.AppetizersPanel.Name = "AppetizersPanel";
             this.AppetizersPanel.Size = new System.Drawing.Size(882, 492);
             this.AppetizersPanel.TabIndex = 37;
@@ -147,6 +149,15 @@
             this.outOfStock.TabIndex = 30;
             this.outOfStock.TabStop = false;
             this.outOfStock.Text = "Out Of Stock";
+            // 
+            // crustGroup
+            // 
+            this.crustGroup.Location = new System.Drawing.Point(17, 264);
+            this.crustGroup.Name = "crustGroup";
+            this.crustGroup.Size = new System.Drawing.Size(164, 183);
+            this.crustGroup.TabIndex = 40;
+            this.crustGroup.TabStop = false;
+            this.crustGroup.Text = "Crusts";
             // 
             // toppingsError
             // 
@@ -258,15 +269,6 @@
             this.orderError.TabIndex = 41;
             this.orderError.Text = "                                            ";
             // 
-            // crustGroup
-            // 
-            this.crustGroup.Location = new System.Drawing.Point(17, 264);
-            this.crustGroup.Name = "crustGroup";
-            this.crustGroup.Size = new System.Drawing.Size(164, 183);
-            this.crustGroup.TabIndex = 40;
-            this.crustGroup.TabStop = false;
-            this.crustGroup.Text = "Crusts";
-            // 
             // sizeGroup
             // 
             this.sizeGroup.Location = new System.Drawing.Point(745, 92);
@@ -291,6 +293,7 @@
             // 
             // pizzaGroup
             // 
+            this.pizzaGroup.Controls.Add(this.scrollPanel);
             this.pizzaGroup.Location = new System.Drawing.Point(21, 63);
             this.pizzaGroup.Name = "pizzaGroup";
             this.pizzaGroup.Size = new System.Drawing.Size(703, 508);
@@ -689,6 +692,14 @@
             this.logoutButton3.UseVisualStyleBackColor = false;
             this.logoutButton3.Click += new System.EventHandler(this.logoutButton3_Click);
             // 
+            // scrollPanel
+            // 
+            this.scrollPanel.AutoScroll = true;
+            this.scrollPanel.Location = new System.Drawing.Point(6, 19);
+            this.scrollPanel.Name = "scrollPanel";
+            this.scrollPanel.Size = new System.Drawing.Size(697, 489);
+            this.scrollPanel.TabIndex = 38;
+            // 
             // AnchovyCustomerMainGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -703,6 +714,7 @@
             this.tabPage1.PerformLayout();
             this.AppetizersPanel.ResumeLayout(false);
             this.AppetizersPanel.PerformLayout();
+            this.pizzaGroup.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -768,6 +780,7 @@
         private System.Windows.Forms.Label orderError;
         private System.Windows.Forms.Label toppingsError;
         private System.Windows.Forms.GroupBox outOfStock;
+        private System.Windows.Forms.Panel scrollPanel;
     }
 }
 

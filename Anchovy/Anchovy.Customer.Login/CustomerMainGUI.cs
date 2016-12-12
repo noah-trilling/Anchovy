@@ -102,8 +102,8 @@ namespace CustomerMain
             customButton = new RadioButton();
             customButton.Text = "Custom Pizza";
             customButton.Font = new Font(customButton.Font.Name, customButton.Font.Size, FontStyle.Bold);
-            customButton.Location = new System.Drawing.Point(20, 20 + (pizzas + 1) * 80);
-            this.pizzaGroup.Controls.Add(customButton);
+            customButton.Location = new System.Drawing.Point(20, 20 + (pizzas + 1) * 95);
+            this.scrollPanel.Controls.Add(customButton);
 
             // Create size, sauce, and crust buttons dynamically
             addSizeButtons();
@@ -399,22 +399,22 @@ namespace CustomerMain
                 radioButtons[x].Text = prePizzas[x];
                 radioButtons[x].Font = new Font(radioButtons[x].Font.Name, radioButtons[x].Font.Size, FontStyle.Bold);
                 radioButtons[x].Location = new System.Drawing.Point(20, 20 + x * 110);
-                this.pizzaGroup.Controls.Add(radioButtons[x]);
+                this.scrollPanel.Controls.Add(radioButtons[x]);
                 sauceLabels[x] = new Label();
                 sauceLabels[x].AutoSize = true;
                 sauceLabels[x].Text = preSauce[x];
                 sauceLabels[x].Location = new System.Drawing.Point(20, 80 * x + 50 + x * 30);
-                this.pizzaGroup.Controls.Add(sauceLabels[x]);
+                this.scrollPanel.Controls.Add(sauceLabels[x]);
                 crustLabels[x] = new Label();
                 crustLabels[x].AutoSize = true;
                 crustLabels[x].Text = preCrust[x];
                 crustLabels[x].Location = new System.Drawing.Point(20, 80 * x + 80 + x * 30);
-                this.pizzaGroup.Controls.Add(crustLabels[x]);
+                this.scrollPanel.Controls.Add(crustLabels[x]);
                 toppingLabels[x] = new Label();
                 toppingLabels[x].AutoSize = true;
                 toppingLabels[x].Text = preTops[x];
                 toppingLabels[x].Location = new System.Drawing.Point(20, 80 * x + 110 + x * 30);
-                this.pizzaGroup.Controls.Add(toppingLabels[x]);
+                this.scrollPanel.Controls.Add(toppingLabels[x]);
             }
             return i;
         }
