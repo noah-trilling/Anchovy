@@ -125,6 +125,7 @@ namespace CustomerMain
         // If logout hide this and return to login page
         private void logoutButton_Click(object sender, EventArgs e)
         {
+            var temp = _orders.DeleteOrder((int)_currentOrder.Id);
             CustomerLoginGUI login = new CustomerLoginGUI();
             login.Show();
             this.Hide();
@@ -132,6 +133,7 @@ namespace CustomerMain
 
         private void logoutButton1_Click(object sender, EventArgs e)
         {
+            var temp = _orders.DeleteOrder((int)_currentOrder.Id);
             CustomerLoginGUI login = new CustomerLoginGUI();
             login.Show();
             this.Hide();
@@ -139,6 +141,7 @@ namespace CustomerMain
 
         private void logoutButton2_Click(object sender, EventArgs e)
         {
+            var temp = _orders.DeleteOrder((int)_currentOrder.Id);
             CustomerLoginGUI login = new CustomerLoginGUI();
             login.Show();
             this.Hide();
@@ -460,6 +463,7 @@ namespace CustomerMain
                 }
                 var currLine = new Anchovy.API.Client.Models.Line();
                 currLine.PizzaId = _currentPizza.Id;
+                currLine.Quantity = 1;
                 currLine = _lines.PostLine(currLine);
                 var currOrdLine = new Anchovy.API.Client.Models.OrderLine();
                 currOrdLine.OrderId = _currentOrder.Id;
