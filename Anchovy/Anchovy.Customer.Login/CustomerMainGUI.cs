@@ -561,6 +561,7 @@ namespace CustomerMain
                                     {
                                         if (line.PizzaId == pizza.Id)
                                         {
+                                            toppingCost = 0;
                                             // Get each Pizza topping for pizzaID
                                             foreach (var topp in allPizzaToppings)
                                             {
@@ -571,7 +572,7 @@ namespace CustomerMain
                                             }
                                         }
                                         // Now we've got a pizza - calculate cost
-                                        totalCost += (double)(toppingCost + toppingCost + pizza.Crust.Cost + pizza.Sauce.Cost + pizza.Size.Cost);
+                                        totalCost += (double)(toppingCost + pizza.Crust.Cost + pizza.Sauce.Cost + pizza.Size.Cost);
                                     }
                                 }
                             }
@@ -589,6 +590,7 @@ namespace CustomerMain
                         cancelLink.AutoSize = true;
                         cancelLink.Text = "Cancel Order (Est. Time - " + calcEstTime() + ")";
                         cancelLink.Click += (sender, e) => cancelHandler(orderId);
+                        //cancelLink.Visible = false;
                         this.historyPanel.Controls.Add(currLabel);
                         loc++;
                         cancelLink.Location = new System.Drawing.Point(10, 10 + loc * 20);
@@ -613,6 +615,7 @@ namespace CustomerMain
             {
                 var order = _orders.GetOrder(temp);
                 order.OrderStatus = 4;
+                order.CancelledTimeStamp = DateTimeOffset.Now;
                 var res = _orders.PutOrder((int)temp, order);
                 historyPanel.Controls.Clear();
                 fillOrderHistory();
