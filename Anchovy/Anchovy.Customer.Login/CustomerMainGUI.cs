@@ -523,7 +523,6 @@ namespace CustomerMain
             var allPizzas = _pizzas.GetPizzas();
             var allPizzaToppings = _pizzaToppings.GetPizzaToppings();
 
-            List<Anchovy.API.Client.Models.OrderLine> orderHistory = new List<Anchovy.API.Client.Models.OrderLine>();
             var loc = 0;
             int status = -1;
             int orderId = -1;
@@ -536,8 +535,8 @@ namespace CustomerMain
                     {
                         if (orderLine.OrderId == order.Id)
                         {
-                            orderId = (int)orderLine.OrderId;
-                            orderHistory.Add(orderLine);
+                            orderId = (int)order.Id;
+                            break;
                         }
                     }
                     var labelString = "Ordered Date: " + String.Format("{0:dddd, MMMM d, yyyy}", order.OrderedTimeStamp);
@@ -609,12 +608,20 @@ namespace CustomerMain
         // Cancel order handler
         private void cancelHandler(int temp)
         {
-            var order = _orders.GetOrder(temp);
-            order.OrderStatus = 4;
-            var res = _orders.PutOrder((int)temp, order);
-            fillOrderHistory();
-            this.historyPanel.Refresh();
-            historyMessage.Text = "Order ID: " + order.Id + " has been cancelled.";
+            try
+            {
+                var order = _orders.GetOrder(temp);
+                order.OrderStatus = 4;
+                var res = _orders.PutOrder((int)temp, order);
+                historyPanel.Controls.Clear();
+                fillOrderHistory();
+                this.historyPanel.Refresh();
+                historyMessage.Text = "Order ID: " + order.Id + " has been cancelled.";
+            }
+            catch (Exception d)
+            {
+                historyMessage.Text = "Error cancelling order!";
+            }
         }
 
         // Generate a status string from the enum
@@ -818,6 +825,14 @@ namespace CustomerMain
 
         private void submitOrder_Click(object sender, EventArgs e)
         {
+            var allOrders = _orders.GetOrders();
+            foreach (var order in allOrders)
+            {
+                if (order.CustomerId == _currentCusty.Id && order.OrderStatus == 0)
+                {
+                    _currentOrder = order;
+                }
+            }
             _currentOrder.OrderStatus = 1;
             _currentOrder = (Anchovy.API.Client.Models.Order)_orders.PutOrder((int)_currentOrder.Id, _currentOrder);
             orderError.Text = "Order submitted successfully";
