@@ -113,6 +113,7 @@ namespace CustomerLogin
             {
                 Username = randString
             };
+            customer1.FirstName = "Guest";
             return _customers.PostCustomer(customer1);
         }
     }
