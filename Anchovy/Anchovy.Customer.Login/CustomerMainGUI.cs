@@ -45,6 +45,7 @@ namespace CustomerMain
         public AnchovyCustomerMainGUI(Anchovy.API.Client.Models.Customer currentCustomer)
         {
             InitializeComponent();
+
             // Create all services
             _orders = new AnchovyAPIService().Orders; 
             _customers = new AnchovyAPIService().Customers;
@@ -64,6 +65,7 @@ namespace CustomerMain
             // Create a new order for this customer
             _currentOrder = new Anchovy.API.Client.Models.Order();
             _currentOrder.CustomerId = currentCustomer.Id;
+            _currentOrder.OrderStatus = 0;
             _currentOrder = _orders.PostOrder(_currentOrder);
 
             // Get all pizza toppings from DB and add them into the listview for custom pizzas
@@ -114,6 +116,7 @@ namespace CustomerMain
 
             // Call method to fill out all account info 
             fillOutFields();
+
         }
 
         // If logout hide this and return to login page
@@ -425,8 +428,44 @@ namespace CustomerMain
             }
             else
             {
-                //TODO: Add toppings and sauce
-                this.Hide();
+                _currentPizza.MenuItem = false;
+                _currentPizza.CrustId = thisCrust.Id;
+                _currentPizza.SauceId = thisSauce.Id;
+                _currentPizza.SizeId = thisSize.Id;
+                Random rnd = new Random();
+                var randString = "NewCustom-";
+                for (int i = 0; i < 6; i++)
+                {
+                    randString += rnd.Next(0, 9);
+                }
+                _currentPizza.Name = randString;
+                _currentPizza = _pizzas.PostPizza(_currentPizza);
+                var allToppings = _toppings.GetToppings();
+                foreach (var top in this.selectedToppings.Items)
+                {
+                    foreach (var top2 in allToppings)
+                    {
+                        if (((String)top).Contains(top2.Name))
+                        {
+                            var temp = new Anchovy.API.Client.Models.PizzaTopping();
+                            temp.PizzaId = _currentPizza.Id;
+                            temp.ToppingId = top2.Id;
+                            var currTop = _pizzaToppings.PostPizzaTopping(temp);
+                        }
+                    }
+                }
+                var currLine = new Anchovy.API.Client.Models.Line();
+                currLine.PizzaId = _currentPizza.Id;
+                currLine = _lines.PostLine(currLine);
+                var currOrdLine = new Anchovy.API.Client.Models.OrderLine();
+                currOrdLine.OrderId = _currentOrder.Id;
+                currOrdLine.LineId = currLine.Id;
+                currOrdLine = _orderLines.PostOrderLine(currOrdLine);
+                orderError.ForeColor = System.Drawing.Color.Green;
+                orderError.Text = "Item added successfully.";
+                _currentOrder = new Anchovy.API.Client.Models.Order();
+                selectedToppings.Items.Clear();
+                AppetizersPanel.Hide();
             }
         }
 
@@ -539,11 +578,12 @@ namespace CustomerMain
                     if (status == 0 || status == 1)
                     {
                         System.Windows.Forms.LinkLabel cancelLink = new System.Windows.Forms.LinkLabel();
-                        cancelLink.Text = "Cancel Order";
+                        cancelLink.AutoSize = true;
+                        cancelLink.Text = "Cancel Order (Est. Time - " + calcEstTime() + ")";
                         cancelLink.Click += (sender, e) => cancelHandler(orderId);
                         this.orderHistory.Controls.Add(currLabel);
                         loc++;
-                        cancelLink.Location = new System.Drawing.Point(10, 10 + loc * 20);
+                        cancelLink.Location = new System.Drawing.Point(10, 10 + loc * 40);
                         this.orderHistory.Controls.Add(cancelLink);
                         loc++;
 
@@ -621,7 +661,11 @@ namespace CustomerMain
                                     {
                                         if (temp.Text.Contains(pizza.Name))
                                         {
-                                            currLine.PizzaId = pizza.Id;
+                                            pizza.SizeId = thisSize.Id;
+                                            pizza.Id = null;
+                                            pizza.MenuItem = false;
+                                            _currentPizza = _pizzas.PostPizza(pizza);
+                                            currLine.PizzaId = _currentPizza.Id;
                                             currLine = _lines.PostLine(currLine);
                                         }
                                     }
@@ -631,6 +675,10 @@ namespace CustomerMain
                                     currOrdLine = _orderLines.PostOrderLine(currOrdLine);
                                     orderError.ForeColor = System.Drawing.Color.Green;
                                     orderError.Text = "Item added successfully.";
+                                    _currentOrder = new Anchovy.API.Client.Models.Order();
+                                    _currentOrder.CustomerId = _currentCusty.Id;
+                                    _currentOrder.OrderStatus = 0;
+                                    _currentOrder = _orders.PostOrder(_currentOrder);
                                 }
                                 catch (Exception a)
                                 {
@@ -652,7 +700,8 @@ namespace CustomerMain
             var orderLines = _orderLines.GetOrderLines();
             foreach (var orderLine in orderLines)
             {
-                if (orderLine.OrderId == _currentOrder.Id)
+                var temp = _orders.GetOrder((int)orderLine.OrderId);
+                if (temp.CustomerId == _currentCusty.Id && temp.OrderStatus == 0)
                 {
                     var lines = _lines.GetLines();
                     foreach (var line in lines)
@@ -684,7 +733,8 @@ namespace CustomerMain
                                         }
                                     }
                                     var cost = pizza.Sauce.Cost + pizza.Crust.Cost + topCost;
-                                    prePizzas.Add(pizza.Name + " ($" + cost + ")");
+                                    var labelString = pizza.Name + " ($" + cost + ")" + " - " + pizza.Size.Name;
+                                    prePizzas.Add(labelString);
                                     preSauce.Add(sauceDesc);
                                     preCrust.Add(crustDesc);
                                     preTops.Add(toppings.Trim(','));
@@ -698,6 +748,7 @@ namespace CustomerMain
                             for (int x = 0; x < i; x++)
                             {
                                 nameLabels[x] = new Label();
+                                nameLabels[x].AutoSize = true;
                                 nameLabels[x].Text = prePizzas[x];
                                 nameLabels[x].Font = new Font(nameLabels[x].Font.Name, nameLabels[x].Font.Size, FontStyle.Bold);
                                 nameLabels[x].Location = new System.Drawing.Point(20, 20 + x * 110);
@@ -738,12 +789,51 @@ namespace CustomerMain
             orderError.ForeColor = System.Drawing.Color.Green;
             shoppingPanel.Hide();
             fillOrderHistory();
+            _currentOrder = new Anchovy.API.Client.Models.Order();
+            _currentOrder.OrderStatus = 0;
+            _currentOrder.CustomerId = _currentCusty.Id;
+            _currentOrder = _orders.PostOrder(_currentOrder);
         }
 
         private void resetOrder_Click(object sender, EventArgs e)
         {
+            var allOrders = _orders.GetOrders();
+            foreach (var order in allOrders)
+            {
+                if (order.CustomerId == _currentCusty.Id && order.OrderStatus == 0)
+                {
+                    _orders.DeleteOrder((int)order.Id);
+                }
+            }
+            shoppingPanel.Controls.Clear();
             _currentOrder = new Anchovy.API.Client.Models.Order();
+            _currentOrder.OrderStatus = 0;
+            _currentOrder.CustomerId = _currentCusty.Id;
+            _currentOrder = _orders.PostOrder(_currentOrder);
+            orderError.ForeColor = System.Drawing.Color.Green;
+            orderError.Text = "Unordered items removed successfully.";
             shoppingPanel.Hide();
+        }
+
+        //Initialize the global queue with orders from database with statuscode == ordered
+        private int calcEstTime()
+        {
+            int totalTime = 0;
+            var orders = _orders.GetOrders();
+            foreach (var ord in orders)
+            {
+                if (ord.OrderStatus == 1) {
+                    if (ord.CustomerId == _currentCusty.Id)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        totalTime += 20;
+                    }
+                }
+            }
+            return totalTime;
         }
     }
 }
